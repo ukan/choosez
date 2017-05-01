@@ -186,9 +186,9 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{!! route('datatables-organigram') !!}",
-                order: [[ 1, 'desc' ]],
+                order: [[ 0, 'desc' ]],
                 columns: [
-                    {data: 'id', name: 'id',visible:false},
+                    {data: 'updated_at', name: 'updated_at',visible:false},
                     {data: 'image', name: 'image', class: 'center-align', searchable: false, orderable: false},
                     {data: 'nama', name: 'nama'},
                     {data: 'action', name: 'action', class: '', searchable: false, orderable: false}
