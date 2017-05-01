@@ -90,7 +90,6 @@
                             <option value="Bimtes">Bimtes</option>
                             <option value="Facilities">Facilities</option>
                             <option value="History">History</option>
-                            <option value="Structure">Structure</option>
                             <option value="UKS">UKS</option>
                         </select>
                         <p class="has-error text-danger error-category"></p>
