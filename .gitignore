@@ -1,0 +1,8 @@
+.env
+.htaccess
+/public/storage
+/vendor
+composer.lock
+/storage
+/bootstrap
+index.php
