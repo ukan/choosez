@@ -1,4 +1,4 @@
-<li>
+<!-- <li>
     <a href="#" class="dropdown-toggle notification-icon btn-alert" data-toggle="dropdown" data-user="{{ $mails['user_id'] }}">
         <i class="fa fa-bell"></i>
         <span class="badge" id="badge-announcement">{{ ($mails['announcement_log'] != 0) ? $mails['announcement_log'] : '' }}</span>
@@ -58,4 +58,4 @@
             }
         });
     }
-</script>
+</script> -->

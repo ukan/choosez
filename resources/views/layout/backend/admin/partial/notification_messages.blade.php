@@ -1,4 +1,4 @@
-<li>
+<!-- <li>
     <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
         <i class="fa fa-envelope"></i>
         <span class="badge">4</span>
@@ -107,4 +107,4 @@
             </div>
         </div>
     </div>
-</li>
+</li> -->

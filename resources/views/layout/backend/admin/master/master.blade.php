@@ -112,7 +112,7 @@
                 <div class="logo-container">
                     <a href="{{ route($route_dashboard) }}" class="logo">
                         
-                        <img src="{{ asset($pathp.'assets/general/images/identity') }}" height="35" alt="{{ env('APP_WEB_ADMIN_NAME', '  Web Admin') }}" />
+                        <img src="{{ asset($pathp.'assets/general/images/identity/web.png') }}" height="55" alt="{{ env('APP_WEB_ADMIN_NAME', '  Web Admin') }}" />
                         <!-- <h4>{{ env('APP_WEB_ADMIN_NAME', $title) }}</h4> -->
                     </a>
                     <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">

@@ -1,4 +1,4 @@
-<!-- start: header -->
+start: header -->
 <header class="header">
 	<div class="logo-container">
 		<a href="" class="logo">
@@ -206,4 +206,4 @@
 	</div>
 	<!-- end: search & user box -->
 </header>
-<!-- end: header -->
+<!-- end: header
