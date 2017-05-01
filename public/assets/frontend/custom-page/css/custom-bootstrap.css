@@ -1,0 +1,408 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+body {
+  padding-top: 0 !important;
+}
+
+.row .col-md-5 img {
+  width: 100%;
+}
+
+.product-information {
+  background-color: #f9f9f9;
+
+}
+
+.product-description {
+  font-size: 20px;
+}
+
+.price-information {
+  font-size: 23px;
+  font-weight: bold;
+  color: #8bad3c;
+}
+
+.scoido-logo-header {
+  width: 280px;
+}
+
+.custom-tab-content {
+  background-color: #f9f9f9 !important;
+}
+
+
+/* Custom container */
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo-header {
+    background: url(../Image/background_header.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 70px !important;
+    padding-bottom: 80px !important;
+
+}
+
+/* Custom navbar */
+.navbar-brand ,.navbar-nav>li>a {
+    padding-left: 30px;
+    padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+} 
+.navbar-nav>.active>a {
+  opacity:.6;
+}
+
+.custom-nav-tabs>li.active>a, .custom-nav-tabs>li.active>a:focus, .custom-nav-tabs>li.active>a:hover {
+  background-color: #f9f9f9;
+}
+
+.container-full .jumbotron p {
+  color: #ecedef;
+  font-weight: 300;
+}
+
+
+/* Tabs panel */
+.tabbable-panel {
+  border:1px solid #eee;
+  padding: 10px;
+}
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+  border-bottom: 2px solid #fbcdcf;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  border-bottom: 2px solid #f3565d;
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: 0px;
+/*  margin-top: -3px;*/
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #fbcdcf;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #f3565d;
+}
+.tabbable-line.tabs-below > .tab-content {
+  margin-top: -10px;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+
+
+
+.logo-confirmation img {
+    vertical-align: middle;
+    width: 18%;
+}
+
+
+
+
+
+
+
+.bg-green {
+    background-color: #265883;
+    height: 5px;
+}
+
+.logo-confirmation {
+    text-align: center;
+    height: 120px;
+    background-color: #f5f5f5;
+    padding-top: 25px;
+    margin-bottom: 75px;
+}
+
+.email-successfully {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.email-successfully span {
+    color: #265883;
+    margin-bottom: 25px;
+}
+
+.email-successfully-description {
+    font-size: 15px;
+    text-align: center;
+/*    padding: 0 200px 0 200px;*/
+    line-height: 2;
+    margin-bottom: 30px;
+}
+
+.confirm-button {
+    font-size: 15px;
+    padding-right: 200px;
+    padding-left: 200px;
+    font-weight: 300;
+    color: #FFF;
+    background-color: #74b446;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.confirm-button:hover {
+    font-size: 15px;
+    padding-right: 200px;
+    padding-left: 200px;
+    font-weight: 300;
+    color: #fff;
+    background-color: #58902f;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.confirm {
+    text-align: center;
+}
+
+.confirm-copyright {
+    text-align: center;
+}
+
+
+
+
+.custom-form {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  width: 17px; height: 17px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 3px; left: 4px;
+  font-size: 18px;
+  line-height: 0.8;
+  color: #09ad7e;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #4778d9!important;
+}
+
+
+
+
+
+
+/* Useless styles, just for demo design */
+
+body {
+  font-family: "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
+  color: #777;
+}
+h1, h2 {
+  margin-bottom: 5px;
+  font-weight: normal;
+  text-align: center;
+}
+h2 {
+  margin: 5px 0 2em;
+  color: #aaa;
+}
+form {
+  width: 80px;
+  margin: 0 auto;
+}
+.txtcenter {
+  margin-top: 4em;
+  font-size: .9em;
+  text-align: center;
+  color: #aaa;
+}
+.copy {
+ margin-top: 2em; 
+}
+.copy a {
+ text-decoration: none;
+ color: #4778d9;
+}
+
+
+
+/*ERROR 404*/
+
+.error-title {
+  text-align: -webkit-auto;
+  font-weight: 700;
+  font-size: 140px;
+  color: #00aaff;
+}
+
+.error-description {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.testfont i {
+  color: black;
+  font-size: 40px;
+}
+
+.error-back {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00aaff;
+    margin-top: 35px;
+}
+
+.error-back a:hover, .error-back a:visited, .error-back a:active, .error-back a:focus{
+    text-decoration: none;  
+}
+
+.notavail-desk {
+  color: #b3b3b3;
+}
+
+
+.row .col-md-6 img {
+    width: 320px;
+    padding-top: 20px;
+    float: right;
+}
+
+.group {
+    position: fixed;
+    top: 50%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}

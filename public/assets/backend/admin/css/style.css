@@ -1,0 +1,12 @@
+.box-header .box-title{
+	margin-right: 40px;
+}
+.nopadding {
+   padding: 0 !important;
+}
+.nomargin {
+   margin: 0 !important;
+}
+.full-width {
+    display:block;
+}

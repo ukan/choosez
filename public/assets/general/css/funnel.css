@@ -1,0 +1,39 @@
+.fusion-row {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 10px;
+}
+.fusion-body .fusion-footer-copyright-center .fusion-copyright-notice, .fusion-body .fusion-footer-copyright-center .fusion-social-links-footer{
+  display: block;
+    text-align: center;
+    width: 100%;
+  }
+  .fusion-footer-copyright-area {
+
+    background-color: #282a2b;
+    border-color: #4b4c4d;
+    border-top-width: 1px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+}
+.fusion-copyright-notice {
+    color: #8c8989;
+    font-size: 12px;
+    display: table-cell;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+.fusion-copyright-notice div{
+font-family: "PT Sans",Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+.fusion-copyright-notice a {
+    color: #bfbfbf;
+}
+.fusion-footer-copyright-area a:hover {
+    color: #0088cc;
+}

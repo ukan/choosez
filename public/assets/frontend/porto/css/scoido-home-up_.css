@@ -1,0 +1,175 @@
+#header .header-nav-main nav > ul > li > a {
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #ADD051;
+}
+
+#header .header-nav-main nav > ul > li:hover > a {
+	color: #fff;
+	background: rgba(0,0,0, .1);
+}
+
+
+.header-body.fixed .header-nav-main nav > ul > li > a {
+   color: #00AAFF;
+
+}
+
+.slider-container.first-fold {
+	display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+        justify-content: center;
+-ms-flex-line-pack: center;
+    align-content: center;
+}
+
+.fold-entry {
+	align-self: center;
+	-ms-flex-item-align: center;-ms-grid-row-align: center;align-self: center;
+}
+
+.call-to-action.custom h2 {
+	letter-spacing: .4px;
+}
+
+.faq-section .toggle > label, .faq-section .toggle-primary .toggle.active > label {
+	padding: 11px 0;
+}
+
+#footer .footer-ribbon {
+	margin: -95px 0 0 14px;
+}
+
+.row.funnels img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+
+@media only screen and min-width (1025px) and (max-width: 1280px) {
+	
+	.call-to-action-content.align-left.pb-md.mb-xl.ml-none {
+		margin-bottom: 0 !important;
+	}
+	
+	.call-to-action-btn .arrow.arrow-light {
+		  -webkit-transform: scale(0.4,.4);  
+		  transform: scale(0.4,.4);
+	}
+	
+	.media-affilate {
+		margin: 30px auto 0;
+	}
+}
+
+@media only screen and (max-width: 60em) {
+	.fold-entry {
+  padding-top: 0;
+  align-self: center;
+}
+
+.fold-text .smt-headline {
+  font-size: 165%;
+  line-height: 1.4;
+  letter-spacing: .5px;
+}
+
+.fold-text .smt-title {
+	font-size: 24px;
+}
+
+.fold-btn .btn.btn-register {
+  margin-top: 95px;
+}
+
+.fold-btn .btn-group > .btn.btn-default {
+	width: 50%;
+}
+
+#header .header-logo img {
+	margin: 15px 15px 15px 0;
+}
+
+.home-intro p em {
+	font-size: 1em;
+}
+
+.call-to-action {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.call-to-action .call-to-action-content {
+	text-align: center !important;
+}
+
+.call-to-action .call-to-action-btn {
+	margin: 0 auto;
+}
+
+.call-to-action.custom h2 {
+  font-size: 27px;
+  letter-spacing: 0.5px;
+}
+
+#footer .footer-ribbon:before {
+	top: -5px;
+}
+
+.fold-btn .btn.btn-register {
+    padding: 10px;
+  font-size: 2rem;
+  margin-top: 64px;
+}
+
+
+	
+}
+
+@media (max-width: 767px) {
+	.pricing-table {
+		  padding: 0 15px;
+  text-align: center;
+  width: 100%;
+  max-width: 75%;
+  margin: 0 auto;
+  display: block;
+	}
+	
+	.call-to-action.custom h2 {
+		line-height: 1.2;
+	}
+}
+
+@media only screen and (max-width: 40em) {
+	.smt-headline {
+	  font-size: 148%;
+	  line-height: 1.2;
+	  letter-spacing: .5px;
+	}
+	
+.fold-text .smt-title {
+	font-size: 120%;
+}
+
+.call-to-action .lead.mb-xl {
+	margin-bottom: 0 !important;
+}
+
+.media-faq {
+	padding: 0;
+}
+
+
+}
+
+
+
+
+
