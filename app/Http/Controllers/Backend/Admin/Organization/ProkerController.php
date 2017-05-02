@@ -10,6 +10,8 @@ use App\Models\Proker;
 use App\Models\Bidang;
 use App\Models\Kementerian;
 use App\Models\Organigram;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
 use Illuminate\Config\Repository as IlluminateConfig;
@@ -71,6 +73,11 @@ class ProkerController extends Controller
 
     public function post_proker(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Proker";
+
         if($request->action == 'get-data'){
             $proker = Proker::find($request->id);
             $response['bidang'] = $proker->bidang_id;
@@ -94,8 +101,15 @@ class ProkerController extends Controller
             } else {
                     if($request->action == 'create'){
                         $proker = new Proker;
+
+                        $audit->action = "New";
+                        $audit->content = $request->bidang.' | '.$request->proker_mingguan.' | '.$request->proker_bulanan.' | '.$request->proker_tahunan.' | '.$request->proker_kondisional;
                     }else{
-                        $proker = Proker::find($request->proker_id);                    
+                        $proker = Proker::find($request->proker_id);
+
+                        $audit->action = "Edit";
+                        $audit->before = $proker->bidang_id.' | '.$proker->proker_mingguan.' | '.$proker->proker_bulanan.' | '.$proker->proker_tahunan.' | '.$proker->proker_kondisional;                    
+                        $audit->after = $request->bidang.' | '.$request->proker_mingguan.' | '.$request->proker_bulanan.' | '.$request->proker_tahunan.' | '.$request->proker_kondisional;                    
                     }
                     $proker->bidang_id = $request->bidang;
                     $proker->proker_mingguan = $request->proker_mingguan;
@@ -104,6 +118,7 @@ class ProkerController extends Controller
                     $proker->proker_kondisional = $request->proker_kondisional;
               
                     $proker->save();
+                    $audit->save();
 
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
@@ -115,6 +130,11 @@ class ProkerController extends Controller
             }
         }else{            
             $proker = Proker::find($request->proker_id);
+
+            $audit->action = "Delete";
+            $audit->content = $request->bidang.' | '.$request->proker_mingguan.' | '.$request->proker_bulanan.' | '.$request->proker_tahunan.' | '.$request->proker_kondisional;
+            $audit->save();
+
             if ($proker->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Slider;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
 use Config;
@@ -68,6 +70,11 @@ class SliderController extends Controller
 
     public function post_slider(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Slider";
+
         if($request->action == 'get-data'){
             $organigram = Slider::find($request->id);
             $response['category'] = $organigram->category;
@@ -88,6 +95,9 @@ class SliderController extends Controller
 
                         $organigram->category = $request->category;
 
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->category;
+
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
                                 if($organigram->image != ""){
@@ -106,6 +116,10 @@ class SliderController extends Controller
                         
                         $organigram->category = $request->category;
 
+                        $audit->action = "Edit";
+                        $audit->before = $organigram->image.' | '.$organigram->category;
+                        $audit->after = $request->image.' | '.$request->category;
+
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
                                 if($organigram->image != ""){
@@ -122,6 +136,8 @@ class SliderController extends Controller
                     }
 
                     $organigram->save();
+                    $audit->save();
+
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
                         $response['status'] = 'success';
@@ -132,6 +148,11 @@ class SliderController extends Controller
             }
         }else{
             $organigram = Slider::find($request->slider_id);
+
+            $audit->action = "Delete";
+            $audit->content = $request->image.' | '.$request->category;
+            $audit->save();
+
             if ($organigram->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

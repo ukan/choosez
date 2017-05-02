@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Organigram;
 use App\Models\Asrama;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
 use Config;
@@ -80,6 +82,11 @@ class OrganigramController extends Controller
 
     public function post_organigram(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Organigram";
+
         if($request->action == 'get-data'){
             $organigram = Organigram::find($request->id);
             $response['nama'] = $organigram->nama;
@@ -101,6 +108,9 @@ class OrganigramController extends Controller
                         $organigram->asrama_id = $request->nama;
                         $organigram->nama = Asrama::where('id',$request->nama)->get()->first()->nama_asrama;
 
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->nama;
+
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
                                 if($organigram->image != ""){
@@ -116,6 +126,11 @@ class OrganigramController extends Controller
                         }
                     }else{
                         $organigram = Organigram::find($request->organigram_id);
+
+                        $audit->action = "Edit";
+                        $audit->before = $organigram->image.' | '.$organigram->nama;
+                        $audit->after = $request->image.' | '.$request->nama;
+
                         if($request->status_center == "hostel"){
                             $organigram->asrama_id = $request->nama_asrama;
                             $organigram->nama = Asrama::where('id',$request->nama_asrama)->get()->first()->nama_asrama;
@@ -139,6 +154,8 @@ class OrganigramController extends Controller
                     }
 
                     $organigram->save();
+                    $audit->save();
+
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
                         $response['status'] = 'success';
@@ -149,6 +166,11 @@ class OrganigramController extends Controller
             }
         }else{
             $organigram = Organigram::find($request->organigram_id);
+
+            $audit->action = "Delete";
+            $audit->content = $organigram->image.' | '.$organigram->nama;
+            $audit->save();
+
             if ($organigram->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\BulletinBoard;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
-use Sentinel;
 
 class BulletinBoardsController extends Controller
 {
@@ -134,6 +135,10 @@ class BulletinBoardsController extends Controller
         $user = Sentinel::getUser();
         $full_name = $user->first_name.' '.$user->last_name;
         
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "BulletinBoard";
+
         $response = array();
         if($request->action == 'publish'){
             $response = array();
@@ -142,7 +147,11 @@ class BulletinBoardsController extends Controller
             $bulletin_board->publish_date = date('Y-m-d H:i:s');
             $bulletin_board->edit_by = $full_name;
             $bulletin_board->save();
-                
+            
+            $audit->action = "Edit";
+            $audit->before = $bulletin_board->publish_status.' | '.$bulletin_board->publish_date.' | '.$bulletin_board->edit_by;                    
+            $audit->after = 'Yes | '.date('Y-m-d H:i:s').' | '.$full_name;
+
             $response['notification'] = "Success Publish Bulletin Board";
             $response['status'] = "success";
         
@@ -153,11 +162,15 @@ class BulletinBoardsController extends Controller
             $bulletin_board->publish_date = "";
             $bulletin_board->edit_by = $full_name;
             $bulletin_board->save();
-                
+            
+            $audit->action = "Edit";
+            $audit->before = $bulletin_board->publish_status.' | '.$bulletin_board->publish_date.' | '.$bulletin_board->edit_by;                    
+            $audit->after = 'No | | '.$full_name;
+
             $response['notification'] = "Success Unpublish Bulletin Board";
             $response['status'] = "success";
         }
-
+        $audit->save();
         // $response['notification'] = "Gagal Bos";
         // $response['status'] = "success";
         
@@ -166,6 +179,11 @@ class BulletinBoardsController extends Controller
 
     public function post_buletin_board(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "BulletinBoard";
+
         if($request->action == 'get-data'){
             $bulletin_board = BulletinBoard::find($request->id);
             $response['title'] = $bulletin_board->title;
@@ -190,8 +208,15 @@ class BulletinBoardsController extends Controller
                     if($request->action == 'create'){
                         $bulletin_board = new BulletinBoard;
                         $bulletin_board->publish_status = "No";
+
+                        $audit->action = "New";
+                        $audit->content = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;
                     }else{
-                        $bulletin_board = BulletinBoard::find($request->bulletin_board_id);                    
+                        $bulletin_board = BulletinBoard::find($request->bulletin_board_id);
+
+                        $audit->action = "Edit";
+                        $audit->before = $bulletin_board->img_url.' | '.$bulletin_board->title.' | '.$bulletin_board->content.' | '.$bulletin_board->type.' | '.$bulletin_board->author;                    
+                        $audit->after = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;                    
                     }
                     $bulletin_board->title = $request->title;
                     $bulletin_board->content = $request->content;
@@ -217,6 +242,8 @@ class BulletinBoardsController extends Controller
                     }
               
                     $bulletin_board->save();
+                    $audit->save();
+
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Bulletin Board';
                         $response['status'] = 'success';
@@ -227,6 +254,10 @@ class BulletinBoardsController extends Controller
             }
         }else{            
             $bulletin_board = BulletinBoard::find($request->bulletin_board_id);
+            $audit->action = "Delete";
+            $audit->content = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;
+            $audit->save();
+                        
             if ($bulletin_board->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';
@@ -243,6 +274,11 @@ class BulletinBoardsController extends Controller
         $full_name = $user->first_name.' '.$user->last_name;
 
         $response = array();
+        
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "BulletinBoard";
+
         if($request->action == 'get-data'){
             $bulletin_board = BulletinBoard::find($request->id);
             $response['title'] = $bulletin_board->title;
@@ -266,7 +302,11 @@ class BulletinBoardsController extends Controller
                     if($request->action == 'create'){
                         $bulletin_board = new BulletinBoard;
                     }else{
-                        $bulletin_board = BulletinBoard::find($request->bulletin_board_id);                    
+                        $bulletin_board = BulletinBoard::find($request->bulletin_board_id); 
+
+                        $audit->action = "Edit";
+                        $audit->before = $bulletin_board->img_url.' | '.$bulletin_board->title.' | '.$bulletin_board->content.' | '.$bulletin_board->type.' | '.$bulletin_board->author;                    
+                        $audit->after = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;                   
                     }
                     $bulletin_board->title = $request->title;
                     $bulletin_board->content = $request->content;
@@ -293,6 +333,8 @@ class BulletinBoardsController extends Controller
                     }
               
                     $bulletin_board->save();
+                    $audit->save();
+
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Bulletin Board';
                         $response['status'] = 'success';

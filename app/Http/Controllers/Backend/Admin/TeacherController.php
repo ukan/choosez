@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Teacher;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
 use Config;
@@ -85,6 +87,11 @@ class TeacherController extends Controller
 
     public function post_teacher(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Teacher";
+
         if($request->action == 'get-data'){
             $teacher = Teacher::find($request->id);
             $response['name'] = $teacher->name;
@@ -117,8 +124,15 @@ class TeacherController extends Controller
             } else {
                     if($request->action == 'create'){
                         $teacher = new Teacher;
+
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->name.' | '.$request->email.' | '.$request->phone.' | '.$request->address.' | '.$request->organization.' | '.$request->postal_code;
                     }else{
                         $teacher = Teacher::find($request->teacher_id);                    
+
+                        $audit->action = "Edit";
+                        $audit->before = $teacher->photo.' | '.$teacher->name.' | '.$teacher->email.' | '.$teacher->phone.' | '.$teacher->address.' | '.$teacher->organization.' | '.$teacher->postal_code;
+                        $audit->after = $request->image.' | '.$request->name.' | '.$request->email.' | '.$request->phone.' | '.$request->address.' | '.$request->organization.' | '.$request->postal_code;
                     }
                     $teacher->name = $request->name;
                     $teacher->email = $request->email;
@@ -147,6 +161,8 @@ class TeacherController extends Controller
                     }
               
                     $teacher->save();
+                    $audit->save();
+
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Teacher Data';
                         $response['status'] = 'success';
@@ -157,6 +173,11 @@ class TeacherController extends Controller
             }
         }else{            
             $teacher = Teacher::find($request->teacher_id);
+
+            $audit->action = "Delete";
+            $audit->content = $teacher->image.' | '.$teacher->name.' | '.$teacher->email.' | '.$teacher->phone.' | '.$teacher->address.' | '.$teacher->organization.' | '.$teacher->postal_code;
+            $audit->save();
+
             if ($teacher->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

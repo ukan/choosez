@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Kementerian;
 use App\Models\Bidang;
+use App\Models\AuditrailLog;
+use Sentinel;
 use Input;
 use Validator;
 
@@ -73,6 +75,11 @@ class KementerianController extends Controller
 
     public function post_kementerian(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Ministry";
+
         if($request->action == 'get-data'){
             $kementerian = Kementerian::find($request->id);
             $response['bidang'] = $kementerian->bidang_id;
@@ -96,8 +103,15 @@ class KementerianController extends Controller
             } else {
                     if($request->action == 'create'){
                         $kementerian = new Kementerian;
+
+                        $audit->action = "New";
+                        $audit->content = $request->bidang.' | '.$request->menteri.' | '.$request->sekretaris.' | '.$request->bendahara.' | '.$request->anggota;
                     }else{
-                        $kementerian = Kementerian::find($request->kementerian_id);                    
+                        $kementerian = Kementerian::find($request->kementerian_id);
+
+                        $audit->action = "Edit";
+                        $audit->before = $kementerian->bidang_id.' | '.$kementerian->menteri.' | '.$kementerian->sekretaris.' | '.$kementerian->bendahara.' | '.$kementerian->anggota;                    
+                        $audit->after = $request->bidang.' | '.$request->menteri.' | '.$request->sekretaris.' | '.$request->bendahara.' | '.$request->anggota;                    
                     }
                     $kementerian->bidang_id = $request->bidang;
                     $kementerian->menteri = $request->menteri;
@@ -106,6 +120,7 @@ class KementerianController extends Controller
                     $kementerian->anggota = $request->anggota;
               
                     $kementerian->save();
+                    $audit->save();
 
                     if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
@@ -117,6 +132,11 @@ class KementerianController extends Controller
             }
         }else{            
             $kementerian = Kementerian::find($request->kementerian_id);
+
+            $audit->action = "Delete";
+            $audit->content = $kementerian->bidang_id.' | '.$kementerian->menteri.' | '.$kementerian->sekretaris.' | '.$kementerian->bendahara.' | '.$kementerian->anggota;
+            $audit->save();
+
             if ($kementerian->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

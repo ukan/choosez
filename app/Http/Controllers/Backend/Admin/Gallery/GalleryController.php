@@ -8,9 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Album;
 use App\Models\Gallery;
+use App\Models\AuditrailLog;
 use Input;
 use Validator;
 use Config;
+use Sentinel;
 
 class GalleryController extends Controller
 {
@@ -109,6 +111,11 @@ class GalleryController extends Controller
 
     public function post_album(Request $request){
         $response = array();
+
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Album";
+        
         if($request->action == 'get-data'){
             $data = Album::find($request->id);
             $response['name'] = $data->name;
@@ -120,6 +127,7 @@ class GalleryController extends Controller
             $rules = array(
                 'image'   => 'image|mimes:jpeg,jpg,png',
                 'name'   => 'required',
+                'date'   => 'required',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -130,6 +138,10 @@ class GalleryController extends Controller
 
                         $data->name = $request->name;
                         $data->date = $request->date;
+
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->name.' | '.$request->date;
+
 
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
@@ -149,6 +161,10 @@ class GalleryController extends Controller
                         $data->name = $request->name;
                         $data->date = $request->date;
 
+                        $audit->action = "Edit";
+                        $audit->before = $data->image.' | '.$data->name.' | '.$data->date;
+                        $audit->after = $request->image.' | '.$request->name.' | '.$request->date;
+
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
                                 if($data->image != ""){
@@ -163,6 +179,7 @@ class GalleryController extends Controller
                             $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                         }
                     }
+                    $audit->save();
 
                     $data->save();
                     if($request->action == 'create'){
@@ -175,6 +192,11 @@ class GalleryController extends Controller
             }
         }else{
             $data = Album::find($request->data_id);
+
+            $audit->action = "Delete";
+            $audit->content = $data->image.' | '.$data->name.' | '.$data->date;
+            $audit->save();
+
             if ($data->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';
@@ -183,11 +205,17 @@ class GalleryController extends Controller
                         $response['status'] = 'failed';
             }
         }
+
         echo json_encode($response);
     }
 
     public function post_photo(Request $request){
         $response = array();
+        
+        $audit = new AuditrailLog;
+        $audit->email = Sentinel::getUser()->email;
+        $audit->table_name = "Gallery";
+
         if($request->action == 'get-data-photo'){
             $data = Album::find($request->id);
             $response['name'] = $data->name;
@@ -208,6 +236,9 @@ class GalleryController extends Controller
                             $data = new Gallery;
                             $data->album_id = $request->album_name;
 
+                            $audit->action = "New";
+                            $audit->content = $request->image[$key].' | '.$request->album_name;
+
                             if($request->hasFile('image')) {
                                 createdirYmd('storage/gallery');
                                 $file = $request->image[$key];
@@ -216,6 +247,7 @@ class GalleryController extends Controller
                                 $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                             }
                             $data->save();
+                            $audit->save();
                         }
 
                     }
@@ -230,6 +262,11 @@ class GalleryController extends Controller
             }
         }else{
             $data = Gallery::find($request->data_id);
+
+            $audit->action = "Delete";
+            $audit->content = $data->image.' | '.$data->album_name;
+            $audit->save();
+
             if ($data->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';

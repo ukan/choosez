@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Book;
+use App\Models\AuditrailLog;
 use Input;
 use Validator;
 use Config;
+use Sentinel;
 
 class BookController extends Controller
 {
@@ -68,6 +70,8 @@ class BookController extends Controller
 
     public function post_book(Request $request){
         $response = array();
+        $audit = new AuditrailLog;
+        
         if($request->action == 'get-data'){
             $book = Book::find($request->id);
             $response['name'] = $book->nama_kitab;
@@ -87,15 +91,25 @@ class BookController extends Controller
             if($validate->fails()) {
                 $this->validate($request,$rules);
             } else {
+                    $audit->email = Sentinel::getUser()->email;
+                    
                     if($request->action == 'create'){
                         $book = new Book;
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->name.' | '.$request->author.' | '.$request->description;
                     }else{
                         $book = Book::find($request->book_id);                    
+                        $audit->action = "Edit";
+                        $audit->before = $book->image.' | '.$book->nama_kitab.' | '.$book->pengarang.' | '.$book->description;
+                        $audit->after = $request->image.' | '.$request->name.' | '.$request->author.' | '.$request->description;
                     }
                     $book->nama_kitab = $request->name;
                     $book->pengarang = $request->author;
                     $book->description = $request->description;
 
+                    $audit->table_name = "Kajian";
+                    $audit->save();
+                    
                     if($request->hasFile('image')) {
                         if($request->action == 'update'){                        
                             if($book->image != ""){  
@@ -121,6 +135,13 @@ class BookController extends Controller
             }
         }else{            
             $book = Book::find($request->book_id);
+
+            $audit->email = Sentinel::getUser()->email;
+            $audit->action = "Delete";
+            $audit->table_name = "Kajian";
+            $audit->content = $book->image.' | '.$book->nama_kitab.' | '.$book->pengarang.' | '.$book->description;
+            $audit->save();
+
             if ($book->delete()) {
                         $response['notification'] = 'Delete Data Success';
                         $response['status'] = 'success';
