@@ -1,6 +1,6 @@
 <div class="col-md-3">
 	<aside class="sidebar">
-		<div class="box effect1">
+		<!-- <div class="box effect1">
 			<h4><b>@lang('general.title.categories')</b></h4>
 			<label class="line"></label>
 			<ul class="nav nav-list push-bottom">
@@ -8,8 +8,8 @@
 				<li><a href="#">Design</a></li>
 				<li><a href="#">Photos</a></li>
 			</ul>
-		</div>
-		<hr>
+		</div> -->
+		<!-- <hr> -->
 		<div class="tabs box effect1">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#popularPosts" data-toggle="tab"><i class="fa fa-star"></i> @lang('general.title.popular_post')</a></li>
@@ -37,7 +37,7 @@
 							<div class="post-image">
 								<div class="img-thumbnail">
 									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-2.jpg') }}" alt="">
+										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
 									</a>
 								</div>
 							</div>
