@@ -72,6 +72,7 @@ class BookController extends Controller
             $book = Book::find($request->id);
             $response['name'] = $book->nama_kitab;
             $response['author'] = $book->pengarang;            
+            $response['description'] = $book->description;            
             $response['image'] = Book::getBook($request->id,'image_path');
         }else if($request->action != 'delete'){
 
@@ -80,6 +81,7 @@ class BookController extends Controller
                 'image'   => 'image|mimes:jpeg,jpg,png',
                 'name'   => 'required',
                 'author'   => 'required',
+                'description'   => 'required',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -92,6 +94,7 @@ class BookController extends Controller
                     }
                     $book->nama_kitab = $request->name;
                     $book->pengarang = $request->author;
+                    $book->description = $request->description;
 
                     if($request->hasFile('image')) {
                         if($request->action == 'update'){                        
@@ -152,6 +155,13 @@ class BookController extends Controller
                     <label class="col-lg-3 control-label">Author</label>
                     <div class="col-lg-9">
                         '.$book->pengarang.'                        
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+        echo '<div class="form-group">
+                    <label class="col-lg-3 control-label">Description</label>
+                    <div class="col-lg-9">
+                        '.$book->description.'                        
                     </div>
                     <div class="clear"></div>
                 </div>';

@@ -96,6 +96,14 @@
                     </div>
                     <div class="clear"></div>
                 </div>
+                <div class="form-group area-insert-update">
+                    <label class="col-md-3 control-label">Description<b class="text-danger">*</b></label>
+                    <div class="col-lg-9">
+                        {!! Form::textarea('description', null, array('class' => 'ckeditor')) !!}
+                        <p class="has-error text-danger error-description"></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
                 <div class="form-group area-delete">                    
                     <div class="col-md-12">
                          <center>Are You Sure for Delete This Data ?</center>
@@ -162,6 +170,7 @@
             $("[name='action']").val('create');
             $("[name='name']").val('');
             $("[name='author']").val('');
+            $("[name='description']").val('');
             $('.area-insert-update').show();
             $('.area-delete').hide();
             $('#modalFormBook').modal({backdrop: 'static', keyboard: false});
@@ -188,6 +197,7 @@
                     }
                     $("[name='name']").val(response.name);
                     $("[name='author']").val(response.author);
+                    $("[name='description']").val(response.description);
                 }
             });
             $("[name='book_id']").val(id);
