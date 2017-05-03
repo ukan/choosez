@@ -11,6 +11,7 @@ use App\Models\AuditrailLog;
 use Sentinel;
 use Input;
 use Validator;
+use Config;
 
 class BulletinBoardsController extends Controller
 {
