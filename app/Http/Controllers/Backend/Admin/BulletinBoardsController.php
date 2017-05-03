@@ -109,8 +109,11 @@ class BulletinBoardsController extends Controller
                     ;
                 })
                 ->editColumn('img_url', function ($bulletin_board) {
+                    $pathp = "";
+
+                    ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
                     if ($bulletin_board->img_url != ""){
-                    return "<img src='".asset('storage/news/'.$bulletin_board->img_url)."' class='img-responsive' width='100px'>";  
+                    return "<img src='".asset($pathp.'storage/news/'.$bulletin_board->img_url)."' class='img-responsive' width='100px'>";  
                     }
                 })
                 ->editColumn('publish_status', function ($bulletin_board) {
@@ -362,13 +365,17 @@ class BulletinBoardsController extends Controller
 
     public function show(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $bulletin_board = BulletinBoard::find($req->id);
         if ($bulletin_board->img_url != ""){
         echo '
                         <div class="form-group">
                             <div class="col-lg-3">Gambar</div>
                             <div class="col-lg-9">
-                                <img src="'.asset('storage/news/'.$bulletin_board->img_url).'" class="img-responsive" >
+                                <img src="'.asset($pathp.'storage/news/'.$bulletin_board->img_url).'" class="img-responsive" >
                             </div>
                         </div>';
         }
@@ -430,13 +437,17 @@ class BulletinBoardsController extends Controller
 
     public function showEditor(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $bulletin_board = BulletinBoard::find($req->id);
         if ($bulletin_board->img_url != ""){
         echo '
                         <div class="form-group">
                             <div class="col-lg-3">Gambar</div>
                             <div class="col-lg-9">
-                                <img src="'.asset('storage/news/'.$bulletin_board->img_url).'" class="img-responsive" >
+                                <img src="'.asset($pathp.'storage/news/'.$bulletin_board->img_url).'" class="img-responsive" >
                             </div>
                         </div>';
         }
