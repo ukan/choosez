@@ -347,16 +347,16 @@ label.line-infra{
             <!-- start content_slider -->
             <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 3, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+                    <img class="lazyOwl" src="{{ asset($pathp.'storage/masjid2.jpg') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+                    <img class="lazyOwl" src="{{ asset($pathp.'storage/volly.JPG') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+                    <img class="lazyOwl" src="{{ asset($pathp.'storage/parkir.jpg') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+                    <img class="lazyOwl" src="{{ asset($pathp.'storage/gor.JPG') }}" alt="name">
                 </div>
             </div>
             <!--//sreen-gallery-cursual -->
