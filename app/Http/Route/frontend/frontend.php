@@ -18,7 +18,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/location-information/{type?}/{id?}/{id_prov?}', array('as' => 'user-location-information-process', 'uses' => 'UsersController@processLocationInformation'));
     Route::get('/process-activation/{forgot_token}', array('as' => 'process-activation', 'uses' => 'UsersController@processActivation'));
 
-    Route::get('/subscribe', array('as' => 'subscribe', 'uses' => 'HomeController@subscribe'));
+    Route::post('/subscribe', array('as' => 'post-data-subscribe', 'uses' => 'HomeController@subscribe'));
     Route::get('/contact', array('as' => 'contact', 'uses' => 'HomeController@contact'));
 
     Route::group(['prefix' => 'news'], function () {

@@ -46,7 +46,7 @@
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/custom.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/css/select2.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2-bootstrap-theme/select2-bootstrap.css') !!}">
-
+		{!! Html::style('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 		<!-- Head Libs -->
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/modernizr/modernizr.js') !!}"></script>
 		<style type="text/css">
@@ -187,6 +187,8 @@
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/jquery.easing/jquery.easing.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/jquery-cookie/jquery-cookie.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/bootstrap/bootstrap.js') !!}"></script>
+		{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/font-awesome/css/font-awesome.css') !!}
+        {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/nanoscroller/nanoscroller.js') !!}
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/common/common.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/jquery.validation/jquery.validation.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/jquery.stellar/jquery.stellar.js') !!}"></script>
@@ -216,6 +218,9 @@
 		<script src="{!! asset($pathp.'assets/general/select/js/bootstrap-select.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/general/select/js/bootstrap-select.min.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/js/select2.js') !!}"></script>
+		
+		{!! Html::script('assets/backend/custom/jquery.form/jquery.form.js') !!}
+		{!! Html::script('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
 		<script type="text/javascript">
 			$(".select2").select2();
 			function show_form_add(){           
@@ -251,11 +256,8 @@
 		                type: type_not,
 		                addclass: "stack-custom",
 		                stack: myStack
-		            });
-		            table.ajax.reload();
-		            tableDraf.ajax.reload();   
-		            $("[name='post_type']").val(''); 
-		            $('#modalFormTicket').modal('hide'); 
+		            });   
+		            $("[name='email']").val('');  
 		        },
 		        beforeSend: function() {
 		          $('.has-error').html('');

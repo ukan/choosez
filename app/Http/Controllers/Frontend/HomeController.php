@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BulletinBoard;
+use App\Models\Subscribe;
+use Illuminate\Http\Request;
 use Redirect;
-use Request;
+use Validator;
 use Cache;
 
 class HomeController extends Controller
@@ -177,5 +179,29 @@ class HomeController extends Controller
             $x++;
         }
         return view('frontend.news.index')->with('news', $getData);
+    }
+
+    public function subscribe(Request $request)
+    {   
+        $response = array();
+        $param = $request->all();
+
+        $rules = array( 
+            'email'   => 'required|email|unique:subscribes',
+        );
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules);
+        } else {
+                $data = new Subscribe;
+
+                $data->email = $request->email;
+                $data->save();
+                
+                $response['notification'] = "Subscribe Success";
+                $response['status'] = "success";
+        }
+        
+        echo json_encode($response);
     }
 }

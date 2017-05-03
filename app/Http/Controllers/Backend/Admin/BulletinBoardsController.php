@@ -63,8 +63,11 @@ class BulletinBoardsController extends Controller
                     ;
                 })
                 ->editColumn('img_url', function ($bulletin_board) {
+                    $pathp = "";
+
+                    ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
                     if ($bulletin_board->img_url != ""){
-                    return "<img src='".asset('storage/news/'.$bulletin_board->img_url)."' class='img-responsive' width='100px'>";  
+                    return "<img src='".asset($pathp.'storage/news/'.$bulletin_board->img_url)."' class='img-responsive' width='100px'>";  
                     }
                 })
                 ->editColumn('status', function ($bulletin_board) {

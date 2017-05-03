@@ -494,54 +494,54 @@ article.post-large-custom .post-audio-custom {
 </script>
 <script type="text/javascript">
 	/*start ajaxForm for notification insert-update-delete*/
-        $('.jquery-form-edit').ajaxForm({
-        	dataType : "json",
+    $('.jquery-form-edit').ajaxForm({
+    	dataType : "json",
 
-			success: function(response) {
+		success: function(response) {
 
-			    if(response.status == 'success'){
-			    	var title_not = 'Notification';
-			      	var type_not = 'success';
+		    if(response.status == 'success'){
+		    	var title_not = 'Notification';
+		      	var type_not = 'success';
 
-			    }else{
-			    	var title_not = 'Notification';
-			      	var type_not = 'failed';
-			    }
+		    }else{
+		    	var title_not = 'Notification';
+		      	var type_not = 'failed';
+		    }
+			var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+			new PNotify({
+				title: title_not,
+				text: response.notification,
+				type: type_not,
+				addclass: "stack-custom",
+				stack: myStack
+			});
+
+			location.href = '{{ route("get-page-psb") }}';
+		},
+		beforeSend: function() {
+			$('.has-error').html('');
+		},
+		error: function(response){
+			if (response.status === 422) {
+			    var data = response.responseJSON;
+			    $.each(data,function(key,val){
+			        $('.error-'+key).html(val);
+			    });
 				var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
 				new PNotify({
-					title: title_not,
-					text: response.notification,
-					type: type_not,
+					title: "Failed",
+					text: "Validate Error, Check Your Data Again",
+					type: 'danger',
 					addclass: "stack-custom",
 					stack: myStack
 				});
-
-				location.href = '{{ route("get-page-psb") }}';
-			},
-			beforeSend: function() {
-				$('.has-error').html('');
-			},
-			error: function(response){
-				if (response.status === 422) {
-				    var data = response.responseJSON;
-				    $.each(data,function(key,val){
-				        $('.error-'+key).html(val);
-				    });
-					var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
-					new PNotify({
-						title: "Failed",
-						text: "Validate Error, Check Your Data Again",
-						type: 'danger',
-						addclass: "stack-custom",
-						stack: myStack
-					});
-		            $("#modalFormMemberEdit").scrollTop(0);
-		            $("#modalFormNewMember").scrollTop(0);
-				  } else {
-				      $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
-				  }
-			}
-		});
+	            $("#modalFormMemberEdit").scrollTop(0);
+	            $("#modalFormNewMember").scrollTop(0);
+			  } else {
+			      $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
+			  }
+		}
+	});
 </script>
 <!-- end datepicker method -->
 @endsection

@@ -15,11 +15,11 @@
 
 					<div class="alert alert-danger hidden" id="newsletterError"></div>
 
-					<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
+					{!! Form::open(['route'=>'post-data-subscribe', 'files'=>true, 'class' => 'form-horizontal jquery-form-tickets']) !!}
 						<div class="input-group">
-							<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+							<input class="form-control" placeholder="Email Address" name="email" id="newsletterEmail" type="text">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit">Go!</button>
+								<button class="btn btn-default" type="submit">Send</button>
 							</span>
 						</div>
 					</form>
@@ -30,7 +30,7 @@
 					<h4>@lang('general.title.contact_us')</h4>
 					<ul class="contact">
 						<li><p><i class="fa fa-map-marker"></i> <strong>@lang('general.footer.address'):</strong> Jl. Cibiruhilir No.23 RT.01 Rw.02 Cileunyi Bandung.</p></li>
-						<li><p><i class="fa fa-phone"></i> <strong>@lang('general.footer.phone'):</strong> (123) 456-7890</p></li>
+						<li><p><i class="fa fa-phone"></i> <strong>@lang('general.footer.phone'):</strong> -</p></li>
 						<li><p><i class="fa fa-envelope"></i> <strong>@lang('general.footer.email'):</strong> <a href="mailto:alihsanpondokpesantren@gmail.com">alihsanpondokpesantren@gmail.com</a></p></li>
 					</ul>
 				</div>
