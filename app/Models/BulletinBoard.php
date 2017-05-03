@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Config;
 
 class BulletinBoard extends Model
 {
@@ -25,13 +26,17 @@ class BulletinBoard extends Model
 
     public static function getBulletinBoard($id="",$field="")
     {   
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         if($id != ''){
             $eloq_bulletin_board = BulletinBoard::where('id',$id);
             if($eloq_bulletin_board->count() == 1){     
 
                 if($field == 'image_path'){ 
                     if($eloq_bulletin_board->get()->first()->img_url != ''){
-                        return asset('storage').'/'.$eloq_bulletin_board->get()->first()->img_url;
+                        return asset($pathp.'storage').'/'.$eloq_bulletin_board->get()->first()->img_url;
                     }else{
                         return asset('assets/backend/porto-admin/images/!logged-user.jpg');
                     }
