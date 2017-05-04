@@ -204,7 +204,7 @@ class HomeController extends Controller
                 $response['status'] = "success";
         }
         
-        $find_data['email'] = "cobaemail122@mailinator.com";
+        $find_data['email'] = $request->email;
         $find_data['full_name'] = "password";
 
         Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
