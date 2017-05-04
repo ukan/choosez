@@ -252,8 +252,8 @@
 		<script src="{!! asset($pathp.'assets/general/select/js/bootstrap-select.min.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/js/select2.js') !!}"></script>
 		
-		{!! Html::script('assets/backend/custom/jquery.form/jquery.form.js') !!}
-		{!! Html::script('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
+		{!! Html::script($pathp.'assets/backend/custom/jquery.form/jquery.form.js') !!}
+		{!! Html::script($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
 		<script type="text/javascript">
 			$(".select2").select2();
 			function show_form_add(){           
