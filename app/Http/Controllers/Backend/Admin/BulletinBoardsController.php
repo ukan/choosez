@@ -8,10 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\BulletinBoard;
 use App\Models\AuditrailLog;
+use App\Models\Subscribe;
 use Sentinel;
 use Input;
 use Validator;
 use Config;
+use Mail;
 
 class BulletinBoardsController extends Controller
 {
@@ -158,6 +160,17 @@ class BulletinBoardsController extends Controller
             $audit->action = "Edit";
             $audit->before = $bulletin_board->publish_status.' | '.$bulletin_board->publish_date.' | '.$bulletin_board->edit_by;                    
             $audit->after = 'Yes | '.date('Y-m-d H:i:s').' | '.$full_name;
+
+            $subscribe = array_column(Subscribe::where('status', 'confirmed')->get()->toArray(), 'email');
+            foreach ($subscribe as $key => $value) {
+                $find_data['email'] = $value;
+                $find_data['id'] = $data->id;
+                $find_data['full_name'] = "XXX";
+                Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
+                        });
+            }
 
             $response['notification'] = "Success Publish Bulletin Board";
             $response['status'] = "success";

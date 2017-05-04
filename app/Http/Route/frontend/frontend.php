@@ -90,6 +90,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::get('/', array('as' => 'gallery', 'uses' => 'GalleryController@index'));
         Route::get('/{id}', array('as' => 'gallery-detail', 'uses' => 'GalleryController@galleryDetail'));
     });
+    Route::get('/subscribe-confirmation/{id}', array('as' => 'subscribe-confirmation', 'uses' => 'HomeController@subscribe_confirmation'));
 });
 
 Route::post('/center/proker/show', array('as' => 'general-show-proker-pusat', 'uses' => 'Backend\Admin\Organization\ProkerController@showData'));

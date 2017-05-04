@@ -195,22 +195,37 @@ class HomeController extends Controller
         if($validate->fails()) {
             $this->validate($request,$rules);
         } else {
+
                 $data = new Subscribe;
 
                 $data->email = $request->email;
+                $data->status = "waiting";
                 $data->save();
+                
+                $find_data['email'] = $request->email;
+                $find_data['id'] = $data->id;
+                $find_data['full_name'] = "XXX";
+                Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
+                        });
                 
                 $response['notification'] = "Subscribe Success";
                 $response['status'] = "success";
         }
-        
-        $find_data['email'] = $request->email;
-        $find_data['full_name'] = "password";
 
-        Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
-                        });
         echo json_encode($response);
+    }
+
+    public function subscribe_confirmation(Request $request)
+    {   
+        $data = Subscribe::find($request->id);
+
+        $data->status = "confirmed";
+        $data->save();
+            
+        flash()->overlay('You have successfully subscribed to the newsletter', 'Notice');
+
+        return redirect()->to('/');
     }
 }

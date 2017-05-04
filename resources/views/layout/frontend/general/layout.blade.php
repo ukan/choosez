@@ -104,7 +104,6 @@
 
 		  ga('create', 'UA-98521525-1', 'auto');
 		  ga('send', 'pageview');
-
 		</script>
 		@yield('css')
 	</head>
@@ -127,7 +126,13 @@
 
 		  </div>
 		</div>
-
+		<div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    @include('flash::message')
+                </div>
+            </div>
+        </div>
 		<!-- modal register -->
 		<div style="margin-top: 200px" class="modal fade modal-getstart" id="modalFormDecode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -149,7 +154,7 @@
                 <div class="col-md-12">
                      <center class="confirmation-message">
                       <i style="font-size: 30px;color: red" id="circle-status" class="fa fa-minus-circle"></i>
-                      <br>The email must be a valid email address.
+                      <br><span id="content"> The email must be a valid email address.</span>
                      </center>
                 </div>
             </div>
@@ -264,7 +269,15 @@
 		
 		{!! Html::script($pathp.'assets/backend/custom/jquery.form/jquery.form.js') !!}
 		{!! Html::script($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
+		<script>
+		    $('#flash-overlay-modal').css('margin-top','210px');
+		    $('#flash-overlay-modal').css('align','center');
+		    $('#flash-overlay-modal').modal();
+		</script>
 		<script type="text/javascript">
+			function removeHidden(){
+				$("#loader").removeClass('hidden');
+			}
 			$(".select2").select2();
 			function show_form_add(){           
 		        $('.FormTicket-title').html('Form Pendaftaran Santri Baru');
@@ -292,6 +305,7 @@
 		                var title_not = 'Notification';
 		                var type_not = 'failed';
 		            }
+		            $('#loader').addClass("hidden");
 		            $("[name='email']").val('');
 		            $('.area-denied').hide(); 
 		            $('.area-delete').show(); 
@@ -305,8 +319,10 @@
 		              var data = response.responseJSON;
 		              $.each(data,function(key,val){
 		                  $('.error-'+key).html(val);
+		                  $('#content').html(val);
 		              });
 		            // $("#modalFormTicket").scrollTop(0);
+		            $('#loader').addClass("hidden"); 
 		            $('.area-delete').hide(); 
 		            $('.area-denied').show(); 
 		            $("#modalFormDecode").modal("show");

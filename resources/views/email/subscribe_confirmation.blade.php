@@ -452,20 +452,23 @@ a span,
                           <td class="column_cell font_default" align="center" valign="top" style="padding: 16px;font-family: Helvetica, Arial, sans-serif;font-size: 15px;text-align: center;vertical-align: top;color: #888888;">
  
                 <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">We have received your request for a
-subscription to our mailing list.
-We look forward to delivering weekly
-brewing articles, tips and news from
-Al Ihsan.<br>
-                <b>However, we need you to click the link below to
-confirm your Al Ihsan news subscription.</b></p>
+                    subscription to our mailing list.
+                    We look forward to delivering weekly
+                    brewing articles, tips and news from
+                    Al Ihsan.<br>
+                                    <b>However, we need you to click the link below to
+                    confirm your Al Ihsan news subscription.</b></p>
 
-                <p><b>To confirm your subscription, please
-click the following link:</b><br>
-{!! link_to('process-activation/', 'Yes, Subscribe me to this list') !!}.<br><br>
-If you received this email by mistake, simply delete it. You won't be subscribed if you don't click the confirmation link above.<br>
-You will be able to unsubscribe at any time.
+                                    <p><b>To confirm your subscription, please
+                    click the following link:</b><br>
+                    <a href="{!! route('subscribe-confirmation', $id) !!}">
+                      Yes, Subscribe me to this list. 
+                    </a>
+                     <br><br>
+                    If you received this email by mistake, simply delete it. You won't be subscribed if you don't click the confirmation link above.<br>
+                    You will be able to unsubscribe at any time.
 
-</p>
+                    </p>
 
                             <table class="secondary_btn" align="center" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;clear: both;margin: 0 auto;">
                               <tbody>
