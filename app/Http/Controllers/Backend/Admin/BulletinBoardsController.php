@@ -164,9 +164,9 @@ class BulletinBoardsController extends Controller
             $subscribe = array_column(Subscribe::where('status', 'confirmed')->get()->toArray(), 'email');
             foreach ($subscribe as $key => $value) {
                 $find_data['email'] = $value;
-                $find_data['id'] = $data->id;
+                $find_data['id'] = "cek";
                 $find_data['full_name'] = "XXX";
-                Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
+                Mail::send('email.demo', $find_data, function($message) use($find_data) {
                             $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
                             $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
                         });
