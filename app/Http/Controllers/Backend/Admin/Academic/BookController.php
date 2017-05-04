@@ -155,12 +155,16 @@ class BookController extends Controller
 
     public function show(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $book = Book::find($req->id);
         if ($book->image != ""){
         echo '<div class="form-group">
                 <div class="col-lg-3">Image</div>
                 <div class="col-lg-9">
-                    <img src="'.asset('storage/books/').'/'.$book->image.'" class="img-responsive" >
+                    <img src="'.asset($pathp.'/storage/books/').'/'.$book->image.'" class="img-responsive" >
                 </div>
             </div>';
         }

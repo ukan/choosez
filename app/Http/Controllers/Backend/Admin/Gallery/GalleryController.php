@@ -280,12 +280,16 @@ class GalleryController extends Controller
 
     public function show(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $data = Album::find($req->id);
         if ($data->image != ""){
         echo '<div class="form-group">
                 <div class="col-md-3"><strong>Tumbnail</strong></div>
                 <div class="col-md-9">
-                    <strong>:</strong> <img src="'.asset('storage/gallery/').'/'.$data->image.'" class="img-responsive" >
+                    <strong>:</strong> <img src="'.asset($pathp.'/storage/gallery/').'/'.$data->image.'" class="img-responsive" >
                 </div>
             </div>';
         }

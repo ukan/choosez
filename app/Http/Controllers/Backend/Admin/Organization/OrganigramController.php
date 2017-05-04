@@ -184,12 +184,16 @@ class OrganigramController extends Controller
 
     public function show(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $organigram = Organigram::find($req->id);
         if ($organigram->image != ""){
         echo '<div class="form-group">
                 <div class="col-md-2"><strong>Image</strong></div>
                 <div class="col-md-9">
-                    <strong>:</strong> <img src="'.asset('storage/organigram/').'/'.$organigram->image.'" class="img-responsive" >
+                    <strong>:</strong> <img src="'.asset($pathp.'/storage/organigram/').'/'.$organigram->image.'" class="img-responsive" >
                 </div>
             </div>';
         }

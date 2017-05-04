@@ -191,12 +191,16 @@ class TeacherController extends Controller
 
     public function show(Request $req)
     {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         $teacher = Teacher::find($req->id);
         if ($teacher->photo != ""){
         echo '<div class="form-group">
                 <div class="col-lg-3">Photo</div>
                 <div class="col-lg-9">
-                    <img src="'.asset('storage/avatars/').'/'.$teacher->photo.'" class="img-responsive" >
+                    <img src="'.asset($pathp.'storage/avatars/').'/'.$teacher->photo.'" class="img-responsive" >
                 </div>
             </div>';
         }
