@@ -117,6 +117,39 @@
 
 		  </div>
 		</div>
+
+		<!-- modal register -->
+		<div style="margin-top: 200px" class="modal fade modal-getstart" id="modalFormDecode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+		    <div class="modal-header bg">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <center class="confirmation-message"><h4 class="modal-title" id="myModalLabel">Notice</h4></center>
+        </div>
+        <div class="modal-body">
+            <div class="form-group area-delete">                    
+                <div class="col-md-12">
+                     <center class="confirmation-message">
+                      <i style="font-size: 30px;color: green" id="circle-status" class="fa fa-check-circle"></i>
+                      <br>Thank You for Subscribing. Please check your email to confirm your subscription.
+                     </center>
+                </div>
+            </div>
+            <div class="form-group area-denied">                    
+                <div class="col-md-12">
+                     <center class="confirmation-message">
+                      <i style="font-size: 30px;color: red" id="circle-status" class="fa fa-minus-circle"></i>
+                      <br>The email must be a valid email address.
+                     </center>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer bg">
+          <button class="btn btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">Close</button>
+        </div>
+		  </div>
+		</div>
+		</div>
 		<div class="body">
 		@if(request()->segment(2) == NULL)
 			<header id="header" class="single-menu flat-menu valign transparent font-color-light" data-plugin-options='{"stickyEnabled": true, "stickyBodyPadding": false}'>
@@ -249,15 +282,10 @@
 		                var title_not = 'Notification';
 		                var type_not = 'failed';
 		            }
-		            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
-		            new PNotify({
-		                title: response.status,
-		                text: response.notification,
-		                type: type_not,
-		                addclass: "stack-custom",
-		                stack: myStack
-		            });   
-		            $("[name='email']").val('');  
+		            $("[name='email']").val('');
+		            $('.area-denied').hide(); 
+		            $('.area-delete').show(); 
+		            $("#modalFormDecode").modal("show");  
 		        },
 		        beforeSend: function() {
 		          $('.has-error').html('');
@@ -268,15 +296,10 @@
 		              $.each(data,function(key,val){
 		                  $('.error-'+key).html(val);
 		              });
-		            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
-		                new PNotify({
-		                    title: "Failed",
-		                    text: "Validate Error, Check Your Data Again",
-		                    type: 'danger',
-		                    addclass: "stack-custom",
-		                    stack: myStack
-		                });
-		            $("#modalFormTicket").scrollTop(0);
+		            // $("#modalFormTicket").scrollTop(0);
+		            $('.area-delete').hide(); 
+		            $('.area-denied').show(); 
+		            $("#modalFormDecode").modal("show");
 		          } else {
 		              $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
 		          }

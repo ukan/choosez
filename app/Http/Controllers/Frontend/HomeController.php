@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Redirect;
 use Validator;
 use Cache;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -70,6 +71,7 @@ class HomeController extends Controller
                  ->with('bulletin_recent',$getDataRecent)
                  ->with('bulletin_article',$getData)
                  ->with('bulletin_news',$getDataEditor);
+        // return view('email.subscribe_confirmation');
     }
     public function sign_in(){
         $form = [
@@ -202,6 +204,13 @@ class HomeController extends Controller
                 $response['status'] = "success";
         }
         
+        $find_data['email'] = "cobaemail122@mailinator.com";
+        $find_data['full_name'] = "password";
+
+        Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
+                        });
         echo json_encode($response);
     }
 }

@@ -234,6 +234,55 @@ label.line-infra{
 
 				</li>
 				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide_web.jpg') }}" data-fullwidthcentering="on" alt="">
+
+						<!-- <div class="tp-caption sft stb visible-lg"
+							 data-x="417"
+							 data-y="100"
+							 data-speed="300"
+							 data-start="1000"
+							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
+
+						<div class="tp-caption top-label lfl stl"
+							 data-x="center" data-hoffset="0"
+							 data-y="100"
+							 data-speed="300"
+							 data-start="500"
+							 data-easing="easeOutExpo">DO YOU NEED A NEW</div>
+
+						<div class="tp-caption sft stb visible-lg"
+							 data-x="717"
+							 data-y="100"
+							 data-speed="300"
+							 data-start="1000"
+							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
+
+						<div class="tp-caption main-label sft stb"
+							 data-x="center" data-hoffset="0"
+							 data-y="130"
+							 data-speed="300"
+							 data-start="1500"
+							 data-easing="easeOutExpo">WEB DESIGN?</div>
+
+						<div class="tp-caption bottom-label sft stb"
+							 data-x="center" data-hoffset="0"
+							 data-y="200"
+							 data-speed="500"
+							 data-start="2000"
+							 data-easing="easeOutExpo">Check out our options and features.</div>
+
+						<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
+							data-x="center" data-hoffset="0"
+							data-y="250"
+							data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+							data-speed="800"
+							data-start="1700"
+							data-easing="Back.easeInOut"
+							data-endspeed="300">
+								Get Started Now!
+						</a> -->
+				</li>
+				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
 					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
