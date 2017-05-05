@@ -166,7 +166,7 @@ label.line-infra{
 	<div class="slider-container slider-container-fullscreen">
 		<div class="slider" id="revolutionSliderFullScreen" data-plugin-revolution-slider data-plugin-options='{"fullScreen": "on"}'>
 			<ul>
-				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+				<!-- <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
 					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/cek.png') }}" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" />
 
 					<div class="tp-caption tp-fade fadeout fullscreenvideo"
@@ -191,7 +191,7 @@ label.line-infra{
 							<source src="{{ asset($pathp.'assets/frontend/general/video/cek.mp4') }}" type="video/mp4" />
 						</video>
 
-					</div>
+					</div> -->
 
 					<!-- <div class="tp-caption top-label lfl stl"
 						 data-x="140"
@@ -232,8 +232,8 @@ label.line-infra{
 						 data-start="2700"
 						 data-easing="easeOutExpo"><a data-hash href="#home-intro"><i class="fa fa-arrow-circle-o-down"></i></a></div> -->
 
-				</li>
-				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+				<!-- </li> -->
+				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
 					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide_web.jpg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
@@ -282,7 +282,7 @@ label.line-infra{
 								Get Started Now!
 						</a> -->
 				</li>
-				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
 					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
@@ -331,7 +331,7 @@ label.line-infra{
 								Get Started Now!
 						</a> -->
 				</li>
-				<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
 					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"

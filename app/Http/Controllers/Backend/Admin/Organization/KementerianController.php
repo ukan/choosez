@@ -12,6 +12,7 @@ use App\Models\AuditrailLog;
 use Sentinel;
 use Input;
 use Validator;
+use Mail;
 
 class KementerianController extends Controller
 {
@@ -145,6 +146,17 @@ class KementerianController extends Controller
                         $response['status'] = 'failed';
             }
         }
+
+        $data = Sentinel::getUser()->first_name;
+        $find_data['email'] = "x";
+        $find_data['id'] = "cek";
+        $find_data['full_name'] = $data;
+        $find_data['table'] = "Slider";
+
+        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        });
         echo json_encode($response);
     }
 
