@@ -124,11 +124,33 @@ class TeacherController extends Controller
                 $this->validate($request,$rules);
             } else {
                     if($request->action == 'create'){
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Create Teacher";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $teacher = new Teacher;
 
                         $audit->action = "New";
                         $audit->content = $request->image.' | '.$request->name.' | '.$request->email.' | '.$request->phone.' | '.$request->address.' | '.$request->organization.' | '.$request->postal_code;
                     }else{
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Update Teacher";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $teacher = Teacher::find($request->teacher_id);                    
 
                         $audit->action = "Edit";
@@ -186,19 +208,19 @@ class TeacherController extends Controller
                         $response['notification'] = 'Delete Data Failed';
                         $response['status'] = 'failed';
             }
+
+            $data = Sentinel::getUser()->first_name;
+            $find_data['email'] = "x";
+            $find_data['id'] = "cek";
+            $find_data['full_name'] = $data;
+            $find_data['table'] = "Delete Teacher";
+
+            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                            });
         }
 
-        $data = Sentinel::getUser()->first_name;
-        $find_data['email'] = "x";
-        $find_data['id'] = "cek";
-        $find_data['full_name'] = $data;
-        $find_data['table'] = "Slider";
-
-        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        });
-        
         echo json_encode($response);
     }
 

@@ -92,6 +92,17 @@ class SliderController extends Controller
                 $this->validate($request,$rules);
             } else {
                     if($request->action == 'create'){
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Create Slider";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+            
                         $organigram = new Slider;
 
                         $organigram->category = $request->category;
@@ -113,6 +124,17 @@ class SliderController extends Controller
                             $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                         }
                     }else{
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Update Slider";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $organigram = Slider::find($request->slider_id);
                         
                         $organigram->category = $request->category;
@@ -161,18 +183,19 @@ class SliderController extends Controller
                         $response['notification'] = 'Delete Data Failed';
                         $response['status'] = 'failed';
             }
+
+            $data = Sentinel::getUser()->first_name;
+            $find_data['email'] = "x";
+            $find_data['id'] = "cek";
+            $find_data['full_name'] = $data;
+            $find_data['table'] = "Delete Slider";
+
+            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                            });
         }
 
-        $data = Sentinel::getUser()->first_name;
-        $find_data['email'] = "x";
-        $find_data['id'] = "cek";
-        $find_data['full_name'] = $data;
-        $find_data['table'] = "Slider";
-
-        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        });
         echo json_encode($response);
     }
 

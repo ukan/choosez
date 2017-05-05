@@ -226,12 +226,34 @@ class BulletinBoardsController extends Controller
                 $this->validate($request,$rules);
             } else {
                     if($request->action == 'create'){
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Create Bulletin";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $bulletin_board = new BulletinBoard;
                         $bulletin_board->publish_status = "No";
 
                         $audit->action = "New";
                         $audit->content = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;
                     }else{
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Update Bulletin";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $bulletin_board = BulletinBoard::find($request->bulletin_board_id);
 
                         $audit->action = "Edit";
@@ -285,18 +307,19 @@ class BulletinBoardsController extends Controller
                         $response['notification'] = 'Delete Data Failed';
                         $response['status'] = 'failed';
             }
+
+            $data = Sentinel::getUser()->first_name;
+            $find_data['email'] = "x";
+            $find_data['id'] = "cek";
+            $find_data['full_name'] = $data;
+            $find_data['table'] = "Delete Bulletin";
+
+            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                            });
         }
 
-        $data = Sentinel::getUser()->first_name;
-        $find_data['email'] = "x";
-        $find_data['id'] = "cek";
-        $find_data['full_name'] = $data;
-        $find_data['table'] = "Slider";
-
-        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        });
         echo json_encode($response);
     }
 
@@ -331,8 +354,30 @@ class BulletinBoardsController extends Controller
                 $this->validate($request,$rules);
             } else {
                     if($request->action == 'create'){
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Create Buletin Editor";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $bulletin_board = new BulletinBoard;
                     }else{
+                        $data = Sentinel::getUser()->first_name;
+                        $find_data['email'] = "x";
+                        $find_data['id'] = "cek";
+                        $find_data['full_name'] = $data;
+                        $find_data['table'] = "Update Buletin Editor";
+
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
+
                         $bulletin_board = BulletinBoard::find($request->bulletin_board_id); 
 
                         $audit->action = "Edit";
@@ -383,19 +428,19 @@ class BulletinBoardsController extends Controller
                         $response['notification'] = 'Delete Data Failed';
                         $response['status'] = 'failed';
             }
+
+            $data = Sentinel::getUser()->first_name;
+            $find_data['email'] = "x";
+            $find_data['id'] = "cek";
+            $find_data['full_name'] = $data;
+            $find_data['table'] = "Delete Buletin Editor";
+
+            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                            });
         }
 
-        $data = Sentinel::getUser()->first_name;
-        $find_data['email'] = "x";
-        $find_data['id'] = "cek";
-        $find_data['full_name'] = $data;
-        $find_data['table'] = "Slider";
-
-        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        });
-        
         echo json_encode($response);
     }
 
