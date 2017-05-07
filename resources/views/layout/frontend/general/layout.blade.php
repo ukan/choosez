@@ -7,7 +7,7 @@
 		<title>Al Ihsan Website</title>
 		<meta name="keywords" content="HTML5" />
 		<meta name="description" content="Website Pondok Pesantren Al - Ihsan Cibiru Hilir Kabupaten Bandung">
-		<meta name="author" content="alihsan">
+		<meta name="author" content="Pondok Pesantren Al - Ihsan">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">

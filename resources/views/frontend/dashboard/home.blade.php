@@ -234,7 +234,7 @@ label.line-infra{
 
 				<!-- </li> -->
 				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide_web.jpg') }}" data-fullwidthcentering="on" alt="">
+					<img alt="slider 1" src="{{ asset($pathp.'assets/frontend/general/img/slides/slide_web.jpg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
 							 data-x="417"
@@ -283,7 +283,7 @@ label.line-infra{
 						</a> -->
 				</li>
 				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-fullwidthcentering="on" alt="">
+					<img alt="slider 2" src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
 							 data-x="417"
@@ -332,7 +332,7 @@ label.line-infra{
 						</a> -->
 				</li>
 				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-fullwidthcentering="on" alt="">
+					<img alt="slider 3" src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-fullwidthcentering="on" alt="">
 
 						<!-- <div class="tp-caption sft stb visible-lg"
 							 data-x="417"
@@ -396,16 +396,16 @@ label.line-infra{
             <!-- start content_slider -->
             <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 3, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/masjid2.jpg') }}" alt="name">
+                    <img alt="fasilitas 1" class="lazyOwl" src="{{ asset($pathp.'storage/masjid2.jpg') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/volly.JPG') }}" alt="name">
+                    <img alt="fasilitas 2" class="lazyOwl" src="{{ asset($pathp.'storage/volly.JPG') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/parkir.jpg') }}" alt="name">
+                    <img alt="fasilitas 3" class="lazyOwl" src="{{ asset($pathp.'storage/parkir.jpg') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
-                    <img class="lazyOwl" src="{{ asset($pathp.'storage/gor.JPG') }}" alt="name">
+                    <img alt="fasilitas 4" class="lazyOwl" src="{{ asset($pathp.'storage/gor.JPG') }}" alt="name">
                 </div>
             </div>
             <!--//sreen-gallery-cursual -->
@@ -430,7 +430,7 @@ label.line-infra{
 				?>
 	        <div class="col-md-6 col-sm-6 egrid">
 				<div class="img">
-				    <img class="img-recent" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}">
+				    <img alt="recent post" class="img-recent" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}">
 				</div>
 			    <div class="textt">
 				    <div class="date-event">
