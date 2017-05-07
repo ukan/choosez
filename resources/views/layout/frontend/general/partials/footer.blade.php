@@ -40,7 +40,7 @@
 				<h4>@lang('general.footer.follow')</h4>
 				<div class="social-icons">
 					<ul class="social-icons">
-						<li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+						<li class="facebook"><a href="https://www.facebook.com/Pondok-Pesantren-Al-Ihsan-850234935093594/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
 						<li class="instagram"><a href="http://www.instagram.com/alihsan_hits/" target="_blank" data-placement="bottom" data-tooltip title="Instagram">Instagram</a></li>
 					</ul>
 				</div>
