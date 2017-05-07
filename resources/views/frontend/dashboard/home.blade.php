@@ -162,7 +162,6 @@ label.line-infra{
 @section('content')
 
 <div role="main" class="main">
-
 	<div class="slider-container slider-container-fullscreen">
 		<div class="slider" id="revolutionSliderFullScreen" data-plugin-revolution-slider data-plugin-options='{"fullScreen": "on"}'>
 			<ul>
@@ -388,6 +387,7 @@ label.line-infra{
 			<hr class="tall" />
 		</div>
 	</div>
+	
 	<!-- Edifice-Starts-Here -->
     <div class="edifice slideanim infra" id="edifice">
     	<h3><b>@lang('general.title.infrastructure')</b></h3>

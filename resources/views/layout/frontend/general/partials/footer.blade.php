@@ -20,7 +20,7 @@
 							<input class="form-control" placeholder="Email Address" name="email" id="newsletterEmail" type="text">
 							<span class="input-group-btn">
 								<button onclick="removeHidden()" class="btn btn-default" type="submit">Send</button>
-								<span><img alt="loader" id="loader" class="hidden" style="margin-left: 10px" height="25" src="{{ asset($pathp.'assets/general/images/loader.gif') }}"></span>
+								<span><img alt="loader gif" id="loader" class="hidden" style="margin-left: 10px" height="25" src="{{ asset($pathp.'assets/general/images/loader.gif') }}"></span>
 							</span>
 						</div>
 					</form>

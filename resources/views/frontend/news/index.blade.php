@@ -114,11 +114,12 @@ article.post-large-custom .post-audio-custom {
 .history-place{width: 100%;box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 40px 0 rgba(0,0,0,0.19);}
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
+
+
 @endsection
 
 @section('content')
 <div role="main" class="main">
-
 	<section class="page-top">
 		<div class="container">
 			<div class="row">
@@ -146,6 +147,7 @@ article.post-large-custom .post-audio-custom {
 
 					<article class="post post-large-custom blog-single-post">
 						<div class="post-content back-content history-place">
+							<div class="sharethis-inline-share-buttons"></div>
 							<h2>{{ $value->title }}</h2>
 							<div class="post-meta">
 								<i class="fa fa-user"></i>
@@ -173,4 +175,8 @@ article.post-large-custom .post-audio-custom {
 	</div>
 
 </div>
+@endsection
+
+@section('scripts')
+
 @endsection
