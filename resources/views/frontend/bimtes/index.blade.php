@@ -144,7 +144,7 @@ article.post-large-custom .post-audio-custom {
 						</div>
 
 						<div class="post-content back-content history-place">
-							<h2 class="center">Bimtes (Bimbingan Test) Pondok Pesantren AL Ihsan</h2>
+							<h2 class="center">BIMTES (Bimbingan Test) DAN JALUR MANDIRI UIN BANDUNG : Pondok Pesantren AL Ihsan</h2>
 							<div class="post-meta">
 								<hr>
 							</div>
