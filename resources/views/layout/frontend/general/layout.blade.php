@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<title>Al Ihsan Website</title>
 		<meta name="keywords" content="HTML5" />
-		<meta name="description" content="Al Ihsan Website">
+		<meta name="description" content="Website Pondok Pesantren Al - Ihsan Cibiru Hilir Kabupaten Bandung">
 		<meta name="author" content="alihsan">
 
 		<!-- Mobile Metas -->
