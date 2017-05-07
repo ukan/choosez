@@ -52,7 +52,7 @@
 			<div class="row">
 				<div class="col-md-1">
 					<a href="{{ route('home') }}" class="logo">
-						<img width="30" alt="Al Ihsan Website" class="img-responsive" src="{{ asset($pathp.'assets/logo_almamater.jpg') }}">
+						<img alt="loader" width="30" alt="Al Ihsan Website" class="img-responsive" src="{{ asset($pathp.'assets/logo_almamater.jpg') }}">
 					</a>
 				</div>
 				<div class="col-md-7">
