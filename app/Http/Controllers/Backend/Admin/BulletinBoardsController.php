@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\BulletinBoard;
 use App\Models\AuditrailLog;
 use App\Models\Subscribe;
+use App\Models\User;
 use Sentinel;
 use Input;
 use Validator;
@@ -36,7 +37,6 @@ class BulletinBoardsController extends Controller
     public function index(Request $req)
     {
         return view('backend.admin.bulletin-boards.index');
-
     }
 
     public function indexEditor(Request $req)
@@ -236,6 +236,20 @@ class BulletinBoardsController extends Controller
                                             $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
                                             $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
                                         });
+
+                        $user = User::select('email','first_name')
+                                    ->where('roles.slug', 'admin-editor')
+                                    ->join('role_users','role_users.user_id','=','users.id')
+                                    ->join('roles','roles.id','=','role_users.role_id')
+                                    ->get();
+                        foreach ($user as $key => $value) {
+                            $find_data['email'] = $value->email;
+                            $find_data['first_name'] = $value->first_name;
+                            Mail::send('email.editor_notification', $find_data, function($message) use($find_data) {
+                                        $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                        $message->to($find_data['email'], $find_data['first_name'])->subject('Postingan Baru');
+                                    });
+                        }
 
                         $bulletin_board = new BulletinBoard;
                         $bulletin_board->publish_status = "No";
