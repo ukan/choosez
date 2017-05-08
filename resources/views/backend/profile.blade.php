@@ -30,20 +30,20 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="form-group{{ Form::hasError('avatar') }}">
+                            <!-- <div class="form-group{{ Form::hasError('avatar') }}">
                                 {!! Form::label('avatar', 'Avatar', ['class' => 'col-sm-3 control-label']) !!}
                                 <div class="col-sm-9">
                                     {!! Form::file('avatar') !!}
                                     {!! Form::errorMsg('avatar') !!}
                                 </div>
-                            </div>
-                            <div class="form-group{{ Form::hasError('email') }}">
+                            </div> -->
+                            <!-- <div class="form-group{{ Form::hasError('email') }}">
                                 {!! Form::label('email', 'Email', ['class' => 'col-sm-3 control-label']) !!}
                                 <div class="col-sm-9">
                                     {!! Form::text('email', null, ['class' => 'form-control']) !!}
                                     {!! Form::errorMsg('email') !!}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group{{ Form::hasError('first_name') }}">
                                 {!! Form::label('first_name', 'First Name', ['class' => 'col-sm-3 control-label']) !!}
                                 <div class="col-sm-9">
