@@ -152,6 +152,17 @@ article.post-large-custom .post-audio-custom {
               <p class="justify left-achievement">
                 1. Juara I Piala Pamiliar Volley Ball antar pesantren Se Bandung Timur Milad II Pesantren Nailul Kirom<br>
                 2. Terbaik I Cabang Fahmil Qur’an MTQ Ke XXIV Tingkat Provinsi Jawa Barat Tahun 2002<br>
+                3. Terbaik I Fahmil Qur’an MTQ Ke XXXIII Tingkat Kabupate Bandung<br>
+                4. Terbaik II M2KQ Putra MTQ Ke XXXVII se Kabupaten Karawang tahun 2007<br>
+                5. Juara II M2KQ Putra MTQ Ke VII Kota Tasikmalaya 2009<br>
+                6. Juara I Bidang Tarikh Tingkat Wustha Putra MTQ Ke IV Kab Bandung 2010<br>
+                7. Juara I Menulis Cerpen FPMIPA UPI 2014<br>
+                8. Juara III Turnamen Futsal antar Pesantren Se Bandung Raya 2015<br>
+                9. Juara 1 Seni Marawis Kategori Umum Se-Provinsi Jaw Barat 2015<br>
+                10. Juara 2 lomba menulis essay tingkat Mahasiswa Se-Jabar  dalam acara Islamic Psychology Fair 2016<br>
+                11. Juara 3 lomba poster tingkat Mahasiswa Se-Jabar dalam acara Islamic Psychology Fair 2016<br>
+                12. 29. Juara 1 Nasyid terbaik pada acara Gebyar Nasyid Eureka Fisika se-Jawa Barat tahun 2016.<br>
+                13. Juara III Lomba  Qiroatul Kutub Putra, Musabaqah Kitab Kuning 2017 yang dilaksanakan oleh DKC Garda Bangsa Kab.Bandung<br>
               </p>
 						</div>
 					</article>
