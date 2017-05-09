@@ -338,6 +338,19 @@ if (! function_exists('eform_date')) {
     }
 }
 
+if (! function_exists('eform_date_news')) {
+    /**
+     * Generate new datetime from configured format datetime.
+     *
+     * @param  string $datetime
+     * @return string
+     */
+    function eform_date_news($datetime)
+    {
+        return date(env('APP_DATE_FORMAT', 'M d, Y'), strtotime($datetime));
+    }
+}
+
 if (! function_exists('eform_date_number')) {
     /**
      * Generate new datetime from configured format datetime.

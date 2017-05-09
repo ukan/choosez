@@ -198,7 +198,7 @@
 				</div>
 				<div class="container">
 					<div class="logo">
-						<a href="index.html">
+						<a href="/">
 							<img alt="Porto" width="181" height="94" data-sticky-width="152" data-sticky-height="90" src="{{ asset($pathp.'assets/general/images/identity/web.png') }}">
 						</a>
 					</div>

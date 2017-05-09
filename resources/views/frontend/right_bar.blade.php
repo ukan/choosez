@@ -18,130 +18,54 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="popularPosts">
 					<ul class="simple-post-list">
+						@foreach($bulletin_populer as $key => $value)
+						<?php
+							$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+		        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+						?>
 						<li>
 							<div class="post-image">
 								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
+									<a href="{{ route('news-detail', $sentEncrypt) }}">
+										<img width="55" height="50" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}" alt="news image">
 									</a>
 								</div>
 							</div>
 							<div class="post-info">
-								<a href="blog-post.html">Nullam Vitae Nibh Un Odiosters</a>
+								<a href="{{ route('news-detail', $sentEncrypt) }}">{!! $value->title !!}</a>
 								<div class="post-meta">
-									 Jan 10, 2013
+									 {{eform_date_news($value->publish_date)}}
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Vitae Nibh Un Odiosters</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-3.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Odiosters Nullam Vitae</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 				<div class="tab-pane" id="recentPosts">
 					<ul class="simple-post-list">
+						@foreach($bulletin_recent as $key => $value)
+						<?php
+							$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+		        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+						?>
 						<li>
 							<div class="post-image">
 								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
+									<a href="{{ route('news-detail', $sentEncrypt) }}">
+										<img width="55" height="50" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}" alt="news image">
 									</a>
 								</div>
 							</div>
 							<div class="post-info">
-								<a href="blog-post.html">Vitae Nibh Un Odiosters</a>
+								<a href="{{ route('news-detail', $sentEncrypt) }}">{!! $value->title !!}</a>
 								<div class="post-meta">
-									 Jan 10, 2013
+									 {{eform_date_news($value->publish_date)}}
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Odiosters Nullam Vitae</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Nullam Vitae Nibh Un Odiosters</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Odiosters Nullam Vitae</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="post-image">
-								<div class="img-thumbnail">
-									<a href="blog-post.html">
-										<img src="{{ asset($pathp.'assets/frontend/general/img/blog/blog-thumb-1.jpg') }}" alt="">
-									</a>
-								</div>
-							</div>
-							<div class="post-info">
-								<a href="blog-post.html">Nullam Vitae Nibh Un Odiosters</a>
-								<div class="post-meta">
-									 Jan 10, 2013
-								</div>
-							</div>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 			</div>

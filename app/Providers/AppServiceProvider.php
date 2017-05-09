@@ -7,6 +7,7 @@ use Sentinel;
 use DB;
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\BulletinBoard;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Config\Repository as IlluminateConfig;
 
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->bootBladeCustomDirectives();
         $this->bootMenuViewComposer();
+        $this->bootNewsViewComposer();
     }
 
     /**
@@ -83,6 +85,44 @@ class AppServiceProvider extends ServiceProvider
                 $index++;
             }
             $view->withMenus($menus);
+        });
+    }
+
+    /**
+     * Bootstrap our news right bar.
+     *
+     * @return void
+     */
+    private function bootNewsViewComposer()
+    {
+        view()->composer('frontend.right_bar', function ($view) {
+            $data = BulletinBoard::where('publish_status', 'Yes')
+                    ->orderBy('counter', 'desc')
+                    ->take(5)->get();
+
+            $getData = [];
+            $x = 0;
+
+            foreach ($data as $key => $value) {
+                $getData[$x] = $value;
+                
+                $x++;
+            }
+
+            $dataRecent = BulletinBoard::where('publish_status', 'Yes')
+                    ->orderBy('publish_date', 'desc')
+                    ->take(5)->get();
+
+            $getDataRecent = [];
+            $x = 0;
+
+            foreach ($dataRecent as $key => $value) {
+                $getDataRecent[$x] = $value;
+                
+                $x++;
+            }
+
+            $view->with('bulletin_populer',$getData)->with('bulletin_recent',$getDataRecent);
         });
     }
 
