@@ -71,7 +71,7 @@ class HomeController extends Controller
                  ->with('bulletin_recent',$getDataRecent)
                  ->with('bulletin_article',$getData)
                  ->with('bulletin_news',$getDataEditor);
-        // return view('email.editor_notification');
+        // return view('email.new_post');
     }
     public function sign_in(){
         $form = [

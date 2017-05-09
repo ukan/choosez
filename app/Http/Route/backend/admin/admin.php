@@ -192,6 +192,11 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
     });
 });
 
+Route::group(['namespace' => 'Frontend'], function () {
+    Route::group(['prefix' => 'news'], function () {
+        Route::get('/{id}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
+    });
+});
 Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () {
     Route::post('country/combo', array('as' => 'list-combo-country', 'uses' => 'CountriesController@comboCountry'));
     Route::get('region/combo', array('as' => 'list-combo-region', 'uses' => 'RegionsController@comboRegion'));

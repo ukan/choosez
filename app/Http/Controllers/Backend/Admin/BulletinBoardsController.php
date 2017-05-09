@@ -162,13 +162,27 @@ class BulletinBoardsController extends Controller
             $audit->after = 'Yes | '.date('Y-m-d H:i:s').' | '.$full_name;
 
             $subscribe = array_column(Subscribe::where('status', 'confirmed')->get()->toArray(), 'email');
+            $bulletin = BulletinBoard::find($request->id);
+
+            $nes = [];
+            foreach ($bulletin as $key => $value) {
+                $nes[0] = $bulletin->id;
+                $nes[1] = $bulletin->title;
+                $nes[2] = $bulletin->img_url;
+                $nes[3] = $bulletin->content;
+            }
+
             foreach ($subscribe as $key => $value) {
                 $find_data['email'] = $value;
-                $find_data['id'] = "cek";
-                $find_data['full_name'] = "XXX";
-                Mail::send('email.demo', $find_data, function($message) use($find_data) {
+                $find_data['id'] = $nes[0];
+                $find_data['title'] = $nes[1];
+                $find_data['img_url'] = $nes[2];
+                $find_data['content'] = $nes[3];
+                $find_data['full_name'] = "noname";
+                
+                Mail::send('email.new_post', $find_data, function($message) use($find_data) {
                             $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                            $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
+                            $message->to($find_data['email'], $find_data['full_name'])->subject('Recent Post');
                         });
             }
 

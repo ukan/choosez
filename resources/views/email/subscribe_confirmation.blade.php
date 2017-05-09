@@ -495,7 +495,7 @@ a span,
                       <tbody>
                         <tr>
                           <td class="column_cell font_default" align="center" valign="top" style="padding: 16px;font-family: Helvetica, Arial, sans-serif;font-size: 15px;text-align: left;vertical-align: top;color: #b3b3b5;padding-bottom: 0;padding-top: 16px;">
-                          <small style="font-size: 86%;font-weight: normal;">this email was sent by <a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #7a7a7a;">noreply@alihsan.com</a>, please do not reply to this email. <br>
+                          <small style="font-size: 86%;font-weight: normal;">this email was sent by <a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #7a7a7a;">noreply@ponpesalihsancbr.id</a>, please do not reply to this email. <br>
                           Copyright {{ date('Y') }} Al Ihsan All Right Reserved</small></td><!-- /.column_cell -->
                         </tr>
                       </tbody>

@@ -327,18 +327,6 @@ a span,
 .text_quote .column_cell {
     border-color: #d8dde4;
 }
-.button {
-    background-color: #008CBA; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 27px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 2px 1px;
-    cursor: pointer;
-}
 /* Responsive */
 @media screen {
   h1, h2, h3, h4, h5, h6, p, a, .font_default {
@@ -429,7 +417,7 @@ a span,
                                 </tr>
                               </tbody>
                             </table><!-- /.icon_holder:icon_primary -->
-                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 3px;font-weight: bold;color: #2f68b4;">Postingan Baru</h3>
+                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 3px;font-weight: bold;color: #2f68b4;">Recent Post</h3>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
@@ -461,14 +449,20 @@ a span,
                     <table class="column" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;vertical-align: top;">
                       <tbody>
                         <tr>
+                        <?php
+                          $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+                              $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+                              $sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+                        ?>
                           <td class="column_cell font_default" align="center" valign="top" style="padding: 16px;font-family: Helvetica, Arial, sans-serif;font-size: 15px;text-align: center;vertical-align: top;color: #888888;">
- 
-                <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><h3>Assalamu'alaikum {!! $first_name !!}</h3><br> 
-                Ada postingan baru dari admin buletin, silahkan cek pada link berikut :<br>
-                    <a target="_blank" href="{!! url('https://www.ponpesalihsancbr.id/admin/manage-bulletin-board/editor') !!}">
-                      <button class="button" >Cek sekarang</button> 
+                <label style="font-family: Helvetica, Arial, sans-serif;font-size: 25px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><b>{{ $title }}</b></label><br><br>
+                <img src="{{ asset($pathp.'storage/news'.'/'.$img_url) }}" width="348" height="348" alt="" style="line-height: 1;outline: none; border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;mso-line-height-rule: exactly;">
+                <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">
+                  {!! str_limit($content,80) !!} 
+                  <a href="{{ route('news-detail', $sentEncrypt) }}">
+                      <b>See more...</b> 
                     </a>
-                    </p>
+                </p>
 
                             <table class="secondary_btn" align="center" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;clear: both;margin: 0 auto;">
                               <tbody>
