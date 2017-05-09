@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['prefix' => 'news'], function () {
-        Route::get('/{id}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
+        Route::get('news/{id}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
     });
 });
 Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () {
