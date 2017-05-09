@@ -45,8 +45,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     });
 
     Route::group(['prefix' => 'psb'], function () {
-        Route::get('/form', array('as' => 'get-page-psb', 'uses' => 'PsbController@index'));
-        Route::get('/', array('as' => 'get-page-psb-info', 'uses' => 'PsbController@psbInfo'));
+        Route::get('/form', array('as' => 'get-page-psb-info', 'uses' => 'PsbController@index'));
+        Route::get('/', array('as' => 'get-page-psb', 'uses' => 'PsbController@psbInfo'));
         Route::post('/post-data-psb', array('as' => 'post-data-psb', 'uses' => 'PsbController@store'));
         Route::get('/form-print', array('as' => 'psb-form-print', 'uses' => 'PsbController@psbPrint'));
     });
