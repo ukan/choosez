@@ -21,6 +21,11 @@ class PsbController extends Controller
         return view('frontend.psb.index');
     }
 
+    public function psbInfo()
+    {   
+        return view('frontend.psb.psb-info');
+    }
+
     public function psbPrint()
     {   
         return view('frontend.psb.psb-print');
