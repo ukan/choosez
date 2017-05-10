@@ -32,7 +32,7 @@
 		</div>
 	</section>
 	<div class="center-align map-place">
-		<iframe width="100%" height="600" src="http://www.citymaps.ie/create-google-map/map.php?width=100%&amp;height=600&amp;hl=en&amp;coord=-6.937694,107.72247199999993&amp;q=Jl.%20Cibiru%20Hilir%20No.23%2C%20Cibiru%20Hilir%2C%20Cileunyi%2C%20Kota%20Bandung%2C%20Jawa%20Barat%2040626%2C%20Indonesia+(Pondok%20Pesantren%20Al%20Ihsan)&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=A&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6660.918550976284!2d107.72007585399265!3d-6.937618721017405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68c32426bbfd0d%3A0xa15cf57dec9e78a0!2sPondok+Pesantren+Al+-+Ihsan!5e0!3m2!1sen!2sid!4v1494376723617" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
 	<br/>
 	<div class="container back-content effect1">
@@ -81,7 +81,7 @@
 				<ul class="list-unstyled">
 					<li><i class="fa fa-map-marker"></i> <strong>@lang('general.about.address'):</strong> Jl. Cibiruhilir No.23 RT.01 Rw.02 Cileunyi Bandung.</li>
 					<li><i class="fa fa-phone"></i> <strong>@lang('general.about.phone'):</strong> -</li>
-					<li><i class="fa fa-envelope"></i> <strong>@lang('general.about.email'):</strong> <a href="mailto:mail@example.com">mail@example.com</a></li>
+					<li><i class="fa fa-envelope"></i> <strong>@lang('general.about.email'):</strong> <a href="mailto:alihsanpondokpesantren@gmail.com">alihsanpondokpesantren@gmail.com</a></li>
 				</ul>
 				<hr />
 			</div>

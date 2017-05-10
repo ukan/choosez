@@ -180,13 +180,13 @@
 									<span style="color: #fff">@lang('general.public.language')</span>
 								</li>
 								<li>
-									<a href="{{ route('session', 'in') }}" title="Indonesia"><img class="img-flag" src="{{ asset($pathp.'assets/general/images/identity/in.ico') }}"></a>
+									<a href="{{ route('session', 'in') }}" title="Indonesia"><img alt="indonesia" class="img-flag" src="{{ asset($pathp.'assets/general/images/identity/in.ico') }}"></a>
 								</li>
 								<li>
-									<a href="{{ route('session','en') }}" title="English (UK)"><img class="img-flag" src="{{ asset($pathp.'assets/general/images/identity/uk.ico') }}"></a>
+									<a href="{{ route('session','en') }}" title="English (UK)"><img alt="UK" class="img-flag" src="{{ asset($pathp.'assets/general/images/identity/uk.ico') }}"></a>
 								</li>
 								<!-- <li>
-									<a href="{{ route('session','ar') }}" title="Saudi Arabia"><img class="img-flag" src="{{ asset('assets/general/images/identity/ar.ico') }}"></a>
+									<a href="{{ route('session','ar') }}" title="Saudi Arabia"><img class="img-flag" alt="AR" src="{{ asset('assets/general/images/identity/ar.ico') }}"></a>
 								</li> -->
 							</ul>
 						</nav>

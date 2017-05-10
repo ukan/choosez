@@ -33,7 +33,7 @@
 
         {!! Html::style('assets/plugins/bootstrap-switch/bootstrap-switch.min.css') !!}
         {!! Html::style('assets/plugins/bootstrap-switch/bootstrap-switch.min.css') !!}
-        {!! Html::style('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
+        {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
         
         <!-- Specific Page Vendor CSS -->
         {!! Html::style('assets/backend/porto-admin/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') !!}
