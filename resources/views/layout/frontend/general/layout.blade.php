@@ -34,7 +34,7 @@
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/skins/default.css') !!}">
 		{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
-		{!! Html::style('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
+		{!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme.css') !!}">
 		
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-blog.css') !!}">
