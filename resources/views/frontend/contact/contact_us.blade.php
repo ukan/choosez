@@ -106,7 +106,7 @@
 
 @section('scripts')
         <!-- Theme Base, Components and Settings -->
-        {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
+        <!-- {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!} -->
 <script type="text/javascript">
 	$('.jquery-form-data').ajaxForm({
         dataType : 'json',
