@@ -23,7 +23,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/contact/contact-us', array('as' => 'contact-us', 'uses' => 'HomeController@post_contact'));
 
     Route::group(['prefix' => 'news'], function () {
-        Route::get('/{id}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
+        Route::get('/{slug}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
     });
 
     Route::group(['prefix' => 'profile'], function () {

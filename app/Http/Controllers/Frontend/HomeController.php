@@ -165,18 +165,18 @@ class HomeController extends Controller
         return view('frontend.contact.contact_us');
     }
 
-    public function newsDetail($id)
+    public function newsDetail($slug)
     {   
-        $beforeDecrypt = str_replace('zpaIwL8TvQqP','/',$id);
+        /*$beforeDecrypt = str_replace('zpaIwL8TvQqP','/',$id);
         $cryptKey   = 'qJB0rGtIn5UB1xG03efyCp';
         $decrypted  = rtrim( mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),base64_decode($beforeDecrypt), 
-                MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");
+                MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");*/
         
-        $bulletin = BulletinBoard::where('id',$decrypted)->orderBy('id')->get()->first();
+        $bulletin = BulletinBoard::where('slug',$slug)->orderBy('id')->get()->first();
         $bulletin->counter = $bulletin->counter+1;
         $bulletin->save();
 
-        $data = BulletinBoard::where('id',$decrypted)->orderBy('id')->get();
+        $data = BulletinBoard::where('slug',$slug)->orderBy('id')->get();
 
         $getData = [];
         $x = 0;

@@ -20,20 +20,20 @@
 					<ul class="simple-post-list">
 						@foreach($bulletin_populer as $key => $value)
 						<?php
-							$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+							/*$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
 		        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
-		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);*/
 						?>
 						<li>
 							<div class="post-image">
 								<div class="img-thumbnail">
-									<a href="{{ route('news-detail', $sentEncrypt) }}">
+									<a href="{{ route('news-detail', $value->slug) }}">
 										<img width="55" height="50" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}" alt="news image">
 									</a>
 								</div>
 							</div>
 							<div class="post-info">
-								<a href="{{ route('news-detail', $sentEncrypt) }}">{!! $value->title !!}</a>
+								<a href="{{ route('news-detail', $value->slug) }}">{!! $value->title !!}</a>
 								<div class="post-meta">
 									 {{eform_date_news($value->publish_date)}}
 								</div>
@@ -46,20 +46,20 @@
 					<ul class="simple-post-list">
 						@foreach($bulletin_recent as $key => $value)
 						<?php
-							$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+							/*$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
 		        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
-		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+		        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);*/
 						?>
 						<li>
 							<div class="post-image">
 								<div class="img-thumbnail">
-									<a href="{{ route('news-detail', $sentEncrypt) }}">
+									<a href="{{ route('news-detail', $value->slug) }}">
 										<img width="55" height="50" src="{{ asset($pathp.'storage/news'.'/'.$value->img_url) }}" alt="news image">
 									</a>
 								</div>
 							</div>
 							<div class="post-info">
-								<a href="{{ route('news-detail', $sentEncrypt) }}">{!! $value->title !!}</a>
+								<a href="{{ route('news-detail', $value->slug) }}">{!! $value->title !!}</a>
 								<div class="post-meta">
 									 {{eform_date_news($value->publish_date)}}
 								</div>

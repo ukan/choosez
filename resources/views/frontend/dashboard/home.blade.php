@@ -424,9 +424,9 @@ label.line-infra{
 	        <label class="line"></label>
 	        @foreach($bulletin_recent as $key => $value)
 	        	<?php
-					$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
-        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
-        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+					// $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+        			// $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$value->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+        			// $sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
 				?>
 	        <div class="col-md-6 col-sm-6 egrid">
 				<div class="img">
@@ -439,7 +439,7 @@ label.line-infra{
 				    <h3 class="height_title">{{ str_limit($value->title,40) }}</h3>
 					<label class="eline"></label>
 				    <p>{!! str_limit($value->content,80) !!}</p>
-					<a href="{{ route('news-detail', $sentEncrypt) }}" >@lang('general.public.read_more')</a>
+					<a href="{{ route('news-detail', $value->slug) }}" >@lang('general.public.read_more')</a>
 				</div>
 				<div class="clearfix"></div>
 	        </div>
@@ -470,18 +470,18 @@ label.line-infra{
 										<div>
 											@for($y=0;$y<2;$y++)
 												<?php
-													$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+													/*$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
 								        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$bulletin_article[$x]->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
-								        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+								        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);*/
 												?>
 												<div class="col-md-6">
 													<article>
-														<div class="date">
+														<div style="color:#0088cc" class="date">
 															<span class="day">{{ eform_date_number($bulletin_article[$x]->updated_at) }}</span>
-															<span class="month">{{ eform_date_month($bulletin_article[$x]->updated_at) }}</span>
+															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_article[$x]->updated_at) }}</span>
 														</div>
-														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $sentEncrypt) }}">{{ str_limit($bulletin_article[$x]->title,41) }}</a></h4>
-														{!! str_limit($bulletin_article[$x]->content, 100) !!}<a href="{{ route('news-detail', $sentEncrypt) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
+														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $value->slug) }}">{{ str_limit($bulletin_article[$x]->title,41) }}</a></h4>
+														{!! str_limit($bulletin_article[$x]->content, 100) !!}<a href="{{ route('news-detail', $value->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
 													</article>
 												</div>
 												@php $x++; @endphp
@@ -505,18 +505,18 @@ label.line-infra{
 										<div>
 											@for($y=0;$y<2;$y++)
 												<?php
-													$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+													/*$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
 								        			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$bulletin_news[$x]->id, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
-								        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+								        			$sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);*/
 												?>
 												<div class="col-md-6">
 													<article>
 														<div class="date">
-															<span class="day">{{ eform_date_number($bulletin_news[$x]->updated_at) }}</span>
-															<span class="month">{{ eform_date_month($bulletin_news[$x]->updated_at) }}</span>
+															<span style="color:#0088cc" class="day">{{ eform_date_number($bulletin_news[$x]->updated_at) }}</span>
+															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_news[$x]->updated_at) }}</span>
 														</div>
-														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $sentEncrypt) }}">{{ str_limit($bulletin_news[$x]->title,41) }}</a></h4>
-														{!! str_limit($bulletin_news[$x]->content, 100) !!}<a href="{{ route('news-detail', $sentEncrypt) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
+														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $bulletin_news[$x]->slug) }}">{{ str_limit($bulletin_news[$x]->title,41) }}</a></h4>
+														{!! str_limit($bulletin_news[$x]->content, 100) !!}<a href="{{ route('news-detail', $bulletin_news[$x]->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
 													</article>
 												</div>
 												@php $x++; @endphp

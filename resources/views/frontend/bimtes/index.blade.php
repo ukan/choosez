@@ -148,7 +148,7 @@ article.post-large-custom .post-audio-custom {
 							<div class="post-meta">
 								<hr>
 							</div>
-							<label>Assalamua’laikum WR.WB...</label>
+							<label style="font-style:italic;font-size: 16px;color:#000">Assalamua’laikum WR.WB...</label>
 							<p class="justify">Bismillah,  bagi kalian akang-akang dan teteh-teteh calon mahasiswa baru yang mau ikut jalur mandiri UIN Sunan Gunung Djati Bandung, yang masih bingung dengan masuk atau tidaknya ke jurusan yang ada di UIN Sunan Gunung Djati Bandung atau masih belum percaya diri dengan ujian tulis jalur mandiri.</p>
 							<p class="justify"><span style="color: red">Nah nah nah ada kabar gembira....</span> sudah di buka lhoo BIMTES (Bimbingan Test) buat jalur mandiri di PONPES AL-IHSAN Cibiruhilir. Kalau kalian sedang mencari informasi, kami solusinya. dari pendaftaran, biaya kuliah, beasiswa, insya Allah kami bisa memberikan informasi yang up to date ,terkini bahkan sudah terbukti lulusan Bimtes Al Ihsan ini telah meloloskan seleksi jalur mandiri UIN Bandung ini.</p>
 							<p class="justify">Ah-ya... kami juga membuka pendaftaran BIMTES jalur mandiri untuk akang-akang/teteh-teteh yang ikut jalur mandiri. so' come along with us.</p>
@@ -164,7 +164,7 @@ article.post-large-custom .post-audio-custom {
 							</p>
 							<p style="color: red;font-style: oblique;" class="justify"><strong>Fasilitas super kumplit ini hanya ada di BIMTES kami.</strong> </p>
 							<p class="justify"><b>BIMTEST PONPES AL IHSAN</b> tentunya yang paling dekat dan pesantren paling favororit lho di UIN Bandung ini.
-							<p class="justify">Ayoo... kalian tinggal registrasi di halaman WEB ini, dengan mengisi formulir <a href="#">disini</a></p>
+							<p class="justify">Ayoo... kalian tinggal registrasi di halaman WEB ini, dengan mengisi formulir <a href="#0">disini</a></p>
 							
 
 						</div>

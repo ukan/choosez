@@ -289,6 +289,7 @@ class BulletinBoardsController extends Controller
                         $audit->after = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;                    
                     }
                     $bulletin_board->title = $request->title;
+                    $bulletin_board->slug = str_replace(" ", "-", $request->title);
                     $bulletin_board->content = $request->content;
                     $bulletin_board->status = $request->type;
                     if($request->type == "news"){
@@ -413,6 +414,7 @@ class BulletinBoardsController extends Controller
                         $audit->after = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;                   
                     }
                     $bulletin_board->title = $request->title;
+                    $bulletin_board->slug = str_replace(" ", "-", $request->title);
                     $bulletin_board->content = $request->content;
                     $bulletin_board->edit_by = $full_name;
                     
