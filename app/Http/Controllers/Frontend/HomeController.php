@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\BulletinBoard;
 use App\Models\Subscribe;
+use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use Redirect;
 use Validator;
@@ -208,9 +209,9 @@ class HomeController extends Controller
                 
                 $find_data['email'] = $request->email;
                 $find_data['id'] = $data->id;
-                $find_data['full_name'] = "XXX";
+                $find_data['full_name'] = "User";
                 Mail::send('email.subscribe_confirmation', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
                             $message->to($find_data['email'], $find_data['full_name'])->subject('Subscribe Confirmation');
                         });
                 
@@ -231,5 +232,36 @@ class HomeController extends Controller
         flash()->overlay('You have successfully subscribed to the newsletter', 'Notice');
 
         return redirect()->to('/');
+    }
+
+    public function post_contact(Request $request)
+    {   
+        $response = array();
+        $param = $request->all();
+
+        $rules = array( 
+            'name'   => 'required',
+            'email'   => 'required|email|unique:contact_us',
+            'subject'   => 'required',
+            'message'   => 'required',
+        );
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules);
+        } else {
+
+                $data = new ContactUs;
+
+                $data->name = $request->name;
+                $data->email = $request->email;
+                $data->subject = $request->subject;
+                $data->message = $request->message;
+                $data->save();
+                
+                $response['notification'] = "Send Message Successfully";
+                $response['status'] = "success";
+        }
+
+        echo json_encode($response);
     }
 }

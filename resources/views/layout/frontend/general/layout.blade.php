@@ -17,6 +17,7 @@
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/bootstrap/bootstrap.css') !!}">
+
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/fontawesome/css/font-awesome.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/owlcarousel/owl.carousel.min.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/owlcarousel/owl.theme.default.min.css') !!}">
@@ -28,8 +29,14 @@
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/general/select/css/bootstrap-select.min.css') !!}">
 
 		<!-- Theme CSS -->
-		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-elements.css') !!}">
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/skins/default.css') !!}">
+		{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
+		{!! Html::style('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
+		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme.css') !!}">
+		
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-blog.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-animate.css') !!}">
 		
@@ -39,14 +46,12 @@
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/rs-plugin/css/settings.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/vendor/circle-flip-slideshow/css/component.css') !!}">
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/skins/default.css') !!}">
-
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/custom.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/css/select2.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2-bootstrap-theme/select2-bootstrap.css') !!}">
-		{!! Html::style('assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
+		
+		{!! Html::script( $pathp.'assets/backend/porto-admin/vendor/modernizr/modernizr.js') !!}
 		<!-- Head Libs -->
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/modernizr/modernizr.js') !!}"></script>
 		<style type="text/css">
@@ -107,6 +112,10 @@
 		</script>
 		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=590f1fe01554ce001135766e&product=inline-share-buttons"></script>
 		@yield('css')
+
+		<!-- Specific Page Vendor CSS -->
+        {!! Html::style( $pathp.'assets/backend/porto-admin/stylesheets/theme.css') !!}
+        {!! Html::style( $pathp.'assets/backend/porto-admin/stylesheets/skins/default.css') !!}
 	</head>
 	<body>
 		<div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -270,6 +279,7 @@
 		
 		{!! Html::script($pathp.'assets/backend/custom/jquery.form/jquery.form.js') !!}
 		{!! Html::script($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
+
 		<script>
 		    $('#flash-overlay-modal').css('margin-top','210px');
 		    $('#flash-overlay-modal').css('align','center');

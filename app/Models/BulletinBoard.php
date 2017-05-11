@@ -11,7 +11,7 @@ class BulletinBoard extends Model
     protected $table = 'buletin_boards';
 
     protected $fillable = [
-        'title', 'content', 'img_url', 'author', 'publish_date', 'publish_status', 'status',
+        'title', 'content', 'img_url', 'author', 'publish_date', 'publish_status', 'status','slug',
     ];
 
     protected static function boot() {

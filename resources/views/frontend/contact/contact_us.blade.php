@@ -3,6 +3,7 @@
 @section('title', 'Contact Us')
 
 @section('css')
+
 <style>
     .center-align {text-align: center;margin: auto;}
     .effect1{box-shadow: -10px 10px 10px -6px #777;}
@@ -45,41 +46,44 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h2 class="short back-color">@lang('general.about.contact_us_form')</h2>
-				<form id="contactForm" action="#" method="POST">
-					<div class="row">
+				
+				{!! Form::open(['route'=>'contact-us', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
+					
 						<div class="form-group">
 							<div class="col-md-6">
-								<label>@lang('general.about.name') <b class="text-danger">*</b></label>
-								<input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
+		                		<label>@lang('general.about.name') <b class="text-danger">*</b></label>    
+		                        <input type="text" value="" maxlength="100" class="form-control" name="name" id="name">
+		                        <p class="has-error text-danger error-name"></p>
 							</div>
 							<div class="col-md-6">
-								<label>@lang('general.about.email') <b class="text-danger">*</b></label>
-								<input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required>
+		                		<label>@lang('general.about.email') <b class="text-danger">*</b></label>    
+		                        <input type="email" value="" maxlength="100" class="form-control" name="email" id="email">
+		                        <p class="has-error text-danger error-email"></p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group">
+					
+						<div style="margin-top: -20px" class="form-group">
 							<div class="col-md-12">
 								<label>@lang('general.about.subject') <b class="text-danger">*</b></label>
-								<input type="text" value="" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="subject" id="subject" required>
+								<input type="text" value="" maxlength="100" class="form-control" name="subject" id="subject">
+								<p class="has-error text-danger error-subject"></p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group">
+					
+						<div style="margin-top: -20px" class="form-group">
 							<div class="col-md-12">
 								<label>@lang('general.about.message') <b class="text-danger">*</b></label>
-								<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+								<textarea maxlength="5000" rows="10" class="form-control" name="message" id="message"></textarea>
+								<p class="has-error text-danger error-message"></p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
+					
 						<div class="col-md-12">
-							<input disabled="disabled" type="submit" value="@lang('general.about.send')" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+							<input style="margin-left: -15px" type="submit" value="@lang('general.about.send')" class="btn btn-primary btn-lg" data-loading-text="Loading...">
 						</div>
-					</div>
+					
 				</form>
+
 			</div>
 			<div class="col-md-6">
 
@@ -101,5 +105,56 @@
 @endsection
 
 @section('scripts')
+        <!-- Theme Base, Components and Settings -->
+        {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
+<script type="text/javascript">
+	$('.jquery-form-data').ajaxForm({
+        dataType : 'json',
+        success: function(response) {
 
+            if(response.status == 'success'){
+                var title_not = 'Notification';
+                var type_not = 'success';
+            }else{
+                var title_not = 'Notification';
+                var type_not = 'failed';
+            }
+            $("[name='name']").val('');
+            $("[name='email']").val('');
+            $("[name='subject']").val('');
+            $("[name='message']").val('');
+
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+            new PNotify({
+                title: response.status,
+                text: response.notification,
+                type: type_not,
+                addclass: "stack-custom",
+                stack: myStack
+            }); 
+        },
+        beforeSend: function() {
+          $('.has-error').html('');
+        },
+        error: function(response){
+          if (response.status === 422) {
+              var data = response.responseJSON;
+              $.each(data,function(key,val){
+                  $('.error-'+key).html(val);
+              });
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                new PNotify({
+                    title: "Failed",
+                    text: "Validate Error, Check Your Data Again",
+                    type: 'danger',
+                    addclass: "stack-custom",
+                    stack: myStack
+                });
+            $("#modalFormTeacher").scrollTop(0);
+          } else {
+              $('.error').createClass('alert alert-danger').html(response.responseJSON.message);
+          }
+        }
+    });
+</script>
 @endsection

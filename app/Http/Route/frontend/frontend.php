@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::post('/subscribe', array('as' => 'post-data-subscribe', 'uses' => 'HomeController@subscribe'));
     Route::get('/contact', array('as' => 'contact', 'uses' => 'HomeController@contact'));
+    Route::post('/contact/contact-us', array('as' => 'contact-us', 'uses' => 'HomeController@post_contact'));
 
     Route::group(['prefix' => 'news'], function () {
         Route::get('/{id}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));
@@ -91,6 +92,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::get('/', array('as' => 'gallery', 'uses' => 'GalleryController@index'));
         Route::get('/{id}', array('as' => 'gallery-detail', 'uses' => 'GalleryController@galleryDetail'));
     });
+
     Route::get('/subscribe-confirmation/{id}', array('as' => 'subscribe-confirmation', 'uses' => 'HomeController@subscribe_confirmation'));
 });
 
