@@ -68,7 +68,7 @@ img.lazyOwl {
 	top: -16px;
     left: 230px;
 	background-color:#0088cc;
-	padding:10px 10px 10px 10px;
+	padding:3px 10px 10px 10px;
 	height: 40px;
 }
 .date-event h5{
@@ -150,7 +150,7 @@ label.line-infra{
 	height: 250px;
 }
 .height_title{
-	height: 20px;
+	height: 30px;
 }
 .height_title_footer_news{
 	height: 80px;
@@ -434,7 +434,7 @@ label.line-infra{
 				</div>
 			    <div class="textt">
 				    <div class="date-event">
-					    <h5>{{ eform_datemonth($value->updated_at) }}</h5>
+					    <h5><b>{{ eform_datemonth($value->updated_at) }}</b></h5>
 					</div>
 				    <h3 class="height_title">{{ str_limit($value->title,40) }}</h3>
 					<label class="eline"></label>
