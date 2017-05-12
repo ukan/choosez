@@ -383,7 +383,7 @@
                     if(response.img_url != ''){
                         $('.fileinput-new.thumbnail.image').html('<img src="'+ response.photo +'" style="width:100px;height:auto" class=" img-responsive">');
                     }else{
-                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset("assets/backend/porto-admin/images/!logged-user.jpg") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
+                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset($pathp."assets/backend/porto-admin/images/!logged-user.jpg") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
                     }
                     $("[name='name']").val(response.name);
                     $("[name='email']").val(response.email);
