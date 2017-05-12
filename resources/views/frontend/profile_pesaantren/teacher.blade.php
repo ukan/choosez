@@ -7,7 +7,7 @@
 	@import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
 	.droid-arabic-naskh{font-family: 'Droid Arabic Naskh', serif;}
 	.disabled{pointer-events: none;cursor: default;}
-	.image-resolution{min-height: 300px; max-height: 300px; height: 585px; width: 585px;}
+	.image-resolution{min-height: 250px; max-height: 250px; height: 585px; width: 585px;}
 	.effect1{box-shadow: -10px 10px 10px -6px #777;}
 	.effect1 h4{padding-left: 10px;padding-top: 10px;}
 </style>
