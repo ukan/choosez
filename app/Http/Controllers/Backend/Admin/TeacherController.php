@@ -112,7 +112,7 @@ class TeacherController extends Controller
             $rules = array(
                 'image'   => 'image|mimes:jpeg,jpg,png',
                 'name'   => 'required',
-                'email'   => 'required|email',
+                // 'email'   => 'required|email',
                 'phone'   => 'required|numeric',
                 'address'   => 'required',
                 'organization'   => 'required',
