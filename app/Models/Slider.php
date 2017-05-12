@@ -27,15 +27,19 @@ class Slider extends Model
 
     public static function getSlider($id="",$field="")
     {   
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         if($id != ''){
             $eloq = Slider::where('id',$id);
             if($eloq->count() == 1){     
 
                 if($field == 'image_path'){ 
                     if($eloq->get()->first()->image != ''){
-                        return asset('storage/slider').'/'.$eloq->get()->first()->image;
+                        return asset($pathp.'storage/slider').'/'.$eloq->get()->first()->image;
                     }else{
-                        return asset('assets/backend/porto-admin/images/!logged-user.png');
+                        return asset($pathp.'assets/backend/porto-admin/images/!logged-user.png');
                     }
                 }else{
                     return $eloq->get()->first()->{$field};                    

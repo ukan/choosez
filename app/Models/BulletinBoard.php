@@ -38,7 +38,7 @@ class BulletinBoard extends Model
                     if($eloq_bulletin_board->get()->first()->img_url != ''){
                         return asset($pathp.'storage').'/'.$eloq_bulletin_board->get()->first()->img_url;
                     }else{
-                        return asset('assets/backend/porto-admin/images/!logged-user.jpg');
+                        return asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg');
                     }
                 }else{
                     return $eloq_bulletin_board->get()->first()->{$field};                    

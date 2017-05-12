@@ -46,15 +46,19 @@ class Teacher extends Model
     }
     public static function getTeacher($id="",$field="")
     {   
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         if($id != ''){
             $eloq_teacher = Teacher::where('id',$id);
             if($eloq_teacher->count() == 1){     
 
                 if($field == 'image_path'){ 
                     if($eloq_teacher->get()->first()->photo != ''){
-                        return asset('storage/avatars').'/'.$eloq_teacher->get()->first()->photo;
+                        return asset($pathp.'storage/avatars').'/'.$eloq_teacher->get()->first()->photo;
                     }else{
-                        return asset('assets/backend/porto-admin/images/!logged-user.jpg');
+                        return asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg');
                     }
                 }else{
                     return $eloq_teacher->get()->first()->{$field};                    

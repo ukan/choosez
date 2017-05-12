@@ -27,15 +27,19 @@ class Organigram extends Model
 
     public static function getOrganigram($id="",$field="")
     {   
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         if($id != ''){
             $eloq = Organigram::where('id',$id);
             if($eloq->count() == 1){     
 
                 if($field == 'image_path'){ 
                     if($eloq->get()->first()->image != ''){
-                        return asset('storage/organigram').'/'.$eloq->get()->first()->image;
+                        return asset($pathp.'storage/organigram').'/'.$eloq->get()->first()->image;
                     }else{
-                        return asset('assets/backend/porto-admin/images/!logged-user.jpg');
+                        return asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg');
                     }
                 }else{
                     return $eloq->get()->first()->{$field};                    

@@ -32,15 +32,19 @@ class Book extends Model
     }
     public static function getBook($id="",$field="")
     {   
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
         if($id != ''){
             $eloq_book = Book::where('id',$id);
             if($eloq_book->count() == 1){     
 
                 if($field == 'image_path'){ 
                     if($eloq_book->get()->first()->image != ''){
-                        return asset('storage/books').'/'.$eloq_book->get()->first()->image;
+                        return asset($pathp.'storage/books').'/'.$eloq_book->get()->first()->image;
                     }else{
-                        return asset('assets/backend/porto-admin/images/!logged-user.jpg');
+                        return asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg');
                     }
                 }else{
                     return $eloq_book->get()->first()->{$field};                    
