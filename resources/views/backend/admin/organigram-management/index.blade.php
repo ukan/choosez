@@ -217,7 +217,7 @@
             $('#modalFormOrganigram').modal({backdrop: 'static', keyboard: false});
             $('#modalFormOrganigram').modal('show');
             $("[name='organigram_id']").val('');
-            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg')}}" class="img-responsive">');
+            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.png')}}" class="img-responsive">');
         }
 
         function show_form_update(id){
@@ -231,10 +231,10 @@
                 dataType: 'json',
                 success: function(response)
                 {
-                    if(response.img_url != ''){
+                    if(response.image != ''){
                         $('.fileinput-new.thumbnail.image').html('<img src="'+ response.image +'" style="width:100px;height:auto" class=" img-responsive">');
                     }else{
-                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset("assets/backend/porto-admin/images/!logged-user.jpg") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
+                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset($pathp."assets/backend/porto-admin/images/!logged-user.png") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
                     }
                     $("[name='nama']").val(response.nama);
                 }

@@ -266,7 +266,7 @@
             $('#modalFormTeacher').modal({backdrop: 'static', keyboard: false});
             $('#modalFormTeacher').modal('show');
             $("[name='teacher_id']").val('');
-            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.jpg')}}" class="img-responsive">');
+            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.png')}}" class="img-responsive">');
         }
         /*start show for active member*/
         function show_form_unpublish(id){
@@ -380,10 +380,10 @@
                 dataType: 'json',
                 success: function(response)
                 {
-                    if(response.img_url != ''){
+                    if(response.photo != ''){
                         $('.fileinput-new.thumbnail.image').html('<img src="'+ response.photo +'" style="width:100px;height:auto" class=" img-responsive">');
                     }else{
-                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset($pathp."assets/backend/porto-admin/images/!logged-user.jpg") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
+                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset($pathp."assets/backend/porto-admin/images/!logged-user.png") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
                     }
                     $("[name='name']").val(response.name);
                     $("[name='email']").val(response.email);

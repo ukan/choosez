@@ -213,7 +213,7 @@
             $('#modalFormSlider').modal({backdrop: 'static', keyboard: false});
             $('#modalFormSlider').modal('show');
             $("[name='slider_id']").val('');
-            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/frontend/porto/img/holder.png')}}" class="img-responsive">');
+            $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.png')}}" class="img-responsive">');
         }
 
         function show_form_update(id){
@@ -227,10 +227,10 @@
                 dataType: 'json',
                 success: function(response)
                 {
-                    if(response.img_url != ''){
+                    if(response.image != ''){
                         $('.fileinput-new.thumbnail.image').html('<img src="'+ response.image +'" style="width:100px;height:auto" class=" img-responsive">');
                     }else{
-                        $('.fileinput-new.thumbnail.image').html('<img src="{{asset($pathp.'assets/frontend/porto/img/holder.png')}}" style="width:100px;height:auto" class="img-circle img-responsive">');
+                        $('.fileinput-new.thumbnail.image').html('<img src="{{asset($pathp.'assets/backend/porto-admin/images/!logged-user.png')}}" style="width:100px;height:auto" class="img-circle img-responsive">');
                     }
                     $("[name='category']").val(response.category);
                 }
