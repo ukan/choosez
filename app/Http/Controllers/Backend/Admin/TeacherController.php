@@ -117,7 +117,7 @@ class TeacherController extends Controller
                 // 'email'   => 'required|email',
                 'phone'   => 'required|numeric',
                 'address'   => 'required',
-                'academic'   => 'required',
+                // 'academic'   => 'required',
                 'organization'   => 'required',
                 'postal_code'   => 'required|numeric',
                 // 'instagram'   => 'url',
