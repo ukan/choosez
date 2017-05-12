@@ -3,7 +3,8 @@
 @section('title', 'Contact Us')
 
 @section('css')
-
+{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
+{!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 <style>
     .center-align {text-align: center;margin: auto;}
     .effect1{box-shadow: -10px 10px 10px -6px #777;}

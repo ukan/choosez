@@ -68,7 +68,7 @@ img.lazyOwl {
 	top: -16px;
     left: 230px;
 	background-color:#0088cc;
-	padding:3px 10px 10px 10px;
+	padding:10px 10px 10px 10px;
 	height: 40px;
 }
 .date-event h5{
