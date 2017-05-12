@@ -129,9 +129,17 @@
                     <div class="clear"></div>
                 </div>
                 <div class="form-group area-insert-update">
+                    <label class="col-md-3 control-label">Academic <b class="text-danger">*</b></label>
+                    <div class="col-lg-9">
+                        {!! Form::textarea('academic', null, array('class' => 'ckeditor')) !!}
+                        <p class="has-error text-danger error-academic"></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group area-insert-update">
                     <label class="col-md-3 control-label">Organization <b class="text-danger">*</b></label>
                     <div class="col-lg-9">
-                        {!! Form::textarea('organization', null, array('class' => '')) !!}
+                        {!! Form::textarea('organization', null, array('class' => 'ckeditor')) !!}
                         <p class="has-error text-danger error-organization"></p>
                     </div>
                     <div class="clear"></div>
@@ -246,6 +254,7 @@
             $("[name='email']").val('');
             $("[name='phone']").val('');
             $("[name='address']").val('');
+            $("[name='academic']").val('');
             $("[name='organization']").val('');
             $("[name='postal_code']").val('');
             $("[name='facebook']").val('');
@@ -380,6 +389,8 @@
                     $("[name='email']").val(response.email);
                     $("[name='phone']").val(response.phone);
                     $('select[name=position]').val(response.position).change();
+                    $("[name='address']").val(response.address);
+                    $("[name='academic']").val(response.academic);
                     $("[name='organization']").val(response.organization);
                     $("[name='postal_code']").val(response.postal_code);
                     $("[name='facebook']").val(response.facebook);

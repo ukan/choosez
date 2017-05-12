@@ -99,6 +99,8 @@ class TeacherController extends Controller
             $response['email'] = $teacher->email;
             $response['phone'] = $teacher->phone;
             $response['position'] = $teacher->position;
+            $response['address'] = $teacher->address;            
+            $response['academic'] = $teacher->academic;            
             $response['organization'] = $teacher->organization;            
             $response['postal_code'] = $teacher->postal_code;            
             $response['facebook'] = $teacher->facebook;            
@@ -115,6 +117,7 @@ class TeacherController extends Controller
                 // 'email'   => 'required|email',
                 'phone'   => 'required|numeric',
                 'address'   => 'required',
+                'academic'   => 'required',
                 'organization'   => 'required',
                 'postal_code'   => 'required|numeric',
                 // 'instagram'   => 'url',
@@ -162,6 +165,7 @@ class TeacherController extends Controller
                     $teacher->phone = $request->phone;
                     $teacher->address = $request->address;
                     $teacher->position = $request->position;
+                    $teacher->academic = $request->academic;
                     $teacher->organization = $request->organization;
                     $teacher->postal_code = $request->postal_code;
                     $teacher->facebook = $request->facebook;
@@ -282,30 +286,23 @@ class TeacherController extends Controller
                     <div class="clear"></div>
                 </div>';
         echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">Province</label>
-                    <div class="col-lg-9">
-                        '.$teacher->province.'                        
-                    </div>
-                    <div class="clear"></div>
-                </div>';
-        echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">District</label>
-                    <div class="col-lg-9">
-                        '.$teacher->district.'                        
-                    </div>
-                    <div class="clear"></div>
-                </div>';
-        echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">Region</label>
-                    <div class="col-lg-9">
-                        '.$teacher->region.'                        
-                    </div>
-                    <div class="clear"></div>
-                </div>';
-        echo '<div class="form-group">
                     <label class="col-lg-3 control-label">Address</label>
                     <div class="col-lg-9">
                         '.$teacher->address.'                        
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+        echo '<div class="form-group">
+                    <label class="col-lg-3 control-label">Academic</label>
+                    <div class="col-lg-9">
+                        '.$teacher->academic.'                        
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+        echo '<div class="form-group">
+                    <label class="col-lg-3 control-label">Organization</label>
+                    <div class="col-lg-9">
+                        '.$teacher->organization.'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
