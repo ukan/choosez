@@ -86,8 +86,8 @@
 					<ul class="list icons list-unstyled list-custom">
 						<li><i class="fa fa-envelope"></i>{{ $value->email }}</li>
 						<li><i class="fa fa-phone"></i>{{ $value->phone }}</li>
-						<li><i class="fa fa-book"></i>{{ $value->academic }}</li>
-						<li><i class="fa fa-group"></i>{{ $value->organization }}</li>
+						<li><i class="fa fa-book"></i>{!! $value->academic !!}</li>
+						<li><i class="fa fa-group"></i>{!! $value->organization !!}</li>
 						<li><i class="fa fa-map-marker"></i>{{ $value->address }}</li>
 					</ul>
 				</div>
