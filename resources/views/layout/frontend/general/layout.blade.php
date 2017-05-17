@@ -351,6 +351,16 @@
 		    	});
 			}
 
+			function ajaxroom(id){
+			    var url= '{{ route('user-room-list-process') }}';
+			    url=url+"/hostel";
+			    url=url+"/"+id;
+
+			    $.get(url, function(data, status){
+		        $("#room_id").html(data);
+		    	});
+			}
+
 			function ajaxsubdistrict(id){
 			    var url= '{{ route('user-location-information-process') }}';
 			    url=url+"/subdistrict";

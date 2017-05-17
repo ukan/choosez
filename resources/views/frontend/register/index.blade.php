@@ -105,6 +105,8 @@ article.post-large-custom .post-audio-custom {
 <link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') !!}">
 {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
+{!! Html::style( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.css') !!}
+{!! Html::style( $pathp.'assets/general/css/loader.css') !!}
 @endsection
 
 @section('content')
@@ -136,10 +138,16 @@ article.post-large-custom .post-audio-custom {
 
 					<article class="post post-large-custom blog-single-post">
 						<div class="post-content back-content history-place">
-
 							        <div class="panel-body">
 							        	{!! Form::open(['route'=>'post-register-data', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
 							            	<input type="hidden" name="method" id="method" value="add">
+							            	<div class="form-group area-insert-update">
+							                    <label class="col-md-3 control-label">Photo</label>
+							                    <div class="col-md-9">
+							                        {!! form_input_file_image('file','image','','200px','200px') !!}
+							                        <p class="has-error text-danger error-image"></p>
+							                    </div>
+							                </div>
 								            <div class="form-group {{ $errors->has('nama') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Nama Lengkap <b class="text-danger">*</b></label>
 								                <div class="col-md-5">
@@ -184,23 +192,9 @@ article.post-large-custom .post-audio-custom {
 							                <div class="form-group {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
 							                    <label class="col-md-3 control-label">Asrama<b class="text-danger">*</b></label>
 							                    <div class="col-md-5">
-							                        <select name="asrama" id="asrama" class="select2" data-plugin-selectTwo class="form-control populate" style="width:100%">
+							                        <select name="asrama" id="asrama_id" onchange="ajaxroom(this.value)" class="select2" data-plugin-selectTwo class="form-control populate" style="width:100%">
 							                            <option value="Pilih Asrama">Pilih Asrama</option>
-							                            <option value="ASPA 1">ASPA 1</option>
-							                            <option value="ASPA 2">ASPA 2</option>
-							                            <option value="ASPA 3">ASPA 3</option>
-							                            <option value="ASPA 4">ASPA 4</option>
-							                            <option value="ASPI 1">ASPI 1</option>
-							                            <option value="ASPI 1C">ASPI 1C</option>
-							                            <option value="ASPI 2">ASPI 2</option>
-							                            <option value="ASPI 3A">ASPI 3A</option>
-							                            <option value="ASPI 3B">ASPI 3B</option>
-							                            <option value="ASPI 3C">ASPI 3C</option>
-							                            <option value="ASPI 4A">ASPI 4A</option>
-							                            <option value="ASPI 4B">ASPI 4B</option>
-							                            <option value="ASPI 5">ASPI 5</option>
-							                            <option value="ASPI 6">ASPI 6</option>
-							                            <option value="ASPI 7">ASPI 7</option>
+							                            {{ user_info('select_asrama') }}
 							                        </select>
 							                        <p class="has-error text-danger error-asrama"></p>
 							                    </div>
@@ -209,9 +203,12 @@ article.post-large-custom .post-audio-custom {
 							                <div class="form-group {{ $errors->has('kamar') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Kamar <b class="text-danger">*</b></label>
 								                <div class="col-md-5">
-								                    {!! Form::text('kamar', '', ['class' => 'form-control']) !!}
-								                    <p class="has-error text-danger error-kamar"></p>
-								                </div>
+							                        <select name="kamar" id="room_id" class="select2" data-plugin-selectTwo class="form-control populate" style="width:100%">
+							                            <option value="Pilih Kamar">Pilih Kamar</option>
+							                            {{ user_info('select_kamar') }}
+							                        </select>
+							                        <p class="has-error text-danger error-asrama"></p>
+							                    </div>
 								            </div>
 
 								            <div class="form-group {{ $errors->has('alamat') ? ' has-error' : '' }}">
@@ -483,6 +480,7 @@ article.post-large-custom .post-audio-custom {
 <script src="{!! asset($pathp.'assets/backend/porto-admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') !!}"></script>
 <!-- start datepicker method -->
 {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
+{!! Html::script( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.js') !!}
 <script type="text/javascript">
 	$( function() {
 		$('#tanggal_lahir').datepicker({
@@ -491,7 +489,11 @@ article.post-large-custom .post-audio-custom {
 		});
 	});
 
-
+	function reload(){
+		setTimeout(function(){
+            	window.location.reload(1);
+            }, 1000);
+	}
 	$('.jquery-form-data').ajaxForm({
         dataType : 'json',
         success: function(response) {
@@ -547,7 +549,10 @@ article.post-large-custom .post-audio-custom {
                 type: type_not,
                 addclass: "stack-custom",
                 stack: myStack
-            }); 
+            });
+            setTimeout(function(){
+            	window.location.reload(1);
+            }, 1000);
         },
         beforeSend: function() {
           $('.has-error').html('');

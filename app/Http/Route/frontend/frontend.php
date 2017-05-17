@@ -16,6 +16,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/process-change-password/{forgot_token}', array('as' => 'process-change-password', 'uses' => 'UsersController@processChangePassword'));
 
     Route::get('/location-information/{type?}/{id?}/{id_prov?}', array('as' => 'user-location-information-process', 'uses' => 'UsersController@processLocationInformation'));
+
+    Route::get('/room-list/{type?}/{id?}', array('as' => 'user-room-list-process', 'uses' => 'UsersController@processRoomList'));
+
     Route::get('/process-activation/{forgot_token}', array('as' => 'process-activation', 'uses' => 'UsersController@processActivation'));
 
     Route::post('/subscribe', array('as' => 'post-data-subscribe', 'uses' => 'HomeController@subscribe'));

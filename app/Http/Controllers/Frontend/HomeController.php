@@ -8,12 +8,14 @@ use App\Models\Subscribe;
 use App\Models\ContactUs;
 use App\Models\User;
 use App\Models\LocationInformation;
+use App\Models\RoomList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
 use Validator;
 use Cache;
 use Mail;
+use Input;
 
 class HomeController extends Controller
 {
@@ -327,6 +329,9 @@ class HomeController extends Controller
                          ->where('sub_district_id', $request->kecamatan)
                          ->get()->first()->name;
 
+                $asrama = RoomList::where('id', $request->asrama)->get()->first()->name;
+                $kamar = RoomList::where('id', $request->kamar)->get()->first()->name;
+
                 $data = new User;
 
                 $data->username = $request->nama;
@@ -363,8 +368,23 @@ class HomeController extends Controller
                 $data->m_last_study = $request->pendidikan_terakhir_ibu;
                 $data->m_current_job = $request->pekerjaan_ibu;
                 $data->gender = $request->jenis_kelamin;
-                $data->hostel = $request->asrama;
-                $data->room = $request->kamar;
+                $data->hostel = ucwords(strtolower($asrama));
+                $data->room = ucwords(strtolower($kamar));
+
+                if($request->hasFile('image')) {
+                    if($request->action == 'update'){
+                        if($data->image != ""){
+                        $image_path = public_path().'/storage/student/'.$data->image;
+                        unlink($image_path);
+                        }
+                    }
+                    createdirYmd('storage/student');
+                    $file = Input::file('image');
+                    $name = str_random(20). '-' .$file->getClientOriginalName();
+                    $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                    $file->move(public_path().'/storage/student/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                }
+
                 $data->password = Hash::make("room");
                 $data->save();
 

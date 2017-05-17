@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Organigram;
+use App\Models\RoomList;
 
 class AcademicController extends Controller
 {
@@ -15,6 +16,8 @@ class AcademicController extends Controller
 
     public function indexSchedule()
     {   
+        $kamar = RoomList::find(user_info('location_information_id'));
+        dd($kamar);
         $schedule = Organigram::where('id',2)->get()->first();
         
         return view('frontend.academic.schedule')->with('schedule',$schedule);

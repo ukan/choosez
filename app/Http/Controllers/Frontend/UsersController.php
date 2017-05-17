@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Models\LocationInformation;
+use App\Models\RoomList;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -20,6 +21,18 @@ class UsersController extends Controller
     public function changePassword()
     {
         // return view('frontend.profile.change-password');
+    }
+
+    public function processRoomList($type="",$id=""){
+        if ($type == 'hostel'){
+            if (ctype_digit($id)) {
+                $query = RoomList::where('parent','=',$id)->orderBy('name')->get();
+                echo"<option selected value=''>Pilih Kamar</option>";
+                foreach($query as $row){
+                    echo "<option value='".$row['id']."'>".ucwords(strtolower($row['name']))."</option>";
+                }
+            }
+        }
     }
 
     public function processLocationInformation($type="",$id="",$id_prov="")

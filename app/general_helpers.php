@@ -1,6 +1,7 @@
 <?php
 use App\Models\User;
 use App\Models\LocationInformation;
+use App\Models\RoomList;
 use Carbon\Carbon;
 
 if (! function_exists('user_info')) {
@@ -146,6 +147,52 @@ if (! function_exists('user_info')) {
                 }
             }
 
+            if ('select_asrama' == $column) {
+                $asrama = RoomList::find(null);
+                if(!empty($asrama)){
+                    $asrama_id = $asrama->id;
+                }else{
+                    $asrama_id = 0;
+                }
+
+                $select_asrama = '';
+                $query = RoomList::where('parent','=',null)->orderBy('name')->get();
+                foreach($query as $row){
+                        if($row['id'] == $asrama_id)
+                        {
+                            $selected = 'selected';
+                        }
+                        else{
+                            $selected = '';
+                        }
+                        $select_asrama .= "<option value='".$row['id']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";
+                    }
+                echo  $select_asrama;
+            }
+
+            if ('select_kamar' == $column) {
+                $kamar = RoomList::find(null);
+                if(!empty($kamar)){
+                    $id = $kamar->id;
+                    $parent = $kamar->parent;
+                    $select_room = '';
+                    $query = RoomList::where('parent','=',$id)->orderBy('name')->get();
+                    foreach($query as $row){
+                            if($row['parent'] == $parent)
+                            {
+                                $selected = 'selected';
+                            }
+                            else{
+                                $selected = '';
+                            }
+                            $select_room .= "<option ".((Input::old("kamar") == $row['parent']) ? "selected='selected'" : "")." value='".$row['parent']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";
+                        }
+                    echo  $select_room;
+                }else{
+                    return '';
+                }
+            }
+
             return $user->{$column};
         } else {
             if ('province' == $column) {
@@ -248,6 +295,53 @@ if (! function_exists('user_info')) {
                             $select_district .= "<option value='".$row['sub_district_id']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";
                         }
                     echo  $select_district;
+                }else{
+                    return '';
+                }
+            }
+
+            if ('select_asrama' == $column) {
+                $asrama = RoomList::find(null);
+                if(!empty($asrama)){
+                    $asrama_id = $asrama->id;
+                }else{
+                    $asrama_id = 0;
+                }
+
+                $select_asrama = '';
+                $query = RoomList::where('parent','=',null)->orderBy('name')->get();
+                foreach($query as $row){
+                        if($row['id'] == $asrama_id)
+                        {
+                            $selected = '';
+                        }
+                        else{
+                            $selected = '';
+                        }
+                        $select_asrama .= "<option ".((Input::old("asrama") == $row['id']) ? "selected='selected'" : "")." value='".$row['id']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";/*
+                        $select_asrama .= "<option value='".$row['id']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";*/
+                    }
+                echo  $select_asrama;
+            }
+
+            if ('select_kamar' == $column) {
+                $kamar = RoomList::find(null);
+                if(!empty($kamar)){
+                    $id = $kamar->id;
+                    $parent = $kamar->parent;
+                    $select_room = '';
+                    $query = RoomList::where('parent','=',$id)->orderBy('name')->get();
+                    foreach($query as $row){
+                            if($row['parent'] == $parent)
+                            {
+                                $selected = 'selected';
+                            }
+                            else{
+                                $selected = '';
+                            }
+                            $select_room .= "<option ".((Input::old("kamar") == $row['parent']) ? "selected='selected'" : "")." value='".$row['parent']."' ".$selected.">".ucwords(strtolower($row['name']))."</option>";
+                        }
+                    echo  $select_room;
                 }else{
                     return '';
                 }
@@ -504,7 +598,7 @@ function form_input_file_img($type = "", $name = "" , $url = "", $width = "", $h
         ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
 
         if($url == ""){
-            $url = asset($pathp.'assets/frontend/porto/img/holder.png');
+            $url = asset($pathp.'assets/frontend/general/img/holder.png');
         }
                     if ($width != "") {
                         $width_img = "width: $width;";
@@ -533,6 +627,48 @@ function form_input_file_img($type = "", $name = "" , $url = "", $width = "", $h
           <div>
             <span class="btn btn-primary btn-file"><span class="fileinput-new"><i class="fa fa-camera"></i> Select Image</span><span class="fileinput-exists"><i class="fa fa-refresh"></i> Change</span><input type="file" name="'.$name.'" class="'.$class.'" accept="image/*"></span>
             <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput"><i class="fa fa-trash-o"></i> Remove</a>
+          </div>
+        </div>
+        ';
+        return $output;
+    }
+
+function form_input_file_image($type = "", $name = "" , $url = "", $width = "", $height = "", $class = "", $id = "", $style = "", $alt = "", $title = "", $other = "")
+    {
+        $pathp = "";
+
+        ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+
+        if($url == ""){
+            $url = asset($pathp.'assets/frontend/general/img/holder.png');
+        }
+                    if ($width != "") {
+                        $width_img = "width: $width;";
+                        $max_width_img = "max-width: $width;";
+                    } else {
+                        $width_img = "";
+                        $max_width_img = "";
+                    }
+                    if ($height != "") {
+                        $height_img = "height: $height;";
+                        $max_height_img = "max-height: $height;";
+                    } else {
+                        $height_img = "";
+                        $max_height_img = "";
+                    }
+        $var_css_1 = $width_img.$height_img;
+        $var_css_2 = $max_width_img.$height_img;
+        // $type file , image , video
+        $output = '';
+        $output .= '
+        <div class="fileinput fileinput-new" data-provides="fileinput" style="margin-right:10px">
+          <div class="fileinput-new thumbnail '.$name.'" style="'.$var_css_1.'">';
+        $output .= '<img src="'.$url.'" class="img-responsive">';
+        $output .= '</div>
+          <div class="fileinput-preview fileinput-exists thumbnail" style="'.$var_css_2.'"></div>
+          <div>
+            <span class="btn btn-primary btn-file"><span class="fileinput-new"><i class="fa fa-camera-retro"></i> Select</span><span class="fileinput-exists"><i class="fa fa-refresh"></i> Change</span><input type="file" name="'.$name.'" class="'.$class.'" accept="image/*"></span>
+            <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput"><i class="fa fa-remove"></i> Remove</a>
           </div>
         </div>
         ';
