@@ -70,33 +70,36 @@ class ProfileController extends Controller
     private function updateProfile(Request $request)
     {
         $this->validate($request, [
-            'avatar' => 'image',
-            'email' => 'required|email|unique:users,email,'.user_info('id'),
+            // 'avatar' => 'image',
+            // 'email' => 'required|email|unique:users,email,'.user_info('id'),
+            'username' => 'required',
             'first_name' => 'required',
-            'last_name' => 'required',
         ]);
 
         $data = $request->except('_token', '_method');
         $user = user_info();
-
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-
-            if ($avatar->isValid()) {
-                $fileName = date('Y_m_d_His').'_'.$avatar->getClientOriginalName();
-
-                $avatar->move(avatar_path(), $fileName);
-                if ($user->avatar && file_exists(avatar_path($user->avatar))) {
-                    unlink(avatar_path($user->avatar));
-                }
-
-                $data['avatar'] = $fileName;
-            }
-        }
+        // dd($user);
+        // if ($request->hasFile('avatar')) {
+        //     $avatar = $request->file('avatar');
+        //
+        //     if ($avatar->isValid()) {
+        //         $fileName = date('Y_m_d_His').'_'.$avatar->getClientOriginalName();
+        //
+        //         $avatar->move(avatar_path(), $fileName);
+        //         if ($user->avatar && file_exists(avatar_path($user->avatar))) {
+        //             unlink(avatar_path($user->avatar));
+        //         }
+        //
+        //         $data['avatar'] = $fileName;
+        //     }
+        // }
 
         flash()->success(trans('general.public.save_success'));
-
-        Sentinel::update($user, $data);
+        // dd($request->username);
+        $user->username = $request->username;
+        $user->first_name = $request->first_name;
+        $user->save();
+        // Sentinel::update($user, $data);
     }
 
     /**

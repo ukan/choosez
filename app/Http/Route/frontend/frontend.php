@@ -5,11 +5,11 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
     Route::any('/destroy_cookie', array('as' => 'destroy_cookie', 'uses' => 'HomeController@destroy_cookie'));
-    
+
     Route::get('/sign_in', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
-    
+
     Route::get('/reset-password', array('as' => 'reset-password', 'uses' => 'UsersController@resetPassword'));
     Route::post('/process-reset-password', array('as' => 'process-reset-password', 'uses' => 'UsersController@processResetPassword'));
     Route::get('/change-password/{forgot_token}', array('as' => 'change-password', 'uses' => 'UsersController@changePassword'));
@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/subscribe', array('as' => 'post-data-subscribe', 'uses' => 'HomeController@subscribe'));
     Route::get('/contact', array('as' => 'contact', 'uses' => 'HomeController@contact'));
     Route::post('/contact/contact-us', array('as' => 'contact-us', 'uses' => 'HomeController@post_contact'));
+    Route::post('/register/post-register-data', array('as' => 'post-register-data', 'uses' => 'HomeController@post_register_data'));
+
+    Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
 
     Route::group(['prefix' => 'news'], function () {
         Route::get('/{slug}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));

@@ -5,7 +5,7 @@
 <section class="body-sign">
 	<div class="center-sign">
 		<a href="/" class="logo pull-left">
-			<img src="{{ asset($pathp.'assets/general/images/identity/web.png') }}" height="100" alt="Porto Admin" />
+			<img src="{{ asset($pathp.'assets/general/images/identity/web.png') }}" height="100" alt="Al-Ihsan" />
 		</a>
 
 		<div class="panel panel-sign">
@@ -29,7 +29,7 @@
                         </span>
                     </span>
                 </div>
-            </div>            
+            </div>
             <div class="form-group{{ Form::hasError('email') }} has-feedback">
                 {!! Form::errorMsg('email') !!}
             </div>

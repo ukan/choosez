@@ -123,7 +123,7 @@
 								</tr>
 								<tr>
 									<td>Pondok Pesantren</td>
-									<td>&nbsp;: {{ $data['ponpes'] }}</td>
+									<td style="width:190px;">&nbsp;: {!! $data['ponpes'] !!}</td>
 								</tr>
 								<tr>
 									<td>Perguruan Tinggi</td>

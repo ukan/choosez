@@ -34,6 +34,7 @@ return [
 		'contact' => 'Kontak Kami',
 		'profile_detail' => 'Detail Profil',
 		'psb_detail' => 'Form Pendaftaran Santri Baru',
+		'register' => 'Pendaftaran',
 	],
 	'form' => [
 		'full_name' => 'Nama Lengkap',
@@ -101,7 +102,7 @@ return [
 	    'update_success' => 'Has been successfully updated',
 	    'update_error' => 'Update data has been failed',
 	    'delete_success' => 'Delete data has been successfully',
-	    'banned_success' => 'Has been successfully banned', 
+	    'banned_success' => 'Has been successfully banned',
 	    'banned_failed' => 'Has been fail banned',
 	    'restore_success' => 'Has been successfully restored',
 	    'access_forbiden' => 'Access Forbiden',
@@ -137,7 +138,7 @@ return [
 	    'user' => 'User',
 	    'hastag' => 'Hastag',
 	    'hastags' => 'Hastags',
-	    
+
 	    'name' => 'Name',
 	    'username' => 'Username',
 	    'email' => 'Email',
@@ -199,7 +200,7 @@ return [
 	    'additional_info' => 'Additional Info',
 	    'add_more_schedules_and_prices' => 'add more schedules and prices',
 	    'add_schedule_and_price' => 'Add Schedule and Price',
-	    
+
 	    'manage_page' => 'Manage Page',
 	    'contact_us' => 'Contact Us',
 	    'terms_and_conditions' => 'Terms and Conditions',
@@ -220,6 +221,6 @@ return [
 	    'by' => 'Oleh',
 	    'hod_ac' => 'Kepala Bidang Akademik',
 	    'hod_ks' => 'Kepala Bidang Kesantrian',
-	    'language' => 'Bahasa',	    
+	    'language' => 'Bahasa',
 	]
 ];

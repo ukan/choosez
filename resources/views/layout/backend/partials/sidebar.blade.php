@@ -536,7 +536,7 @@
 					<ul class="list-unstyled m-none">
 						<li><a href="#">Porto HTML5 Template</a></li>
 						<li><a href="#">Tucson Template</a></li>
-						<li><a href="#">Porto Admin</a></li>
+						<li><a href="#">Al-Ihsan</a></li>
 					</ul>
 				</div>
 			</div>
@@ -588,7 +588,7 @@
 				if (localStorage.getItem('sidebar-left-position') !== null) {
 					var initialPosition = localStorage.getItem('sidebar-left-position'),
 						sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-					
+
 					sidebarLeft.scrollTop = initialPosition;
 				}
 			}

@@ -4,9 +4,9 @@
 
 		<!-- Basic -->
 		<meta charset="utf-8">
-		<title>Al Ihsan Website</title>
+		<title>Al-Ihsan | @yield('title')</title>
 		<meta name="keywords" content="HTML5" />
-		<meta name="description" content="Website Pondok Pesantren Al - Ihsan Cibiru Hilir Kabupaten Bandung">
+		<meta name="description" content="Website Pondok Pesantren Al-Ihsan Cibiru Hilir Kabupaten Bandung">
 		<meta name="author" content="Pondok Pesantren Al - Ihsan">
 
 		<!-- Mobile Metas -->
@@ -35,10 +35,10 @@
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/skins/default.css') !!}">
 		@yield('css')
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme.css') !!}">
-		
+
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-blog.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/theme-animate.css') !!}">
-		
+
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/hover/hover.css') !!}">
 
 		<!-- Current Page CSS -->
@@ -49,7 +49,7 @@
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/custom.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/css/select2.css') !!}">
 		<link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2-bootstrap-theme/select2-bootstrap.css') !!}">
-		
+
 		{!! Html::script( $pathp.'assets/backend/porto-admin/vendor/modernizr/modernizr.js') !!}
 		<!-- Head Libs -->
 		<script src="{!! asset($pathp.'assets/frontend/general/vendor/modernizr/modernizr.js') !!}"></script>
@@ -79,21 +79,21 @@
 
 			    // Get todays date and time
 			    var now = new Date().getTime();
-			    
+
 			    // Find the distance between now an the count down date
 			    var distance = countDownDate - now;
-			    
+
 			    // Time calculations for days, hours, minutes and seconds
 			    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 			    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			    
+
 			    // Output the result in an element with id="demo"
 			    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
 			    + minutes + "m " + seconds + "s ";
-			    
-			    // If the count down is over, write some text 
+
+			    // If the count down is over, write some text
 			    if (distance < 0) {
 			        clearInterval(x);
 			        document.getElementById("demo").innerHTML = "EXPIRED";
@@ -150,7 +150,7 @@
           <center class="confirmation-message"><h4 class="modal-title" id="myModalLabel">Notice</h4></center>
         </div>
         <div class="modal-body">
-            <div class="form-group area-delete">                    
+            <div class="form-group area-delete">
                 <div class="col-md-12">
                      <center class="confirmation-message">
                       <i style="font-size: 30px;color: green" id="circle-status" class="fa fa-check-circle"></i>
@@ -158,7 +158,7 @@
                      </center>
                 </div>
             </div>
-            <div class="form-group area-denied">                    
+            <div class="form-group area-denied">
                 <div class="col-md-12">
                      <center class="confirmation-message">
                       <i style="font-size: 30px;color: red" id="circle-status" class="fa fa-minus-circle"></i>
@@ -232,7 +232,7 @@
 			      	<h4 class="modal-title FormTicket-title" style="color: white" id="myModalLabel">Add</h4>
 			    </div>
 			    <div class="modal-body">
-			    
+
 			    </div>
 			  </div>
 			</div>
@@ -274,7 +274,7 @@
 		<script src="{!! asset($pathp.'assets/general/select/js/bootstrap-select.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/general/select/js/bootstrap-select.min.js') !!}"></script>
 		<script src="{!! asset($pathp.'assets/backend/porto-admin/vendor/select2/js/select2.js') !!}"></script>
-		
+
 		{!! Html::script($pathp.'assets/backend/custom/jquery.form/jquery.form.js') !!}
 		{!! Html::script($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
 
@@ -288,7 +288,7 @@
 				$("#loader").removeClass('hidden');
 			}
 			$(".select2").select2();
-			function show_form_add(){           
+			function show_form_add(){
 		        $('.FormTicket-title').html('Form Pendaftaran Santri Baru');
 		        $("[name='method']").val('add');
 		        $("[name='subject']").val('');
@@ -316,9 +316,9 @@
 		            }
 		            $('#loader').addClass("hidden");
 		            $("[name='email']").val('');
-		            $('.area-denied').hide(); 
-		            $('.area-delete').show(); 
-		            $("#modalFormDecode").modal("show");  
+		            $('.area-denied').hide();
+		            $('.area-delete').show();
+		            $("#modalFormDecode").modal("show");
 		        },
 		        beforeSend: function() {
 		          $('.has-error').html('');
@@ -331,9 +331,9 @@
 		                  $('#content').html(val);
 		              });
 		            // $("#modalFormTicket").scrollTop(0);
-		            $('#loader').addClass("hidden"); 
-		            $('.area-delete').hide(); 
-		            $('.area-denied').show(); 
+		            $('#loader').addClass("hidden");
+		            $('.area-delete').hide();
+		            $('.area-denied').show();
 		            $("#modalFormDecode").modal("show");
 		          } else {
 		              $('.error').addClass('alert alert-danger').html(response.responseJSON.message);

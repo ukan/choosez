@@ -44,18 +44,18 @@
                                     {!! Form::errorMsg('email') !!}
                                 </div>
                             </div> -->
+                            <div class="form-group{{ Form::hasError('username') }}">
+                                {!! Form::label('username', 'Name', ['class' => 'col-sm-3 control-label']) !!}
+                                <div class="col-sm-9">
+                                    {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                                    {!! Form::errorMsg('username') !!}
+                                </div>
+                            </div>
                             <div class="form-group{{ Form::hasError('first_name') }}">
-                                {!! Form::label('first_name', 'First Name', ['class' => 'col-sm-3 control-label']) !!}
+                                {!! Form::label('first_name', 'Nick Name', ['class' => 'col-sm-3 control-label']) !!}
                                 <div class="col-sm-9">
                                     {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
                                     {!! Form::errorMsg('first_name') !!}
-                                </div>
-                            </div>
-                            <div class="form-group{{ Form::hasError('last_name') }}">
-                                {!! Form::label('last_name', 'Last Name', ['class' => 'col-sm-3 control-label']) !!}
-                                <div class="col-sm-9">
-                                    {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-                                    {!! Form::errorMsg('last_name') !!}
                                 </div>
                             </div>
                             <div class="form-group">

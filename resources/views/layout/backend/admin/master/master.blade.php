@@ -30,7 +30,7 @@
         {!! Html::meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') !!}
 
         <title>{{ env('APP_WEB_ADMIN_NAME', $title) }} - @yield('title')</title>
-        
+
         <!-- Web Fonts  -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -52,7 +52,7 @@
         {!! Html::style( $pathp.'assets/plugins/bootstrap-switch/bootstrap-switch.min.css') !!}
         {!! Html::style( $pathp.'assets/plugins/bootstrap-switch/bootstrap-switch.min.css') !!}
         {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
-        
+
         <!-- Specific Page Vendor CSS -->
         {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') !!}
         {!! Html::style( $pathp.'assets/plugins/summernote/summernote.css') !!}
@@ -63,17 +63,17 @@
         {!! Html::style( $pathp.'assets/backend/porto-admin/stylesheets/skins/default.css') !!}
         {!! Html::style( $pathp.'assets/plugins/croppie/demo.css') !!}
         {!! Html::style( $pathp.'assets/plugins/croppie/croppie.css') !!}
-        
+
 
         <!-- General CSS -->
         {!! Html::style( $pathp.'assets/general/css/loader.css') !!}
         {!! Html::style( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.css') !!}
-        
+
         {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/modernizr/modernizr.js') !!}
 
         <link rel="shortcut icon" type="image/png" href="{{ asset( $pathp.'assets/general/images/identity/favicon.png')}}"/>
 
-        
+
         @yield('header')
         <style type="text/css">
         .borderless td, .borderless th {
@@ -104,14 +104,14 @@
                 <div class="smt3"></div>
                 <div class="smt4"></div>
                 <div class="smt5"></div>
-            </div> 
+            </div>
         </div>
         <section class="body">
             <!-- start: header -->
             <header class="header">
                 <div class="logo-container">
                     <a href="{{ route($route_dashboard) }}" class="logo">
-                        
+
                         <img src="{{ asset($pathp.'assets/general/images/identity/web.png') }}" height="55" alt="{{ env('APP_WEB_ADMIN_NAME', '  Web Admin') }}" />
                         <!-- <h4>{{ env('APP_WEB_ADMIN_NAME', $title) }}</h4> -->
                     </a>
@@ -119,10 +119,10 @@
                         <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
                     </div>
                 </div>
-            
+
                 <!-- start: search & user box -->
                 <div class="header-right">
-            
+
                     <form action="pages-search-results.html" class="search nav-form" style="display:none">
                         <div class="input-group input-search">
                             <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
@@ -131,13 +131,13 @@
                             </span>
                         </div>
                     </form>
-            
+
                     <span class="separator" style="display:none"></span>
-                
+
                     <ul class="notifications" id="box-badge-user-notif">
                         @include($include_partial_notification_tasks)
                     </ul>&nbsp;&nbsp;&nbsp;
-                
+
                     <ul class="notifications" id="box-badge-notif">
                         @include($include_partial_notification_messages)
                     </ul>&nbsp;&nbsp;&nbsp;
@@ -147,7 +147,7 @@
                     </ul>
                 @endif
                     <span class="separator"></span>
-            
+
                     <div id="userbox" class="userbox">
                         <a href="#" data-toggle="dropdown">
 
@@ -162,19 +162,19 @@
                                     <span class="role"><span class="label label-primary" style="background-color:{{ PlanGetColor(user_info('plan_id')) }}">{{ $role_area }}</span></span>
                                 @endif
                             </div>
-            
+
                             <i class="fa custom-caret"></i>
                         </a>
-            
+
                         <div class="dropdown-menu">
                             <ul class="list-unstyled">
                                 <li class="divider"></li>
                                 <li>
                                     <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a role="menuitem" target="_blank" href="#"><i class="fa fa-question-circle"></i> Help</a>
-                                </li>
+                                </li> -->
                                 <li class="display-none">
                                     <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
                                 </li>
@@ -192,7 +192,7 @@
             <div class="inner-wrapper">
                 <!-- start: sidebar -->
                 <aside id="sidebar-left" class="sidebar-left">
-                
+
                     <div class="sidebar-header">
                         <div class="sidebar-title">
                             Navigation
@@ -201,7 +201,7 @@
                             <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
                         </div>
                     </div>
-                
+
                     <div class="nano">
                         <div class="nano-content">
                             <nav id="menu" class="nav-main" role="navigation">
@@ -213,28 +213,28 @@
                                 @include('layout.backend.admin.partial.funnel_stats')
                             @endif
                         </div>
-                
+
                         <script>
                             // Preserve Scroll Position
                             if (typeof localStorage !== 'undefined') {
                                 if (localStorage.getItem('sidebar-left-position') !== null) {
                                     var initialPosition = localStorage.getItem('sidebar-left-position'),
                                         sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-                                    
+
                                     sidebarLeft.scrollTop = initialPosition;
                                 }
                             }
                         </script>
-                
+
                     </div>
-                
+
                 </aside>
                 <!-- end: sidebar -->
 
                 <section role="main" class="content-body">
                     <header class="page-header">
                         <h2>@yield('page-header')</h2>
-                    
+
                         <div class="right-wrapper pull-right">
                             @yield('breadcrumb')
                             &nbsp;&nbsp;
@@ -242,7 +242,7 @@
                         </div>
                     </header>
 
-                    <!-- start: page -->                        
+                    <!-- start: page -->
                     @yield('content')
                     <!-- end: page -->
                 </section>
@@ -254,7 +254,7 @@
                         <a href="#" class="mobile-close visible-xs">
                             Collapse <i class="fa fa-chevron-right"></i>
                         </a>
-            
+
                         <div class="sidebar-right-wrapper">
 
                         </div>
@@ -270,7 +270,7 @@
           <h4 class="modal-title-user-notification modalUserNotificationName" id="myModalLabel">Notification</h4>
         </div>
         <div class="modal-body modalUserNotificationBody">
-            
+
         </div>
       </div>
     </div>
@@ -298,21 +298,21 @@
         {!! Html::script( $pathp.'assets/backend/custom/jquery.form/jquery.form.js') !!}
         {!! Html::script( $pathp.'assets/general/js/jquery.ajax-cross-origin.min.js') !!}
 
-        {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}        
+        {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.js') !!}
         {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/bootstrap-typeahead/typeahead.bundle.js') !!}
         {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js') !!}
 
         {!! Html::script( $pathp.'assets/plugins/summernote/summernote.js') !!}
-        
+
         <!-- Theme Base, Components and Settings -->
         {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
-        
+
         <!-- Theme Custom -->
         {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.custom.js') !!}
-        
+
         <!-- Theme Initialization Files -->
         {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.init.js') !!}
-        
+
         {!! Html::script( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.js') !!}
 
         {!! Html::script( $pathp.'assets/plugins/croppie/croppie.js') !!}
@@ -320,7 +320,7 @@
         {!! Html::script( $pathp.'assets/plugins/croppie/exif.js') !!}
 
         <script type="text/javascript">
-        
+
                     jQuery(function ($) {
               $('.jquery-form-edit-avatar').ajaxForm({
                   success: function(response) {
@@ -338,7 +338,7 @@
                           $.magnificPopup.close();
                       setTimeout(function(){
                          window.location.reload(1);
-                      }, 2);  
+                      }, 2);
 
                     }
                   },
@@ -355,11 +355,11 @@
                           $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
                       }
                   }
-              }); 
-            }); 
+              });
+            });
         </script>
 
-        
+
         @yield('scripts')
         @yield('partial-scripts')
         <!-- {!! Html::script( $pathp.'assets/backend/porto-admin/vendor/socket-io/1.5.0/socket.io.min.js') !!} -->
@@ -371,8 +371,8 @@
 
                 checkNotification(message.data);
             });
-            
-            
+
+
 
             $('a.btn-notif').on('click', function() {
                 var user_id = $(this).data('user');
@@ -389,9 +389,9 @@
                 setReadUserNotification(user_id);
             });
 
-            
+
         </script>
-        
+
         <script>
         $.fn.modal.Constructor.prototype.enforceFocus = function() {};
         $('.loader-body').hide();
@@ -404,7 +404,7 @@
             .ajaxStop(function () {
                 loading.hide();
             });
-        }); 
+        });
         </script>
     </body>
 </html>

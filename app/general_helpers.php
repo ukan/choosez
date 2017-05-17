@@ -18,7 +18,7 @@ if (! function_exists('user_info')) {
             }
 
             if ('full_name' == $column) {
-                return user_info('first_name').' '.user_info('last_name');
+                return user_info('username');
             }
 
             if ('role' == $column) {
@@ -274,7 +274,7 @@ if (! function_exists('link_to_avatar')) {
             ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
             return asset($pathp.'assets/general/images/default/avatar.png');
         }else{
-            return asset('storage/avatars').'/'.trim($path, '/');            
+            return asset('storage/avatars').'/'.trim($path, '/');
         }
 
     }
@@ -611,5 +611,5 @@ if (! function_exists('ahloo_form_title')) {
     {
         return $id > 0 ? 'edit' : 'add';
     }
-}   
+}
 define('quotes',"'");

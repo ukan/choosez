@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 
 		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="description" content="Website Pondok Pesantren Al-Ihsan Cibiru Hilir Kabupaten Bandung">
 		<meta name="author" content="okler.net">
 
 		<!-- Mobile Metas -->
@@ -37,7 +37,7 @@
                 {!! Html::script($pathp.'assets/backend/porto-admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') !!}
                 {!! Html::script($pathp.'assets/backend/porto-admin/vendor/magnific-popup/jquery.magnific-popup.js') !!}
                 {!! Html::script($pathp.'assets/backend/porto-admin/vendor/jquery-placeholder/jquery-placeholder.js') !!}
-                
+
                 <!-- Theme Base, Components and Settings -->
                 {!! Html::script($pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
 
@@ -46,7 +46,7 @@
 
                 <!-- Theme Initialization Files -->
                 {!! Html::script($pathp.'assets/backend/porto-admin/javascripts/theme.init.js') !!}
-                
+
                 @yield('scripts')
 
 	</body>
