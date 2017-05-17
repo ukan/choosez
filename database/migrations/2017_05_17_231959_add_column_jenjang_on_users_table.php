@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnOnUsersTable extends Migration
+class AddColumnJenjangOnUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddColumnOnUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('hostel')->nullable();
-            $table->string('room')->nullable();
+            $table->string('jenjang')->nullable();
         });
     }
 
@@ -26,8 +25,7 @@ class AddColumnOnUsersTable extends Migration
     public function down()
     {
       Schema::table('users', function (Blueprint $table) {
-          $table->dropColumn('hostel');
-          $table->dropColumn('room');
+          $table->dropColumn('jenjang');
       });
     }
 }

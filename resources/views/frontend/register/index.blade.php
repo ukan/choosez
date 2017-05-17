@@ -362,6 +362,20 @@ article.post-large-custom .post-audio-custom {
 								                </div>
 								            </div>
 
+								            <div class="form-group {{ $errors->has('jenjang_pendidikan') ? ' has-error' : '' }}">
+							                    <label class="col-md-3 control-label">Jenjang Pendidikan</label>
+							                    <div class="col-md-5">
+							                        <select name="jenjang_pendidikan" id="jenjang_pendidikan" class="select2" data-plugin-selectTwo class="form-control populate" style="width:100%">
+							                            <option value="Pilih Jenjang Pendidikan">Pilih Jenjang Pendidikan</option>
+							                            <option value="D3">D3</option>
+							                            <option value="S1">S1</option>
+							                            <option value="S2">S2</option>
+							                            <option value="S3">S3</option>
+							                        </select>
+							                        <p class="has-error text-danger error-jenis_kelamin"></p>
+							                    </div>
+							                </div>
+
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">Fakultas </label>
 								                <div class="col-md-5">

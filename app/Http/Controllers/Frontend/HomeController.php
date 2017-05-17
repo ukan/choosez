@@ -364,6 +364,7 @@ class HomeController extends Controller
                 $data->f_last_study = $request->pendidikan_terakhir_ayah;
                 $data->f_current_job = $request->pekerjaan_ayah;
                 $data->mother_name = $request->ibu;
+                $data->jenjang = $request->jenjang_pendidikan;
                 $data->mother_age = $request->umur_ibu;
                 $data->m_last_study = $request->pendidikan_terakhir_ibu;
                 $data->m_current_job = $request->pekerjaan_ibu;
