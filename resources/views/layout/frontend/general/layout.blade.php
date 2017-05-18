@@ -4,11 +4,11 @@
 
 		<!-- Basic -->
 		<meta charset="utf-8">
+		<meta name="msvalidate.01" content="EF7F4C0D0397AF60A3E98059C6119CAC" />
 		<title>Al-Ihsan | @yield('title')</title>
 		<meta name="keywords" content="HTML5" />
 		<meta name="description" content="Website Pondok Pesantren Al-Ihsan Cibiru Hilir Kabupaten Bandung">
 		<meta name="author" content="Pondok Pesantren Al - Ihsan">
-
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
