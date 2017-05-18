@@ -280,7 +280,7 @@ class HomeController extends Controller
         $param = $request->all();
 
         $rules = array(
-            'nama'   => 'required',
+            /*'nama'   => 'required',
             'nama_panggilan'   => 'required',
             'tempat_lahir'   => 'required',
             'tanggal_lahir'   => 'required',
@@ -310,7 +310,7 @@ class HomeController extends Controller
             'email'   => 'required|email|unique:users',
             'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
             'asrama'   => 'required|not_in:Pilih Asrama',
-            'kamar'   => 'required',
+            'kamar'   => 'required',*/
         );
         $validate = Validator::make($param,$rules);
         if($validate->fails()) {
@@ -386,8 +386,24 @@ class HomeController extends Controller
                     $file->move(public_path().'/storage/student/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                 }
 
-                $data->password = Hash::make("room");
+                $password = "";
+                for ($i = 0; $i<8; $i++) 
+                {
+                    $password .= mt_rand(0,9);
+                }
+
+                $data->password = Hash::make($password);
                 $data->save();
+
+                $find_data['password'] = $password;
+                $find_data['email'] = $request->email;
+                $find_data['first_name'] = $request->nama_panggilan;
+                $find_data['image'] = $data->image;
+                
+                Mail::send('email.new_user', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
+                        });
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
