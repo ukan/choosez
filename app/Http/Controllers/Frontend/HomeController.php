@@ -9,12 +9,14 @@ use App\Models\ContactUs;
 use App\Models\User;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
+use App\Models\AuthLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
 use Validator;
 use Cache;
 use Mail;
+use Sentinel;
 use Input;
 
 class HomeController extends Controller
@@ -81,22 +83,19 @@ class HomeController extends Controller
     }
     public function sign_in(){
         $form = [
-            'url' => route('post-sign-up'),
+            'url' => route('admin-login-member'),
             'autocomplete' => 'off',
         ];
-        
+
         return view('frontend.login', compact('form'))->with('type','member');
     }
 
     public function postLogin(Request $request)
     {
-        if($request->input('type') == "member"){
-            $route_login_type = "admin-login-member";
-            $route_dashboard_type = "admin-dashboard-member";
-        }else{
-            $route_login_type = "admin-login";
-            $route_dashboard_type = "admin-dashboard";
-        }
+        
+        $route_login_type = "admin-login-member";
+        $route_dashboard_type = "admin-dashboard-member";
+        
         $backToLogin = redirect()->route($route_login_type)->withInput();
         $findUser = Sentinel::findByCredentials(['login' => $request->input('email')]);
 

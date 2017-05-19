@@ -13,7 +13,7 @@ a {
   color: #3B424D;
 }
 .main-wrap {
-  background: url("/assets/general/images/aurora.jpg");
+  background: #2750e5;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -27,19 +27,38 @@ a {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ff7e68;
+  background: #83aaea;
   padding: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.login-main-alert {
+  width: 300px;
+  height: 10px;
+  position: absolute;
+  margin: auto;
+  top: -135px;
+  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: red;
+  background: #83aaea;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 .login-main p {
   text-indent: 10px;
 }
 .box1 {
-  background: #ffd5ce;
+  background: #d7e3f7;
   height: 40px;
   text-indent: 10px;
   width: 90%;
@@ -73,8 +92,8 @@ a {
   position: absolute;
   right: 9px;
   top: 20px;
-  border: 5px solid #ff7e68;
-  background: #FF5335;
+  border: 5px solid #83aaea;
+  background: #1259d1;
   font-size: 18px;
   color: #fff;
   font-weight: normal;

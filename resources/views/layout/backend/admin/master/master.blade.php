@@ -14,9 +14,9 @@
     {{--*/ $include_partial_notification_alerts = 'layout.frontend.member.partial.notification_alerts' /*--}}
     {{--*/ $include_partial_sidebar_right = 'layout.frontend.member.partial.sidebar_right' /*--}}
     {{--*/ $route_profile = 'member-profile' /*--}}
-    {{--*/ $route_logout = 'admin-logout' /*--}}
+    {{--*/ $route_logout = 'logout-member' /*--}}
     {{--*/ $route_dashboard = 'admin-dashboard-member' /*--}}
-    {{--*/ $role_area = '  - '.user_info('plan') /*--}}
+    {{--*/ $role_area = user_info('role')->name /*--}}
     {{--*/ $title = '  Web Member' /*--}}
 @endif
 <!DOCTYPE html>
@@ -156,11 +156,7 @@
                             </figure>
                             <div class="profile-info" data-lock-name="{{ user_info('full_name') }}" data-lock-email="{{ user_info('email') }}">
                                 <span class="name">{{ user_info('full_name') }}</span>
-                                @if(sentinel_check_role_admin())
                                     <span class="role">{{ $role_area }}</span>
-                                @else
-                                    <span class="role"><span class="label label-primary" style="background-color:{{ PlanGetColor(user_info('plan_id')) }}">{{ $role_area }}</span></span>
-                                @endif
                             </div>
 
                             <i class="fa custom-caret"></i>
@@ -169,9 +165,11 @@
                         <div class="dropdown-menu">
                             <ul class="list-unstyled">
                                 <li class="divider"></li>
-                                <li>
-                                    <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
-                                </li>
+                                @if(sentinel_check_role_admin())
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
+                                    </li>
+                                @endif
                                 <!-- <li>
                                     <a role="menuitem" target="_blank" href="#"><i class="fa fa-question-circle"></i> Help</a>
                                 </li> -->
@@ -207,11 +205,6 @@
                             <nav id="menu" class="nav-main" role="navigation">
                                 @include('layout.backend.admin.partial.side_menu')
                             </nav>
-                            @if(sentinel_check_role_admin() == false)
-                                @include('layout.backend.admin.partial.completion_stats')
-                                @include('layout.backend.admin.partial.coin_stats')
-                                @include('layout.backend.admin.partial.funnel_stats')
-                            @endif
                         </div>
 
                         <script>

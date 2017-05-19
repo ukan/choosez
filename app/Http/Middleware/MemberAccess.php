@@ -28,7 +28,7 @@ class MemberAccess
         if(Sentinel::check()){
             
         }else{
-            return Redirect::route('admin-login');
+            return Redirect::route('admin-login-member');
         }
         if (sentinel_check_role_admin()) {
             return Redirect::route('admin-dashboard');

@@ -7,6 +7,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::any('/destroy_cookie', array('as' => 'destroy_cookie', 'uses' => 'HomeController@destroy_cookie'));
 
     Route::get('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
+    Route::post('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@postLogin'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
 
@@ -71,6 +72,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['middleware' => 'MemberAccess', 'namespace' => 'Member'], function () {
         Route::any('/dashboard/{filter}', array('as' => 'admin-dashboard-filter-member', 'uses' => 'DashboardController@index'));
         Route::any('/dashboard', array('as' => 'admin-dashboard-member', 'uses' => 'DashboardController@index'));
+        Route::any('/logout', array('as' => 'logout-member', 'uses' => 'DashboardController@getLogout'));
+
         Route::any('/dashboard_ajax_bulletin_pagination', array('as' => 'admin-dashboard-ajax-pagination-bulletin-board-member', 'uses' => 'DashboardController@ajax_pagination_bulletin_board'));
         Route::get('/dashboard_datatables_orders', array('as' => 'datatables-dashboard-funnel-orders', 'uses' => 'DashboardController@datatables_orders'));
 

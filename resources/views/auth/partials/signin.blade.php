@@ -15,8 +15,8 @@
 			<div class="panel-body">
 				@include('flash::message')
 				@if (Session::has('notice'))
-      <div class="alert alert-info">{!! Session::get('notice') !!}</div>
-    @endif
+                  <div class="alert alert-info">{!! Session::get('notice') !!}</div>
+                @endif
         {!! Form::open($form) !!}
             <input type="hidden" name="type" value="{{ $type }}">
             <div class="form-group mb-lg">

@@ -165,11 +165,8 @@ class AuthController extends Controller
 
     public function getLogout()
     {
-        if(sentinel_check_role_admin()){
-            $route = 'admin-login';
-        }else{
-            $route = 'admin-login-member';      
-        }
+        $route = 'member-login';      
+        
         $idLog = DB::table('auth_logs')
                  ->where('user_id','=',user_info('id'))
                  ->max('id');

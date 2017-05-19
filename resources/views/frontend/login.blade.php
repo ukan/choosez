@@ -9,14 +9,22 @@
 
 <body>
   <div class="main-wrap">
-        <div class="login-main">
-            <input type="text" placeholder="user name" class="box1 border1">
-            <input type="password" placeholder="password" class="box1 border2">
-            <input type="submit" class="send" value="Go">
-            <p>Forgot Your Password? <a href="#">click here</a></p>    
-        </div>
-        
-    </div>
+      <div class="login-main-alert">
+        @include('flash::message')
+        @if (Session::has('notice'))
+          <div class="login-main-alert">{!! Session::get('notice') !!}</div>
+        @endif
+      </div>
+      <div class="login-main">
+    {!! Form::open($form) !!}
+          <input type="hidden" name="type" value="{{ $type }}">
+          <input type="text" id="email" name="email" placeholder="Email" class="box1 border1">
+          <input type="password" id="password" name="password" placeholder="Password" class="box1 border2">
+          <input type="submit" class="send" value="Go">
+          <p style="color: black;padding-top: 5px">Forgot Your Password? <a href="#">click here</a></p>    
+    {!! Form::close() !!}
+      </div>
+  </div>
   
   
 </body>
