@@ -6,7 +6,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
     Route::any('/destroy_cookie', array('as' => 'destroy_cookie', 'uses' => 'HomeController@destroy_cookie'));
 
-    Route::get('/sign_in', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
+    Route::get('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
 

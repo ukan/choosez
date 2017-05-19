@@ -81,11 +81,11 @@ class HomeController extends Controller
     }
     public function sign_in(){
         $form = [
-            'url' => route('admin-login'),
+            'url' => route('post-sign-up'),
             'autocomplete' => 'off',
         ];
-
-        return view('auth.partials.signin', compact('form'))->with('type','member');
+        
+        return view('frontend.login', compact('form'))->with('type','member');
     }
 
     public function postLogin(Request $request)
