@@ -290,7 +290,7 @@ class HomeController extends Controller
             'alamat'   => 'required',
             'provinsi'   => 'required|not_in:Pilih Provinsi',
             'kota'   => 'required|not_in:Pilih Kabupaten/Kota',
-            'kecamatan'   => 'required|not_in:Pilih kecamatan',
+            // 'kecamatan'   => 'required|not_in:Pilih kecamatan',
             'desa'   => 'required',
             'sd'   => 'required',
             'smp'   => 'required',
