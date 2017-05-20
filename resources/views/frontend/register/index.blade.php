@@ -121,7 +121,8 @@ article.post-large-custom .post-audio-custom {
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 {!! Html::style( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.css') !!}
 {!! Html::style( $pathp.'assets/general/css/loader.css') !!}
-<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+<!-- <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script> -->
+<script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 @endsection
 
 @section('content')
