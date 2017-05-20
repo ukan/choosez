@@ -101,7 +101,7 @@ article.post-large-custom .post-audio-custom {margin-left: -60px;}
 
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
-{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
+<!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 @endsection
 
@@ -164,7 +164,7 @@ article.post-large-custom .post-audio-custom {margin-left: -60px;}
         </div>
         <div class="modal-body" id="getContentProkerModal" style="padding-top:0px">
         <div class="center">
-        	<img style="width: 980px;height: 600" src="{{ asset($pathp.'storage/organigram/'.$struktur) }}">
+        	<img style="max-width: 980px;height: 600" src="{{ asset($pathp.'storage/organigram/'.$struktur) }}">
         </div>
       </div>
     </div>
@@ -244,7 +244,6 @@ article.post-large-custom .post-audio-custom {margin-left: -60px;}
             $("[name='email']").val('');
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
-                title: response.status,
                 text: response.notification,
                 type: type_not,
                 addclass: "stack-custom",
@@ -265,7 +264,6 @@ article.post-large-custom .post-audio-custom {margin-left: -60px;}
             $('#loader').addClass("hidden");
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
-                title: "Failed",
                 text: "Validate Error, Check Your Data Again",
                 type: 'danger',
                 addclass: "stack-custom",
