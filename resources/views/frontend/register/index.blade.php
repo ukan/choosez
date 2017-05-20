@@ -100,6 +100,20 @@ article.post-large-custom .post-audio-custom {
 	margin-left: -60px;
 }
 .history-place{width: 100%;box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 40px 0 rgba(0,0,0,0.19);}
+.styleLoad{
+	height: 50px;
+	width: 50px;
+}
+</style>
+<script type="text/javascript">
+	function removeHidden(){
+	  $("#imageLoading").removeClass('hidden');
+	}
+</script>
+<style type="text/css">
+.hidden{
+  display: none;
+}
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
 <link rel="stylesheet" href="{!! asset($pathp.'assets/backend/porto-admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') !!}">
@@ -471,7 +485,9 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"></label>
 								                <div class="col-md-5">
-								                    {!! Form::submit('Kirim', ['class' => 'btn btn-primary btn-submit', 'title' => 'Kirim']) !!}
+								                    <button type="submit" onclick="removeHidden()" title="Kirim" class="btn btn-primary btn-submit" >Kirim</button>
+								                    <img id="imageLoading" src="{!! asset($pathp.'assets/general/images/loaderx.gif') !!}" alt="loader" class="styleLoad hidden">
+								                    
 								                </div>
 								            </div>
 								        </form>
@@ -556,6 +572,8 @@ article.post-large-custom .post-audio-custom {
             $("[name='pendidikan_terakhir_ibu']").val('');
             $("[name='email']").val('');
 
+            $("#imageLoading").addClass('hidden');
+
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
                 title: response.status,
@@ -577,6 +595,7 @@ article.post-large-custom .post-audio-custom {
               $.each(data,function(key,val){
                   $('.error-'+key).html(val);
               });
+              $("#imageLoading").addClass('hidden');
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
                 new PNotify({
                     title: "Failed",
