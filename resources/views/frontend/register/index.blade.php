@@ -387,7 +387,7 @@ article.post-large-custom .post-audio-custom {
 							                            <option value="S2">S2</option>
 							                            <option value="S3">S3</option>
 							                        </select>
-							                        <p class="has-error text-danger error-jenis_kelamin"></p>
+							                        <p class="has-error text-danger error-jenjang_pendidikan"></p>
 							                    </div>
 							                </div>
 
@@ -596,7 +596,7 @@ article.post-large-custom .post-audio-custom {
               $.each(data,function(key,val){
                   $('.error-'+key).html(val);
               });
-              $("#imageLoading").addClass('hidden');
+              $("#imageLoadingClass").addClass('hidden');
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
                 new PNotify({
                     title: "Failed",
