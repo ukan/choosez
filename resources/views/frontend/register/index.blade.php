@@ -577,15 +577,15 @@ article.post-large-custom .post-audio-custom {
 
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
-                title: response.status,
-                text: response.notification,
+                title: response.notification,
+                text: "Please check your email to activate your account.",
                 type: type_not,
                 addclass: "stack-custom",
                 stack: myStack
             });
             setTimeout(function(){
             	window.location.reload(1);
-            }, 1000);
+            }, 7000);
         },
         beforeSend: function() {
           $('.has-error').html('');
