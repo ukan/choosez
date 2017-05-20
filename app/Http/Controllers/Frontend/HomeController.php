@@ -279,7 +279,7 @@ class HomeController extends Controller
         $param = $request->all();
 
         $rules = array(
-            /*'nama'   => 'required',
+            'nama'   => 'required',
             'nama_panggilan'   => 'required',
             'tempat_lahir'   => 'required',
             'tanggal_lahir'   => 'required',
@@ -309,7 +309,7 @@ class HomeController extends Controller
             'email'   => 'required|email|unique:users',
             'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
             'asrama'   => 'required|not_in:Pilih Asrama',
-            'kamar'   => 'required',*/
+            'kamar'   => 'required',
         );
         $validate = Validator::make($param,$rules);
         if($validate->fails()) {

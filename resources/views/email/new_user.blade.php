@@ -450,7 +450,7 @@ a span,
                                   <td class="hspace" style="padding: 0;font-size: 0;height: 8px;overflow: hidden;">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                  <td class="icon_cell" style="padding: 8px;font-size: 0;line-height: 1;height: 48px;background-color: #e1e3e7;border-color: #d8dde4;"><img src="{{ asset($pathp.'storage/student'.'/'.$image) }}" width="48" height="48" alt="image user" style="line-height: 1;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;mso-line-height-rule: exactly;"></td>
+                                  <td class="icon_cell" style="padding: 8px;font-size: 0;line-height: 1;height: 150px; width: 150px; background-color: #e1e3e7;border-color: #d8dde4;"><img src="{{ asset($pathp.'storage/student'.'/'.$image) }}" width="150" height="150" alt="image user" style="line-height: 1;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;mso-line-height-rule: exactly;"></td>
                                 </tr>
                                 <tr>
                                   <td class="hspace" style="padding: 0;font-size: 0;height: 8px;overflow: hidden;">&nbsp;</td>
