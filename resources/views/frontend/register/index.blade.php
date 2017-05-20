@@ -106,8 +106,8 @@ article.post-large-custom .post-audio-custom {
 }
 </style>
 <script type="text/javascript">
-	function removeHidden(){
-	  $("#imageLoading").removeClass('hidden');
+	function removeHiddenClass(){
+	  $("#imageLoadingClass").removeClass('hidden');
 	}
 </script>
 <style type="text/css">
@@ -486,8 +486,8 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"></label>
 								                <div class="col-md-5">
-								                    <button type="submit" onclick="removeHidden()" title="Kirim" class="btn btn-primary btn-submit" >Kirim</button>
-								                    <img id="imageLoading" src="{!! asset($pathp.'assets/general/images/loaderx.gif') !!}" alt="loader" class="styleLoad hidden">
+								                    <button type="submit" onclick="removeHiddenClass()" title="Kirim" class="btn btn-primary btn-submit" >Kirim</button>
+								                    <img id="imageLoadingClass" src="{!! asset($pathp.'assets/general/images/loaderx.gif') !!}" alt="loader" class="styleLoad hidden">
 								                    
 								                </div>
 								            </div>
@@ -573,7 +573,7 @@ article.post-large-custom .post-audio-custom {
             $("[name='pendidikan_terakhir_ibu']").val('');
             $("[name='email']").val('');
 
-            $("#imageLoading").addClass('hidden');
+            $("#imageLoadingClass").addClass('hidden');
 
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
