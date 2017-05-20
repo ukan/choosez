@@ -11,7 +11,7 @@
 			<ul class="dropdown-menu">
 				<li><a href="{{ route('profile-history') }}" title="@lang('general.menu.history')">@lang('general.menu.history')</a></li>
 				<li><a href="{{ route('profile-structure') }}" title="@lang('general.menu.structure')">@lang('general.menu.structure')</a></li>
-				<li><a href="{{ route('profile-teacher') }}" title="@lang('general.menu.teacher')">@lang('general.menu.teacher')</a></li>
+				<!-- <li><a href="{{ route('profile-teacher') }}" title="@lang('general.menu.teacher')">@lang('general.menu.teacher')</a></li> -->
 				<li><a href="{{ route('profile-achievement') }}" title="@lang('general.menu.achievement')">@lang('general.menu.achievement')</a></li>
 			</ul>
 		</li>
@@ -26,7 +26,7 @@
 				<li><a href="{{ route('organization-uks') }}" title="Unit Kegiatan Santri">@lang('general.menu.uks')</a></li>
 			</ul>
 		</li>
-		<li class="dropdown">
+		<!-- <li class="dropdown">
 			<a title="@lang('general.menu.academic')" class="dropdown-toggle" href="#">
 				@lang('general.menu.academic')
 				<i class="fa fa-angle-down"></i>
@@ -36,7 +36,7 @@
 				<li><a href="{{ route('academic-material') }}" title="@lang('general.menu.material')">@lang('general.menu.material')</a></li>
 				<li><a href="#" title="@lang('general.menu.academic_support')">@lang('general.menu.academic_support')</a></li>
 			</ul>
-		</li>
+		</li> -->
 		<li>
 			<a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a>
 		</li>
@@ -51,6 +51,9 @@
 		</li>
 		<li>
 			<a href="{{ route('contact') }}" title="@lang('general.menu.contact')">@lang('general.menu.contact')</a>
+		</li>
+		<li>
+			<a href="{{ route('admin-login-member') }}" title="Login">Login</a>
 		</li>
 	</ul>
 </nav>

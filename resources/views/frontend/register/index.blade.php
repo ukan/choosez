@@ -294,11 +294,9 @@ article.post-large-custom .post-audio-custom {
 
 								            <div class="form-group {{ $errors->has('kode_pos') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Kode Pos <b class="text-danger">*</b></label>
-								                <div class="col-md-2">
+								                <div class="col-md-4">
 								                    {!! Form::text('kode_pos', '', ['class' => 'form-control']) !!}
-								                    @if ($errors->has('kode_pos'))
-									                    <!-- <p class="has-error text-danger">{{ $errors->first('kode_pos') }}</p> -->
-									                @endif
+								                    <p class="has-error text-danger error-kode_pos"></p>
 								                </div>
 								            </div>
 
@@ -493,7 +491,7 @@ article.post-large-custom .post-audio-custom {
 								            </div>
 								        </form>
 							        </div>
-
+							        <p><span style="font-style: italic;"><b>Note: </b> Jika ada kesulitan hubungi <b style="color: red">089661900320</b></span></p>
 					</article>
 
 				</div>
@@ -608,6 +606,58 @@ article.post-large-custom .post-audio-custom {
             $("#modalFormTeacher").scrollTop(0);
           } else {
               $('.error').createClass('alert alert-danger').html(response.responseJSON.message);
+          }
+        }
+    });
+</script>
+
+{!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
+<script type="text/javascript">
+	$('.jquery-form-tickets').ajaxForm({
+        dataType : 'json',
+        success: function(response) {
+            if(response.status == 'success'){
+                var title_not = 'Notification';
+                var type_not = 'success';
+                // $(":file").filestyle('clear');
+                $(".btn.btn-default .badge").remove();
+            }else{
+                var title_not = 'Notification';
+                var type_not = 'failed';
+            }
+            $('#loader').addClass("hidden");
+            $("[name='email']").val('');
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+            new PNotify({
+                title: response.status,
+                text: response.notification,
+                type: type_not,
+                addclass: "stack-custom",
+                stack: myStack
+            });
+        },
+        beforeSend: function() {
+          $('.has-error').html('');
+        },
+        error: function(response){
+          if (response.status === 422) {
+              var data = response.responseJSON;
+              $.each(data,function(key,val){
+                  $('.error-'+key).html(val);
+                  $('#content').html(val);
+              });
+            // $("#modalFormTicket").scrollTop(0);
+            $('#loader').addClass("hidden");
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+            new PNotify({
+                title: "Failed",
+                text: "Validate Error, Check Your Data Again",
+                type: 'danger',
+                addclass: "stack-custom",
+                stack: myStack
+            });
+          } else {
+              $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
           }
         }
     });

@@ -157,5 +157,54 @@
           }
         }
     });
+
+    $('.jquery-form-tickets').ajaxForm({
+        dataType : 'json',
+        success: function(response) {
+            if(response.status == 'success'){
+                var title_not = 'Notification';
+                var type_not = 'success';
+                // $(":file").filestyle('clear');
+                $(".btn.btn-default .badge").remove();
+            }else{
+                var title_not = 'Notification';
+                var type_not = 'failed';
+            }
+            $('#loader').addClass("hidden");
+            $("[name='email']").val('');
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+            new PNotify({
+                title: response.status,
+                text: response.notification,
+                type: type_not,
+                addclass: "stack-custom",
+                stack: myStack
+            });
+        },
+        beforeSend: function() {
+          $('.has-error').html('');
+        },
+        error: function(response){
+          if (response.status === 422) {
+              var data = response.responseJSON;
+              $.each(data,function(key,val){
+                  $('.error-'+key).html(val);
+                  $('#content').html(val);
+              });
+            // $("#modalFormTicket").scrollTop(0);
+            $('#loader').addClass("hidden");
+            var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+            new PNotify({
+                title: "Failed",
+                text: "Validate Error, Check Your Data Again",
+                type: 'danger',
+                addclass: "stack-custom",
+                stack: myStack
+            });
+          } else {
+              $('.error').addClass('alert alert-danger').html(response.responseJSON.message);
+          }
+        }
+    });
 </script>
 @endsection
