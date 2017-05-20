@@ -121,6 +121,7 @@ article.post-large-custom .post-audio-custom {
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 {!! Html::style( $pathp.'assets/general/library/bootstrap-file-input/bootstrap-file-input.css') !!}
 {!! Html::style( $pathp.'assets/general/css/loader.css') !!}
+<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -362,8 +363,8 @@ article.post-large-custom .post-audio-custom {
 
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">Pondok Pesantren </label>
-								                <div class="col-lg-5">
-							                        {!! Form::textarea('ponpes', null, array('class' => 'form-control')) !!}
+								                <div class="col-lg-9">
+							                        {!! Form::textarea('ponpes', null, array('class' => 'ckeditor')) !!}
 							                        <p class="has-error text-danger error-ponpes"></p>
 							                    </div>
 								            </div>
