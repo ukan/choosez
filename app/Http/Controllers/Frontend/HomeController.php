@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
 use App\Models\AuthLog;
+use App\Models\Activation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
@@ -393,6 +394,15 @@ class HomeController extends Controller
 
                 $data->password = Hash::make($password);
                 $data->save();
+
+                $active = new Activation;
+                $active->user_id = $data->id;
+                $active->code = bin2hex(random_bytes(16));
+                $active->completed = true;
+                $active->completed_at = date('Y-m-d H:i:s');
+                $active->save();
+
+                Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
 
                 $find_data['password'] = $password;
                 $find_data['email'] = $request->email;
