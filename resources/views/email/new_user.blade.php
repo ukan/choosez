@@ -516,7 +516,7 @@ a span,
                             <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 5px;margin-bottom: 24px;"><strong>Password</strong><br>
                               {!! $password !!}<br><br>
                               you can login to member area with the following link :</p>
-                              <a href="{!! route('admin-login-member') !!}" style="padding-top: 5px;padding-bottom: 5px; background-color: #22aaa0;display: block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #ffffff;font-weight: bold;text-align: center;"><span style="text-decoration: none;color: #ffffff;text-align: center;display: block;">Start your first campaign</span></a>
+                              <a href="https://www.ponpesalihsancbr.id/in/login" style="padding-top: 5px;padding-bottom: 5px; background-color: #22aaa0;display: block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #ffffff;font-weight: bold;text-align: center;"><span style="text-decoration: none;color: #ffffff;text-align: center;display: block;">Start your first campaign</span></a>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
