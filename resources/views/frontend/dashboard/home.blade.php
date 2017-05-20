@@ -158,7 +158,7 @@ label.line-infra{
 /*-- //Events Section --*/
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
-{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
+<!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 @endsection
 @section('content')
@@ -537,7 +537,7 @@ label.line-infra{
 @endsection
 
 @section('scripts')
-{!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
+<!-- {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!} -->
 <script type="text/javascript">
 	$('.jquery-form-tickets').ajaxForm({
         dataType : 'json',
@@ -555,7 +555,6 @@ label.line-infra{
             $("[name='email']").val('');
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
-                title: response.status,
                 text: response.notification,
                 type: type_not,
                 addclass: "stack-custom",
@@ -576,7 +575,6 @@ label.line-infra{
             $('#loader').addClass("hidden");
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
-                title: "Failed",
                 text: "Validate Error, Check Your Data Again",
                 type: 'danger',
                 addclass: "stack-custom",
