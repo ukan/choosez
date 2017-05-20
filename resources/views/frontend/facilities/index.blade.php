@@ -202,7 +202,10 @@ img.lazyOwl {
 						            <!-- start content_slider -->
 						            <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 1, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
 						                <div class="item facilities-slider">
-						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/asrama1.jpeg') }}" alt="name">
+						                </div>
+						                <div class="item facilities-slider">
+						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/asrama2.jpeg') }}" alt="name">
 						                </div>
 						            </div>
 						            <!--//sreen-gallery-cursual -->
@@ -216,26 +219,30 @@ img.lazyOwl {
 						            <!-- start content_slider -->
 						            <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 1, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
 						                <div class="item facilities-slider">
-						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
+						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/aula1.jpeg') }}" alt="name">
+						                </div>
+						                <div class="item facilities-slider">
+						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/aula2.jpeg') }}" alt="name">
+						                </div>
+						                <div class="item facilities-slider">
+						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/aula3.jpeg') }}" alt="name">
 						                </div>
 						            </div>
 						            <!--//sreen-gallery-cursual -->
 						        </div>
 						    </div>
 						    <!-- Edifice-Starts-Here -->
-						    <div class="edifice slideanim infra" id="edifice">
+						    <!-- <div class="edifice slideanim infra" id="edifice">
 								<h4><b>Sekretariat Pengurus</b></h4>
 						    	<label class="line-infra"></label>
 						        <div class="gallery-cursual">
-						            <!-- start content_slider -->
 						            <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 1, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
 						                <div class="item facilities-slider">
 						                    <img class="lazyOwl" src="{{ asset($pathp.'storage/holder.png') }}" alt="name">
 						                </div>
 						            </div>
-						            <!--//sreen-gallery-cursual -->
 						        </div>
-						    </div>
+						    </div> -->
 						    <!-- Edifice-Starts-Here -->
 						    <div class="edifice slideanim infra" id="edifice">
 								<h4><b>Sarana Olahraga</b></h4>
