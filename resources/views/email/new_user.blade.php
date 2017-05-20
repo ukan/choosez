@@ -458,7 +458,7 @@ a span,
                               </tbody>
                             </table><!-- /.icon_holder:icon_secondary -->
                             <h4 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: bold;color: #383d42;">Congratulations {!! $first_name !!}</h4>
-                            <p class="lead" style="font-family: Helvetica, Arial, sans-serif;font-size: 19px;line-height: 27px;margin-top: 16px;margin-bottom: 16px;">You have finished setting up your account.</p>
+                            <p class="lead" style="font-family: Helvetica, Arial, sans-serif;font-size: 19px;line-height: 27px;margin-top: 16px;margin-bottom: 16px;">You have finished register your account.</p>
                             <table class="primary_btn" align="center" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;clear: both;margin: 0 auto;">
                               <tbody>
                                 <tr>
