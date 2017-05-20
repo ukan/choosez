@@ -280,7 +280,7 @@ class HomeController extends Controller
         $param = $request->all();
 
         $rules = array(
-            /*'nama'   => 'required',
+            'nama'   => 'required',
             'nama_panggilan'   => 'required',
             'tempat_lahir'   => 'required',
             'tanggal_lahir'   => 'required',
@@ -310,14 +310,14 @@ class HomeController extends Controller
             'email'   => 'required|email|unique:users',
             'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
             'asrama'   => 'required|not_in:Pilih Asrama',
-            'kamar'   => 'required',*/
+            'kamar'   => 'required',
         );
         $validate = Validator::make($param,$rules);
         if($validate->fails()) {
             $this->validate($request,$rules);
         } else {
 
-                /*$setCity = explode('/', $request->kota);
+                $setCity = explode('/', $request->kota);
                 
                 $province = LocationInformation::where('province_id', $request->provinsi)->get()->first()->name;
                 $kota = LocationInformation::where('province_id', $setCity[1])
@@ -403,11 +403,11 @@ class HomeController extends Controller
                 $active->save();
 
                 Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
-*/
-                $find_data['password'] = "xxx";
-                $find_data['email'] = "ukan.job@gmail.com";
-                $find_data['first_name'] = "ganteng";
-                $find_data['image'] = "xxx";
+
+                $find_data['password'] = $password;
+                $find_data['email'] = $request->email;
+                $find_data['first_name'] = $request->nama_panggilan;
+                $find_data['image'] = $data->image;
                 
                 Mail::send('email.new_user', $find_data, function($message) use($find_data) {
                             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
