@@ -398,6 +398,9 @@ label.line-infra{
             <!-- start content_slider -->
             <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 3, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
                 <div class="item facilities-slider">
+                    <img alt="fasilitas 5" class="lazyOwl" src="{{ asset($pathp.'storage/asrama1.jpeg') }}" alt="name">
+                </div>
+                <div class="item facilities-slider">
                     <img alt="fasilitas 1" class="lazyOwl" src="{{ asset($pathp.'storage/masjid2.jpg') }}" alt="name">
                 </div>
                 <div class="item facilities-slider">
