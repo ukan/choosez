@@ -26,17 +26,17 @@
 				<li><a href="{{ route('organization-uks') }}" title="Unit Kegiatan Santri">@lang('general.menu.uks')</a></li>
 			</ul>
 		</li>
-		<!-- <li class="dropdown">
+		<li class="dropdown">
 			<a title="@lang('general.menu.academic')" class="dropdown-toggle" href="#">
 				@lang('general.menu.academic')
 				<i class="fa fa-angle-down"></i>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a href="{{ route('academic-schedule') }}" title="@lang('general.menu.schedule')">@lang('general.menu.schedule')</a></li>
+				<!-- <li><a href="{{ route('academic-schedule') }}" title="@lang('general.menu.schedule')">@lang('general.menu.schedule')</a></li> -->
 				<li><a href="{{ route('academic-material') }}" title="@lang('general.menu.material')">@lang('general.menu.material')</a></li>
-				<li><a href="#" title="@lang('general.menu.academic_support')">@lang('general.menu.academic_support')</a></li>
+				<!-- <li><a href="#" title="@lang('general.menu.academic_support')">@lang('general.menu.academic_support')</a></li> -->
 			</ul>
-		</li> -->
+		</li>
 		<li>
 			<a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a>
 		</li>
