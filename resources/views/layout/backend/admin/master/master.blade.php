@@ -170,12 +170,12 @@
                                         <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
                                     </li>
                                 @endif
-                                <!-- <li>
-                                    <a role="menuitem" target="_blank" href="#"><i class="fa fa-question-circle"></i> Help</a>
-                                </li> -->
-                                <li class="display-none">
-                                    <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
                                 </li>
+                                <!-- <li class="display-none">
+                                    <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
+                                </li> -->
                                 <li>
                                     <a role="menuitem" tabindex="-1" href="{!! route($route_logout) !!}"><i class="fa fa-power-off"></i> Logout</a>
                                 </li>

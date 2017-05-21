@@ -47,12 +47,12 @@ class ProfileController extends Controller
         }
         $queryProvince = LocationInformation::where('district_id','=','0')->where('sub_district_id','=','0')->where('village_id','=','0')->orderBy('name')->get();
             $form = [
-                'url' => route('profile-profile-edit-process'),
+                'url' => route('member-profile-update'),
                 'class' => 'form-horizontal jquery-form-edit-profile',
                 'autocomplete' => 'off',
                 'files' => true,
             ];
-        return view('backend.member.profile.profile', compact('form'))->with('queryProvince',$queryProvince)->with('date_of_birth',$date_of_birth);
+        return view('frontend.member.profile.profile', compact('form'))->with('queryProvince',$queryProvince)->with('date_of_birth',$date_of_birth);
     }
     public function profileEdit()
     {

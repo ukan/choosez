@@ -22,6 +22,10 @@ if (! function_exists('user_info')) {
                 return user_info('username');
             }
 
+            if ('nick_name' == $column) {
+                return user_info('first_name');
+            }
+
             if ('role' == $column) {
                 return user_info()->roles[0];
             }
@@ -40,7 +44,7 @@ if (! function_exists('user_info')) {
                 return 'Indonesia';
             }
 
-            if ('province' == $column) {
+            /*if ('province' == $column) {
                 $location = LocationInformation::find(user_info('location_information_id'));
                 if(!empty($location)){
                     $province_id = $location->province_id;
@@ -48,11 +52,11 @@ if (! function_exists('user_info')) {
                     $sub_district_id = $location->sub_district_id;
                     return ucwords(strtolower(LocationInformation::where('province_id','=',$province_id)->where('district_id','=','0')->where('sub_district_id','=','0')->where('village_id','=','0')->orderBy('name')->get()->first()->name));
                 }else{
-                    return '';
+                    return 'ganteng';
                 }
-            }
+            }*/
 
-            if ('city' == $column) {
+            /*if ('city' == $column) {
                 $location = LocationInformation::find(user_info('location_information_id'));
                 if($location){
                     $province_id = $location->province_id;
@@ -62,9 +66,9 @@ if (! function_exists('user_info')) {
                 }else{
                     return '';
                 }
-            }
+            }*/
 
-            if ('district' == $column) {
+            /*if ('district' == $column) {
                 $location = LocationInformation::find(user_info('location_information_id'));
                 if(!empty($location)){
                     $province_id = $location->province_id;
@@ -74,7 +78,7 @@ if (! function_exists('user_info')) {
                 }else{
                     return '';
                 }
-            }
+            }*/
 
             if ('select_province' == $column) {
                 $location = LocationInformation::find(user_info('location_information_id'));

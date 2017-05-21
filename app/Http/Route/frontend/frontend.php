@@ -41,6 +41,11 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::get('/achievement', array('as' => 'profile-achievement', 'uses' => 'PesantrenController@indexAchievement'));
     });
 
+    Route::group(['prefix' => 'user','namespace' => 'Member'], function () {
+        Route::get('profile', array('as' => 'member-profile', 'uses' => 'ProfileController@index'));
+        Route::put('profile', array('as' => 'member-profile-update', 'uses' => 'ProfileController@update'));
+    });
+
     Route::group(['prefix' => 'organization'], function () {
         Route::get('/center', array('as' => 'organization-center', 'uses' => 'OrganizationController@indexCenter'));
         Route::get('/region', array('as' => 'organization-region', 'uses' => 'OrganizationController@indexRegion'));

@@ -53,7 +53,7 @@
 			<a href="{{ route('contact') }}" title="@lang('general.menu.contact')">@lang('general.menu.contact')</a>
 		</li>
 		<li>
-			<a href="{{ route('admin-login-member') }}" title="Login">Login</a>
+			<a href="https://www.ponpesalihsancbr.id/in/login" title="Login">Login</a>
 		</li>
 	</ul>
 </nav>
