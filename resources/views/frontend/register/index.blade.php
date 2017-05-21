@@ -414,7 +414,7 @@ article.post-large-custom .post-audio-custom {
 								                </div>
 								            </div>
 
-								            <div class="form-group area-insert-update">
+								            <!-- <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"><strong>Data Orang Tua</strong></label>
 								            </div>
 
@@ -480,7 +480,7 @@ article.post-large-custom .post-audio-custom {
 								                    {!! Form::text('pekerjaan_ibu', '', ['class' => 'form-control']) !!}
 								                    <p class="has-error text-danger error-pekerjaan_ibu"></p>
 								                </div>
-								            </div>
+								            </div> -->
 
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"></label>
