@@ -99,17 +99,36 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return static::select(
             'users.id',
-            'users.username',
             'users.email',
             'users.username',
             'users.first_name',
             'users.is_admin',
             'roles.name as role',
             'users.last_login',
+            'users.image',
             'users.phone'
         )
         ->join('role_users', 'role_users.user_id', '=', 'users.id')
         ->join('roles', 'role_users.role_id', '=', 'roles.id');
+
+        return $return;
+    }
+
+    public static function datatablesUser($isAdmin = null)
+    {
+        return static::select(
+            'users.id',
+            'users.email',
+            'users.username',
+            'users.first_name',
+            'users.image',
+            'users.hostel',
+            'users.room',
+            'users.phone'
+        )
+        ->join('role_users', 'role_users.user_id', '=', 'users.id')
+        ->join('roles', 'role_users.role_id', '=', 'roles.id')
+        ->where('hostel','!=',"");
 
         return $return;
     }

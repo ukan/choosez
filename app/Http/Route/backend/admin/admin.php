@@ -27,6 +27,14 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
 
     });
 
+    Route::group(['prefix' => 'users','namespace' => 'userRegister'], function () {
+
+        // User Trustee Management...
+        Route::resource('user-register', 'UserRegisterController', ['except' => 'show']);
+        Route::delete('users/{id}/delete', 'UserRegisterController@delete');
+
+    });
+
     Route::group(['prefix' => 'master'], function () {
 
         //route Country

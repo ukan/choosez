@@ -92,9 +92,6 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::post('/my-profile/change-password', array('as' => 'member-profile-change-password-process', 'uses' => 'ProfileController@processChangePassword'));
         Route::post('/my-profile/upload-crop-avatar', array('as' => 'member-profile-upload-crop-avatar', 'uses' => 'ProfileController@UploadAvatar'));
 
-        Route::get('/my-profile/smtp', array('as' => 'member-general-setting-smtp', 'uses' => 'GeneralSettingController@index_smtp'));
-        Route::get('/my-profile/datatables_smtp', array('as' => 'datatables-general-setting-smtp', 'uses' => 'GeneralSettingController@DatatablesSmtp'));
-        Route::post('/my-profile/post_smtp', array('as' => 'member-general-setting-smtp-post', 'uses' => 'GeneralSettingController@post_smtp'));
     });
 
     Route::group(['prefix' => 'gallery'], function () {

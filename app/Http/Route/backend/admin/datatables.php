@@ -7,6 +7,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         Route::get('hashtags/{type}', 'HashtagController@datatables');
         Route::get('roles', 'UserTrustee\RoleController@datatables');
         Route::get('user-trustees', array('as' => 'datatables-user-trustees', 'uses' =>'UserTrustee\UserController@datatables'));
+
+        Route::get('user-register', array('as' => 'datatables-user-register', 'uses' =>'userRegister\UserRegisterController@datatables'));
+        
         Route::get('menu', 'UserTrustee\MenuController@datatables');
         Route::get('country', array('as' => 'datatables-country', 'uses' => 'CountriesController@datatables'));
         Route::get('province', array('as' => 'datatables-province', 'uses' => 'ProvincesController@datatables'));
