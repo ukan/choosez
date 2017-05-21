@@ -372,6 +372,7 @@ class HomeController extends Controller
                 $data->gender = $request->jenis_kelamin;
                 $data->hostel = ucwords(strtolower($asrama));
                 $data->room = ucwords(strtolower($kamar));
+                $data->status = "Santri";
 
                 if($request->hasFile('image')) {
                     if($request->action == 'update'){
