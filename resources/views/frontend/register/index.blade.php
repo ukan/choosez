@@ -360,13 +360,13 @@ article.post-large-custom .post-audio-custom {
 								                </div>
 								            </div>
 
-								            <div class="form-group area-insert-update">
+								            <!-- <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">Pondok Pesantren </label>
 								                <div class="col-lg-9">
 							                        {!! Form::textarea('ponpes', null, array('class' => 'ckeditor')) !!}
 							                        <p class="has-error text-danger error-ponpes"></p>
 							                    </div>
-								            </div>
+								            </div> -->
 
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">Univ/Institut </label>
