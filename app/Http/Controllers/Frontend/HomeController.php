@@ -280,6 +280,7 @@ class HomeController extends Controller
         $param = $request->all();
 
         $rules = array(
+            'image'   => 'required|image',
             'nama'   => 'required',
             'nama_panggilan'   => 'required',
             'tempat_lahir'   => 'required',

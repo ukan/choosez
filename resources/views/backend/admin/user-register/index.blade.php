@@ -28,7 +28,6 @@
         </div>
         <div class="panel-body">
             @include('flash::message')
-            <a class="btn btn-primary pull-right" href="{{ action('Backend\Admin\UserTrustee\UserController@create') }}" title="Add"><i class="fa fa-plus fa-fw"></i></a>
             <br><br>
             <table id="trustees-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
                 <thead>

@@ -158,7 +158,7 @@ article.post-large-custom .post-audio-custom {
 							        	{!! Form::open(['route'=>'post-register-data', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
 							            	<input type="hidden" name="method" id="method" value="add">
 							            	<div class="form-group area-insert-update">
-							                    <label class="col-md-3 control-label">Photo</label>
+							                    <label class="col-md-3 control-label">Photo<b class="text-danger">*</b></label>
 							                    <div class="col-md-9">
 							                        {!! form_input_file_image('file','image','','200px','200px') !!}
 							                        <p class="has-error text-danger error-image"></p>
