@@ -27,14 +27,12 @@ if (! function_exists('user_info')) {
             }
 
             if ('avatar_path' == $column) {
-                if(user_info('avatar') == null){
                     $pathp = "";
-
                     ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
-
+                if(user_info('image') == null){
                     return asset($pathp.'assets/general/images/default/avatar.png');
                 }else{
-                    return asset('storage/avatars').'/'.user_info('avatar');
+                    return asset($pathp.'storage/student').'/'.user_info('image');
                 }
             }
 
@@ -383,7 +381,7 @@ if (! function_exists('avatar_path')) {
      */
     function avatar_path($path = null)
     {
-        $link = public_path('storage/avatars');
+        $link = public_path('storage/student');
 
         if (is_null($path)) {
             return $link;

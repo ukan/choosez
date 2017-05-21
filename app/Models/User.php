@@ -80,6 +80,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'gender',
         'hostel',
         'room',
+        'status',
     ];
 
     /**
