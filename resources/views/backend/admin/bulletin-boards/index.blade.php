@@ -20,6 +20,8 @@
             display: none;
         }
     </style>
+
+    <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 @endsection
 
 @section('page-header', 'News Management')
@@ -115,7 +117,7 @@
     </div>
     <!-- modal register -->
   <div class="modal fade modal-getstart" id="modalFormBulletinBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div style="min-width: 1027px" class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -126,8 +128,8 @@
                 <input type="hidden" name="action" id="action" value="">      
                 <input type="hidden" name="bulletin_board_id" value=""> 
                 <div class="form-group area-insert-update">
-                    {!! Form::label('type', 'Type', array('class' => 'col-lg-3 control-label')) !!}
-                    <div class="col-lg-9">
+                    {!! Form::label('type', 'Type', array('class' => 'col-lg-2 control-label')) !!}
+                    <div class="col-lg-10">
                         <select onchange="changeCondition()" id="type" name="type" class="select2" style="width:100px">
                             <option value="news">News</option>
                             <option value="article">Article</option>
@@ -137,31 +139,31 @@
                     <div class="clear"></div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Image <b class="text-danger">*</b></label>
-                    <div class="col-md-9">
+                    <label class="col-md-2 control-label">Image <b class="text-danger">*</b></label>
+                    <div class="col-md-10">
                         {!! form_input_file_img('file','image') !!}
                         <p class="has-error text-danger error-image"></p>
                     </div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Title <b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
+                    <label class="col-md-2 control-label">Title <b class="text-danger">*</b></label>
+                    <div class="col-lg-10">
                         {!! Form::text('title', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
                         <p class="has-error text-danger error-title"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Content <b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
+                    <label class="col-md-2 control-label">Content <b class="text-danger">*</b></label>
+                    <div class="col-lg-10">
                         {!! Form::textarea('content', null, array('class' => 'ckeditor')) !!}
                         <p class="has-error text-danger error-content"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div id="author" class="form-group area-insert-update hidden">
-                    {!! Form::label('author', 'Author', array('class' => 'col-lg-3 control-label')) !!}
-                    <div class="col-lg-9">
+                    {!! Form::label('author', 'Author', array('class' => 'col-lg-2 control-label')) !!}
+                    <div class="col-lg-10">
                         {!! Form::text('author', null, array('class' => 'form-control')) !!}
                         <p class="has-error text-danger error-author"></p>
                     </div>
