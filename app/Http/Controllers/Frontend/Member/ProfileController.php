@@ -218,16 +218,13 @@ class ProfileController extends Controller
     }
     public function changePassword()
     {
-                    Session::forget('otp');
-                    Session::forget('otp_code');
-                    Session::forget('member_password');
             $form = [
-                'url' => route('profile-change-password-process'),
+                'url' => route('member-profile-change-password-process'),
                 'class' => 'form-horizontal form-bordered jquery-form-change-password',
                 'autocomplete' => 'off',
                 'files' => true,
             ];
-        return view('backend.member.profile.change_password', compact('form'));
+        return view('frontend.member.profile.change_password', compact('form'));
     }
     public function processChangePassword(Request $req)
     {
@@ -239,49 +236,25 @@ class ProfileController extends Controller
         $find_data = Sentinel::findRoleBySlug('member')->users()->where('id','=', user_info('id'))->first();
        
         $validate = Validator::make($data, $valid);
-        if(Session::has('otp_code')){
-            if($req->old_password == FALSE){
-                if($req->otp_code == Session::get('otp_code')){
-                    $find_data->password = Session::get('member_password');
-                    $find_data->save();
-                    Session::forget('otp');
-                    Session::forget('otp_code');
-                    Session::forget('member_password');
-                    echo 'success_otp_code';
-                }else{
-                    echo '<div class="alert alert-danger error_otp">Otp Code Wrong';
-                }
-            }else{
-                echo 'fill_otp_code_mode';                
-            }
-        }else{
         
-            if(Hash::check($req->old_password, User::find(user_info('id'))->password))
-            {
-                if($validate->fails()) {
-                    
-                    echo '<div class="alert alert-danger">';
-                    foreach ($validate->messages()->all() as $message) {
-                        echo '<span class="text-danger">'.$message.'</span><br>';
-                    }
-                    echo '</div>';
-                } else {
-                    Session::put('member_password',Hash::make($req->password));
-                    $otp_code = MemberArea::otp_code();
-                    Session::put('otp_code',$otp_code);
-                    Session::put('otp','true');
-                    $user_data =  Sentinel::findRoleBySlug('member')->users()->where('id','=',user_info('id'))->first();
-                    $find_data = $user_data->toArray();
-                    $find_data['otp_code'] = $otp_code;
-                    Mail::send('emails.otpcodeforchangepassword', $find_data, function($message) use($find_data) {
-                        $message->from("noreply@scoido.com", 'No-Reply');
-                        $message->to($find_data['email'], $find_data['first_name'])->subject('Otp Code for Change Password to Scoido');
-                    });
-                    echo 'success_change_password';
+        if(Hash::check($req->old_password, User::find(user_info('id'))->password))
+        {
+            if($validate->fails()) {
+                
+                echo '<div class="alert alert-danger">';
+                foreach ($validate->messages()->all() as $message) {
+                    echo '<span class="text-danger">'.$message.'</span><br>';
                 }
-            }else {
-                echo '<div class="alert alert-danger">Old Password Wrong</div>';            
+                echo '</div>';
+            } else {
+                $user = User::find(user_info('id'));
+                $user->password = Hash::make($req->password);
+                $user->save();
+
+                echo 'success_change_password';
             }
+        }else {
+            echo '<div class="alert alert-danger">Old Password Wrong</div>';            
         }
     }
     public function profileCompletion()

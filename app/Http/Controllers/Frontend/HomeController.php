@@ -324,11 +324,14 @@ class HomeController extends Controller
                 $kota = LocationInformation::where('province_id', $setCity[1])
                          ->where('district_id', $setCity[0])
                          ->get()->first()->name;
-
-                $sub_district = LocationInformation::where('province_id', $setCity[1])
+                if(!empty($request->kecamatan)){
+                    $sub_district = LocationInformation::where('province_id', $setCity[1])
                          ->where('district_id', $setCity[0])
                          ->where('sub_district_id', $request->kecamatan)
                          ->get()->first()->name;
+                }else{
+                    $sub_district = "";
+                }
 
                 $asrama = RoomList::where('id', $request->asrama)->get()->first()->name;
                 $kamar = RoomList::where('id', $request->kamar)->get()->first()->name;

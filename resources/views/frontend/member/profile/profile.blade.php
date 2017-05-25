@@ -23,7 +23,7 @@
 				<a><i class="fa fa-info"></i> Personal Information</a>
 			</li>
 			<li>
-				<a href="{{ route('member-profile') }}"><i class="fa fa-edit"></i> Change Password</a>
+				<a href="{{ route('member-profile-change-password') }}"><i class="fa fa-edit"></i> Change Password</a>
 			</li>
 		</ul>
 		<div class="tab-content">

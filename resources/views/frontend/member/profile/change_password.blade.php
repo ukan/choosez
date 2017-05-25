@@ -17,22 +17,13 @@
 @endsection
 
 @section('content')
-	@include('backend.profile.partials.cover')
-
-
 	<div class="tabs tabs-primary">
 		<ul class="nav nav-tabs">
 			<li>
 				<a href="{{ route('member-profile') }}"><i class="fa fa-info"></i> Personal Information</a>
 			</li>
-			<li>
-				<a href="{{ route('member-profile-profile-completion') }}"><i class="fa fa-check"></i> Billing & Plan</a>
-			</li>
 			<li class="active">
 				<a><i class="fa fa-edit"></i> Change Password</a>
-			</li>
-			<li>
-				<a href="{{ route('member-general-setting-smtp') }}"><i class="fa fa-wrench"></i> Smtp     </a>
 			</li>
 		</ul>
 		<div class="tab-content has-loader">
@@ -152,11 +143,6 @@
 		      		$('.modal-with-form').click();
 	    	}else{
 		      	if(response.indexOf('success_change_password') >= 0){
-					$('.errorsMessageOtpCode').html('');
-					$('.errorsMessageChangePassword').html('');
-					$('.alert-sending-otp').html('');
-		      		$('.modal-with-form').click();
-				}else if(response.indexOf('success_otp_code') >= 0){
 					var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
 					new PNotify({
 					    title: "Success",
@@ -169,23 +155,10 @@
 					setTimeout(function(){
 					   window.location.reload(1);
 					}, 3000);
-						$('.errorsMessageOtpCode').html('');
-						$('.errorsMessageChangePassword').html('');
-						$('.alert-sending-otp').html('');
-
 				}else{
-
-					if(response.indexOf('error_otp') >= 0){
-						$('.errorsMessageOtpCode').html(response);
-					}else{
-						$('.errorsMessageChangePassword').html(response);
-					}
+					$('.errorsMessageChangePassword').html(response);
 				}
 			}
-                $.post( "http://develop.dev/scoido-builder/admin/index.php?object=user-login&action=index", {
-                    'user[user-name]': 'admin',
-                    'user[user-password]': '123456'
-                } );
 	    },
 		beforeSend: function() {
 		  	$('.has-error').html('');
