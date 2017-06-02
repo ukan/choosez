@@ -146,27 +146,14 @@ article.post-large-custom .post-audio-custom {
 						</div>
 
 						<div class="post-content back-content history-place">
-							<h2 class="center">BIMTES DAN JALUR MANDIRI UIN BANDUNG : Pondok Pesantren AL Ihsan</h2>
+						@foreach($bimtes as $key => $value)
+							<h2 class="center">{!! $value->title !!}</h2>
 							<div class="post-meta">
 								<hr>
 							</div>
-							<label style="font-style:italic;font-size: 16px;color:#000">Assalamua’laikum WR.WB...</label>
-							<p class="justify">Bismillah,  bagi kalian akang-akang dan teteh-teteh calon mahasiswa baru yang mau ikut jalur mandiri UIN Sunan Gunung Djati Bandung, yang masih bingung dengan masuk atau tidaknya ke jurusan yang ada di UIN Sunan Gunung Djati Bandung atau masih belum percaya diri dengan ujian tulis jalur mandiri.</p>
-							<p class="justify"><span style="color: red">Nah nah nah ada kabar gembira....</span> sudah di buka lhoo BIMTES (Bimbingan Test) buat jalur mandiri di PONPES AL-IHSAN Cibiruhilir. Kalau kalian sedang mencari informasi, kami solusinya. dari pendaftaran, biaya kuliah, beasiswa, insya Allah kami bisa memberikan informasi yang up to date ,terkini bahkan sudah terbukti lulusan Bimtes Al Ihsan ini telah meloloskan seleksi jalur mandiri UIN Bandung ini.</p>
-							<p class="justify">Ah-ya... kami juga membuka pendaftaran BIMTES jalur mandiri untuk akang-akang/teteh-teteh yang ikut jalur mandiri. so' come along with us.</p>
-							<p class="justify">Buat pendaftarannya cukup<span style="color: red"><b> Rp. 125.000,- </b></span> fasilitas yang kalian dapatkan dijamin deh buat kalian terpana. fasilitasnya antara lain :
-							<br>1. Sertifikat
-							<br>2. Notebook
-							<br>3. Stiker
-							<br>4. PENGINAPAN (ini dia, buat kalian yang rumahnya jauh gak usah khawatir mencari tempat tinggal semasa BIMTES. kami siapkan dengan sebaik mungkin)
-							<br>5. Paket soal 
-							<br>6. Bolpoin
-							<br>7. Snack
-							<br>8. Makan sebanyak 6x selama bimtes berjalan.
-							</p>
-							<p style="color: red;font-style: oblique;" class="justify"><strong>Fasilitas super kumplit ini hanya ada di BIMTES kami.</strong> </p>
-							<p class="justify"><b>BIMTEST PONPES AL IHSAN</b> tentunya yang paling dekat dan pesantren paling favororit lho di UIN Bandung ini.
-							<p class="justify">Ayoo... kalian tinggal registrasi di halaman WEB ini, dengan mengisi formulir <a href="#0">disini</a></p>
+							{!! $value->content !!}
+						@endforeach
+							<p class="justify">Silahkan isi data diri anda <a href="#0">disini</a></p>
 							
 
 						</div>

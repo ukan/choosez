@@ -169,10 +169,11 @@
                                     <li>
                                         <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
                                     </li>
+                                @else
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
+                                    </li>
                                 @endif
-                                <li>
-                                    <a role="menuitem" tabindex="-1" href="{!! route($route_profile) !!}"><i class="fa fa-user"></i> My Profile</a>
-                                </li>
                                 <!-- <li class="display-none">
                                     <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
                                 </li> -->

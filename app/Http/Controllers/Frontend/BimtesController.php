@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\RegisterStudent;
 use App\Models\Slider;
+use App\Models\Bimtes;
 use Illuminate\Http\Request;
 use Validator;
 use View;
@@ -19,7 +20,11 @@ class BimtesController extends Controller
     public function index()
     {   
         $slider = Slider::where('category', 'Bimtes')->get();
-        return view('frontend.bimtes.index')->with('slider', $slider);
+        $bimtes = Bimtes::get();
+
+        return view('frontend.bimtes.index')
+                 ->with('slider', $slider)
+                 ->with('bimtes', $bimtes);
     }
 
     public function indexFacilities()
