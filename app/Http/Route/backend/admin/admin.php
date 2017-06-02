@@ -163,6 +163,12 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::post('/post-slider', array('as' => 'admin-post-slider', 'uses' => 'SliderController@post_slider'));
     });
 
+    Route::group(['prefix' => 'bimtes', 'namespace' => 'Bimtes'], function () {
+        Route::get('/', array('as' => 'admin-index-bimtes', 'uses' => 'BimtesController@index'));
+        Route::post('/show', array('as' => 'admin-show-bimtes', 'uses' => 'BimtesController@show'));
+        Route::post('/post-bimtes', array('as' => 'admin-post-bimtes', 'uses' => 'BimtesController@post_bimtes'));
+    });
+
     Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {
         // Category Management...
         Route::resource('lcwcategorys', 'LcwCategorysController', ['except' => 'show']);

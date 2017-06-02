@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         Route::get('datatables-hq-dashboard-withdrawal-request', array('as' => 'datatables-hq-dashboard-withdrawal-request', 'uses' => 'DashboardController@DatatablesHqDashboardWithdrawalRequest'));   
 
         Route::get('user-notifications', array('as' => 'admin-datatables-user-notifications', 'uses' => 'UserNotificationsController@datatables'));
+        
+        //bimtes management
+        Route::get('bimtes-datatable', array('as' => 'datatables-bimtes', 'uses' => 'Bimtes\BimtesController@datatables'));
     });
 
 });
