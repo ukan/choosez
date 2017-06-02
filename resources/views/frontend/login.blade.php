@@ -21,7 +21,7 @@
           <input type="text" id="email" name="email" placeholder="Email" class="box1 border1">
           <input type="password" id="password" name="password" placeholder="Password" class="box1 border2">
           <input type="submit" class="send" value="Go">
-          <p style="color: black;padding-top: 5px">Forgot Your Password? <a href="#">click here</a></p>    
+          <!-- <p style="color: black;padding-top: 5px">Forgot Your Password? <a href="#">click here</a></p> -->    
     {!! Form::close() !!}
       </div>
   </div>
