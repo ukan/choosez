@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBimtesTable extends Migration
+class AdPamfletOnBimtesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,8 @@ class CreateBimtesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bimtes', function(Blueprint $table){
-            $table->increments('id');
-            $table->string('title');
-            $table->text('content');
-            $table->timestamps();
+        Schema::table('bimtes',function(Blueprint $table){
+            $table->string('pamflet')->nullable();
         });
     }
 
@@ -27,6 +24,8 @@ class CreateBimtesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bimtes');
+        Schema::table('bimtes',function(){
+            $table->dropColumn('pamflet');
+        });
     }
 }

@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/contact', array('as' => 'contact', 'uses' => 'HomeController@contact'));
     Route::post('/contact/contact-us', array('as' => 'contact-us', 'uses' => 'HomeController@post_contact'));
     Route::post('/register/post-register-data', array('as' => 'post-register-data', 'uses' => 'HomeController@post_register_data'));
+    Route::post('/bimtes/post-register-bimtes', array('as' => 'post-register-bimtes', 'uses' => 'HomeController@post_register_bimtes'));
 
     Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
 

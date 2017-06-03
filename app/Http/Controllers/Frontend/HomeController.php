@@ -7,6 +7,7 @@ use App\Models\BulletinBoard;
 use App\Models\Subscribe;
 use App\Models\ContactUs;
 use App\Models\User;
+use App\Models\BimtesRegister;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
 use App\Models\AuthLog;
@@ -418,6 +419,82 @@ class HomeController extends Controller
                             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
                             $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
                         });
+
+                $response['notification'] = "Register Successfully";
+                $response['status'] = "success";
+        }
+
+        echo json_encode($response);
+    }
+
+    public function post_register_bimtes(Request $request){
+        $response = array();
+        $param = $request->all();
+
+        $rules = array(
+            'image'   => 'required|image',
+            'nama'   => 'required',
+            'tempat_lahir'   => 'required',
+            'tanggal_lahir'   => 'required',
+            'alamat'   => 'required',
+            'sekolah_asal'   => 'required',
+            'tahun_lulus'   => 'required|numeric',
+            'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
+            'no_kontak'   => 'required|numeric',
+            'email'   => 'required|email|unique:bimtes_register',
+            'no_tes'   => 'required',
+            'tanggal_tes'   => 'required',
+            'pilihan_jurusan'   => 'required',
+            'bukti_pembayaran'   => 'required|image',
+        );
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules);
+        } else {
+                $data = new BimtesRegister;
+
+                $data->name = $request->nama;
+                $data->place_of_birth = $request->tempat_lahir;
+                $data->date_of_birth = $request->tanggal_lahir;
+                $data->address = $request->alamat;
+                $data->email = $request->email;
+                $data->phone = $request->no_kontak;
+                $data->slta = $request->sekolah_asal;
+                $data->slta_th = $request->tahun_lulus;
+                $data->gender = $request->jenis_kelamin;
+                $data->test_number = $request->no_tes;
+                $data->test_day = $request->tanggal_tes;
+                $data->major1 = $request->pilihan_jurusan;
+                $data->major2 = $request->pilihan_jurusan2;
+
+                if($request->hasFile('image')) {
+                    if($request->action == 'update'){
+                        if($data->photo != ""){
+                        $image_path = public_path().'/storage/bimtes/photo/'.$data->photo;
+                        unlink($image_path);
+                        }
+                    }
+                    createdirYmd('storage/bimtes/photo');
+                    $file = Input::file('image');
+                    $name = str_random(20). '-' .$file->getClientOriginalName();
+                    $data->photo = date("Y")."/".date("m")."/".date("d")."/".$name;
+                    $file->move(public_path().'/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                }
+                if($request->hasFile('bukti_pembayaran')) {
+                    if($request->action == 'update'){
+                        if($data->image_confirm != ""){
+                        $image_path = public_path().'/storage/bimtes/bukti/'.$data->image_confirm;
+                        unlink($image_path);
+                        }
+                    }
+                    createdirYmd('storage/bimtes/bukti');
+                    $file = Input::file('bukti_pembayaran');
+                    $name = str_random(20). '-' .$file->getClientOriginalName();
+                    $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
+                    $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                }
+
+                $data->save();
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
