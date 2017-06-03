@@ -16,6 +16,7 @@ class BimtesRegister extends Model
         'address',
         'phone',
         'email',
+        'status',
         'slta',
         'slta_th',
         'gender',
@@ -26,4 +27,20 @@ class BimtesRegister extends Model
         'test_day',
         'test_number',
     ];
+
+    public static function datatablesBimtesRegister($isAdmin = null)
+    {
+        return static::select(
+            'id',
+            'photo',
+            'name',
+            'phone',
+            'email',
+            'test_number',
+            'test_day',
+            'status'
+        );
+
+        return $return;
+    }
 }

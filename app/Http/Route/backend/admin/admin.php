@@ -167,6 +167,10 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::get('/', array('as' => 'admin-index-bimtes', 'uses' => 'BimtesController@index'));
         Route::post('/show', array('as' => 'admin-show-bimtes', 'uses' => 'BimtesController@show'));
         Route::post('/post-bimtes', array('as' => 'admin-post-bimtes', 'uses' => 'BimtesController@post_bimtes'));
+        
+        Route::get('/bimtes-register/', array('as' => 'admin-index-bimtes-register', 'uses' => 'BimtesRegisterController@index'));
+        Route::post('/bimtes-register/show', array('as' => 'admin-bimtes-register-show-user', 'uses' => 'BimtesRegisterController@showBimtes'));
+        // Route::delete('bimtes/{id}/delete', 'BimtesRegisterController@delete');
     });
 
     Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {
