@@ -260,7 +260,7 @@ class BulletinBoardsController extends Controller
                             $find_data['email'] = $value->email;
                             $find_data['first_name'] = $value->first_name;
                             Mail::send('email.editor_notification', $find_data, function($message) use($find_data) {
-                                        $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                                        $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
                                         $message->to($find_data['email'], $find_data['first_name'])->subject('Postingan Baru');
                                     });
                         }

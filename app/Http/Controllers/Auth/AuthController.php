@@ -172,9 +172,8 @@ class AuthController extends Controller
                  ->max('id');
         $logs = AuthLog::find($idLog);
         if($logs){
-            
-        $logs->logout = date('Y-m-d H:i:s');
-        $logs->save();
+            $logs->logout = date('Y-m-d H:i:s');
+            $logs->save();
         }
 
         setcookie("isAuthorized");
