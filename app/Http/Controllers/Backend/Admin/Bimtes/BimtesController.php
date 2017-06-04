@@ -64,12 +64,14 @@ class BimtesController extends Controller
             $bimtes_data = Bimtes::find($request->id);
             $response['title'] = $bimtes_data->title;
             $response['content'] = $bimtes_data->content;
+            $response['pamphlet'] = $bimtes_data->pamflet;
         }else if($request->action != 'delete'){
 
             $param = $request->all();
             $rules = array(
                 'title'   => 'required',
                 'content'   => 'required',
+                'image'   => 'required|image',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -80,7 +82,7 @@ class BimtesController extends Controller
                         $find_data['email'] = "x";
                         $find_data['id'] = "cek";
                         $find_data['full_name'] = $data;
-                        $find_data['table'] = "Create Bulletin";
+                        $find_data['table'] = "Create Bimtes";
 
                         Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
                                             $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
@@ -96,7 +98,7 @@ class BimtesController extends Controller
                         $find_data['email'] = "x";
                         $find_data['id'] = "cek";
                         $find_data['full_name'] = $data;
-                        $find_data['table'] = "Update Bulletin";
+                        $find_data['table'] = "Update Bimtes";
 
                         Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
                                             $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
@@ -106,12 +108,26 @@ class BimtesController extends Controller
                         $bimtes_data = Bimtes::find($request->bimtes_id);
 
                         $audit->action = "Edit";
-                        $audit->before = $bimtes_data->title.' | '.$bimtes_data->content;                    
-                        $audit->after = $request->title.' | '.$request->content;                    
+                        $audit->before = $bimtes_data->title.' | '.$bimtes_data->content.' | '.$bimtes_data->pamflet;                    
+                        $audit->after = $request->title.' | '.$request->content.' | '.$request->image;                    
                     }
                     $bimtes_data->title = $request->title;
                     $bimtes_data->content = $request->content;
-              
+                    
+                    if($request->hasFile('image')) {
+                        if($request->action == 'update'){                        
+                            if($bimtes_data->pamflet != ""){  
+                            $image_path = public_path().'/storage/bimtes/'.$bimtes_data->pamflet;
+                            unlink($image_path);
+                            }
+                        }
+                        createdirYmd('storage/bimtes');
+                        $file = Input::file('image');            
+                        $name = str_random(20). '-' .$file->getClientOriginalName();  
+                        $bimtes_data->pamflet = date("Y")."/".date("m")."/".date("d")."/".$name;          
+                        $file->move(public_path().'/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    }
+
                     $bimtes_data->save();
                     $audit->save();
 
@@ -150,18 +166,26 @@ class BimtesController extends Controller
         $bimtes_data = Bimtes::find($req->id);
 
         echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">Title</label>
-                    <div class="col-lg-9">
+                    <label class="col-lg-2 control-label">Title</label>
+                    <div class="col-lg-10">
                         '.$bimtes_data->title.'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
         echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">Content</label>
-                    <div class="col-lg-9">
+                    <label class="col-lg-2 control-label">Content</label>
+                    <div class="col-lg-10">
                         '.$bimtes_data->content.'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
+        if ($bimtes_data->pamflet != ""){
+        echo '<div class="form-group">
+                <div class="col-lg-2">Pamphlet</div>
+                <div class="col-lg-10">
+                    <img src="'.asset($pathp.'/storage/bimtes/').'/'.$bimtes_data->pamflet.'" class="img-responsive" >
+                </div>
+            </div>';
+        }
     }
 }

@@ -152,7 +152,7 @@ article.post-large-custom .post-audio-custom {
 								@foreach($slider as $key => $value)
 								<div>
 									<div class="img-thumbnail">
-										<img style="height: 400px;width: 1280px" class="img-responsive" src="{{ asset($pathp.'storage/slider/'.$value->image) }}" alt="">
+										<img style="height: 400px;width: 1280px" class="img-responsive" src="{{ asset($pathp.'storage/slider/'.$value->image) }}" alt="slider">
 									</div>
 								</div>
 								@endforeach
@@ -327,6 +327,20 @@ article.post-large-custom .post-audio-custom {
 			</div>
 
 			@include('frontend.right_bar')
+			@foreach($bimtes as $key => $value)
+				@if(!empty($value->pamflet))
+					<div class="col-md-3">
+						<aside class="sidebar">
+							<div class="box effect1">
+								<a href="{{ asset($pathp.'storage/bimtes/'.$value->pamflet) }}">
+									<img class="img-responsive" src="{{ asset($pathp.'storage/bimtes/'.$value->pamflet) }}" alt="pamflet">
+								</a>
+							</div>
+							<hr>
+						</aside>
+					</div>
+				@endif
+			@endforeach
 		</div>
 
 	</div>

@@ -91,6 +91,13 @@
                     </div>
                     <div class="clear"></div>
                 </div>
+                <div class="form-group area-insert-update">
+                    <label class="col-md-2 control-label">Pamphlet <b class="text-danger">*</b></label>
+                    <div class="col-md-9">
+                        {!! form_input_file_img('file','image') !!}
+                        <p class="has-error text-danger error-image"></p>
+                    </div>
+                </div>
                 <div class="form-group area-delete">                    
                     <div class="col-md-12">
                          <center>Are You Sure for Delete This Data ?</center>
