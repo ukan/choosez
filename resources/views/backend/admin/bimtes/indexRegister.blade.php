@@ -16,6 +16,10 @@
         .center-align {
             text-align: center;
         }
+        a.disabled {
+           /*pointer-events: none;*/
+           cursor: default;
+        }
     </style>
 @endsection
 
@@ -29,20 +33,22 @@
         <div class="panel-body">
             @include('flash::message')
             <br><br>
-            <table id="trustees-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
-                <thead>
-                    <tr>
-                        <th class="center-align">Photo</th>
-                        <th class="center-align">Name</th>
-                        <th class="center-align">Phone</th>
-                        <!-- <th class="center-align">Email</th> -->
-                        <th class="center-align">Test Number</th>
-                        <th class="center-align">Test Date</th>
-                        <th class="center-align">Status</th>
-                        <th class="center-align" width="2%">Action</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="scrollmenu">
+                <table id="trustees-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
+                    <thead>
+                        <tr>
+                            <th class="center-align">Photo</th>
+                            <th class="center-align">Name</th>
+                            <th class="center-align">Phone</th>
+                            <!-- <th class="center-align">Email</th> -->
+                            <th class="center-align">Test Number</th>
+                            <th class="center-align">Test Date</th>
+                            <th class="center-align">Status</th>
+                            <th class="center-align" width="2%">Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -64,6 +70,36 @@
 
       </div>
     </div>
+
+    <div class="modal fade modal-getstart" id="modalFormApproval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title FormDecode-title" id="myModalLabel"><i class="fa fa-exclamation fa-fw"></i>Add</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>'change-status', 'files'=>true, 'class' => 'form-horizontal jquery-form-bimtes']) !!}
+                    <input type="hidden" name="method" id="method" value="">      
+                    <input type="hidden" name="id" value="">
+
+                    <div class="form-group area-approve">                    
+                        <div class="col-md-12">
+                             <center class="confirmation-message">Are You Sure Want To Approve ?</center>
+                        </div>
+                    </div>
+
+                    <div class="form-group area-approve">
+                        <center>
+                            <button type="submit" class="btn btn-success btn-submit btn-success">Approve</button>
+                            <button class="btn btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @section('scripts')
@@ -101,6 +137,81 @@
                 }
             });
         }
+
+        /*start set update */
+        function show_form_proccess_approve(id){            
+            
+            $.ajax({
+                type: "POST",
+                url: "{{ route('get-data-approval')}}",
+                data: {
+                    'id': id
+                },
+                dataType: 'json',
+                success: function(response)
+                {
+                    $("[name='id']").val(response.id);
+                }
+            });
+            
+            $('.has-error').html('');
+            $('.head-has-error').removeClass('text-danger');
+            $('.area-approve').show();
+            $('.area-deny').hide();
+            $('.FormDecode-title').html('Approve');
+            $("[name='method']").val('Approved');
+            $('#modalFormApproval').modal({backdrop: 'static', keyboard: false});
+            $('#modalFormApproval').modal('show');
+        }
+        /*end set update */
+
+        $('.jquery-form-bimtes').ajaxForm({
+            dataType : 'json',
+            success: function(response) {
+
+                if(response.status == 'success'){
+                    var title_not = 'Notification';
+                    var type_not = 'success';
+                }else{
+                    var title_not = 'Notification';
+                    var type_not = 'failed';
+                }
+                var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                new PNotify({
+                    title: response.status,
+                    text: response.notification,
+                    type: type_not,
+                    addclass: "stack-custom",
+                    stack: myStack
+                });
+                table.ajax.reload();    
+                $('#modalFormApproval').modal('hide'); 
+                $('#getBimtesModal').modal('hide'); 
+            },
+            beforeSend: function() {
+              $('.has-error').html('');
+            },
+            error: function(response){
+              if (response.status === 422) {
+                  var data = response.responseJSON;
+                  $.each(data,function(key,val){
+                      $('.error-'+key).html(val);
+                  });
+                var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                    new PNotify({
+                        title: "Failed",
+                        text: "Validate Error, Check Your Data Again",
+                        type: 'danger',
+                        addclass: "stack-custom",
+                        stack: myStack
+                    });
+                $("#modalFormBimtes").scrollTop(0);
+              } else {
+                  $('.error').createClass('alert alert-danger').html(response.responseJSON.message);
+              }
+            }
+        }); 
+
     </script>
     @include('backend.delete-modal-datatables')
 @endsection

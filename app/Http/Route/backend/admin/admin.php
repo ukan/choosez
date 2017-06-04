@@ -170,7 +170,8 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         
         Route::get('/bimtes-register/', array('as' => 'admin-index-bimtes-register', 'uses' => 'BimtesRegisterController@index'));
         Route::post('/bimtes-register/show', array('as' => 'admin-bimtes-register-show-user', 'uses' => 'BimtesRegisterController@showBimtes'));
-        // Route::delete('bimtes/{id}/delete', 'BimtesRegisterController@delete');
+        Route::post('/get-data-approval', array('as' => 'get-data-approval', 'uses' => 'BimtesRegisterController@get_data_approval'));
+        Route::post('change-status', array('as' => 'change-status', 'uses' => 'BimtesRegisterController@change_status'));
     });
 
     Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {

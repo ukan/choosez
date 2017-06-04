@@ -93,6 +93,18 @@
             border: 1px solid #0099E6;
             color:#fff;
         }
+        div.scrollmenu {
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+        div.scrollmenu a {
+            display: inline-block;
+            text-align: center;
+        }
+
+        div.scrollmenu a:hover {
+        }
         </style>
     </head>
 

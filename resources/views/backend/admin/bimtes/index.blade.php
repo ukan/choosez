@@ -19,6 +19,23 @@
         .hidden{
             display: none;
         }
+        div.scrollmenu {
+            background-color: #333;
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+        div.scrollmenu a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+
+        div.scrollmenu a:hover {
+            background-color: #777;
+        }
     </style>
 
     <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
@@ -33,15 +50,17 @@
         </div>
         <div class="panel-body">
             @include('flash::message')
-            <table id="bimtes-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
-                <thead>
-                    <tr>
-                        <th width="30%" class="center-align">Title</th>
-                        <th class="center-align">Content</th>
-                        <th width="15%">Action</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="scrollmenu">
+                <table id="bimtes-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
+                    <thead>
+                        <tr>
+                            <th width="30%" class="center-align">Title</th>
+                            <th class="center-align">Content</th>
+                            <th width="15%">Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
     <div id="getBimtesModal" class="modal fade" role="dialog">

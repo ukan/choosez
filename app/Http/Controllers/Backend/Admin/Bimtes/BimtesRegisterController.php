@@ -139,6 +139,48 @@ class BimtesRegisterController extends BaseController
                 </div>
             </div>';
         }
+        $button_action = '';
+        if($bimtes_reg->status == "Not Yet Checked"){
+            $button_action .= '
+                <a href="javascript:show_form_proccess_approve('.$req->id.')" class="btn btn-success btn-xs mlr5" title="Approve"><i class="fa fa-check fa-fw"></i>Approve</a>    
+            ';
+        }else{
+            $button_action .= '
+                <a href="#" class="btn btn-success btn-xs mlr5 disabled" title="Approve"><i class="fa fa-check fa-fw"></i>Approve</a>               
+            ';
+        }
+
+        echo '<div class="form-group">
+                <div class="col-md-3"><strong></strong></div>
+                <div class="col-md-9">
+                    '.$button_action.'
+                </div>
+            </div>';
+    }
+
+    public function get_data_approval(Request $req){        
+        $response = array();
+
+        $response['id'] = $req->id;
+
+        $response['status'] = 'success';
+        echo json_encode($response);   
+    }
+
+    public function change_status(Request $request)
+    {
+        $response = array();
+
+        $status = $request->method;
+
+        $u_experience = BimtesRegister::find($request->id);
+        $u_experience->status = $status;
+        $u_experience->save();
+
+        $response['notification'] = 'Approval Successfully';
+        $response['status'] = 'success';
+
+        echo json_encode($response);
     }
 
     /**
