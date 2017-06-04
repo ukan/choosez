@@ -189,9 +189,15 @@
                                 <!-- <li class="display-none">
                                     <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
                                 </li> -->
-                                <li>
-                                    <a role="menuitem" tabindex="-1" href="{!! route($route_logout) !!}"><i class="fa fa-power-off"></i> Logout</a>
-                                </li>
+                                @if(sentinel_check_role_admin())
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="{!! route($route_logout) !!}"><i class="fa fa-power-off"></i> Logout</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a role="menuitem" tabindex="-1" href="{!! route($route_logout) !!}"><i class="fa fa-power-off"></i> Logout</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

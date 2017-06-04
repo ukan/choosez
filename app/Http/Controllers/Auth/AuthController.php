@@ -165,7 +165,7 @@ class AuthController extends Controller
 
     public function getLogout()
     {
-        $route = 'member-login';      
+        $route = 'admin-login';      
         
         $idLog = DB::table('auth_logs')
                  ->where('user_id','=',user_info('id'))
