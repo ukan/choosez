@@ -432,7 +432,7 @@ class HomeController extends Controller
         $param = $request->all();
 
         $rules = array(
-            'image'   => 'required|image',
+            // 'image'   => 'required|image',
             'nama'   => 'required',
             'tempat_lahir'   => 'required',
             'tanggal_lahir'   => 'required',
@@ -442,10 +442,10 @@ class HomeController extends Controller
             'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
             'no_kontak'   => 'required|numeric',
             'email'   => 'required|email|unique:bimtes_register',
-            'no_tes'   => 'required',
-            'tanggal_tes'   => 'required',
+            // 'no_tes'   => 'required',
+            // 'tanggal_tes'   => 'required',
             'pilihan_jurusan'   => 'required',
-            'bukti_pembayaran'   => 'required|image',
+            // 'bukti_pembayaran'   => 'required|image',
         );
         $validate = Validator::make($param,$rules);
         if($validate->fails()) {
@@ -494,7 +494,33 @@ class HomeController extends Controller
                     $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                 }
 
+                $password = "";
+                for ($i = 0; $i<8; $i++) 
+                {
+                    $password .= mt_rand(0,9);
+                }
+
+                $data->password = Hash::make($password);
                 $data->save();
+
+                $active = new Activation;
+                $active->user_id = $data->id;
+                $active->code = bin2hex(random_bytes(16));
+                $active->completed = true;
+                $active->completed_at = date('Y-m-d H:i:s');
+                $active->save();
+
+                Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
+
+                /*$find_data['password'] = $password;
+                $find_data['email'] = $request->email;
+                $find_data['first_name'] = $request->nama_panggilan;
+                $find_data['image'] = $data->image;
+                
+                Mail::send('email.new_user', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
+                        });*/
 
                 $user = User::select('email','first_name')
                             ->where('roles.slug', 'admin-bimtes')

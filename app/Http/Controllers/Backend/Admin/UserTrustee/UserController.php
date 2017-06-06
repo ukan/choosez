@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend\Admin\UserTrustee;
 use Sentinel;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Activation;
 use App\Models\SocialMedia;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Http\Requests\Backend\UserTrustee\UserRequest as Request;
 use Mail;
+use Hash;
 
 class UserController extends BaseController
 {
@@ -203,7 +205,29 @@ class UserController extends BaseController
 
                 $user = Sentinel::update($user, $data);
             } else {
-                $user = Sentinel::registerAndActivate($data);
+                $user = new User();
+
+                $user->username = $request->username;
+                $user->first_name = $request->first_name;
+                $user->last_name = $request->last_name;
+                $user->email = $request->email;
+                $user->password = Hash::make('12345678');
+                $user->phone = $request->phone;
+                $user->address = $request->address;
+                $user->is_admin = true;
+
+                if(!$user->save()) {
+                    dd("gagal");
+                    throw new HttpException(500);
+                }
+
+                $active = new Activation;
+                $active->user_id = $user->id;
+                $active->code = bin2hex(random_bytes(16));
+                $active->completed = true;
+                $active->completed_at = date('Y-m-d H:i:s');
+                $active->save();
+
                 $roleSlug = strtolower(Role::find($request->input('role'))->slug);
                 $data['full_name'] = $data['first_name'].' '.$data['last_name'];
                 $data['role_slug'] = $roleSlug;

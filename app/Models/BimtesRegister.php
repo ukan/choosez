@@ -14,6 +14,7 @@ class BimtesRegister extends Model
         'place_of_birth', 
         'date_of_birth', 
         'address',
+        'password',
         'phone',
         'email',
         'status',
