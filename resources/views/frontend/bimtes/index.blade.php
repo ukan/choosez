@@ -190,7 +190,7 @@ article.post-large-custom .post-audio-custom {
 							        	{!! Form::open(['route'=>'post-register-bimtes', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
 							            	<input type="hidden" name="method" id="method" value="add">
 							            	<div class="form-group area-insert-update">
-							                    <label class="col-md-3 control-label">Photo<b class="text-danger">*</b></label>
+							                    <label class="col-md-3 control-label">Photo</label>
 							                    <div class="col-md-9">
 							                        {!! form_input_file_image('file','image','','200px','200px') !!}
 							                        <p class="has-error text-danger error-image"></p>
@@ -268,7 +268,7 @@ article.post-large-custom .post-audio-custom {
 								            </div>
 
 								            <div class="form-group {{ $errors->has('no_tes') ? ' has-error' : '' }}">
-								                <label class="col-md-3 control-label">No. Tes <b class="text-danger">*</b></label>
+								                <label class="col-md-3 control-label">No. Tes </label>
 								                <div class="col-md-4">
 								                    {!! Form::text('no_tes', '', ['class' => 'form-control', 'placeholder' => 'No. Tes']) !!}
 								                    <p class="has-error text-danger error-no_tes"></p>
@@ -276,7 +276,7 @@ article.post-large-custom .post-audio-custom {
 								            </div>
 
 								            <div class="form-group {{ $errors->has('tanggal_tes') ? ' has-error' : '' }}">
-								                <label class="col-md-3 control-label">Tanggal Tes <b class="text-danger">*</b></label>
+								                <label class="col-md-3 control-label">Tanggal Tes </label>
 								                <div class="col-md-4">
 								                    <input type="text" id="tanggal_tes" name="tanggal_tes" class="form-control" placeholder="Tanggal Tes">
 								                    <p class="has-error text-danger error-tanggal_tes"></p>
