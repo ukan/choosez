@@ -512,15 +512,14 @@ class HomeController extends Controller
 
                 Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
 
-                /*$find_data['password'] = $password;
-                $find_data['email'] = $request->email;
-                $find_data['first_name'] = $request->nama_panggilan;
-                $find_data['image'] = $data->image;
+                $find_data_bimtes['password'] = $password;
+                $find_data_bimtes['email'] = $request->email;
+                $find_data_bimtes['full_name'] = $request->nama;
                 
-                Mail::send('email.new_user', $find_data, function($message) use($find_data) {
+                Mail::send('email.email_temp', $find_data_bimtes, function($message) use($find_data_bimtes) {
                             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
-                            $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
-                        });*/
+                            $message->to('ukan.job@gmail.com', 'Ganteng Bimtes')->subject('New Account');
+                        });
 
                 $user = User::select('email','first_name')
                             ->where('roles.slug', 'admin-bimtes')
