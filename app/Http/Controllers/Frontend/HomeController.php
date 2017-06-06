@@ -445,7 +445,7 @@ class HomeController extends Controller
             // 'no_tes'   => 'required',
             // 'tanggal_tes'   => 'required',
             'pilihan_jurusan'   => 'required',
-            // 'bukti_pembayaran'   => 'required|image',
+            'bukti_pembayaran'   => 'required|image',
         );
         $validate = Validator::make($param,$rules);
         if($validate->fails()) {
