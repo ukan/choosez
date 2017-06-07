@@ -114,12 +114,16 @@ class BimtesRegisterController extends BaseController
                     </div>
                     <div class="clear"></div>
                 </div>';
-                $date2 = explode('-', $bimtes_reg->test_day);
-                $date2 = $date2[1].'-'.$date2[0].'-'.$date2[2];
+                if(!empty($bimtes_reg->test_day)){
+                    $date2 = explode('-', $bimtes_reg->test_day);
+                    $date2 = eform_date($date2[1].'-'.$date2[0].'-'.$date2[2]);
+                }else{
+                    $date2 = "";
+                }
         echo '<div class="form-group">
                     <label class="col-md-3 control-label"><strong>Test Date</strong></label>
                     <div class="col-md-9">
-                        <strong>:</strong> '.eform_date($date2).'
+                        <strong>:</strong> '.$date2.'
                     </div>
                     <div class="clear"></div>
                 </div>';
