@@ -131,7 +131,7 @@ class BimtesRegisterController extends BaseController
                     <label class="col-md-3 control-label"><strong>Major</strong></label>
                     <div class="col-md-4">
                         <strong>:</strong> 1. '.$bimtes_reg->major1.'
-                        <br><strong>&nbsp;&nbsp;</strong> 2. '.$bimtes_reg->major1.'
+                        <br><strong>&nbsp;&nbsp;</strong> 2. '.$bimtes_reg->major2.'
                     </div>
                     <div class="clear"></div>
                 </div>';
