@@ -193,7 +193,6 @@ class HomeController extends Controller
         $route_dashboard_type = "dashboard-member-bimtes";
         
         $backToLogin = redirect()->route($route_login_type)->withInput();
-        // $findUser = Sentinel::findByCredentials(['login' => $request->input('email')]);
         $findUser = BimtesRegister::where('email',$request->input('email'))->get()->first();
         // If we can not find user based on email...
         if (! $findUser) {
@@ -222,12 +221,6 @@ class HomeController extends Controller
 
             $roleId = RoleUser::where('user_id',$getBim->id)->get()->first()->role_id;
             $role = Role::find($roleId)->slug;
-
-            if (strtolower($role) != 'member' and $request->input('type') == "member") {
-                flash()->error('You Have No Access!');
-                Sentinel::logout();
-                return $backToLogin;
-            }
 
             if ($request->input('remember_me') == TRUE) {
                 Session::put('field_email',$request->input('email'));
