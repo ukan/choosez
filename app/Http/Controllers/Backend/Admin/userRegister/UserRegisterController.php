@@ -21,7 +21,7 @@ class UserRegisterController extends BaseController
     public function __construct(User $model)
     {
         parent::__construct($model);
-        $this->middleware('SentinelHasAccess:user-management');
+        $this->middleware('SentinelHasAccess:student-management');
     }
 
     /**
