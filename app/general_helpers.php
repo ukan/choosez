@@ -1,5 +1,6 @@
 <?php
 use App\Models\User;
+use App\Models\BimtesRegister;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
 use Carbon\Carbon;

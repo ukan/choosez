@@ -8,6 +8,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
     Route::post('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@postLogin'));
+    Route::get('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@sign_in_bimtes'));
+    Route::post('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@postLoginBimtes'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
 
@@ -27,6 +29,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/contact/contact-us', array('as' => 'contact-us', 'uses' => 'HomeController@post_contact'));
     Route::post('/register/post-register-data', array('as' => 'post-register-data', 'uses' => 'HomeController@post_register_data'));
     Route::post('/bimtes/post-register-bimtes', array('as' => 'post-register-bimtes', 'uses' => 'HomeController@post_register_bimtes'));
+    
+    Route::post('/bimtes/df8d4njfdnjuYxnJrS3aLv0JbJFLnnmW4TRRpF6zpaIwL8TvQqPYB0JD6LUhPYu0U=/edit-register-bimtes', array('as' => 'edit-register-bimtes', 'uses' => 'HomeController@post_register_bimtes_edit'));
 
     Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
 
@@ -74,6 +78,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['prefix' => 'facilities'], function () {
         Route::get('/', array('as' => 'get-page-facilities', 'uses' => 'BimtesController@indexFacilities'));
     });
+
+    Route::get('/bimtes/df8d4njfdnj{id?}', array('as' => 'dashboard-member-bimtes', 'uses' => 'HomeController@indexBimtes'));
+    Route::get('/bimtes/logout', array('as' => 'member-bimtes-logout', 'uses' => 'HomeController@getLogout'));
 
     Route::group(['middleware' => 'MemberAccess', 'namespace' => 'Member'], function () {
         Route::any('/dashboard/{filter}', array('as' => 'admin-dashboard-filter-member', 'uses' => 'DashboardController@index'));
