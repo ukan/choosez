@@ -139,7 +139,7 @@ class BimtesRegisterController extends BaseController
         echo '<div class="form-group">
                 <div class="col-md-3"><strong>Photo</strong></div>
                 <div class="col-md-9">
-                    <strong>:</strong> <img src="'.asset($pathp.'storage/bimtes/bukti/').'/'.$bimtes_reg->image_confirm.'" class="img-responsive" >
+                    <strong>:</strong><a href="'.asset($pathp.'storage/bimtes/bukti/').'/'.$bimtes_reg->image_confirm.'"> <img src="'.asset($pathp.'storage/bimtes/bukti/').'/'.$bimtes_reg->image_confirm.'" class="img-responsive" ></a>
                 </div>
             </div>';
         }
