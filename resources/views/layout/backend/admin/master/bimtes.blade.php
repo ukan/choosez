@@ -148,11 +148,24 @@
                         <a href="#" data-toggle="dropdown">
 
                             <figure class="profile-picture">
-                                <img src="{{ asset($pathp.'storage/bimtes/photo/'.$data['photo']) }}" style="width: 35px; height: 35px"alt="{{ $data['name'] }}" class="img-circle" data-lock-picture="{{ user_info('avatar_path') }}" />
+                                @if(!empty($data))
+                                    @if(!empty($data['photo']))
+                                        <img src="{{ asset($pathp.'storage/bimtes/photo/'.$data['photo']) }}" style="width: 35px; height: 35px"alt="Ava" class="img-circle" data-lock-picture="XX" />
+                                    @else
+                                        <img src="{{ asset($pathp.'assets/avatar.png') }}" style="width: 35px; height: 35px"alt="Ava" class="img-circle" data-lock-picture="XX" />
+                                    @endif
+                                @else
+                                    <img src="{{ asset($pathp.'assets/avatar.png') }}" style="width: 35px; height: 35px"alt="Ava" class="img-circle" data-lock-picture="XX" />
+                                @endif
                             </figure>
-                            <div class="profile-info" data-lock-name="{{ user_info('full_name') }}" data-lock-email="{{ user_info('email') }}">
-                                <span class="name"> {{ $data['name'] }}</span>
-                                    <span class="role"> Member </span>
+                            <div class="profile-info" data-lock-name="Ganteng" data-lock-email="ganteng@ganteng.com">
+                                @if(!empty($data))
+                                    <span class="name"> {{ $data['name'] }}</span>
+                                    <span class="role"> Member Bimtes</span>
+                                @else
+                                    <span class="name"> Anonymous </span>
+                                    <span class="role"></span>
+                                @endif
                             </div>
 
                             <i class="fa custom-caret"></i>

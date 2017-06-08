@@ -30,7 +30,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/register/post-register-data', array('as' => 'post-register-data', 'uses' => 'HomeController@post_register_data'));
     Route::post('/bimtes/post-register-bimtes', array('as' => 'post-register-bimtes', 'uses' => 'HomeController@post_register_bimtes'));
     
-    Route::post('/bimtes/df8d4njfdnjuYxnJrS3aLv0JbJFLnnmW4TRRpF6zpaIwL8TvQqPYB0JD6LUhPYu0U=/edit-register-bimtes', array('as' => 'edit-register-bimtes', 'uses' => 'HomeController@post_register_bimtes_edit'));
+    Route::post('/bimtes/df8d4njfdnjczFBhfnLXsNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=/edit-register-bimtes', array('as' => 'edit-register-bimtes', 'uses' => 'HomeController@post_register_bimtes_edit'));
 
     Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
 

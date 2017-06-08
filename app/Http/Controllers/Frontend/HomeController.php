@@ -42,9 +42,11 @@ class HomeController extends Controller
         $cryptKey   = 'qJB0rGtIn5UB1xG03efyCp';
         $decrypted  = rtrim( mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),base64_decode($beforeDecrypt),
                 MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");
-
+        if (!is_numeric($decrypted)) {
+            $bimtes_data = null;
+            return view('backend.unautor')->with('data', $bimtes_data);
+        }
         $bimtes_data = BimtesRegister::find($decrypted);
-        
         return view('frontend.member.dashboard.homepage')->with('data', $bimtes_data);
     }
 
@@ -218,9 +220,6 @@ class HomeController extends Controller
                 flash()->error('Password is incorrect!');
                 return $backToLogin;
             }
-
-            $roleId = RoleUser::where('user_id',$getBim->id)->get()->first()->role_id;
-            $role = Role::find($roleId)->slug;
 
             if ($request->input('remember_me') == TRUE) {
                 Session::put('field_email',$request->input('email'));
@@ -617,8 +616,6 @@ class HomeController extends Controller
                 $active->completed = true;
                 $active->completed_at = date('Y-m-d H:i:s');
                 $active->save();
-
-                Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
 
                 $find_data_bimtes['password'] = $password;
                 $find_data_bimtes['email'] = $request->email;

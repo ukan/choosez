@@ -38,7 +38,16 @@
     	<div class="form-group area-insert-update">
             <label class="col-md-3 control-label">Photo</label>
             <div class="col-md-9">
-                {!! form_input_file_image('file','image',asset($pathp.'storage/bimtes/photo/'.$data["photo"]),'200px','200px') !!}
+                <?php
+                    $url = "";
+                    if(!empty($data["photo"])){
+                        $url = asset($pathp.'storage/bimtes/photo/'.$data["photo"]);
+                    }
+                    else{
+                        $url = asset($pathp.'assets/avatar.png');
+                    }
+                ?>
+                {!! form_input_file_image('file','image',$url,'200px','200px') !!}
                 <p class="has-error text-danger error-image"></p>
             </div>
         </div>
