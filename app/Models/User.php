@@ -125,6 +125,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'users.image',
             'users.hostel',
             'users.room',
+            'users.updated_at',
             'users.phone'
         )
         ->join('role_users', 'role_users.user_id', '=', 'users.id')

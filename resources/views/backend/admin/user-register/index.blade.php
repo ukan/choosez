@@ -32,6 +32,7 @@
             <table id="trustees-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
                 <thead>
                     <tr>
+                        <th class="center-align"></th>
                         <th class="center-align">Photo</th>
                         <th class="center-align">Email</th>
                         <th class="center-align">Full Name</th>
@@ -57,7 +58,9 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{!! route('datatables-user-register') !!}",
+                order: [[ 0, 'desc' ]],
                 columns: [
+                    {data: 'updated_at', name: 'updated_at', visible:false},
                     {data: 'image', name: 'image'},
                     {data: 'email', name: 'email'},
                     {data: 'username', name: 'username'},
