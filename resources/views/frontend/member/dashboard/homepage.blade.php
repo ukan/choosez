@@ -152,6 +152,13 @@
                 <p class="has-error text-danger error-pilihan_jurusan2"></p>
             </div>
         </div>
+        <div class="form-group {{ $errors->has('pilihan_jurusan3') ? ' has-error' : '' }}">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-4">
+                {!! Form::text('pilihan_jurusan3', $data["major3"], ['class' => 'form-control', 'placeholder' => 'Jurusan 3']) !!}
+                <p class="has-error text-danger error-pilihan_jurusan3"></p>
+            </div>
+        </div>
 
         <div class="form-group area-insert-update">
             <label class="col-md-3 control-label">Bukti Pembayaran <b class="text-danger">*</b></label>

@@ -691,6 +691,9 @@ class HomeController extends Controller
         if(!empty($request->pilihan_jurusan2)){
             $data->major2 = $request->pilihan_jurusan2;
         }
+        if(!empty($request->pilihan_jurusan3)){
+            $data->major3 = $request->pilihan_jurusan3;
+        }
 
         if($request->hasFile('image')) {
             if($request->action == 'update'){
