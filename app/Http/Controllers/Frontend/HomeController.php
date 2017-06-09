@@ -569,6 +569,7 @@ class HomeController extends Controller
                 $data->test_day = $request->tanggal_tes;
                 $data->major1 = $request->pilihan_jurusan;
                 $data->major2 = $request->pilihan_jurusan2;
+                $data->major3 = $request->pilihan_jurusan3;
 
                 if($request->hasFile('image')) {
                     if($request->action == 'update'){
