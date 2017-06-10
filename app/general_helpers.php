@@ -377,6 +377,28 @@ if (! function_exists('link_to_avatar')) {
     }
 }
 
+if (! function_exists('link_to_photo')) {
+    /**
+     * Generates link to avatar.
+     *
+     * @param  null|string $path
+     * @return string
+     */
+    function link_to_photo($path = null)
+    {
+        if (is_null($path) || $path == '' || ! file_exists(avatar_path($path))) {
+            // return 'http://lorempixel.com/128/128/';
+            $pathp = "";
+
+            ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
+            return asset($pathp.'assets/general/images/default/avatar.png');
+        }else{
+            return asset('storage/student').'/'.trim($path, '/');
+        }
+
+    }
+}
+
 if (! function_exists('avatar_path')) {
     /**
      * Generates avatars path.

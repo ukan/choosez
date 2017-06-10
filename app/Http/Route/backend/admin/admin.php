@@ -35,6 +35,14 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
 
     });
 
+    Route::group(['prefix' => 'manual','namespace' => 'ManualEdit'], function () {
+
+        // User Trustee Management...
+        Route::resource('user-edit', 'ManualController', ['except' => 'show']);
+        Route::post('user-edit/{id}/update', array('as' => 'admin-update-user-manual', 'uses' => 'ManualController@update'));
+
+    });
+
     Route::group(['prefix' => 'master'], function () {
 
         //route Country

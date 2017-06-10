@@ -9,6 +9,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         Route::get('user-trustees', array('as' => 'datatables-user-trustees', 'uses' =>'UserTrustee\UserController@datatables'));
 
         Route::get('user-register', array('as' => 'datatables-user-register', 'uses' =>'userRegister\UserRegisterController@datatables'));
+        Route::get('manual-user-register', array('as' => 'datatables-manual-user-register', 'uses' =>'ManualEdit\ManualController@datatables'));
         Route::get('bimtes', array('as' => 'datatables-bimtes-register', 'uses' =>'Bimtes\BimtesRegisterController@datatables'));
         
         Route::get('menu', 'UserTrustee\MenuController@datatables');
