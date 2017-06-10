@@ -209,7 +209,6 @@ class UserController extends BaseController
 
                 $user->username = $request->username;
                 $user->first_name = $request->first_name;
-                $user->last_name = $request->last_name;
                 $user->email = $request->email;
                 $user->password = Hash::make('12345678');
                 $user->phone = $request->phone;
@@ -217,7 +216,6 @@ class UserController extends BaseController
                 $user->is_admin = true;
 
                 if(!$user->save()) {
-                    dd("gagal");
                     throw new HttpException(500);
                 }
 
