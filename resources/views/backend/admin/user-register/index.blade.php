@@ -38,7 +38,7 @@
                         <th class="center-align">Full Name</th>
                         <th class="center-align">Nick Name</th>
                         <th class="center-align">Phone</th>
-                        <th class="center-align">Hostel</th>
+                        <th class="center-align">Dormitory</th>
                         <th class="center-align">Room</th>
                         <!-- <th width="12%">&nbsp;</th> -->
                     </tr>
