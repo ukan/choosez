@@ -452,7 +452,7 @@ class HomeController extends Controller
                 $data->province = ucwords(strtolower($province));
                 $data->postal_code = $request->kode_pos;
                 $data->phone = $request->telepon;
-                $data->email = $request->email;
+                $data->email = strtolower($request->email);
                 $data->sd = $request->sd;
                 $data->sd_th = $request->tahun_lulus_sd;
                 $data->sltp = $request->smp;
