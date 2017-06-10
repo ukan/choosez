@@ -511,7 +511,7 @@ class HomeController extends Controller
                 Sentinel::findRoleBySlug('member')->users()->attach(Sentinel::findById($data->id));
 
                 $find_data['password'] = $password;
-                $find_data['email'] = $request->email;
+                $find_data['email'] = strtolower($request->email);
                 $find_data['first_name'] = $request->nama_panggilan;
                 $find_data['image'] = $data->image;
                 
