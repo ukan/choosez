@@ -125,7 +125,7 @@ class HomeController extends Controller
         $route_dashboard_type = "admin-dashboard-member";
         
         $backToLogin = redirect()->route($route_login_type)->withInput();
-        $findUser = Sentinel::findByCredentials(['login' => strtolower($request->input('email'))]);
+        $findUser = Sentinel::findByCredentials(['login' => $request->input('email')]);
 
         // If we can not find user based on email...
         if (! $findUser) {
@@ -195,7 +195,7 @@ class HomeController extends Controller
         $route_dashboard_type = "dashboard-member-bimtes";
         
         $backToLogin = redirect()->route($route_login_type)->withInput();
-        $findUser = BimtesRegister::where('email',$request->input('email'))->get()->first();
+        $findUser = BimtesRegister::where('email',strtolower($request->input('email')))->get()->first();
         // If we can not find user based on email...
         if (! $findUser) {
             flash()->error('Wrong email!');
