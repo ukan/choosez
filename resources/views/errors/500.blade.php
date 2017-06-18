@@ -23,15 +23,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="agile">
 			<div class="agileits_main_grid">
 				<div class="agileits_main_grid_left">
-					<h1>404</h1>
+					<h1>500</h1>
 				</div>
 				<div class="clear"> </div>
 			</div>
 			<div class="w3l">
 				<div class="text">
-					<h1>PAGE NOT FOUND</h1>	
-					
-					<p>You have been tricked into click on a link that can not be found. Please check the url or go to <a href="/">main page</a> and see if you can locate what you are looking for</p>
+					<h1>INTERNAL SERVER ERROR</h1>	
 				</div>
 				<div class="image">
 					<img class="img-responsive image-resolution" alt="menu icon" src="{{ asset($pathp.'assets/general/images/default/smile.png') }}">
