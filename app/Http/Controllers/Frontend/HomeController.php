@@ -13,6 +13,7 @@ use App\Models\BimtesRegister;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
 use App\Models\AuthLog;
+use App\Models\AuthLogBimtes;
 use App\Models\Activation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
