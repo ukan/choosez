@@ -235,8 +235,8 @@ class HomeController extends Controller
             }
             $ipAddress = $ip;
 
-            $logs = new AuthLog;
-            $logs->user_id = $getBim->id;
+            $logs = new AuthLogBimtes;
+            $logs->bimtes_register_id = $getBim->id;
             $logs->ip_address = $ipAddress;
             $logs->login = date('Y-m-d H:i:s');
             $logs->save();
