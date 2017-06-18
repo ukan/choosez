@@ -1,6 +1,6 @@
 @extends('layout.frontend.general.layout')
 
-@section('title', 'Teacher')
+@section('title', 'Material')
 
 @section('css')
 <style type="text/css">

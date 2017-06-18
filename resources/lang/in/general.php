@@ -10,6 +10,7 @@ return [
 		'popular_post' => 'Populer',
 		'recent_post' => 'Terbaru',
 		'contact_us' => 'Kontak Kami',
+		'get_more_photo' => 'Dapatkan lebih banyak foto',
 	],
 	'menu' => [
 		'home' => 'Beranda',

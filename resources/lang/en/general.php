@@ -10,6 +10,7 @@ return [
 		'popular_post' => 'Popular',
 		'recent_post' => 'Recent',
 		'contact_us' => 'Contact Us',
+		'get_more_photo' => 'Get more photo',
 
 	],
 	'menu' => [

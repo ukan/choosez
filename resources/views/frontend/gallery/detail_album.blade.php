@@ -1,6 +1,6 @@
 @extends('layout.frontend.general.layout')
 
-@section('title', 'History')
+@section('title', 'Gallery')
 
 @section('css')
 <style type="text/css">
@@ -83,7 +83,7 @@ label.line{
 	<div class="container back-content">
 		<div class="row">
 			<div id="" >
-				<h4><a target="_blank" href="{{$link}}">Get more photo</a></h4>
+				<h4><a target="_blank" href="{{$link}}">@lang('general.title.get_more_photo')</a></h4>
 			</div>
 		</div>
 	</div>
