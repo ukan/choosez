@@ -29,7 +29,7 @@
 		<div class="tab-content">
 			<a class="btn btn-warning pull-right" data-toggle="modal" data-target="#editProfile">Edit Profile</a>
 			<br>
-			    <img src="{{ user_info('avatar_path') }}" style="display: block; margin: auto;  width: 150px; height: 150px"alt="{{ user_info('full_name') }}" class="img-circle" data-lock-picture="{{ user_info('avatar_path') }}" />
+			    <img src="{{ user_info('avatar_path') }}" style="display: block; margin: auto;  width: 150px; height: 150px" alt="{{ user_info('full_name') }}" class="img-circle" data-lock-picture="{{ user_info('avatar_path') }}" />
 			<div class="clearfix">&nbsp;</div>
 			<div class="table-responsive custom-tabinfo">
 				<table class="table table-striped">
@@ -134,7 +134,7 @@
 							<td>Semester</td>
 							<td>{{ user_info('semester') }}</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>Nama Ayah</td>
 							<td>{{ user_info('father_name') }}</td>
 						</tr>
@@ -165,13 +165,15 @@
 						<tr>
 							<td>Pekerjaan</td>
 							<td>{{ user_info('m_current_job') }}</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 
+	@include('frontend.member.profile.edit')
+	
 @endsection
 
 @section('scripts')
@@ -197,11 +199,22 @@
   $('[name=funnels_name]').on('keyup',function(){
   	$('.warning-after-save').show();
   });
-@if(user_info('gender') != '')
-	$("input[name=gender][value={{user_info('gender')}}]").attr('checked', 'checked');
+@if(user_info('gender') == 'Laki - laki')
+	$("input[name=jenis_kelamin][value='Laki - laki']").attr('checked', 'checked');
+@else
+	$("input[name=jenis_kelamin][value='Perempuan']").attr('checked', 'checked');
 @endif
+
+@if(user_info('jenjang') != '')
+	$("#jenjang").val("{{user_info('jenjang')}}");
+@endif
+	
 @if(user_info('information') != '')
-	$("input[name=information][value={{user_info('information')}}]").attr('checked', 'checked');
+	$("#province_id").val("{{user_info('information')}}");
+	ajaxdistrict("{{user_info('information')}}");
+	$("#district_id").val("{{user_info('information_dictrict')}}/{{user_info('information')}}");
+	ajaxsubdistrict("{{user_info('information_dictrict')}}/{{user_info('information')}}");
+	$("#sub_district_id").val("{{user_info('information_dictrict_sub')}}");
 @endif
 	function ajaxdistrict(id){
 	    var url= '{{ route('user-location-information-process') }}';
@@ -233,22 +246,27 @@
 
 
 	$('.jquery-form-edit-profile').ajaxForm({
+	    dataType : 'json',
 	    success: function(response) {
-	      	if(response.indexOf('success') >= 0){
-				var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
-				new PNotify({
-				    title: "Success",
-				    text: "Data Has Been Updated",
-					type: 'success',
-				    addclass: "stack-custom",
-				    stack: myStack
-				});
-				setTimeout(function(){
-				   window.location.reload(1);
-				}, 0);
-			}else{
-				$('.errorsMessage').html(response);
-			}
+	    	if(response.status == 'success'){
+                var title_not = 'Notification';
+                var type_not = 'success';
+            }else{
+                var title_not = 'Notification';
+                var type_not = 'failed';
+            }
+
+			var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+			new PNotify({
+			    title: response.status,
+			    text: response.notification,
+				type: type_not,
+			    addclass: "stack-custom",
+			    stack: myStack
+			});
+			setTimeout(function(){
+			   window.location.reload(1);
+			}, 0);
 
 	    },
 		beforeSend: function() {

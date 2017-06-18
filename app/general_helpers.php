@@ -45,6 +45,33 @@ if (! function_exists('user_info')) {
                 return 'Indonesia';
             }
 
+            if ('information' == $column) {
+                $location = LocationInformation::where('name',user_info('province'))->get()->first()->province_id;
+                return $location;
+            }
+
+            if ('information_dictrict' == $column) {
+                $location_id = LocationInformation::where('name',user_info('province'))->get()->first()->province_id;
+                $location_dic_id = LocationInformation::where('province_id',$location_id)
+                    ->where('name', strtoupper(user_info('city_or_district')))
+                    ->get()->first()->district_id;
+
+                return $location_dic_id;
+            }
+
+            if ('information_dictrict_sub' == $column) {
+                $location_id = LocationInformation::where('name',user_info('province'))->get()->first()->province_id;
+                $location_dic_id = LocationInformation::where('province_id',$location_id)
+                    ->where('name', strtoupper(user_info('city_or_district')))
+                    ->get()->first()->district_id;
+                $location_dic_id_sub = LocationInformation::where('province_id',$location_id)
+                    ->where('district_id', $location_dic_id)
+                    ->where('name', strtoupper(user_info('sub_district')))
+                    ->get()->first()->sub_district_id;
+
+                return $location_dic_id_sub;
+            }
+
             /*if ('province' == $column) {
                 $location = LocationInformation::find(user_info('location_information_id'));
                 if(!empty($location)){
@@ -688,12 +715,12 @@ function form_input_file_image($type = "", $name = "" , $url = "", $width = "", 
         $output .= '
         <div class="fileinput fileinput-new" data-provides="fileinput" style="margin-right:10px">
           <div class="fileinput-new thumbnail '.$name.'" style="'.$var_css_1.'">';
-        $output .= '<img src="'.$url.'" class="img-responsive">';
+        $output .= '<img src="'.$url.'" class="img-responsive" style="'.$var_css_1.'">';
         $output .= '</div>
           <div class="fileinput-preview fileinput-exists thumbnail" style="'.$var_css_2.'"></div>
           <div>
-            <span class="btn btn-primary btn-file"><span class="fileinput-new"><i class="fa fa-camera-retro"></i> Select</span><span class="fileinput-exists"><i class="fa fa-refresh"></i> Change</span><input type="file" name="'.$name.'" class="'.$class.'" accept="image/*"></span>
-            <a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput"><i class="fa fa-remove"></i> Remove</a>
+            <span class="btn '.$class.' btn-file"><span class="fileinput-new"><i class="fa fa-camera-retro"></i> Select</span><span class="fileinput-exists"><i class="fa fa-refresh"></i> Change</span><input type="file" name="'.$name.'" class="'.$class.'" accept="image/*"></span>
+            <a href="#" class="btn '.$class.' fileinput-exists" data-dismiss="fileinput"><i class="fa fa-remove"></i> Remove</a>
           </div>
         </div>
         ';

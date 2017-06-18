@@ -11,6 +11,8 @@ use App\Models\UserRequest;
 use App\Models\UserNotification;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+
 use Image;
 use Input;
 use Validator;
@@ -47,13 +49,15 @@ class ProfileController extends Controller
         }
         $queryProvince = LocationInformation::where('district_id','=','0')->where('sub_district_id','=','0')->where('village_id','=','0')->orderBy('name')->get();
             $form = [
-                'url' => route('member-profile-update'),
+                'url' => route('member-profile-post'),
                 'class' => 'form-horizontal jquery-form-edit-profile',
                 'autocomplete' => 'off',
                 'files' => true,
             ];
+        
         return view('frontend.member.profile.profile', compact('form'))->with('queryProvince',$queryProvince)->with('date_of_birth',$date_of_birth);
     }
+    
     public function profileEdit()
     {
             $form = [
@@ -500,23 +504,94 @@ class ProfileController extends Controller
     public function post_profile(Request $request)
     {
         $response = array();
-        $user_id = $request->user_id;
-        if($request->action == 'get-data'){
-        }else if($request->action == 'activate'){
-            $coin = Plan::find(User::getUser($user_id,'plan_id'))->price;
-            $transaction_id = CoinTransaction::where('code','extension')->where('user_id',$user_id)->orderBy('id','desc')->get()->first()->id;
-            if(CoinTransaction::genTotalCoin($user_id) > $coin){ 
-                $transaction = CoinTransaction::find($transaction_id);
-                $transaction->status = 'success';
-                $transaction->save();
-                User::ActionStatus($user_id,'active');
-                $response['notification'] = 'Activate Success';
-                $response['status'] = 'success';
-            }else{                
-                $response['notification'] = 'Coin NOT Enough';
-                $response['status'] = 'success';
+        $param = $request->all();
+
+        $rules = array(
+            'nama'   => 'required',
+            'nama_panggilan'   => 'required',
+            'tempat_lahir'   => 'required',
+            'tanggal_lahir'   => 'required',
+            'kode_pos'   => 'required|numeric',
+            // 'alamat'   => 'required',
+            'sd'   => 'required',
+            'smp'   => 'required',
+            'sma'   => 'required',
+            'universitas'   => 'required',
+            'jenjang'   => 'required|not_in:Pilih Jenjang Pendidikan',
+            'fakultas'   => 'required',
+            'jurusan'   => 'required',
+            'semester'   => 'required',
+            /*'ayah'   => 'required',
+            'umur_ayah'   => 'required|numeric',
+            'pendidikan_terakhir_ayah'   => 'required',
+            'pekerjaan_ayah'   => 'required',
+            'ibu'   => 'required',
+            'umur_ibu'   => 'required|numeric',
+            'pendidikan_terakhir_ibu'   => 'required',
+            'pekerjaan_ibu'   => 'required',*/
+            'telepon'   => 'required|numeric',
+            'tahun_lulus_sd'   => 'required|numeric',
+            'tahun_lulus_smp'   => 'required|numeric',
+            'tahun_lulus_sma'   => 'required|numeric',
+            'email'   => 'required|email',
+            'jenis_kelamin'   => 'required',
+            /*'asrama'   => 'required|not_in:Pilih Asrama',
+            'kamar'   => 'required',*/
+        );
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules);
+        } else {
+            $user_data = User::find($request->id);
+
+            if($request->email == $user_data->email){
+                $user_data->email = $user_data->email;
+            }else {
+                $check_email = User::where('email',$request->email)->get();
+                
+                if(count($check_email)>0){
+                    $json = ['email' => ['The email has already been taken.']];
+                    
+                    return new JsonResponse($json, 422);
+                }else{
+                    $user_data->email = $request->email;
+                }
             }
-        }else{
+
+            if($request->hasFile('image')) {
+                if($user_data->image != ""){
+                    $image_path = public_path().'/storage/student/'.$user_data->image;
+                    unlink($image_path);
+                }
+                createdirYmd('storage/student');
+                $file = Input::file('image');
+                $name = str_random(20). '-' .$file->getClientOriginalName();
+                $user_data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                $file->move(public_path().'/storage/student/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            }
+
+            $user_data->username = $request->nama;
+            $user_data->first_name = $request->nama_panggilan;
+            $user_data->place_of_birth = $request->tempat_lahir;
+            $user_data->date_of_birth = $request->tanggal_lahir;
+            $user_data->gender = $request->jenis_kelamin;
+            $user_data->phone = $request->telepon;
+            $user_data->postal_code = $request->kode_pos;
+            $user_data->sd = $request->sd;
+            $user_data->sd_th = $request->tahun_lulus_sd;
+            $user_data->sltp = $request->smp;
+            $user_data->sltp_th = $request->tahun_lulus_smp;
+            $user_data->slta = $request->sma;
+            $user_data->slta_th = $request->tahun_lulus_sma;
+            $user_data->university = $request->universitas;
+            $user_data->jenjang = $request->jenjang;
+            $user_data->faculty = $request->fakultas;
+            $user_data->major = $request->jurusan;
+            $user_data->semester = $request->semester;
+            $user_data->save();
+
+            $response['notification'] = 'Data has been updated';
+            $response['status'] = 'success';
         }
         echo json_encode($response);
     }
