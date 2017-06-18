@@ -82,7 +82,7 @@ label.line{
 
 	<div class="container back-content">
 		<div class="row">
-			<div id="gallery" >
+			<div id="" >
 				<h4><a target="_blank" href="{{$link}}">Get more photo</a></h4>
 			</div>
 		</div>
