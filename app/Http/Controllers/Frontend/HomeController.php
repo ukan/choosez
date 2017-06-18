@@ -122,7 +122,7 @@ class HomeController extends Controller
     {
         
         $route_login_type = "admin-login-member";
-        $route_dashboard_type = "admin-dashboard-member";
+        $route_dashboard_type = "member-profile";
         
         $backToLogin = redirect()->route($route_login_type)->withInput();
         $findUser = Sentinel::findByCredentials(['login' => strtolower($request->input('email'))]);
