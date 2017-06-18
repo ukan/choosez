@@ -142,8 +142,11 @@ class HomeController extends Controller
                 $user = User::find($user->first()->id);
             }
 
+            $request_data = [];
+            $request_data['email'] = strtolower($request->email);
+            $request_data['password'] = $request->password;
             // If password is incorrect...
-            if (! Sentinel::authenticate($request->all(), $remember)) {
+            if (! Sentinel::authenticate($request_data, $remember)) {
                 flash()->error('Password is incorrect!');
                 return $backToLogin;
             }
