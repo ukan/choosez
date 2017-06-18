@@ -100,6 +100,14 @@
                     </div>
                     <div class="clear"></div>
                 </div>
+                <div class="form-group area-insert-update">
+                    <label class="col-md-3 control-label">Link Download<b class="text-danger">*</b></label>
+                    <div class="col-lg-9">
+                        {!! Form::text('link_donwload', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
+                        <p class="has-error text-danger error-link_donwload"></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
                 <div class="form-group area-delete">
                     <div class="col-md-12">
                          <center>Are You Sure for Delete This Data ?</center>

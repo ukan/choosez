@@ -121,6 +121,7 @@ class GalleryController extends Controller
             $data = Album::find($request->id);
             $response['name'] = $data->name;
             $response['date'] = $data->date;
+            $response['link_donwload'] = $data->link_donwload;
             $response['image'] = Album::getAlbum($request->id,'image_path');
         }else if($request->action != 'delete'){
 
@@ -129,6 +130,7 @@ class GalleryController extends Controller
                 'image'   => 'image|mimes:jpeg,jpg,png',
                 'name'   => 'required',
                 'date'   => 'required',
+                'link_donwload'   => 'required',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -151,9 +153,10 @@ class GalleryController extends Controller
 
                         $data->name = $request->name;
                         $data->date = $request->date;
+                        $data->link_donwload = $request->link_donwload;
 
                         $audit->action = "New";
-                        $audit->content = $request->image.' | '.$request->name.' | '.$request->date;
+                        $audit->content = $request->image.' | '.$request->name.' | '.$request->date.' | '.$request->link_donwload;
 
 
                         if($request->hasFile('image')) {
@@ -184,10 +187,11 @@ class GalleryController extends Controller
                         $data = Album::find($request->data_id);
                         $data->name = $request->name;
                         $data->date = $request->date;
+                        $data->link_donwload = $request->link_donwload;
 
                         $audit->action = "Edit";
-                        $audit->before = $data->image.' | '.$data->name.' | '.$data->date;
-                        $audit->after = $request->image.' | '.$request->name.' | '.$request->date;
+                        $audit->before = $data->image.' | '.$data->name.' | '.$data->date.' | '.$data->link_donwload;
+                        $audit->after = $request->image.' | '.$request->name.' | '.$request->date.' | '.$request->link_donwload;
 
                         if($request->hasFile('image')) {
                             if($request->action == 'update'){
@@ -218,7 +222,7 @@ class GalleryController extends Controller
             $data = Album::find($request->data_id);
 
             $audit->action = "Delete";
-            $audit->content = $data->image.' | '.$data->name.' | '.$data->date;
+            $audit->content = $data->image.' | '.$data->name.' | '.$data->date.' | '.$data->link_donwload;
             $audit->save();
 
             if ($data->delete()) {
@@ -363,6 +367,14 @@ class GalleryController extends Controller
                     <label class="col-md-3 control-label"><strong>Date</strong></label>
                     <div class="col-md-9">
                         <strong>:</strong> '.$data->date.'
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+
+        echo '<div class="form-group">
+                    <label class="col-md-3 control-label"><strong>Link Download</strong></label>
+                    <div class="col-md-9">
+                        <strong>:</strong> '.$data->link_donwload.'
                     </div>
                     <div class="clear"></div>
                 </div>';

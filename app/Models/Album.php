@@ -13,6 +13,7 @@ class Album extends Model
     protected $fillable = [
         'name',
         'date',
+        'link_donwload',
     ];
 
     protected static function boot() {
