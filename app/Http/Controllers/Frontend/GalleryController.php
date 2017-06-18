@@ -39,6 +39,7 @@ class GalleryController extends Controller
                 MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");
         
         $data = Gallery::where('album_id',$decrypted)->orderBy('id')->get();
+        $album_link = Album::where('id',$data->first()->album_id)->orderBy('id')->get()->first()->link_donwload;
 
         $getData = [];
         $x = 0;
@@ -47,6 +48,8 @@ class GalleryController extends Controller
 
             $x++;
         }
-        return view('frontend.gallery.detail_album')->with('album', $getData);
+        return view('frontend.gallery.detail_album')
+                 ->with('album', $getData)
+                 ->with('link', $album_link);
     }
 }

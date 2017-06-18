@@ -82,6 +82,14 @@ label.line{
 
 	<div class="container back-content">
 		<div class="row">
+			<div id="gallery" >
+				<h4><a target="_blank" href="{{$link}}">Get more photo</a></h4>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="container back-content">
+		<div class="row">
 			<div id="gallery" class="zoomwall">
 				@foreach($album as $key => $value)
 			    	<img src="{{ asset($pathp.'storage/gallery/').'/'.$value->image }}" data-highres="{{ asset($pathp.'storage/gallery/').'/'.$value->image }}"  />
