@@ -24,6 +24,7 @@ class BimtesRegister extends Model
         'image_confirm',
         'major1',
         'major2',
+        'major3',
         'photo',
         'test_day',
         'test_number',

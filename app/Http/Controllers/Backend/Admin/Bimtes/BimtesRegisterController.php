@@ -7,8 +7,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\BimtesRegister;
 use App\Http\Controllers\Backend\Admin\BaseController;
+
 use Mail;
 use Config;
+use Excel;
 
 class BimtesRegisterController extends BaseController
 {
@@ -210,5 +212,116 @@ class BimtesRegisterController extends BaseController
                 }
             })
             ->make(true);
+    }
+
+    /*function download file*/
+    public function download($type, $from="", $end=""){
+        ob_end_clean();
+        ob_start();
+        
+        $bulan = array (1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            );
+
+        if($from == 'undefined' or $end == 'undefined'){
+            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day')->get();
+
+            $data_send = [];
+            $x=0;
+            foreach ($data as $key => $value) {
+                $data_send[$x]['name'] = $value->name;
+                $data_send[$x]['address'] = $value->address;
+                $data_send[$x]['place_of_birth'] = $value->place_of_birth;
+
+                $date = explode('-', $value->date_of_birth);
+                $date = $date[1].' '.$bulan[(int)$date[0]].' '.$date[2];
+                
+                $data_send[$x]['date_of_birth'] = $date;
+                $data_send[$x]['gender'] = $value->gender;
+                $data_send[$x]['phone'] = $value->phone;
+                $data_send[$x]['email'] = $value->email;
+                $data_send[$x]['slta'] = $value->slta;
+                $data_send[$x]['slta_th'] = $value->slta_th;
+                $data_send[$x]['major1'] = $value->major1;
+                $data_send[$x]['major2'] = $value->major2;
+                $data_send[$x]['major3'] = $value->major3;
+                $data_send[$x]['test_number'] = $value->test_number;
+
+                if(!empty($value->test_day)){
+                    $date_test = explode('-', $value->test_day);
+                    $date_test = $date_test[1].' '.$bulan[(int)$date_test[0]].' '.$date_test[2];
+                }else{
+                    $date_test = "";
+                }
+
+                $data_send[$x]['test_day'] = $date_test;
+                
+                $x++;
+            }
+        }else{
+            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day');
+            $data = $data->whereBetween('bimtes_register.created_at', array($from.' 00:00:00', $end.' 23:59:59'));
+            $data = $data->get();
+
+            $data_send = [];
+            $x=0;
+            foreach ($data as $key => $value) {
+                $data_send[$x]['name'] = $value->name;
+                $data_send[$x]['address'] = $value->address;
+                $data_send[$x]['place_of_birth'] = $value->place_of_birth;
+
+                $date = explode('-', $value->date_of_birth);
+                $date = $date[1].' '.$bulan[(int)$date[0]].' '.$date[2];
+                
+                $data_send[$x]['date_of_birth'] = $date;
+                $data_send[$x]['gender'] = $value->gender;
+                $data_send[$x]['phone'] = $value->phone;
+                $data_send[$x]['email'] = $value->email;
+                $data_send[$x]['slta'] = $value->slta;
+                $data_send[$x]['slta_th'] = $value->slta_th;
+                $data_send[$x]['major1'] = $value->major1;
+                $data_send[$x]['major2'] = $value->major2;
+                $data_send[$x]['major3'] = $value->major3;
+                $data_send[$x]['test_number'] = $value->test_number;
+
+                if(!empty($value->test_day)){
+                    $date_test = explode('-', $value->test_day);
+                    $date_test = $date_test[1].' '.$bulan[(int)$date_test[0]].' '.$date_test[2];
+                }else{
+                    $date_test = "";
+                }
+
+                $data_send[$x]['test_day'] = $date_test;
+                
+                $x++;
+            }
+        } 
+        
+        return Excel::create('Export Data Peserta Bimtes', function($excel) use ($data_send){
+            $excel->sheet('Sheet1', function($sheet) use ($data_send)
+            {
+                $first_header = array('Nama', 'Alamat', 'Tempat Lahir', 'Tanggal Lahir','Jenis Kelamin','Telepon','Email','Sekolah Asal','Tahun Lulus','Pilihan Jurusan 1','Pilihan Jurusan 2','Pilihan Jurusan 3','No. Tes','Tanggal Tes');
+
+                $sheet->setOrientation('landscape');
+                $sheet->fromArray($data_send, null, 'A1', true);
+
+                $sheet->row(1, function($row){
+                   $row->setFontWeight('bold');
+                });
+
+                $sheet->row(1, $first_header);
+            });
+
+        })->download($type);
     }
 }

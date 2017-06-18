@@ -48,6 +48,27 @@
                         </tr>
                     </thead>
                 </table>
+
+                <!-- start fiture upload -->
+                <div class="">
+                    <!-- <div class="pull-left">
+                        <button data-toggle="modal" data-target="#import" title="Upload" id="upload" name="upload" class="btn btn-primary">
+                                <b>Bulk Upload</b>
+                            </button>
+                            &nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="pull-left">
+                        <a href="{{ URL::to('lead-management/lead-report/download/xlsx') }}">
+                            <button id="uploadFormat" name="uploadFormat" title="download format" class="btn btn-primary"><b>Download Format</b></button></a>
+                        <i style="font-size: 18px;" class="fa fa-question-circle" rel="tooltip" title="" data-original-title="Aturan format file bulk upload sudah tertera didalam file, anda dapat menambahkan beberapa other attributes sesuai kebutuhan anda"></i>
+                    </div>
+                     --><div class="pull-left">
+                        <a href="javascript:exportTo()">
+                            <button title="Download" id="dwXls" name="dwXls" class="btn btn-primary"><b>Download</b></button>
+                        </a>
+                    </div>
+                </div>
+                <!-- end fiture download -->
             </div>
         </div>
     </div>
@@ -212,6 +233,23 @@
             }
         }); 
 
+    </script>
+    <script language="javascript" type="text/javascript">
+        var excelID = document.getElementById("dwXls");
+        var type = '';
+        excelID.onclick = function(){
+            type = 'xlsx';
+            fromDate = $('input[name=fromDate]').val();
+            untilDate = $('input[name=untilDate]').val();
+            keywords = $('input[type=search]').val();
+        }
+        
+        exportTo = function() {
+            if(keywords == ""){
+                keywords = '';
+            }
+            location.href = "bimtes-register/download/"+type+"/"+fromDate+"/"+untilDate;
+        }
     </script>
     @include('backend.delete-modal-datatables')
 @endsection
