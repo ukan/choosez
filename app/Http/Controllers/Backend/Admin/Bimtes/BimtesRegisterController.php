@@ -234,7 +234,7 @@ class BimtesRegisterController extends BaseController
             );
 
         if($from == 'undefined' or $end == 'undefined'){
-            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day')->get();
+            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day')->where('status','Approved')->get();
 
             $data_send = [];
             $x=0;
@@ -269,7 +269,7 @@ class BimtesRegisterController extends BaseController
                 $x++;
             }
         }else{
-            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day');
+            $data = BimtesRegister::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','phone','email','slta','slta_th','major1','major2','major3','test_number','test_day')->where('status','Approved');
             $data = $data->whereBetween('bimtes_register.created_at', array($from.' 00:00:00', $end.' 23:59:59'));
             $data = $data->get();
 
