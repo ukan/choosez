@@ -110,10 +110,10 @@
 							<td>SMA/MA/SMK</td>
 							<td>{{ user_info('slta') }}</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>Pondok Pesantren</td>
 							<td>{{ user_info('mbs') }}</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>Univ/Institut</td>
 							<td>{{ user_info('university') }}</td>

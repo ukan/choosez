@@ -47,7 +47,7 @@
                         $url = asset($pathp.'assets/avatar.png');
                     }
                 ?>
-                {!! form_input_file_image('file','image',$url,'200px','200px') !!}
+                {!! form_input_file_image('file','image',$url,'200px','', 'btn-primary') !!}
                 <p class="has-error text-danger error-image"></p>
             </div>
         </div>
@@ -163,7 +163,7 @@
         <div class="form-group area-insert-update">
             <label class="col-md-3 control-label">Bukti Pembayaran <b class="text-danger">*</b></label>
             <div class="col-md-9">
-                {!! form_input_file_image('file','bukti_pembayaran',asset($pathp.'storage/bimtes/bukti/'.$data["image_confirm"]),'300px','300px') !!}
+                {!! form_input_file_image('file','bukti_pembayaran',asset($pathp.'storage/bimtes/bukti/'.$data["image_confirm"]),'300px','', 'btn-primary') !!}
                 <p class="has-error text-danger error-bukti_pembayaran"></p>
             </div>
         </div>
