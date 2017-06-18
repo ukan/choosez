@@ -238,7 +238,7 @@
         var excelID = document.getElementById("dwXls");
         var type = '';
         excelID.onclick = function(){
-            type = 'xls';
+            type = 'xlsx';
             fromDate = $('input[name=fromDate]').val();
             untilDate = $('input[name=untilDate]').val();
             keywords = $('input[type=search]').val();
