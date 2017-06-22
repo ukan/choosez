@@ -564,7 +564,7 @@ class HomeController extends Controller
                 $data->place_of_birth = $request->tempat_lahir;
                 $data->date_of_birth = $request->tanggal_lahir;
                 $data->address = $request->alamat;
-                $data->email = $request->email;
+                $data->email = strtolower($request->email);
                 $data->phone = $request->no_kontak;
                 $data->slta = $request->sekolah_asal;
                 $data->slta_th = $request->tahun_lulus;
