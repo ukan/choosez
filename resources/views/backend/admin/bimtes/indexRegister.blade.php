@@ -64,7 +64,7 @@
                     </div>
                      --><div class="pull-left">
                         <a href="javascript:exportTo()">
-                            <button title="Download" id="dwXls" name="dwXls" class="btn btn-primary"><b>Download</b></button>
+                            <button title="Download" id="dwXls" name="dwXls" class="btn btn-primary"><b>Download</b></button> Hanya yang sudah di approve yang bisa di download
                         </a>
                     </div>
                 </div>
@@ -139,7 +139,16 @@
                 // {data: 'email', name: 'email'},
                 {data: 'test_number', name: 'test_number'},
                 {data: 'test_day', name: 'test_day', searchable: false},
-                {data: 'status', name: 'status', class: 'center-align', searchable: false},
+                {data: 'status', name: 'status', class: 'center-align', searchable: false, "render": function (data, type, JsonResultRow, meta) {
+                        var check = "";
+                        if(JsonResultRow.status == "Not Yet Checked"){
+                            check = '<p style="text-align:right">'+JsonResultRow.status+'</p>';
+                        }else {
+                            check = '<b><p style="text-align:right;font-style:italic;color:green;">'+JsonResultRow.status+'</p></b>';
+                        }
+                        return check;
+                    }
+                },
                 {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
             ]
         });
