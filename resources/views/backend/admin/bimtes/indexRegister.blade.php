@@ -37,6 +37,7 @@
                 <table id="trustees-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
                     <thead>
                         <tr>
+                            <th class="center-align">updated at</th>
                             <th class="center-align">Photo</th>
                             <th class="center-align">Name</th>
                             <th class="center-align">Phone</th>
@@ -132,7 +133,9 @@
             processing: true,
             serverSide: true,
             ajax: "{!! route('datatables-bimtes-register') !!}",
+            order: [[ 0, 'desc' ]],
             columns: [
+                {data: 'updated_at', name: 'updated_at', class: 'center-align', visible:false},
                 {data: 'photo', name: 'photo', class: 'center-align'},
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},

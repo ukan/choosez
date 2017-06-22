@@ -40,7 +40,8 @@ class BimtesRegister extends Model
             'email',
             'test_number',
             'test_day',
-            'status'
+            'status',
+            'updated_at'
         );
 
         return $return;
