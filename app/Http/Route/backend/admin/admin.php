@@ -180,6 +180,7 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::post('/bimtes-register/show', array('as' => 'admin-bimtes-register-show-user', 'uses' => 'BimtesRegisterController@showBimtes'));
         Route::post('/get-data-approval', array('as' => 'get-data-approval', 'uses' => 'BimtesRegisterController@get_data_approval'));
         Route::post('change-status', array('as' => 'change-status', 'uses' => 'BimtesRegisterController@change_status'));
+        Route::post('/post-bimtes-data', array('as' => 'admin-post-bimtes-data', 'uses' => 'BimtesRegisterController@post_bimtes_data'));
 
         /*download report*/
         Route::any('/bimtes-register/download/{type}/{from?}/{end?}', 

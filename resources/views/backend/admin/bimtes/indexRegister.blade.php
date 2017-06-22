@@ -122,6 +122,34 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade modal-getstart" id="modalFormBimtes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title FormBook-title" id="myModalLabel">Create</h4>
+            </div>
+            <div class="modal-body">
+            {!! Form::open(['route'=>'admin-post-bimtes-data', 'files'=>true, 'class' => 'form-horizontal jquery-form-bimtes-data']) !!}
+                    <input type="hidden" name="action" id="action" value="">      
+                    <input type="hidden" name="bimtes_register_id" value=""> 
+                    <div class="form-group area-delete">                    
+                        <div class="col-md-12">
+                             <center>Are You Sure for Delete This Data ?</center>
+                        </div>
+                    </div>
+                    <div class="form-group area-delete">
+                        <center>
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-submit', 'title' => 'Delete']) !!}
+                            <button class="btn btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @section('scripts')
@@ -171,6 +199,16 @@
             });
         }
 
+        function show_form_delete(id){         
+            $("[name='bimtes_register_id']").val(id);
+            $('.area-insert-update').hide();
+            $('.area-delete').show();
+            $('.FormBook-title').html('Delete Data');
+            $("[name='action']").val('delete');
+            $('#modalFormBimtes').modal({backdrop: 'static', keyboard: false});
+            $('#modalFormBimtes').modal('show');
+        }
+
         /*start set update */
         function show_form_proccess_approve(id){            
             
@@ -197,6 +235,52 @@
             $('#modalFormApproval').modal('show');
         }
         /*end set update */
+
+        $('.jquery-form-bimtes-data').ajaxForm({
+            dataType : 'json',
+            success: function(response) {
+
+                if(response.status == 'success'){
+                    var title_not = 'Notification';
+                    var type_not = 'success';
+                }else{
+                    var title_not = 'Notification';
+                    var type_not = 'failed';
+                }
+                var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                new PNotify({
+                    title: response.status,
+                    text: response.notification,
+                    type: type_not,
+                    addclass: "stack-custom",
+                    stack: myStack
+                });
+                table.ajax.reload();    
+                $('#modalFormBimtes').modal('hide'); 
+            },
+            beforeSend: function() {
+              $('.has-error').html('');
+            },
+            error: function(response){
+              if (response.status === 422) {
+                  var data = response.responseJSON;
+                  $.each(data,function(key,val){
+                      $('.error-'+key).html(val);
+                  });
+                var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                    new PNotify({
+                        title: "Failed",
+                        text: "Validate Error, Check Your Data Again",
+                        type: 'danger',
+                        addclass: "stack-custom",
+                        stack: myStack
+                    });
+                $("#modalFormBimtes").scrollTop(0);
+              } else {
+                  $('.error').createClass('alert alert-danger').html(response.responseJSON.message);
+              }
+            }
+        }); 
 
         $('.jquery-form-bimtes').ajaxForm({
             dataType : 'json',

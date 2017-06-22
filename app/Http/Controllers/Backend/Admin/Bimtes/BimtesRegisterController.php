@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Backend\Admin\Bimtes;
 
-use Sentinel;
+
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\AuditrailLog;
 use App\Models\BimtesRegister;
+
+use Illuminate\Http\Request;
 use App\Http\Controllers\Backend\Admin\BaseController;
 
 use Mail;
-use Config;
 use Excel;
+use Config;
+use Sentinel;
 
 class BimtesRegisterController extends BaseController
 {
@@ -198,7 +201,9 @@ class BimtesRegisterController extends BaseController
     {
         return datatables(BimtesRegister::datatablesBimtesRegister(true))
             ->addColumn('action', function ($bimtes) {
-                $action =  '<a href="javascript:show_bimtes_register('.$bimtes->id.')" class="btn btn-info btn-xs" title="View"><i class="fa fa-search fa-fw"></i></a>';
+                $action =  
+                '<a href="javascript:show_bimtes_register('.$bimtes->id.')" class="btn btn-info btn-xs" title="View"><i class="fa fa-search fa-fw"></i></a>
+                <a onclick="javascript:show_form_delete('.$bimtes->id.')" class="btn btn-danger btn-xs actDelete" title="Delete"><i class="fa fa-trash-o fa-fw"></i></a>';
 
                 return $action;
 
@@ -323,5 +328,49 @@ class BimtesRegisterController extends BaseController
             });
 
         })->download($type);
+    }
+
+    public function post_bimtes_data(Request $request){
+        $response = array();
+        $audit = new AuditrailLog;
+                    
+        $book = BimtesRegister::find($request->bimtes_register_id);
+
+        $audit->email = Sentinel::getUser()->email;
+        $audit->action = "Delete";
+        $audit->table_name = "Bimtes Register";
+        $audit->content = $book->email;
+        $audit->save();
+
+        if($book->photo != ""){
+            $image_path = public_path().'/storage/bimtes/photo/'.$book->photo;
+            unlink($image_path);
+        }
+        if($book->image_confirm != ""){
+            $image_path = public_path().'/storage/bimtes/bukti/'.$book->image_confirm;
+            unlink($image_path);
+        }
+
+        if ($book->delete()) {
+                    $response['notification'] = 'Delete Data Success';
+                    $response['status'] = 'success';
+        } else {
+                    $response['notification'] = 'Delete Data Failed';
+                    $response['status'] = 'failed';
+        }
+
+        $data = Sentinel::getUser()->first_name;
+
+        $find_data['email'] = "x";
+        $find_data['id'] = "cek";
+        $find_data['full_name'] = $data;
+        $find_data['table'] = "Delete Bimtes Data";
+
+        /*Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        });*/
+
+        echo json_encode($response);
     }
 }
