@@ -87,9 +87,14 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::any('/dashboard', array('as' => 'admin-dashboard-member', 'uses' => 'DashboardController@index'));
         Route::any('/logout', array('as' => 'logout-member', 'uses' => 'DashboardController@getLogout'));
 
-        Route::any('/dashboard_ajax_bulletin_pagination', array('as' => 'admin-dashboard-ajax-pagination-bulletin-board-member', 'uses' => 'DashboardController@ajax_pagination_bulletin_board'));
-        Route::get('/dashboard_datatables_orders', array('as' => 'datatables-dashboard-funnel-orders', 'uses' => 'DashboardController@datatables_orders'));
-
+        /*Route::any('/dashboard_ajax_bulletin_pagination', array('as' => 'admin-dashboard-ajax-pagination-bulletin-board-member', 'uses' => 'DashboardController@ajax_pagination_bulletin_board'));*/
+        Route::group(['prefix' => 'suggestion'], function () {
+            Route::get('/', array('as' => 'member-suggestion', 'uses' => 'SuggestionController@index'));
+            Route::get('/datatables', array('as' => 'member-suggestion-datatables', 'uses' => 'SuggestionController@datatables'));
+            Route::post('/show', array('as' => 'member-show-suggestion', 'uses' => 'SuggestionController@show'));
+            Route::post('/post-suggestion', array('as' => 'member-post-suggestion', 'uses' => 'SuggestionController@post_suggestion'));
+        });
+        
         Route::get('/my-profile', array('as' => 'member-profile', 'uses' => 'ProfileController@index'));
 
         Route::post('/my-profile/post_profile', array('as' => 'member-profile-post', 'uses' => 'ProfileController@post_profile'));
@@ -97,8 +102,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::post('/my-profile/profile-edit-avatar', array('as' => 'member-profile-profile-edit-avatar-process', 'uses' => 'ProfileController@processEditAvatar'));
         Route::get('/my-profile/profile-edit', array('as' => 'member-profile-profile-edit', 'uses' => 'ProfileController@profileEdit'));
         Route::post('/my-profile/profile-edit', array('as' => 'member-profile-profile-edit-process', 'uses' => 'ProfileController@processProfileEdit'));
-        Route::get('/my-profile/profile-edit-bank-account', array('as' => 'member-profile-profile-edit-bank-account', 'uses' => 'ProfileController@profileEditBankAccount'));
-        Route::post('/my-profile/profile-edit-bank-account', array('as' => 'member-profile-profile-edit-bank-account-process', 'uses' => 'ProfileController@processProfileEditBankAccount'));
+        
         Route::get('/my-profile/profile-completion', array('as' => 'member-profile-profile-completion', 'uses' => 'ProfileController@profileCompletion'));
         Route::post('/my-profile/profile-completion', array('as' => 'member-profile-profile-completion-process', 'uses' => 'ProfileController@processProfileCompletion'));
         Route::get('/my-profile/change-password', array('as' => 'member-profile-change-password', 'uses' => 'ProfileController@changePassword'));

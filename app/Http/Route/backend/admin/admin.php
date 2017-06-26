@@ -222,6 +222,12 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::any('post', array('as' => 'admin-hq-user-request-post', 'uses' => 'UserRequestController@post'));
 
     });
+
+    Route::group(['prefix' => 'suggestion-member', 'namespace' => 'Suggestion'], function () {
+        Route::get('/', array('as' => 'suggestion-member', 'uses' => 'SuggestionController@index'));
+        Route::post('/show', array('as' => 'admin-show-suggestion', 'uses' => 'SuggestionController@show'));
+        Route::post('/post-suggestion', array('as' => 'admin-post-suggestion', 'uses' => 'SuggestionController@post_suggestion'));
+    });
 });
 
 Route::group(['namespace' => 'Frontend'], function () {

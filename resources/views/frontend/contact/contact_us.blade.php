@@ -90,7 +90,7 @@
 
 				<h4 class="push-top">@lang('general.about.the_office')</h4>
 				<ul class="list-unstyled">
-					<li><i class="fa fa-map-marker"></i> <strong>@lang('general.about.address'):</strong> Jl. Cibiruhilir No.23 RT.01 Rw.02 Cileunyi Bandung.</li>
+					<li><i class="fa fa-map-marker"></i> <strong>@lang('general.about.address'):</strong> Jl. Cibiruhilir No.23 RT.01 RW.02 Cileunyi Bandung.</li>
 					<li><i class="fa fa-phone"></i> <strong>@lang('general.about.phone'):</strong> -</li>
 					<li><i class="fa fa-envelope"></i> <strong>@lang('general.about.email'):</strong> <a href="mailto:alihsanpondokpesantren@gmail.com">alihsanpondokpesantren@gmail.com</a></li>
 				</ul>

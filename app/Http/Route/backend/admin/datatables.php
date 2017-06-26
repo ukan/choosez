@@ -63,6 +63,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         
         //bimtes management
         Route::get('bimtes-datatable', array('as' => 'datatables-bimtes', 'uses' => 'Bimtes\BimtesController@datatables'));
+
+        Route::get('/datatables', array('as' => 'admin-suggestion-datatables', 'uses' => 'Suggestion\SuggestionController@datatables'));
     });
 
 });
