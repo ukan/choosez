@@ -8,8 +8,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@sign_in'));
     Route::post('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@postLogin'));
-    Route::get('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@sign_in_bimtes'));
-    Route::post('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@postLoginBimtes'));
+    // Route::get('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@sign_in_bimtes'));
+    // Route::post('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@postLoginBimtes'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
 

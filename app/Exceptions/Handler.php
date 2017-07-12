@@ -48,8 +48,8 @@ class Handler extends ExceptionHandler
         if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
         return response(view('errors.404'), 404);
 
-        if($e instanceof \Symfony\Component\Debug\Exception\FatalErrorException)
-        return response(view('errors.500'), 500);
+            if($e instanceof \Symfony\Component\Debug\Exception\FatalErrorException)
+            return response(view('errors.500'), 500);
     
         return parent::render($request, $e);
     }
