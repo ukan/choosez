@@ -35,7 +35,7 @@ class Role extends Model
      */
     public function datatables()
     {
-        return static::select('id', 'name', 'slug', 'is_super_admin');
+        return static::select('id', 'name', 'slug', 'is_super_admin')->where('slug','!=','super-admin');
     }
 
     /**
