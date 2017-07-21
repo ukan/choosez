@@ -109,6 +109,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'users.image',
             'users.phone'
         )
+        ->where('email','!=','superadmin@alihsan.com')
         ->join('role_users', 'role_users.user_id', '=', 'users.id')
         ->join('roles', 'role_users.role_id', '=', 'roles.id');
 
