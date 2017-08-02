@@ -197,23 +197,9 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::delete('lcwcontents/{id}/delete', 'LcwContentsController@destroy');
     });
 
-    Route::group(['prefix' => 'log-history-page','namespace' => 'Hq'], function () {
+    Route::group(['prefix' => 'log-history-page','namespace' => 'AuthLogHistory'], function () {
         Route::get('log-history', array('as' => 'admin-view-history-log', 'uses' => 'HistoryLogsController@index'));
         Route::get('log-history-datatable-login', array('as' => 'admin-view-history-log-datatable-login', 'uses' => 'HistoryLogsController@datatablesLogin'));
-        Route::get('log-history-datatable-transaction', array('as' => 'admin-view-history-log-datatable-transaction', 'uses' => 'HistoryLogsController@datatablesTransaction'));
-        Route::get('log-history-datatable-order', array('as' => 'admin-view-history-log-datatable-order', 'uses' => 'HistoryLogsController@datatablesOrder'));
-    });
-
-    Route::group(['prefix' => 'fraud-detection-page','namespace' => 'Hq'], function () {
-        Route::get('fraud-detection', array('as' => 'admin-view-fraud-detection', 'uses' => 'FraudDetectionsController@index'));
-        Route::get('fraud-detection-datatable-user-duplication', array('as' => 'admin-view-datatable-user-duplication', 'uses' => 'FraudDetectionsController@datatableUserDuplication'));
-
-        Route::get('fraud-detection-datatable-transaction', array('as' => 'admin-view-fraud-datatable-transaction', 'uses' => 'FraudDetectionsController@datatablesTransaction'));
-        Route::get('fraud-detection-datatable-order', array('as' => 'admin-view-fraud-datatable-order', 'uses' => 'FraudDetectionsController@datatablesOrder'));
-
-        Route::get('fraud-management', array('as' => 'admin-view-fraud-management', 'uses' => 'FraudDetectionsController@fraud_index'));
-
-        Route::get('fraud-detection-datatable-abnormal-transaction', array('as' => 'admin-view-datatable-abnormal-transaction', 'uses' => 'FraudDetectionsController@datatableAbnormalTransaction'));
     });
 
     Route::group(['prefix' => 'user-request','namespace' => 'Hq'], function () {
