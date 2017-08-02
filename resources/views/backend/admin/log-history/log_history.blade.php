@@ -93,8 +93,8 @@
 };
 </script>
     
-    {!! Html::script('assets/plugins/datatables/jquery.dataTables.min.js') !!}
-    {!! Html::script('assets/plugins/datatables/dataTables.bootstrap.min.js') !!}
+    {!! Html::script($pathp.'assets/plugins/datatables/jquery.dataTables.min.js') !!}
+    {!! Html::script($pathp.'assets/plugins/datatables/dataTables.bootstrap.min.js') !!}
 
     <script type="text/javascript">        
        var login_history_table = $('#history-login-table').DataTable({
