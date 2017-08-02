@@ -31,7 +31,7 @@ class HistoryLogsController extends BaseController
             $eloq = AuthLog::selectRaw('users.username,users.email, auth_logs.ip_address, auth_logs.login, auth_logs.logout,auth_logs.created_at,auth_logs.updated_at')
                  ->leftJoin('users','users.id','=','auth_logs.user_id')
                  ->where('email','!=','superadmin@alihsan.com')
-                 ->whereBetween('auth_logs.created_at', array($request->filter_start.' 00:00:00', $request->filter_end.' 23:59:59'))
+                 ->whereBetween('auth_logs.login', array($request->filter_start.' 00:00:00', $request->filter_end.' 23:59:59'))
                  ->orderBy('auth_logs.id')->get();
         }
 
