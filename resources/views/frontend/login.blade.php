@@ -5,6 +5,7 @@
   <title>Login Form</title>  
   <link rel="stylesheet" href="css/style.css">  
   <link rel="stylesheet" href="{!! asset($pathp.'assets/general/css/style.css') !!}">
+  <!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
 </head>
 
 <body>
@@ -21,11 +22,9 @@
           <input type="text" id="email" name="email" placeholder="Email" class="box1 border1">
           <input type="password" id="password" name="password" placeholder="Password" class="box1 border2">
           <input type="submit" class="send" value="Go">
-          <!-- <p style="color: black;padding-top: 5px">Forgot Your Password? <a href="#">click here</a></p> -->    
+          <p style="color: black;padding-top: 5px">Forgot Your Password? <a href="{!! route('reset-password') !!}" class="btn btn-primary pull-right" title="Create"><i class="fa fa-plus fa-fw"></i> Click here !</a></p>    
     {!! Form::close() !!}
       </div>
-  </div>
-  
-  
+  </div>  
 </body>
 </html>

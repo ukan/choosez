@@ -379,6 +379,10 @@ class HomeController extends Controller
         return view('frontend.register.index');
     }
 
+    public function registerAlumni(){
+        return view('frontend.register-alumni.index');
+    }
+
     public function post_register_data(Request $request)
     {
         $response = array();

@@ -16,7 +16,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/reset-password', array('as' => 'reset-password', 'uses' => 'UsersController@resetPassword'));
     Route::post('/process-reset-password', array('as' => 'process-reset-password', 'uses' => 'UsersController@processResetPassword'));
     Route::get('/change-password/{forgot_token}', array('as' => 'change-password', 'uses' => 'UsersController@changePassword'));
-    Route::post('/process-change-password/{forgot_token}', array('as' => 'process-change-password', 'uses' => 'UsersController@processChangePassword'));
+    Route::post('/process-change-password', array('as' => 'process-change-password', 'uses' => 'UsersController@processChangePassword'));
 
     Route::get('/location-information/{type?}/{id?}/{id_prov?}', array('as' => 'user-location-information-process', 'uses' => 'UsersController@processLocationInformation'));
 
@@ -32,7 +32,11 @@ Route::group(['namespace' => 'Frontend'], function () {
     
     Route::post('/bimtes/df8d4njfdnjczFBhfnLXsNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=/edit-register-bimtes', array('as' => 'edit-register-bimtes', 'uses' => 'HomeController@post_register_bimtes_edit'));
 
+    //register santri
     Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
+
+    //register alumni
+    Route::get('/register-alumni', array('as' => 'register-alumni', 'uses' => 'HomeController@registerAlumni'));
 
     Route::group(['prefix' => 'news'], function () {
         Route::get('/{slug}', array('as' => 'news-detail', 'uses' => 'HomeController@newsDetail'));

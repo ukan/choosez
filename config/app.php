@@ -183,6 +183,7 @@ return [
 
         Barryvdh\Snappy\ServiceProvider::class,
         DidierDeMaeyer\MultipleLocales\Providers\MultipleLocalesServiceProvider::class,
+        LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
 
     ],
 

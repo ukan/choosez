@@ -3,12 +3,12 @@
     <head>
         {!! Html::meta(null, null, ['charset' => 'UTF-8']) !!}
         {!! Html::meta('robots', 'noindex, nofollow') !!}
-        {!! Html::meta('product', env('APP_WEB_ADMIN_NAME', 'Scoido Web Admin')) !!}
-        {!! Html::meta('description', env('APP_WEB_ADMIN_NAME', 'TScoido Web Admin')) !!}
-        {!! Html::meta('author', 'Scoido') !!}
+        {!! Html::meta('product', env('APP_WEB_ADMIN_NAME', 'Al-Ihsan Website')) !!}
+        {!! Html::meta('description', env('APP_WEB_ADMIN_NAME', 'Al-Ihsan Website')) !!}
+        {!! Html::meta('author', 'Al-Ihsan IT Team') !!}
         {!! Html::meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') !!}
 
-        <title>{{ env('APP_WEB_ADMIN_NAME', 'Scoido Web Admin') }} - Sign In</title>
+        <title>{{ env('APP_WEB_ADMIN_NAME', 'Al-Ihsan Website') }}</title>
 
         <!-- Web Fonts  -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
                     @yield('content')
                 </div>
 
-                <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2014. All Rights Reserved.</p>
+                <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2017. All Rights Reserved.</p>
             </div>
         </section>
 
