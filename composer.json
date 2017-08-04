@@ -30,7 +30,8 @@
         "barryvdh/laravel-snappy": "^0.3.1",
         "hbattat/verifyemail": "^1.0.7",
         "google/apiclient" : "^1.1",
-        "didierdemaeyer/laravel-multiple-locales": "1.*"
+        "didierdemaeyer/laravel-multiple-locales": "1.*",
+        "captcha-com/laravel-captcha": "4.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -73,5 +74,12 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        { "packagist": false }
+    ]
 }
