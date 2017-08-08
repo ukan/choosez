@@ -50,6 +50,10 @@
             <div class="form-group{{ Form::hasError('password') }} has-feedback">
                                     {!! Form::errorMsg('password') !!}
             </div>
+            <div class="g-recaptcha" data-sitekey="6LcpOywUAAAAAH2bBTRR1YBHSYAbnki9sUak_L6f"></div>
+            <div class="form-group{{ Form::hasError('g-recaptcha-response') }} has-feedback">
+                {!! Form::errorMsg('g-recaptcha-response') !!}
+            </div>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="checkbox-custom checkbox-default hidden">

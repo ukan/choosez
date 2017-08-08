@@ -24,7 +24,8 @@
                 {!! Html::style($pathp.'assets/backend/porto-admin/stylesheets/theme-custom.css') !!}
 
                 {!! Html::script($pathp.'assets/backend/porto-admin/vendor/modernizr/modernizr.js') !!}
-
+                <!-- G-Recaptha -->
+                {!! Html::script('https://www.google.com/recaptcha/api.js') !!}
 	</head>
 	<body>
 		@yield('content')
