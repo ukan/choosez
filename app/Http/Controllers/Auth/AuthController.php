@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\AuthLog;
 use Sentinel;
 use DB;
+use App\Traits\CaptchaTrait;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, CaptchaTrait;
 
     /**
      * Where to redirect users after login / registration.
@@ -42,21 +43,6 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
     }
 
     /**
@@ -91,73 +77,95 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        if($request->input('type') == "member"){
-            $route_login_type = "member-login";
-            $route_dashboard_type = "member-dashboard";
-        }else{
-            $route_login_type = "admin-login";
-            $route_dashboard_type = "admin-dashboard";
-        }
-        $backToLogin = redirect()->route($route_login_type)->withInput();
-        $findUser = Sentinel::findByCredentials(['login' => $request->input('email')]);
-
-        // If we can not find user based on email...
-        if (! $findUser) {
-            flash()->error('Wrong email!');
-
-            return $backToLogin;
-        }
-
-        try {
-            $remember = (bool) $request->input('remember_me');
-            $user = User::where('email',$request->input('email'));
-            if($user->count() > 0){
-                $user = User::find($user->first()->id);
-            }
-            
-            // If password is incorrect...
-            if (! Sentinel::authenticate($request->all(), $remember)) {
-                flash()->error('Password is incorrect!');
-                return $backToLogin;
-            }
-
-            if (strtolower(Sentinel::check()->roles[0]->slug) != 'member' and $request->input('type') == "member" or strtolower(Sentinel::check()->roles[0]->slug) == 'member' and $request->input('type') == "admin") {
-                flash()->error('You Have No Access!');
-                Sentinel::logout();
-                return $backToLogin;
-            }
-
-            if ($request->input('remember_me') == TRUE) {
-                Session::put('field_email',$request->input('email'));
-                Session::put('field_password',$request->input('password'));
-            }
-
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-              $ip=$_SERVER['HTTP_CLIENT_IP'];
-            }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-              $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $param = $request->all();
+        $param['captcha'] = $this->captchaCheck();
+        $rules = [
+                    'email' => 'required|email',
+                    'password' => 'required|min:8',
+                    'g-recaptcha-response'  => 'required',
+                    'captcha'               => 'required|min:1'
+                ];
+        $messages = [
+                    'email.required'        => 'Email is required',
+                    'email.email'           => 'Email is invalid',
+                    'password.required'     => 'Password is required',
+                    'password.min'          => 'Password needs to have at least 8 characters',
+                    'g-recaptcha-response.required' => 'Captcha is required',
+                    'captcha.min'           => 'Wrong captcha, please try again.'
+                ];
+        $validate = Validator::make($param, $rules, $messages);
+        
+        if($validate->fails()) {
+            $this->validate($request, $rules, $messages);
+        } else {
+            if($request->input('type') == "member"){
+                $route_login_type = "member-login";
+                $route_dashboard_type = "member-dashboard";
             }else{
-              $ip=$_SERVER['REMOTE_ADDR'];
+                $route_login_type = "admin-login";
+                $route_dashboard_type = "admin-dashboard";
             }
-            $ipAddress = $ip;
-            
-            $getEmail = User::where('email','=', $request->email)->get();
-            foreach ($getEmail as $value) {
-                $idUser = $value->id;   
+            $backToLogin = redirect()->route($route_login_type)->withInput();
+            $findUser = Sentinel::findByCredentials(['login' => $request->input('email')]);
+
+            // If we can not find user based on email...
+            if (! $findUser) {
+                flash()->error('Wrong email!');
+
+                return $backToLogin;
             }
 
-            $logs = new AuthLog;
-            $logs->user_id = $idUser;
-            $logs->ip_address = $ipAddress;
-            $logs->login = date('Y-m-d H:i:s');
-            $logs->save();
+            try {
+                $remember = (bool) $request->input('remember_me');
+                $user = User::where('email',$request->input('email'));
+                if($user->count() > 0){
+                    $user = User::find($user->first()->id);
+                }
+                
+                // If password is incorrect...
+                if (! Sentinel::authenticate($request->all(), $remember)) {
+                    flash()->error('Password is incorrect!');
+                    return $backToLogin;
+                }
 
-            flash()->success('Login success!');
-            return redirect()->route($route_dashboard_type);
-        } catch (ThrottlingException $e) {
-            flash()->error('Too many attempts!');
-        } catch (NotActivatedException $e) {
-            flash()->error('Please activate your account before trying to log in.');
+                if (strtolower(Sentinel::check()->roles[0]->slug) != 'member' and $request->input('type') == "member" or strtolower(Sentinel::check()->roles[0]->slug) == 'member' and $request->input('type') == "admin") {
+                    flash()->error('You Have No Access!');
+                    Sentinel::logout();
+                    return $backToLogin;
+                }
+
+                if ($request->input('remember_me') == TRUE) {
+                    Session::put('field_email',$request->input('email'));
+                    Session::put('field_password',$request->input('password'));
+                }
+
+                if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+                  $ip=$_SERVER['HTTP_CLIENT_IP'];
+                }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+                  $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+                }else{
+                  $ip=$_SERVER['REMOTE_ADDR'];
+                }
+                $ipAddress = $ip;
+                
+                $getEmail = User::where('email','=', $request->email)->get();
+                foreach ($getEmail as $value) {
+                    $idUser = $value->id;   
+                }
+
+                $logs = new AuthLog;
+                $logs->user_id = $idUser;
+                $logs->ip_address = $ipAddress;
+                $logs->login = date('Y-m-d H:i:s');
+                $logs->save();
+
+                flash()->success('Login success!');
+                return redirect()->route($route_dashboard_type);
+            } catch (ThrottlingException $e) {
+                flash()->error('Too many attempts!');
+            } catch (NotActivatedException $e) {
+                flash()->error('Please activate your account before trying to log in.');
+            }
         }
 
         return $backToLogin;

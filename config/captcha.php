@@ -35,7 +35,7 @@ return [
     */
     'LoginCaptcha' => [
         'UserInputID' => 'CaptchaCode',
-        'CodeLength' => 3,
+        'CodeLength' => CaptchaRandomization::GetRandomCodeLength(4, 6),
         'ImageStyle' => [
             ImageStyle::Radar,
             ImageStyle::Collage,
