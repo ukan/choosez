@@ -15,16 +15,33 @@ class Mos extends Model
     protected $fillable = [
         'id',
         'name', 
-        'email', 
+        'address',
         'place_of_birth',
         'date_of_birth',
-        'address',
+        'gender',
         'dorm',
         'room',
         'major',
+        'email', 
         'phone',
-        'tshirtSize',
-        'gender',
+        'tsirt_size',
         'image_confirm',
+        'status',
     ];
+
+    public static function datatables($isAdmin = null)
+    {
+        return static::select(
+            'id',
+            'name',
+            'email',
+            'phone',
+            'dorm',
+            'room',
+            'status',
+            'updated_at'
+        );
+
+        return $return;
+    }
 }
