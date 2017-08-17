@@ -327,7 +327,7 @@ class MosController extends BaseController
 
         Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
                     $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                    $message->to("kh4nz.97@gmail.com", $find_data['full_name'])->subject('Admin Delete Data');
+                    $message->to("ukansaokani@gmail.com", $find_data['full_name'])->subject('Admin Delete Data');
                 });
 
         echo json_encode($response);
