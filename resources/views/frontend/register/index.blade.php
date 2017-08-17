@@ -205,7 +205,7 @@ article.post-large-custom .post-audio-custom {
 							                    </div>
 							                </div>
 
-							                <div class="form-group {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
+							                <div class="form-group {{ $errors->has('asrama') ? ' has-error' : '' }}">
 							                    <label class="col-md-3 control-label">Asrama<b class="text-danger">*</b></label>
 							                    <div class="col-md-5">
 							                        <select name="asrama" id="asrama_id" onchange="ajaxroom(this.value)" class="select2" data-plugin-selectTwo class="form-control populate" style="width:100%">
@@ -223,7 +223,7 @@ article.post-large-custom .post-audio-custom {
 							                            <option value="Pilih Kamar">Pilih Kamar</option>
 							                            {{ user_info('select_kamar') }}
 							                        </select>
-							                        <p class="has-error text-danger error-asrama"></p>
+							                        <p class="has-error text-danger error-kamar"></p>
 							                    </div>
 								            </div>
 

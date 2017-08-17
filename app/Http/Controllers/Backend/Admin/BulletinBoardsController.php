@@ -16,6 +16,9 @@ use Validator;
 use Config;
 use Mail;
 
+use Event;
+use App\Events\Backend\AdminAlertEvent;
+
 class BulletinBoardsController extends Controller
 {
     /**
@@ -271,16 +274,7 @@ class BulletinBoardsController extends Controller
                         $audit->action = "New";
                         $audit->content = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;
                     }else{
-                        $data = Sentinel::getUser()->first_name;
-                        $find_data['email'] = "x";
-                        $find_data['id'] = "cek";
-                        $find_data['full_name'] = $data;
-                        $find_data['table'] = "Update Bulletin";
-
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        Event::fire(new AdminAlertEvent());
 
                         $bulletin_board = BulletinBoard::find($request->bulletin_board_id);
 
