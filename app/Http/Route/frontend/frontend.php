@@ -79,6 +79,11 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::get('/form-print', array('as' => 'psb-form-print', 'uses' => 'PsbController@psbPrint'));*/
     });
 
+    Route::group(['prefix' => 'mos'], function () {
+        Route::get('/', array('as' => 'get-page-mos', 'uses' => 'MosController@index'));
+        Route::post('/post-register-mos', array('as' => 'post-register-mos', 'uses' => 'MosController@post_register_mos'));
+    });
+
     Route::group(['prefix' => 'facilities'], function () {
         Route::get('/', array('as' => 'get-page-facilities', 'uses' => 'BimtesController@indexFacilities'));
     });
