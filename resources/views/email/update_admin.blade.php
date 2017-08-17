@@ -1,1 +1,1 @@
-<h1>{{ $full_name }} Update {{$table}}</h1>
+<h1>{{ $full_name }} {{$table}}</h1>

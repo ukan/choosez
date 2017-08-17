@@ -187,6 +187,18 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
             array('as' => 'download-data-bimtes', 'uses' =>  'BimtesRegisterController@download'));
     });
 
+    Route::group(['prefix' => 'mos', 'namespace' => 'Mos'], function () {
+        Route::get('/', array('as' => 'admin-index-mos', 'uses' => 'MosController@index'));
+        Route::post('/show', array('as' => 'admin-mos-show-user', 'uses' => 'MosController@showMos'));
+        Route::post('/get-data-approval', array('as' => 'get-data-approval', 'uses' => 'MosController@get_data_approval'));
+        Route::post('change-status', array('as' => 'change-status', 'uses' => 'MosController@change_status'));
+        Route::post('/post-mos-data', array('as' => 'admin-post-mos-data', 'uses' => 'MosController@post_mos_data'));
+
+        /*download report*/
+        Route::any('/download/{type}/{from?}/{end?}', 
+            array('as' => 'download-data-mos', 'uses' =>  'MosController@download'));
+    });
+
     Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {
         // Category Management...
         Route::resource('lcwcategorys', 'LcwCategorysController', ['except' => 'show']);
