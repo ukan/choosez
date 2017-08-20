@@ -16,6 +16,7 @@ use App\Models\RoomList;
 use App\Models\AuthLog;
 use App\Models\AuthLogBimtes;
 use App\Models\AuthLogMos;
+use App\Models\AuditrailLog;
 use App\Models\Activation;
 
 use Illuminate\Http\Request;
@@ -838,9 +839,58 @@ class HomeController extends Controller
 
     public function post_register_mos_edit(Request $request){
         
+        $audit = new AuditrailLog;
+
         $param = $request->all();
         $data = Mos::find($request->id);
         
+        if($param['event'][0] == "Ta'aruf"){
+            $dataTaaruf = "Ya";
+            if(isset($param['event'][1])){
+                $dataLpks = "Ya";
+            }else{
+                $dataLpks = "Tidak";
+            }
+        }else{
+            $dataTaaruf = "Tidak";
+            $dataLpks = "Ya";
+        }
+
+        $audit->email = $data->email;
+        $audit->table_name = "Mos";
+        $audit->action = "Edit";
+        $audit->before = 
+            $data->name.' | '.
+            $data->place_of_birth.' | '.
+            $data->date_of_birth.' | '.
+            $data->address.' | '.
+            $data->email.' | '.
+            $data->phone.' | '.
+            $data->gender.' | '.
+            $data->dorm.' | '.
+            $data->room.' | '.
+            $data->major.' | '.
+            $data->tsirt_size.' | '.
+            $data->taaruf.' | '.
+            $data->lpks.' | '.
+            $data->image_confirm;
+
+        $audit->after = 
+            $request->name.' | '.
+            $request->place.' | '.
+            $request->date.' | '.
+            $request->address.' | '.
+            $request->email.' | '.
+            $request->phone.' | '.
+            $request->gender.' | '.
+            $request->asrama.' | '.
+            $request->kamar.' | '.
+            $request->major.' | '.
+            $request->tshirtSize.' | '.
+            $dataTaaruf.' | '.
+            $dataLpks.' | '.
+            $request->imageConfirm;
+
         if(!empty($request->name)){
             $data->name = $request->name;
         }
@@ -878,12 +928,16 @@ class HomeController extends Controller
         
         if($param['event'][0] == "Ta'aruf"){
             $data->taaruf = "Ya";
+            $dataTaaruf = "Ya";
             if(isset($param['event'][1])){
                 $data->lpks = "Ya";
+                $dataLpks = "Ya";
             }
         }else{
             $data->taaruf    = "Tidak";
             $data->lpks      = "Ya";
+            $dataTaaruf = "Tidak";
+            $dataLpks = "Ya";
         }
 
         if($request->hasFile('imageConfirm')) {
@@ -901,6 +955,7 @@ class HomeController extends Controller
         }
 
         $data->save();
+        $audit->save();
 
         return redirect()->back();
     }
