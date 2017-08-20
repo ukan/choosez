@@ -157,7 +157,7 @@ article.post-large-custom .post-audio-custom {
 							      </div>
 							      <div id="collapse3" class="panel-collapse collapse in">
 							        <div class="panel-body">
-							        	{!! Form::open(['route'=>'post-register-mos', 'files'=>true, 'class' => 'form-horizontal ']) !!}
+							        	{!! Form::open(['route'=>'post-register-mos', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
 							            	<input type="hidden" name="method" id="method" value="add">
 							            	<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Nama Lengkap <b class="text-danger">*</b></label>
