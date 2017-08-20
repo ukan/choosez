@@ -15,6 +15,7 @@ use App\Models\LocationInformation;
 use App\Models\RoomList;
 use App\Models\AuthLog;
 use App\Models\AuthLogBimtes;
+use App\Models\AuthLogMos;
 use App\Models\Activation;
 
 use Illuminate\Http\Request;
@@ -332,11 +333,11 @@ class HomeController extends Controller
             }
             $ipAddress = $ip;
 
-            // $logs = new AuthLogMos;
-            // $logs->bimtes_register_id = $getBim->id;
-            // $logs->ip_address = $ipAddress;
-            // $logs->login = date('Y-m-d H:i:s');
-            // $logs->save();
+            $logs = new AuthLogMos;
+            $logs->mos_register_id = $getBim->id;
+            $logs->ip_address = $ipAddress;
+            $logs->login = date('Y-m-d H:i:s');
+            $logs->save();
 
             $cryptKeyc  = 'qJB0rGtIn5UB1xG03efyCp';
                     $encryptedc = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKeyc),$getBim->id, MCRYPT_MODE_CBC,md5(md5($cryptKeyc))));
