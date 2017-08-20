@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Mos;
+use App\Models\Activation;
+
 use Illuminate\Http\Request;
+
 use Validator;
 use View;
 use Input;
@@ -39,6 +43,7 @@ class MosController extends Controller
             'phone'   => 'required|numeric',
             'email'   => 'required|email|unique:mos',
             'tshirtSize'   => 'required|not_in:Pilih Ukuran Kaos',
+            'event'   => 'required',
             'imageConfirm'   => 'required|image',
         );
 
@@ -57,6 +62,7 @@ class MosController extends Controller
             'imageConfirm.required' => 'Bukti pembayaran wajib diisi',
             'imageConfirm.image' => 'Bukti pembayaran tidak valid',
             'gender.not_in' => 'Jenis kelamin tidak valid',
+            'event.required' => 'Jenis kegiatan wajib dipilih',
             'tshirtSize.not_in' => 'Ukuran kaos tidak valid',
         ];
 
@@ -64,7 +70,11 @@ class MosController extends Controller
         if($validate->fails()) {
             $this->validate($request,$rules, $message);
         } else {
+            if(!empty($request->mos_id)){
+                $mos = Mos::find($request->mos_id);
+            }else{
                 $mos = new Mos;
+            }
                 $mos->name = $request->name;
                 $mos->place_of_birth = $request->place;
                 $mos->date_of_birth = $request->date;
@@ -74,7 +84,17 @@ class MosController extends Controller
                 $mos->room = $request->kamar;
                 $mos->major = $request->major;
                 $mos->phone = $request->phone;
-                $mos->email = $request->email;
+                $mos->email = strtolower($request->email);
+                if($param['event'][0] == "Ta'aruf"){
+                    $mos->taaruf = "Ya";
+                    if(isset($param['event'][1])){
+                        $mos->lpks = "Ya";
+                    }
+                }else{
+                    $mos->taaruf    = "Tidak";
+                    $mos->lpks      = "Ya";
+                }
+                
                 $mos->tsirt_size = $request->tshirtSize;
 
                 if($request->hasFile('imageConfirm')) {
@@ -84,10 +104,31 @@ class MosController extends Controller
                     $mos->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
                     $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                 }
+
+                $password = "";
+                for ($i = 0; $i<8; $i++) 
+                {
+                    $password .= mt_rand(0,9);
+                }
+
+                $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+                $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$password, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+                $sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+
+                $mos->password = $sentEncrypt;
+
                 $mos->save();
 
-                $find_data['email'] = $request->email;
+                $active = new Activation;
+                $active->user_id = $mos->id;
+                $active->code = bin2hex(random_bytes(16));
+                $active->completed = true;
+                $active->completed_at = date('Y-m-d H:i:s');
+                $active->save();
+
+                $find_data['email'] = strtolower($request->email);
                 $find_data['full_name'] = $request->name;
+                $find_data['password'] = $password;
                 
                 Mail::send('email.new_mos_register', $find_data, function($message) use($find_data) {
                             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');

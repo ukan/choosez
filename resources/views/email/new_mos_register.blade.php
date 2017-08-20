@@ -38,62 +38,62 @@ h1, h2, h3, h4, h5, h6 { Margin-left: 0; Margin-right: 0; Margin-top: 16px; Marg
 .line-through { text-decoration: line-through; }
 h1,
 h2 {
-	font-size: 26px;
-	line-height: 36px;
-	font-weight: bold;
+  font-size: 26px;
+  line-height: 36px;
+  font-weight: bold;
 }
 .pricing_box h1,
 .pricing_box h2,
 .primary_pricing_box h1,
 .primary_pricing_box h2 {
-	line-height: 20px;
-	Margin-top: 16px;
-	Margin-bottom: 0;
+  line-height: 20px;
+  Margin-top: 16px;
+  Margin-bottom: 0;
 }
 h3,
 h4 {
-	font-size: 22px;
-	line-height: 30px;
-	font-weight: bold;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: bold;
 }
 h5 {
-	font-size: 18px;
-	line-height: 26px;
-	font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: bold;
 }
 h6 {
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
 }
 .primary_btn td,
 .secondary_btn td {
-	font-size: 16px;
-	mso-line-height-rule: exactly;
+  font-size: 16px;
+  mso-line-height-rule: exactly;
 }
 .primary_btn a,
 .secondary_btn a {
-	font-weight: bold;
+  font-weight: bold;
 }
 /* Grid */
 .email_body {
-	padding: 32px 10px;
-	text-align: center;
+  padding: 32px 10px;
+  text-align: center;
 }
 .email_container, .row, .col-1, .col-13, .col-2, .col-3 {
-	display: inline-block;
-	width: 100%;
-	vertical-align: top;
-	text-align: center;
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  text-align: center;
 }
 .email_container {
-	width: 100%;
-	margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 }
 .email_container,
 .row,
 .col-3 { 
-	max-width: 580px; 
+  max-width: 580px; 
 }
 .col-1 { max-width: 190px; }
 .col-2 { max-width: 290px; }
@@ -101,13 +101,13 @@ h6 {
 
 .row { margin: 0 auto; }
 .column {
-	width: 100%;
-	vertical-align: top;
+  width: 100%;
+  vertical-align: top;
 }
 .column_cell {
-	padding: 16px;
-	text-align: center;
-	vertical-align: top;
+  padding: 16px;
+  text-align: center;
+  vertical-align: top;
 }
 .col-bottom-0 .column_cell { padding-bottom: 0; }
 .col-top-0 .column_cell { padding-top: 0; }
@@ -118,102 +118,102 @@ h6 {
 .content_cell, 
 .footer_cell,
 .image_responsive {
-	font-size: 0 !important;
-	text-align: center;
+  font-size: 0 !important;
+  text-align: center;
 }
 /* Header & Footer */
 .header_cell,
 .footer_cell {
-	padding-bottom: 16px;
+  padding-bottom: 16px;
 }
 .header_cell .column_cell,
 .footer_cell .col-13 .column_cell,
 .footer_cell .col-1 .column_cell {
-	text-align: left;
-	padding-top: 16px;
+  text-align: left;
+  padding-top: 16px;
 }
 
 .header_cell img {
-	max-width: 156px;
-	height: auto;
+  max-width: 156px;
+  height: auto;
 }
 .footer_cell {
-	text-align: center;
+  text-align: center;
 }
 .footer_cell p { Margin: 16px 0; }
 /* Jumbotron */
 .invoice_cell .column_cell {
-	text-align: left;
-	padding-top: 0;
-	padding-bottom: 0;
+  text-align: left;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .invoice_cell p {
-	margin-top: 8px;
-	margin-bottom: 16px;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 /* Content */
 .pricing_box {
-	border-collapse: separate;
-	padding: 10px 16px;
-	
-	
+  border-collapse: separate;
+  padding: 10px 16px;
+  
+  
 }
 .primary_pricing_box {
-	border-collapse: separate;
-	padding: 18px 16px;
+  border-collapse: separate;
+  padding: 18px 16px;
 }
 .text_quote .column_cell {
-	border-left: 4px solid;
-	text-align: left;
-	padding-right: 0;
-	padding-top: 0;
-	padding-bottom: 0;
+  border-left: 4px solid;
+  text-align: left;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 /* Buttons */
 .primary_btn,
 .secondary_btn {
-	clear: both;
-	margin: 0 auto;
+  clear: both;
+  margin: 0 auto;
 }
 .primary_btn td,
 .secondary_btn td {
-	text-align: center;
-	vertical-align: middle;
-	padding: 12px 24px;
-	
-	
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 24px;
+  
+  
 }
 .primary_btn a,
 .primary_btn span,
 .secondary_btn a,
 .secondary_btn span {
-	text-align: center;
-	display: block;
+  text-align: center;
+  display: block;
 }
 .label .font_default {
-	font-size: 10px;
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	padding: 3px 7px;
-	white-space: nowrap;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 3px 7px;
+  white-space: nowrap;
 }
 /* Icon Holder + Rules */
 .icon_holder, .hruler {
-	width: 62px;
-	margin-left: auto;
-	margin-right: auto;
-	clear: both;
+  width: 62px;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
 }
 .icon_holder { width: 48px; }
 .hspace, .hruler_cell {
-	font-size: 0;
-	height: 8px;
-	overflow: hidden;
+  font-size: 0;
+  height: 8px;
+  overflow: hidden;
 }
 .hruler_cell {
-	height: 4px;
-	line-height: 4px;
+  height: 4px;
+  line-height: 4px;
 }
 .icon_cell {  font-size: 0;
   line-height: 1;
@@ -224,14 +224,14 @@ h6 {
 .product_row { padding: 0 0 16px; }
 .product_row .column_cell { padding: 16px 16px 0; }
 .image_thumb img {
-	
-	
+  
+  
 }
 .product_row .col-13 .column_cell { text-align: left; }
 .product_row h6 { Margin-top: 0; }
 .product_row p {
-	Margin-top: 8px;
-	Margin-bottom: 8px;
+  Margin-top: 8px;
+  Margin-bottom: 8px;
 }
 .order_total_right .column_cell { text-align: right; }
 .order_total_left .column_cell { text-align: left; }
@@ -239,47 +239,47 @@ h6 {
 .order_total h2 { Margin: 8px 0; }
 /* Responsive Images */
 .image_responsive img {
-	display: block;
-	width: 100%;
-	height: auto;
-	max-width: 580px;
-	margin-left: auto;
-	margin-right: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Colors */
 body,
 .email_body {
-	background-color: #d8dde4; 
+  background-color: #d8dde4; 
 }
 .content_cell {
-	background-color: #ffffff; 
+  background-color: #ffffff; 
 }
 .header_cell,
 .secondary_btn td,
 .icon_primary .icon_cell,
 .primary_pricing_box {
-	background-color: #2f68b4;
+  background-color: #2f68b4;
 }
 .jumbotron_cell,
 .footer_cell,
 .pricing_box {
-	background-color: #f2f2f5;
+  background-color: #f2f2f5;
 }
 .primary_btn td,
 .label .font_default {
-	background-color: #22aaa0;
+  background-color: #22aaa0;
 }
 .icon_secondary .icon_cell {
-	background-color: #e1e3e7;
+  background-color: #e1e3e7;
 }
 .label_1 .font_default {
-	background-color: #62a9dd;
+  background-color: #62a9dd;
 }
 .label_2 .font_default {
-	background-color: #8965ad;
+  background-color: #8965ad;
 }
 .label_3 .font_default {
-	background-color: #df6164;
+  background-color: #df6164;
 }
 .header_cell .column_cell,
 .header_cell a,
@@ -292,16 +292,16 @@ body,
 .primary_pricing_box,
 .primary_pricing_box h1,
 .primary_pricing_box small {
-	color: #ffffff;
+  color: #ffffff;
 }
 h2,
 h4,
 h5,
 h6 {
-	color: #383d42;
+  color: #383d42;
 }
 .column_cell {
-	color: #888888;
+  color: #888888;
 }
 h1,
 h3,
@@ -310,22 +310,22 @@ a span,
 .text-secondary,
 .column_cell .text-secondary, 
 .content_cell h2 .text-secondary {
-	color: #2f68b4;
+  color: #2f68b4;
 }
 .footer_cell a, 
 .footer_cell a span {
-	color: #7a7a7a;
+  color: #7a7a7a;
 }
 .text-muted,
 .footer_cell .column_cell, 
 .content h4 span, 
 .content h3 span {
-	color: #b3b3b5;
+  color: #b3b3b5;
 }
 .footer_cell,
 .product_row, 
 .order_total {
-	border-top: 1px solid;
+  border-top: 1px solid;
 }
 .product_row, 
 .order_total,
@@ -335,37 +335,37 @@ a span,
 .content .order_total,
 .pricing_box,
 .text_quote .column_cell {
-	border-color: #d8dde4;
+  border-color: #d8dde4;
 }
 /* Responsive */
 @media screen {
   h1, h2, h3, h4, h5, h6, p, a, .font_default {
-	  font-family: "Noto Sans", Helvetica, Arial, sans-serif !important;  /* web font */
+    font-family: "Noto Sans", Helvetica, Arial, sans-serif !important;  /* web font */
   }
   .primary_btn td, .secondary_btn td {
-	  padding: 0 !important;
+    padding: 0 !important;
   }
   .primary_btn a, .secondary_btn a {
-	  padding: 12px 24px !important;
+    padding: 12px 24px !important;
   }
 }
 @media screen and (min-width: 631px) and (max-width: 769px) {
 .col-1, .col-2, .col-3, .col-13 {
-	float: left !important;
+  float: left !important;
 }
 .col-1 {
-	width: 200px !important;
+  width: 200px !important;
 }
 .col-2 {
-	width: 300px !important;
+  width: 300px !important;
 }
 }
 @media screen and (max-width: 630px) {
   .jumbotron_cell {
-	  background-size: cover !important;
+    background-size: cover !important;
   }
   .row, .col-1, .col-13, .col-2, .col-3 {
-	  max-width: 100% !important;
+    max-width: 100% !important;
   }
 }
 </style>
@@ -378,7 +378,7 @@ a span,
       <tr>
         <td width="580" align="center" valign="top">
   <![endif]-->
-  	<div class="email_container" style="display: inline-block;width: 100%;vertical-align: top;text-align: center;margin: 0 auto;max-width: 580px;font-size: 0 !important;">
+    <div class="email_container" style="display: inline-block;width: 100%;vertical-align: top;text-align: center;margin: 0 auto;max-width: 580px;font-size: 0 !important;">
       <table class="header" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
         <tbody>
           <tr>
@@ -454,8 +454,8 @@ a span,
                                 </tr>
                               </tbody>
                             </table><!-- /.icon_holder:icon_secondary -->
-                            <h4 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: bold;color: #383d42;"></h4>
-                            <p class="lead" style="font-family: Helvetica, Arial, sans-serif;font-size: 19px;line-height: 27px;margin-top: 16px;margin-bottom: 16px;"></p>
+                            <h4 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: bold;color: #383d42;">Congratulations {!! $full_name !!}</h4>
+                            <p class="lead" style="font-family: Helvetica, Arial, sans-serif;font-size: 19px;line-height: 27px;margin-top: 16px;margin-bottom: 16px;">You have finished register your account.</p>
                             <table class="primary_btn" align="center" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;clear: both;margin: 0 auto;">
                               <tbody>
                                 <tr>
@@ -507,8 +507,13 @@ a span,
                       <tbody>
                         <tr>
                           <td class="column_cell font_default" align="center" valign="top" style="padding: 16px;font-family: Helvetica, Arial, sans-serif;font-size: 15px;text-align: center;vertical-align: top;color: #888888;">
-                            <strong style="font-size: 22px;font-weight: normal;"><b>Congratulations {!! $full_name !!}</b></strong>
-                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: 19px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">You have finished register your account.</p>
+                            <small style="font-size: 86%;font-weight: normal;">Here's some useful information.</small>
+                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><strong>Email</strong><br>
+                              {!! $email !!}</p>
+                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: 15px;line-height: 23px;margin-top: 5px;margin-bottom: 24px;"><strong>Password</strong><br>
+                              {!! $password !!}<br><br>
+                              you can login to member area with the following link :</p>
+                              <a href="https://www.ponpesalihsancbr.id/in/mos/login" style="padding-top: 5px;padding-bottom: 5px; background-color: #22aaa0;display: block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #ffffff;font-weight: bold;text-align: center;"><span style="text-decoration: none;color: #ffffff;text-align: center;display: block;">Start your first campaign</span></a>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>

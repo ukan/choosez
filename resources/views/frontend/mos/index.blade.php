@@ -152,12 +152,12 @@ article.post-large-custom .post-audio-custom {
 							    <div class="panel panel-default">
 							      <div class="panel-heading">
 							        <h4 class="panel-title">
-							          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><b>Form Pendaftaran Ta'aruf Online</b></a>
+							          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><b>Form Pendaftaran Ta'aruf dan LPKS Online</b></a>
 							        </h4>
 							      </div>
 							      <div id="collapse3" class="panel-collapse collapse in">
 							        <div class="panel-body">
-							        	{!! Form::open(['route'=>'post-register-mos', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
+							        	{!! Form::open(['route'=>'post-register-mos', 'files'=>true, 'class' => 'form-horizontal ']) !!}
 							            	<input type="hidden" name="method" id="method" value="add">
 							            	<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Nama Lengkap <b class="text-danger">*</b></label>
@@ -224,7 +224,7 @@ article.post-large-custom .post-audio-custom {
 								            </div>
 
 								            <div class="form-group {{ $errors->has('major') ? ' has-error' : '' }}">
-								                <label class="col-md-3 control-label">Pilihan Jurusan <b class="text-danger">*</b></label>
+								                <label class="col-md-3 control-label">Jurusan <b class="text-danger">*</b></label>
 								                <div class="col-md-4">
 								                    {!! Form::text('major', '', ['class' => 'form-control', 'placeholder' => 'Jurusan']) !!}
 								                    <p class="has-error text-danger error-major"></p>
@@ -262,6 +262,17 @@ article.post-large-custom .post-audio-custom {
 							                        <p class="has-error text-danger error-tshirtSize"></p>
 							                    </div>
 							                </div>
+
+							                <div class="form-group {{ $errors->has('event') ? ' has-error' : '' }}">
+								                <label class="col-md-3 control-label">Jenis Kegiatan <b class="text-danger">*</b></label>
+								                <div class="col-md-4">
+								                    <div class="checkbox">
+													  <label><input name="event[]" type="checkbox" value="Ta'aruf">Ta'aruf</label><br>
+													  <label><input name="event[]" type="checkbox" value="LPKS">LPKS</label>
+													</div>
+								                    <p class="has-error text-danger error-event"></p>
+								                </div>
+								            </div>
 
 								            <div class="form-group area-insert-update">
 							                    <label class="col-md-3 control-label">Bukti Pembayaran <b class="text-danger">*</b></label>

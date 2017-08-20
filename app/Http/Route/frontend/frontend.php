@@ -10,6 +10,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/login', array('as' => 'admin-login-member', 'uses' => 'HomeController@postLogin'));
     // Route::get('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@sign_in_bimtes'));
     // Route::post('bimtes/login', array('as' => 'login-member-bimtes', 'uses' => 'HomeController@postLoginBimtes'));
+    Route::get('mos/login', array('as' => 'login-member-mos', 'uses' => 'HomeController@sign_in_mos'));
+    Route::post('mos/login', array('as' => 'login-member-mos', 'uses' => 'HomeController@postLoginMos'));
     Route::get('/sign_up', array('as' => 'sign_up', 'uses' => 'HomeController@sign_up'));
     Route::post('/sign_up', array('as' => 'post-sign-up', 'uses' => 'UsersController@postSignUp'));
 
@@ -31,6 +33,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('/bimtes/post-register-bimtes', array('as' => 'post-register-bimtes', 'uses' => 'HomeController@post_register_bimtes'));
     
     Route::post('/bimtes/df8d4njfdnjczFBhfnLXsNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=/edit-register-bimtes', array('as' => 'edit-register-bimtes', 'uses' => 'HomeController@post_register_bimtes_edit'));
+
+    //edit mos
+    Route::post('/mos/df8d4njfdnjczFBhfnLXsNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=/edit-register-mos', array('as' => 'edit-register-mos', 'uses' => 'HomeController@post_register_mos_edit'));
 
     //register santri
     Route::get('/register', array('as' => 'register', 'uses' => 'HomeController@register'));
@@ -90,6 +95,10 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::get('/bimtes/df8d4njfdnj{id?}', array('as' => 'dashboard-member-bimtes', 'uses' => 'HomeController@indexBimtes'));
     Route::get('/bimtes/logout', array('as' => 'member-bimtes-logout', 'uses' => 'HomeController@getLogout'));
+
+    //mos dashboard
+    Route::get('/mos/df8d4njfdnj{id?}', array('as' => 'dashboard-member-mos', 'uses' => 'HomeController@indexMos'));
+    Route::get('/mos/logout', array('as' => 'member-mos-logout', 'uses' => 'HomeController@getLogoutMos'));
 
     Route::group(['middleware' => 'MemberAccess', 'namespace' => 'Member'], function () {
         Route::any('/dashboard/{filter}', array('as' => 'admin-dashboard-filter-member', 'uses' => 'DashboardController@index'));

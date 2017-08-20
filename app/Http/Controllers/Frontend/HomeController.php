@@ -10,13 +10,16 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\BimtesRegister;
+use App\Models\Mos;
 use App\Models\LocationInformation;
 use App\Models\RoomList;
 use App\Models\AuthLog;
 use App\Models\AuthLogBimtes;
 use App\Models\Activation;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 use Redirect;
 use Validator;
 use Cache;
@@ -49,6 +52,20 @@ class HomeController extends Controller
         }
         $bimtes_data = BimtesRegister::find($decrypted);
         return view('frontend.member.dashboard.homepage')->with('data', $bimtes_data);
+    }
+
+    public function indexMos($id)
+    {   
+        $beforeDecrypt = str_replace('zpaIwL8TvQqP','/',$id);
+        $cryptKey   = 'qJB0rGtIn5UB1xG03efyCp';
+        $decrypted  = rtrim( mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),base64_decode($beforeDecrypt),
+                MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");
+        if (!is_numeric($decrypted)) {
+            $bimtes_data = null;
+            return view('backend.unautor')->with('data', $bimtes_data);
+        }
+        $bimtes_data = Mos::find($decrypted);
+        return view('frontend.member.dashboard.homemos')->with('data', $bimtes_data);
     }
 
     public function index()
@@ -113,6 +130,15 @@ class HomeController extends Controller
     public function sign_in_bimtes(){
         $form = [
             'url' => route('login-member-bimtes'),
+            'autocomplete' => 'off',
+        ];
+
+        return view('frontend.login', compact('form'))->with('type','member');
+    }
+
+    public function sign_in_mos(){
+        $form = [
+            'url' => route('login-member-mos'),
             'autocomplete' => 'off',
         ];
 
@@ -260,9 +286,83 @@ class HomeController extends Controller
         return $backToLogin;
     }
 
+    public function postLoginMos(Request $request)
+    {
+        $route_login_type = "login-member-mos";
+        $route_dashboard_type = "dashboard-member-mos";
+        
+        $backToLogin = redirect()->route($route_login_type)->withInput();
+        $findUser = Mos::where('email',strtolower($request->input('email')))->get()->first();
+        // If we can not find user based on email...
+        if (! $findUser) {
+            flash()->error('Wrong email!');
+
+            return $backToLogin;
+        }
+
+        try {
+            $remember = (bool) $request->input('remember_me');
+            $user = Mos::where('email',$request->input('email'));
+            if($user->count() > 0){
+                $user = Mos::find($user->first()->id);
+            }
+
+            $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+                    $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$request->input('password'), MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+                    $sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+
+            // If password is incorrect...
+            $getBim = Mos::where('password', $sentEncrypt)->get()->first();
+            if (count($getBim) <= 0) {
+                flash()->error('Password is incorrect!');
+                return $backToLogin;
+            }
+
+            if ($request->input('remember_me') == TRUE) {
+                Session::put('field_email',$request->input('email'));
+                Session::put('field_password',$request->input('password'));
+            }
+
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+              $ip=$_SERVER['HTTP_CLIENT_IP'];
+            }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+              $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+            }else{
+              $ip=$_SERVER['REMOTE_ADDR'];
+            }
+            $ipAddress = $ip;
+
+            // $logs = new AuthLogMos;
+            // $logs->bimtes_register_id = $getBim->id;
+            // $logs->ip_address = $ipAddress;
+            // $logs->login = date('Y-m-d H:i:s');
+            // $logs->save();
+
+            $cryptKeyc  = 'qJB0rGtIn5UB1xG03efyCp';
+                    $encryptedc = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKeyc),$getBim->id, MCRYPT_MODE_CBC,md5(md5($cryptKeyc))));
+                    $sentEncryptc = str_replace('/','zpaIwL8TvQqP', $encryptedc);
+
+            flash()->success('Login success!');
+            return redirect()->route($route_dashboard_type, $sentEncryptc);
+        } catch (ThrottlingException $e) {
+            flash()->error('Too many attempts!');
+        } catch (NotActivatedException $e) {
+            flash()->error('Please activate your account before trying to log in.');
+        }
+
+        return $backToLogin;
+    }
+
     public function getLogout()
     {
         $route = 'login-member-bimtes';
+        
+        return redirect()->route($route);
+    }
+
+    public function getLogoutMos()
+    {
+        $route = 'login-member-mos';
         
         return redirect()->route($route);
     }
@@ -728,6 +828,75 @@ class HomeController extends Controller
             $name = str_random(20). '-' .$file->getClientOriginalName();
             $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
             $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+        }
+
+        $data->save();
+
+        return redirect()->back();
+    }
+
+    public function post_register_mos_edit(Request $request){
+        
+        $param = $request->all();
+        $data = Mos::find($request->id);
+        
+        if(!empty($request->name)){
+            $data->name = $request->name;
+        }
+        if(!empty($request->place)){
+            $data->place_of_birth = $request->place;
+        }
+        if(!empty($request->date)){
+            $data->date_of_birth = $request->date;
+        }
+        if(!empty($request->address)){
+            $data->address = $request->address;
+        }
+        if(!empty($data->email) && ($request->email!=$data->email) ){
+            $data->email = strtolower($request->email);
+        }
+        if(!empty($request->phone)){
+            $data->phone = $request->phone;
+        }
+        if(!empty($request->gender)){
+            $data->gender = $request->gender;
+        }
+
+        if(!empty($request->asrama) && $request->assrama != "Pilih Asrama"){
+            $data->dorm = $request->asrama;
+        }
+        if(!empty($request->kamar) && $request->kamar != "Pilih Kamar"){
+            $data->room = $request->kamar;
+        }
+        if(!empty($request->major)){
+            $data->major = $request->major;
+        }
+        if(!empty($request->tshirtSize)){
+            $data->tsirt_size = $request->tshirtSize;
+        }
+        
+        if($param['event'][0] == "Ta'aruf"){
+            $data->taaruf = "Ya";
+            if(isset($param['event'][1])){
+                $data->lpks = "Ya";
+            }
+        }else{
+            $data->taaruf    = "Tidak";
+            $data->lpks      = "Ya";
+        }
+
+        if($request->hasFile('imageConfirm')) {
+            if($request->action == 'update'){
+                if($data->image_confirm != ""){
+                $image_path = public_path().'/storage/mos/'.$data->image_confirm;
+                unlink($image_path);
+                }
+            }
+            createdirYmd('storage/mos');
+            $file = Input::file('imageConfirm');
+            $name = str_random(20). '-' .$file->getClientOriginalName();
+            $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
+            $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
         }
 
         $data->save();
