@@ -36,7 +36,7 @@ return [
 		'profile_detail' => 'Detail Profil',
 		'psb_detail' => 'Form Pendaftaran Santri Baru',
 		'register' => 'Pendaftaran',
-		'mos' => "Ta'aruf",
+		'mos' => "Ta'aruf dan LPKS",
 	],
 	'form' => [
 		'full_name' => 'Nama Lengkap',
