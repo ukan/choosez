@@ -144,7 +144,7 @@ class HomeController extends Controller
             'autocomplete' => 'off',
         ];
 
-        return view('frontend.login', compact('form'))->with('type','member');
+        return view('frontend.login_mos', compact('form'))->with('type','member');
     }
 
     public function postLogin(Request $request)

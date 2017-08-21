@@ -14,6 +14,7 @@ use Mail;
 use Excel;
 use Config;
 use Sentinel;
+use Validator;
 
 class MosController extends BaseController
 {
@@ -123,6 +124,14 @@ class MosController extends BaseController
                     <label class="col-md-3 control-label"><strong>Tshirt Size</strong></label>
                     <div class="col-md-9">
                         <strong>:</strong> '.$mos_reg->tsirt_size.'
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+         echo '<div class="form-group">
+                    <label class="col-md-3 control-label"><strong>Event</strong></label>
+                    <div class="col-md-9">
+                        <strong>:</strong><br> - <b>Taaruf</b> : '.$mos_reg->taaruf.'
+                        <br> - <b>LPKS</b> : '.$mos_reg->lpks.'
                     </div>
                     <div class="clear"></div>
                 </div>';
@@ -331,5 +340,74 @@ class MosController extends BaseController
                 });
 
         echo json_encode($response);
+    }
+
+    public function resetPassword(){
+
+        $data['form']['route'] = 'admin-update-user-manual';
+        $data['form']['method'] = 'POST';
+
+        return view('backend.admin.mos.form', $data)->with('title', 'Reset Password')->with('pass', null);
+    }
+
+    public function resetPasswordUser(Request $request)
+    {   
+        $response = array();
+        $param = $request->all();
+
+        $rules = array( 
+            'email'   => 'required|email',
+        );
+
+        $message = [
+            'email.required' => 'Email wajib diisi',
+        ];
+
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules, $message);
+        } else {
+            $data['form']['route'] = 'admin-update-user-manual';
+            $data['form']['method'] = 'POST';
+
+            $password = "";
+            for ($i = 0; $i<8; $i++) 
+            {
+                $password .= mt_rand(0,9);
+            }
+
+            $cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+            $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey),$password, MCRYPT_MODE_CBC,md5(md5($cryptKey))));
+            $sentEncrypt = str_replace('/','zpaIwL8TvQqP', $encrypted);
+
+            $userMos = Mos::where('email', strtolower($request->email))->first();
+            
+            if(!empty($userMos)){
+                $userMos->password = $sentEncrypt;
+                $userMos->save();
+            }else{
+                //create foo validation rule
+                Validator::extend('ganteng', function($field,$value,$parameters){
+                 //return true if field value is foo
+                 return $value == 'ds';
+                });
+
+                 //create array of validation rules
+                $rules = array(
+                        'email'=>'ganteng',
+                );
+                 //set custom error messages
+                $messages = array(
+                     'ganteng'=>'usernot found'
+                );
+                 //validate inputs
+                $validator = Validator::make($param,$rules,$messages);
+                if($validate->fails()) {
+                    $this->validate($request,$rules, $message);
+                }
+            }
+        }
+
+        return view('backend.admin.mos.form', $data)->with('title', 'user-edit')->with('pass', $password);
     }
 }
