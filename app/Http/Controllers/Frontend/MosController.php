@@ -38,8 +38,8 @@ class MosController extends Controller
             'date'   => 'required',
             'gender'   => 'required|not_in:Pilih Jenis Kelamin',
             'address'   => 'required',
-            'asrama'   => 'required',
-            'kamar'   => 'required',
+            'asrama'   => 'required|not_in:Pilih Asrama',
+            'kamar'   => 'required|not_in:Pilih Kamar',
             'major'   => 'required',
             'phone'   => 'required|numeric',
             'email'   => 'required|email|unique:mos',
@@ -59,12 +59,16 @@ class MosController extends Controller
             'major.required' => 'Jurusan wajib diisi',
             'phone.required' => 'No. Kontak wajib diisi',
             'email.required' => 'Email wajib diisi',
+            'email.email' => 'Alamat email tidak valid',
+            'email.unique' => 'Alamat email sudah ada',
             'tshirtSize.required' => 'Ukuran kaos wajib diisi',
+            'tshirtSize.not_in' => 'Ukuran kaos tidak valid',
             'imageConfirm.required' => 'Bukti pembayaran wajib diisi',
             'imageConfirm.image' => 'Bukti pembayaran tidak valid',
             'gender.not_in' => 'Jenis kelamin tidak valid',
             'event.required' => 'Jenis kegiatan wajib dipilih',
-            'tshirtSize.not_in' => 'Ukuran kaos tidak valid',
+            'asrama.not_in' => 'Asrama tidak valid',
+            'kamar.not_in' => 'Kamar tidak valid',
         ];
 
         $validate = Validator::make($param,$rules);

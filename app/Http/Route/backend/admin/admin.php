@@ -199,9 +199,15 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
             Route::post('user-edit/', array('as' => 'admin-update-user-manual', 'uses' => 'MosController@resetPasswordUser'));
 
         });
+
         /*download report*/
         Route::any('/download/{type}/{from?}/{end?}', 
             array('as' => 'download-data-mos', 'uses' =>  'MosController@download'));
+    });
+
+    Route::group(['prefix' => 'mos/log-history-page','namespace' => 'AuthLogHistory'], function () {
+        Route::get('log-history', array('as' => 'admin-view-history-log-mos', 'uses' => 'HistoryLogsController@indexMos'));
+        Route::get('log-history-datatable-mos', array('as' => 'admin-view-history-log-datatable-mos', 'uses' => 'HistoryLogsController@datatablesLoginMos'));
     });
 
     Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {
