@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 
 use App\Models\Mos;
+use App\Models\RoomList;
 use App\Models\Activation;
 
 use Illuminate\Http\Request;
@@ -75,13 +76,16 @@ class MosController extends Controller
             }else{
                 $mos = new Mos;
             }
+                $asrama = RoomList::where('id', $request->asrama)->first()->name;
+                $kamar = RoomList::where('id', $request->kamar)->first()->name;
+                
                 $mos->name = $request->name;
                 $mos->place_of_birth = $request->place;
                 $mos->date_of_birth = $request->date;
                 $mos->gender = $request->gender;
                 $mos->address = $request->address;
-                $mos->dorm = $request->asrama;
-                $mos->room = $request->kamar;
+                $mos->dorm = $asrama;
+                $mos->room = $kamar;
                 $mos->major = $request->major;
                 $mos->phone = $request->phone;
                 $mos->email = strtolower($request->email);
