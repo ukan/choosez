@@ -933,6 +933,7 @@ class HomeController extends Controller
                 $dataLpks.' | '.
                 $request->imageConfirm;
 
+
             if(!empty($request->name)){
                 $data->name = $request->name;
             }
@@ -956,10 +957,12 @@ class HomeController extends Controller
             }
 
             if(!empty($request->asrama) && $request->assrama != "Pilih Asrama"){
-                $data->dorm = $request->asrama;
+                $asrama = RoomList::where('id', $request->asrama)->first()->name;
+                $data->dorm = $asrama;
             }
             if(!empty($request->kamar) && $request->kamar != "Pilih Kamar"){
-                $data->room = $request->kamar;
+                $kamar = RoomList::where('id', $request->kamar)->first()->name;
+                $data->room = $kamar;
             }
             if(!empty($request->major)){
                 $data->major = $request->major;
