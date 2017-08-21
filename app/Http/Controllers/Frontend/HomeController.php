@@ -842,120 +842,163 @@ class HomeController extends Controller
         $audit = new AuditrailLog;
 
         $param = $request->all();
-        $data = Mos::find($request->id);
-        
-        if($param['event'][0] == "Ta'aruf"){
-            $dataTaaruf = "Ya";
-            if(isset($param['event'][1])){
-                $dataLpks = "Ya";
-            }else{
-                $dataLpks = "Tidak";
-            }
-        }else{
-            $dataTaaruf = "Tidak";
-            $dataLpks = "Ya";
-        }
+        $rules = array( 
+            'name'   => 'required',
+            'place'   => 'required',
+            'date'   => 'required',
+            'gender'   => 'required|not_in:Pilih Jenis Kelamin',
+            'address'   => 'required',
+            'asrama'   => 'required|not_in:Pilih Asrama',
+            'kamar'   => 'required|not_in:Pilih Kamar',
+            'major'   => 'required',
+            'phone'   => 'required|numeric',
+            'email'   => 'required|email',
+            'tshirtSize'   => 'required|not_in:Pilih Ukuran Kaos',
+            'event'   => 'required',
+            'imageConfirm'   => 'required|image',
+        );
 
-        $audit->email = $data->email;
-        $audit->table_name = "Mos";
-        $audit->action = "Edit";
-        $audit->before = 
-            $data->name.' | '.
-            $data->place_of_birth.' | '.
-            $data->date_of_birth.' | '.
-            $data->address.' | '.
-            $data->email.' | '.
-            $data->phone.' | '.
-            $data->gender.' | '.
-            $data->dorm.' | '.
-            $data->room.' | '.
-            $data->major.' | '.
-            $data->tsirt_size.' | '.
-            $data->taaruf.' | '.
-            $data->lpks.' | '.
-            $data->image_confirm;
+        $message = [
+            'name.required' => 'Nama wajib diisi',
+            'place.required' => 'Tempat lahir wajib diisi',
+            'date.required' => 'Tanggal lahir wajib diisi',
+            'gender.required' => 'Jenis kelamin wajib diisi',
+            'address.required' => 'Alamat wajib diisi',
+            'asrama.required' => 'Asrama wajib diisi',
+            'kamar.required' => 'Kamar wajib diisi',
+            'major.required' => 'Jurusan wajib diisi',
+            'phone.required' => 'No. Kontak wajib diisi',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Alamat email tidak valid',
+            'tshirtSize.required' => 'Ukuran kaos wajib diisi',
+            'tshirtSize.not_in' => 'Ukuran kaos tidak valid',
+            'imageConfirm.required' => 'Bukti pembayaran wajib diisi',
+            'imageConfirm.image' => 'Bukti pembayaran tidak valid',
+            'gender.not_in' => 'Jenis kelamin tidak valid',
+            'event.required' => 'Jenis kegiatan wajib dipilih',
+            'asrama.not_in' => 'Asrama tidak valid',
+            'kamar.not_in' => 'Kamar tidak valid',
+        ];
+        $validate = Validator::make($param,$rules);
+        if($validate->fails()) {
+            $this->validate($request,$rules, $message);
+        } else {
 
-        $audit->after = 
-            $request->name.' | '.
-            $request->place.' | '.
-            $request->date.' | '.
-            $request->address.' | '.
-            $request->email.' | '.
-            $request->phone.' | '.
-            $request->gender.' | '.
-            $request->asrama.' | '.
-            $request->kamar.' | '.
-            $request->major.' | '.
-            $request->tshirtSize.' | '.
-            $dataTaaruf.' | '.
-            $dataLpks.' | '.
-            $request->imageConfirm;
-
-        if(!empty($request->name)){
-            $data->name = $request->name;
-        }
-        if(!empty($request->place)){
-            $data->place_of_birth = $request->place;
-        }
-        if(!empty($request->date)){
-            $data->date_of_birth = $request->date;
-        }
-        if(!empty($request->address)){
-            $data->address = $request->address;
-        }
-        if(!empty($data->email) && ($request->email!=$data->email) ){
-            $data->email = strtolower($request->email);
-        }
-        if(!empty($request->phone)){
-            $data->phone = $request->phone;
-        }
-        if(!empty($request->gender)){
-            $data->gender = $request->gender;
-        }
-
-        if(!empty($request->asrama) && $request->assrama != "Pilih Asrama"){
-            $data->dorm = $request->asrama;
-        }
-        if(!empty($request->kamar) && $request->kamar != "Pilih Kamar"){
-            $data->room = $request->kamar;
-        }
-        if(!empty($request->major)){
-            $data->major = $request->major;
-        }
-        if(!empty($request->tshirtSize)){
-            $data->tsirt_size = $request->tshirtSize;
-        }
-        
-        if($param['event'][0] == "Ta'aruf"){
-            $data->taaruf = "Ya";
-            $dataTaaruf = "Ya";
-            if(isset($param['event'][1])){
-                $data->lpks = "Ya";
-                $dataLpks = "Ya";
-            }
-        }else{
-            $data->taaruf    = "Tidak";
-            $data->lpks      = "Ya";
-            $dataTaaruf = "Tidak";
-            $dataLpks = "Ya";
-        }
-
-        if($request->hasFile('imageConfirm')) {
-            if($request->action == 'update'){
-                if($data->image_confirm != ""){
-                $image_path = public_path().'/storage/mos/'.$data->image_confirm;
-                unlink($image_path);
+            $data = Mos::find($request->id);
+            
+            if($param['event'][0] == "Ta'aruf"){
+                $dataTaaruf = "Ya";
+                if(isset($param['event'][1])){
+                    $dataLpks = "Ya";
+                }else{
+                    $dataLpks = "Tidak";
                 }
+            }else{
+                $dataTaaruf = "Tidak";
+                $dataLpks = "Ya";
             }
-            createdirYmd('storage/mos');
-            $file = Input::file('imageConfirm');
-            $name = str_random(20). '-' .$file->getClientOriginalName();
-            $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
-            $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-        }
 
-        $data->save();
-        $audit->save();
+            $audit->email = $data->email;
+            $audit->table_name = "Mos";
+            $audit->action = "Edit";
+            $audit->before = 
+                $data->name.' | '.
+                $data->place_of_birth.' | '.
+                $data->date_of_birth.' | '.
+                $data->address.' | '.
+                $data->email.' | '.
+                $data->phone.' | '.
+                $data->gender.' | '.
+                $data->dorm.' | '.
+                $data->room.' | '.
+                $data->major.' | '.
+                $data->tsirt_size.' | '.
+                $data->taaruf.' | '.
+                $data->lpks.' | '.
+                $data->image_confirm;
+
+            $audit->after = 
+                $request->name.' | '.
+                $request->place.' | '.
+                $request->date.' | '.
+                $request->address.' | '.
+                $request->email.' | '.
+                $request->phone.' | '.
+                $request->gender.' | '.
+                $request->asrama.' | '.
+                $request->kamar.' | '.
+                $request->major.' | '.
+                $request->tshirtSize.' | '.
+                $dataTaaruf.' | '.
+                $dataLpks.' | '.
+                $request->imageConfirm;
+
+            if(!empty($request->name)){
+                $data->name = $request->name;
+            }
+            if(!empty($request->place)){
+                $data->place_of_birth = $request->place;
+            }
+            if(!empty($request->date)){
+                $data->date_of_birth = $request->date;
+            }
+            if(!empty($request->address)){
+                $data->address = $request->address;
+            }
+            if(!empty($data->email) && ($request->email!=$data->email) ){
+                $data->email = strtolower($request->email);
+            }
+            if(!empty($request->phone)){
+                $data->phone = $request->phone;
+            }
+            if(!empty($request->gender)){
+                $data->gender = $request->gender;
+            }
+
+            if(!empty($request->asrama) && $request->assrama != "Pilih Asrama"){
+                $data->dorm = $request->asrama;
+            }
+            if(!empty($request->kamar) && $request->kamar != "Pilih Kamar"){
+                $data->room = $request->kamar;
+            }
+            if(!empty($request->major)){
+                $data->major = $request->major;
+            }
+            if(!empty($request->tshirtSize)){
+                $data->tsirt_size = $request->tshirtSize;
+            }
+            
+            if($param['event'][0] == "Ta'aruf"){
+                $data->taaruf = "Ya";
+                $dataTaaruf = "Ya";
+                if(isset($param['event'][1])){
+                    $data->lpks = "Ya";
+                    $dataLpks = "Ya";
+                }
+            }else{
+                $data->taaruf    = "Tidak";
+                $data->lpks      = "Ya";
+                $dataTaaruf = "Tidak";
+                $dataLpks = "Ya";
+            }
+
+            if($request->hasFile('imageConfirm')) {
+                if($request->action == 'update'){
+                    if($data->image_confirm != ""){
+                    $image_path = public_path().'/storage/mos/'.$data->image_confirm;
+                    unlink($image_path);
+                    }
+                }
+                createdirYmd('storage/mos');
+                $file = Input::file('imageConfirm');
+                $name = str_random(20). '-' .$file->getClientOriginalName();
+                $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
+                $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            }
+
+            $data->save();
+            $audit->save();
+        }
 
         return redirect()->back();
     }

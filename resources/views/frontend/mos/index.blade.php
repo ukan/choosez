@@ -163,7 +163,9 @@ article.post-large-custom .post-audio-custom {
 								                <label class="col-md-3 control-label">Nama Lengkap <b class="text-danger">*</b></label>
 								                <div class="col-md-5">
 								                    {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Nama Lengkap']) !!}
-								                    <p class="has-error text-danger error-name"></p>
+								                    @if ($errors->has('name'))
+									                    <p class="has-error text-danger">{{ $errors->first('name') }}</p>
+									                @endif
 								                </div>
 								            </div>
 								            <div class="form-group {{ $errors->has('place') ? ' has-error' : '' }}">
