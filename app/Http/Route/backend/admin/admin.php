@@ -194,6 +194,11 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::post('change-status', array('as' => 'change-status', 'uses' => 'MosController@change_status'));
         Route::post('/post-mos-data', array('as' => 'admin-post-mos-data', 'uses' => 'MosController@post_mos_data'));
 
+        Route::group(['prefix' => 'manual'], function () {
+            Route::get('/user-edit', array('as' => 'admin-index-mos-user-edit', 'uses' => 'MosController@resetPassword'));
+            Route::post('user-edit/', array('as' => 'admin-update-user-manual', 'uses' => 'MosController@resetPasswordUser'));
+
+        });
         /*download report*/
         Route::any('/download/{type}/{from?}/{end?}', 
             array('as' => 'download-data-mos', 'uses' =>  'MosController@download'));
