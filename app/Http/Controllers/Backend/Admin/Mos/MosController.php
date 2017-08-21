@@ -386,25 +386,11 @@ class MosController extends BaseController
                 $userMos->password = $sentEncrypt;
                 $userMos->save();
             }else{
-                //create foo validation rule
-                Validator::extend('ganteng', function($field,$value,$parameters){
-                 //return true if field value is foo
-                 return $value == 'ds';
-                });
+                $route_login_type = "admin-index-mos-user-edit";
+                $backToLogin = redirect()->route($route_login_type)->withInput();
+                flash()->error('Email not found, please try again!');
 
-                 //create array of validation rules
-                $rules = array(
-                        'email'=>'ganteng',
-                );
-                 //set custom error messages
-                $messages = array(
-                     'ganteng'=>'usernot found'
-                );
-                 //validate inputs
-                $validator = Validator::make($param,$rules,$messages);
-                if($validate->fails()) {
-                    $this->validate($request,$rules, $message);
-                }
+                return $backToLogin;
             }
         }
 

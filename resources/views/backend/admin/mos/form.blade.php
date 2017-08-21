@@ -21,13 +21,7 @@
                 </div>
                 {!! Form::modelHorizontal($form) !!}
                     <div class="panel-body">
-                        @if (! empty($user['image']) && file_exists(avatar_path($user['image'])))
-                            <div class="form-group">
-                                <div class="col-sm-12" align="center">
-                                    <img src="{{ link_to_photo($user['image']) }}" style="width: 120px; height: 120px" class="img-circle img-responsive"/>
-                                </div>
-                            </div>
-                        @endif
+                        @include('flash::message')
                         <div class="form-group{{ Form::hasError('email') }}">
                             {!! Form::label('email', 'Email', ['class' => 'col-sm-3 control-label']) !!}
                             <div class="col-sm-9">
