@@ -305,6 +305,16 @@ article.post-large-custom .post-audio-custom {
 			</div>
 
 			@include('frontend.right_bar')
+			<div class="col-md-3">
+				<aside class="sidebar">
+					<div class="box effect1">
+						<a href="{{ asset($pathp.'assets/pamfletmos.jpeg') }}">
+							<img class="img-responsive" src="{{ asset($pathp.'assets/pamfletmos.jpeg') }}" alt="pamflet">
+						</a>
+					</div>
+					<hr>
+				</aside>
+			</div>
 		</div>
 
 	</div>

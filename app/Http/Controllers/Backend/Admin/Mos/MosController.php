@@ -138,9 +138,9 @@ class MosController extends BaseController
         
         if ($mos_reg->image_confirm != ""){
         echo '<div class="form-group">
-                <div class="col-md-3"><strong>Photo</strong></div>
+                <div class="col-md-3"><strong>Confirmation</strong></div>
                 <div class="col-md-9">
-                    <strong>:</strong><a href="'.asset($pathp.'storage/bimtes/bukti/').'/'.$mos_reg->image_confirm.'"> <img src="'.asset($pathp.'storage/mos/').'/'.$mos_reg->image_confirm.'" class="img-responsive" ></a>
+                    <strong>:</strong><a href="'.asset($pathp.'storage/mos/').'/'.$mos_reg->image_confirm.'"> <img src="'.asset($pathp.'storage/mos/').'/'.$mos_reg->image_confirm.'" class="img-responsive" ></a>
                 </div>
             </div>';
         }
