@@ -279,7 +279,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group area-insert-update">
 							                    <label class="col-md-3 control-label">Bukti Pembayaran <b class="text-danger">*</b></label>
 							                    <div class="col-md-9">
-							                        {!! form_input_file_image('file','imageConfirm','','300px','','btn-primary') !!}
+							                        {!! form_input_file_image('file','imageConfirm','','250px','','btn-primary') !!}
 							                        <p class="has-error text-danger error-imageConfirm"></p>
 							                    </div>
 							                </div>
