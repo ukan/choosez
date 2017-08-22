@@ -235,7 +235,7 @@ class MosController extends BaseController
             );
 
         if($from == 'undefined' or $end == 'undefined'){
-            $data = Mos::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','dorm','room','major','email','phone','tsirt_size')->where('status','Approved')->get();
+            $data = Mos::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','dorm','room','major','email','phone','tsirt_size','taaruf','lpks')->where('status','Approved')->get();
 
             $data_send = [];
             foreach ($data as $key => $value) {
@@ -254,11 +254,13 @@ class MosController extends BaseController
                 $data_sen['email'] = $value->email;
                 $data_sen['phone'] = $value->phone;
                 $data_sen['tsirt_size'] = $value->tsirt_size;
+                $data_sen['taaruf'] = $value->taaruf;
+                $data_sen['lpks'] = $value->lpks;
                 
                 array_push($data_send, $data_sen);
             }
         }else{
-            $data = Mos::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','dorm','room','major','email','phone','tsirt_size')->where('status','Approved');
+            $data = Mos::select('name', 'address', 'place_of_birth', 'date_of_birth','gender','dorm','room','major','email','phone','tsirt_size','taaruf','lpks')->where('status','Approved');
             $data = $data->whereBetween('mos.created_at', array($from.' 00:00:00', $end.' 23:59:59'));
             $data = $data->get();
 
@@ -279,6 +281,8 @@ class MosController extends BaseController
                 $data_sen['email'] = $value->email;
                 $data_sen['phone'] = $value->phone;
                 $data_sen['tsirt_size'] = $value->tsirt_size;
+                $data_sen['taaruf'] = $value->taaruf;
+                $data_sen['lpks'] = $value->lpks;
                 
                 array_push($data_send, $data_sen);
             }
@@ -287,7 +291,7 @@ class MosController extends BaseController
         return Excel::create("Export Data Peserta Ta'aruf", function($excel) use ($data_send){
             $excel->sheet('Sheet1', function($sheet) use ($data_send)
             {
-                $first_header = array('Nama', 'Alamat', 'Tempat Lahir', 'Tanggal Lahir','Jenis Kelamin','Asrama','Kamar','Jurusan','Email','Telepon','Ukuran Baju');
+                $first_header = array('Nama', 'Alamat', 'Tempat Lahir', 'Tanggal Lahir','Jenis Kelamin','Asrama','Kamar','Jurusan','Email','Telepon','Ukuran Baju',"Ta'aruf", 'LPKS');
 
                 $sheet->setOrientation('landscape');
                 $sheet->fromArray($data_send, null, 'A1', true);
