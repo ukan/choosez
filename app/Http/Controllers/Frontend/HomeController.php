@@ -74,7 +74,7 @@ class HomeController extends Controller
     {
         $data = BulletinBoard::where('status','article')
                     ->where('publish_status', 'Yes')
-                    ->orderBy('updated_at', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->take(6)->get();
 
         $getData = [];
@@ -89,7 +89,7 @@ class HomeController extends Controller
 
         $data_editor = BulletinBoard::where('status','news')
                     ->where('publish_status', 'Yes')
-                    ->orderBy('updated_at', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->take(6)->get();
 
         $getDataEditor = [];

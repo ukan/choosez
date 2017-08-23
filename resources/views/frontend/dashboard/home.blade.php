@@ -303,8 +303,8 @@ label.line-infra{
 												<div class="col-md-6">
 													<article>
 														<div style="color:#0088cc" class="date">
-															<span class="day">{{ eform_date_number($bulletin_article[$x]->updated_at) }}</span>
-															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_article[$x]->updated_at) }}</span>
+															<span class="day">{{ eform_date_number($bulletin_article[$x]->created_at) }}</span>
+															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_article[$x]->created_at) }}</span>
 														</div>
 														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $value->slug) }}">{{ str_limit($bulletin_article[$x]->title,41) }}</a></h4>
 														{!! str_limit($bulletin_article[$x]->content, 100) !!}<a href="{{ route('news-detail', $value->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
@@ -338,8 +338,8 @@ label.line-infra{
 												<div class="col-md-6">
 													<article>
 														<div class="date">
-															<span style="color:#0088cc" class="day">{{ eform_date_number($bulletin_news[$x]->updated_at) }}</span>
-															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_news[$x]->updated_at) }}</span>
+															<span style="color:#0088cc" class="day">{{ eform_date_number($bulletin_news[$x]->created_at) }}</span>
+															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_news[$x]->created_at) }}</span>
 														</div>
 														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $bulletin_news[$x]->slug) }}">{{ str_limit($bulletin_news[$x]->title,41) }}</a></h4>
 														{!! str_limit($bulletin_news[$x]->content, 100) !!}<a href="{{ route('news-detail', $bulletin_news[$x]->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
