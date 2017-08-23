@@ -85,7 +85,7 @@ img.lazyOwl {
 	color:#B3B3B3;
 }
  .textt p{
-	margin-top:3px ;
+	/*margin-top:3px ;*/
 	margin-bottom:10px;
 	font-size: 14px;
 	color: #4E4E4E;
@@ -151,6 +151,9 @@ label.line-infra{
 }
 .height_title{
 	height: 30px;
+}
+.height_content{
+	height: 100px;
 }
 .height_title_footer_news{
 	height: 80px;
@@ -261,7 +264,7 @@ label.line-infra{
 					</div>
 				    <h3 class="height_title">{{ str_limit($value->title,40) }}</h3>
 					<label class="eline"></label>
-				    <p>{!! str_limit($value->content,100) !!}</p>
+				    <div class="height_content">{!! str_limit($value->content,100) !!}</div>
 					<a href="{{ route('news-detail', $value->slug) }}" >@lang('general.public.read_more')</a>
 				</div>
 				<div class="clearfix"></div>
