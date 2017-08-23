@@ -102,7 +102,7 @@ class HomeController extends Controller
         $count_news = count($getDataEditor);
 
         $data_recent = BulletinBoard::where('publish_status', 'Yes')
-                    ->orderBy('updated_at', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->take(4)->get();
         $getDataRecent = [];
         $x = 0;
