@@ -157,12 +157,19 @@ label.line-infra{
 }
 /*-- //Events Section --*/
 
-.full-screen {
+/*.full-screen {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
+}*/
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        display: block;
+        /*height: 400px;*/
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+        line-height: 1;
+    }
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
 <!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
@@ -171,26 +178,28 @@ label.line-infra{
 @section('content')
 
 <div role="main" class="main">
-	<div id="mycarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#mycarousel" data-slide-to="1"></li>
-    <li data-target="#mycarousel" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item">
-        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/rsz_slide_web.png') }}" data-color="lightblue" alt="First Image">
-    </div>
-    <div class="item">
-        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-color="firebrick" alt="Second Image">
-    </div>
-    <div class="item">
-        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-color="violet" alt="Third Image">
-    </div>
-  </div>
+	<div id="myCarousel" class="carousel slide">
+	    <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active" contenteditable="false"></li>
+	        <li data-target="#myCarousel" data-slide-to="1" class="" contenteditable="false"></li>
+	        <li data-target="#myCarousel" data-slide-to="2" class="" contenteditable="false"></li>
+	        <li data-target="#myCarousel" data-slide-to="3" class="" contenteditable="false"></li>
+	    </ol>
+	    <div class="carousel-inner">
+	        <div class="item active" style="">
+	           <a href="in/mos"> <img src="{{ asset($pathp.'assets/frontend/general/img/slides/pamflet.png') }}" alt="" class=""></a>
+	        </div>
+	        <div class="item ">
+	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/rsz_slide_web.png') }}" alt="" class="">
+	        </div>
+	        <div class="item" style="">
+	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" alt="" class="">
+	        </div>
+	        <div class="item" style="">
+	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" alt="" class="">
+	        </div>
+	    </div>    
+	</div>
 
 </div>
 	<div class="container">
@@ -398,30 +407,41 @@ label.line-infra{
         }
     });
 
-    var $item = $('.carousel .item'); 
-	var $wHeight = $(window).height();
-	$item.eq(0).addClass('active');
-	$item.height($wHeight); 
-	$item.addClass('full-screen');
+	$('#myCarousel').carousel();
+    var winWidth = $(window).innerWidth();
+    $(window).resize(function () {
 
-	$('.carousel img').each(function() {
-	  var $src = $(this).attr('src');
-	  var $color = $(this).attr('data-color');
-	  $(this).parent().css({
-	    'background-image' : 'url(' + $src + ')',
-	    'background-color' : $color
-	  });
-	  $(this).remove();
-	});
-
-	$(window).on('resize', function (){
-	  $wHeight = $(window).height();
-	  $item.height($wHeight);
-	});
-
-	$('.carousel').carousel({
+        if ($(window).innerWidth() < winWidth) {
+            $('.carousel-inner>.item>img').css({
+                'min-width': winWidth, 'width': winWidth
+            });
+        }
+        else {
+            winWidth = $(window).innerWidth();
+            $('.carousel-inner>.item>img').css({
+                'min-width': '', 'width': ''
+            });
+        }
+    });
+    $('.carousel').carousel({
 	  interval: 6000,
 	  pause: "false"
 	});
+
+    // var $item = $('.carousel .item'); 
+	// var $wHeight = $(window).height();
+	// $item.eq(0).addClass('active');
+	// $item.height($wHeight); 
+	// $item.addClass('full-screen');
+
+	// $('.carousel img').each(function() {
+	//   var $src = $(this).attr('src');
+	//   var $color = $(this).attr('data-color');
+	//   $(this).parent().css({
+	//     'background-image' : 'url(' + $src + ')',
+	//     'background-color' : $color
+	//   });
+	//   $(this).remove();
+	// });
 </script>
 @endsection
