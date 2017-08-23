@@ -20,8 +20,6 @@
             display: none;
         }
     </style>
-
-    <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 @endsection
 
 @section('page-header', 'Bimtes Management')
@@ -131,7 +129,8 @@
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     {!! Html::script($pathp.'assets/general/library/ckeditor/ckeditor.init.js') !!}
-
+    {!! Html::script($pathp.'assets/plugins/ckeditor/ckeditor.js') !!}
+    
     <script>
         var table = $('#bimtes-table').DataTable({
                 processing: true,

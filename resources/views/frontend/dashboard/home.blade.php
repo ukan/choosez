@@ -261,7 +261,7 @@ label.line-infra{
 					</div>
 				    <h3 class="height_title">{{ str_limit($value->title,40) }}</h3>
 					<label class="eline"></label>
-				    <p>{!! str_limit($value->content,80) !!}</p>
+				    <p>{!! str_limit($value->content,100) !!}</p>
 					<a href="{{ route('news-detail', $value->slug) }}" >@lang('general.public.read_more')</a>
 				</div>
 				<div class="clearfix"></div>
