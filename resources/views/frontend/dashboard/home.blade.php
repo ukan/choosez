@@ -260,7 +260,7 @@ label.line-infra{
 				</div>
 			    <div class="textt">
 				    <div class="date-event">
-					    <h5><b>{{ eform_datemonth($value->updated_at) }}</b></h5>
+					    <h5><b>{{ eform_datemonth($value->created_at) }}</b></h5>
 					</div>
 				    <h3 class="height_title">{{ str_limit($value->title,40) }}</h3>
 					<label class="eline"></label>
