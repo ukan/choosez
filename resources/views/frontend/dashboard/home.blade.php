@@ -156,6 +156,13 @@ label.line-infra{
 	height: 80px;
 }
 /*-- //Events Section --*/
+
+.full-screen {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
 <!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
@@ -164,226 +171,28 @@ label.line-infra{
 @section('content')
 
 <div role="main" class="main">
-	<div class="slider-container slider-container-fullscreen">
-		<div class="slider" id="revolutionSliderFullScreen" data-plugin-revolution-slider data-plugin-options='{"fullScreen": "on"}'>
-			<ul>
-				<!-- <li data-transition="fade" data-slotamount="10" data-masterspeed="300">
-					<img src="{{ asset($pathp.'assets/frontend/general/img/slides/cek.png') }}" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" />
+	<div id="mycarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#mycarousel" data-slide-to="1"></li>
+    <li data-target="#mycarousel" data-slide-to="2"></li>
+  </ol>
 
-					<div class="tp-caption tp-fade fadeout fullscreenvideo"
-						data-x="0"
-						data-y="0"
-						data-speed="1000"
-						data-start="100"
-						data-easing="Power4.easeOut"
-						data-elementdelay="0.01"
-						data-endelementdelay="0.1"
-						data-endspeed="1500"
-						data-endeasing="Power4.easeIn"
-						data-autoplay="true"
-						data-autoplayonlyfirsttime="false"
-						data-nextslideatend="true"
-						data-volume="mute"
-						data-forceCover="1"
-						data-aspectratio="16:9"
-						data-forcerewind="on">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item">
+        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/rsz_slide_web.png') }}" data-color="lightblue" alt="First Image">
+    </div>
+    <div class="item">
+        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-color="firebrick" alt="Second Image">
+    </div>
+    <div class="item">
+        <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-color="violet" alt="Third Image">
+    </div>
+  </div>
 
-						<video preload="none" width="100%" height="100%" poster="{{ asset('public/assets/frontend/general/img/slides/cek.png') }}"> 
-							<source src="{{ asset($pathp.'assets/frontend/general/video/cek.mp4') }}" type="video/mp4" />
-						</video>
-
-					</div> -->
-
-					<!-- <div class="tp-caption top-label lfl stl"
-						 data-x="140"
-						 data-y="180"
-						 data-speed="300"
-						 data-start="500"
-						 data-easing="easeOutExpo">You just found the</div>
-
-					<div class="tp-caption main-label sft stb"
-						 data-x="135"
-						 data-y="210"
-						 data-speed="300"
-						 data-start="1500"
-						 data-easing="easeOutExpo">BEST SOLUTION</div>
-
-					<div class="tp-caption bottom-label sft stb"
-						 data-x="150"
-						 data-y="280"
-						 data-speed="500"
-						 data-start="2000"
-						 data-easing="easeOutExpo">The #1 Selling HTML Site Template on ThemeForest</div>
-
-					<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#home-intro"
-						data-x="260"
-						data-y="335"
-						data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-						data-speed="800"
-						data-start="2500"
-						data-easing="Back.easeInOut"
-						data-endspeed="300">
-							Get Started Now!
-					</a>
-
-					<div class="tp-caption main-label sft stb visible-lg"
-						 data-x="345"
-						 data-y="415"
-						 data-speed="500"
-						 data-start="2700"
-						 data-easing="easeOutExpo"><a data-hash href="#home-intro"><i class="fa fa-arrow-circle-o-down"></i></a></div> -->
-
-				<!-- </li> -->
-				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img alt="slider 1" src="{{ asset($pathp.'assets/frontend/general/img/slides/slide_web.jpg') }}" data-fullwidthcentering="on" alt="">
-
-						<!-- <div class="tp-caption sft stb visible-lg"
-							 data-x="417"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption top-label lfl stl"
-							 data-x="center" data-hoffset="0"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="500"
-							 data-easing="easeOutExpo">DO YOU NEED A NEW</div>
-
-						<div class="tp-caption sft stb visible-lg"
-							 data-x="717"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption main-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="130"
-							 data-speed="300"
-							 data-start="1500"
-							 data-easing="easeOutExpo">WEB DESIGN?</div>
-
-						<div class="tp-caption bottom-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="200"
-							 data-speed="500"
-							 data-start="2000"
-							 data-easing="easeOutExpo">Check out our options and features.</div>
-
-						<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
-							data-x="center" data-hoffset="0"
-							data-y="250"
-							data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-							data-speed="800"
-							data-start="1700"
-							data-easing="Back.easeInOut"
-							data-endspeed="300">
-								Get Started Now!
-						</a> -->
-				</li>
-				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img alt="slider 2" src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" data-fullwidthcentering="on" alt="">
-
-						<!-- <div class="tp-caption sft stb visible-lg"
-							 data-x="417"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption top-label lfl stl"
-							 data-x="center" data-hoffset="0"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="500"
-							 data-easing="easeOutExpo">DO YOU NEED A NEW</div>
-
-						<div class="tp-caption sft stb visible-lg"
-							 data-x="717"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption main-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="130"
-							 data-speed="300"
-							 data-start="1500"
-							 data-easing="easeOutExpo">WEB DESIGN?</div>
-
-						<div class="tp-caption bottom-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="200"
-							 data-speed="500"
-							 data-start="2000"
-							 data-easing="easeOutExpo">Check out our options and features.</div>
-
-						<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
-							data-x="center" data-hoffset="0"
-							data-y="250"
-							data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-							data-speed="800"
-							data-start="1700"
-							data-easing="Back.easeInOut"
-							data-endspeed="300">
-								Get Started Now!
-						</a> -->
-				</li>
-				<li data-transition="fade" data-slotamount="5" data-masterspeed="600">
-					<img alt="slider 3" src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" data-fullwidthcentering="on" alt="">
-
-						<!-- <div class="tp-caption sft stb visible-lg"
-							 data-x="417"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption top-label lfl stl"
-							 data-x="center" data-hoffset="0"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="500"
-							 data-easing="easeOutExpo">DO YOU NEED A NEW</div>
-
-						<div class="tp-caption sft stb visible-lg"
-							 data-x="717"
-							 data-y="100"
-							 data-speed="300"
-							 data-start="1000"
-							 data-easing="easeOutExpo"><img src="{{ asset($pathp.'assets/frontend/general/img/slides/slide-title-border.png') }}" alt=""></div>
-
-						<div class="tp-caption main-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="130"
-							 data-speed="300"
-							 data-start="1500"
-							 data-easing="easeOutExpo">WEB DESIGN?</div>
-
-						<div class="tp-caption bottom-label sft stb"
-							 data-x="center" data-hoffset="0"
-							 data-y="200"
-							 data-speed="500"
-							 data-start="2000"
-							 data-easing="easeOutExpo">Check out our options and features.</div>
-
-						<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
-							data-x="center" data-hoffset="0"
-							data-y="250"
-							data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-							data-speed="800"
-							data-start="1700"
-							data-easing="Back.easeInOut"
-							data-endspeed="300">
-								Get Started Now!
-						</a> -->
-				</li>
-			</ul>
-		</div>
-	</div>
+</div>
 	<div class="container">
 		<div class="row">
 			<hr class="tall" />
@@ -588,5 +397,31 @@ label.line-infra{
           }
         }
     });
+
+    var $item = $('.carousel .item'); 
+	var $wHeight = $(window).height();
+	$item.eq(0).addClass('active');
+	$item.height($wHeight); 
+	$item.addClass('full-screen');
+
+	$('.carousel img').each(function() {
+	  var $src = $(this).attr('src');
+	  var $color = $(this).attr('data-color');
+	  $(this).parent().css({
+	    'background-image' : 'url(' + $src + ')',
+	    'background-color' : $color
+	  });
+	  $(this).remove();
+	});
+
+	$(window).on('resize', function (){
+	  $wHeight = $(window).height();
+	  $item.height($wHeight);
+	});
+
+	$('.carousel').carousel({
+	  interval: 6000,
+	  pause: "false"
+	});
 </script>
 @endsection
