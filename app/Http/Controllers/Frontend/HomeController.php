@@ -385,8 +385,11 @@ class HomeController extends Controller
                 MCRYPT_MODE_CBC,md5(md5($cryptKey))), "\0");*/
 
         $bulletin = BulletinBoard::where('slug',$slug)->orderBy('id')->get()->first();
-        $bulletin->counter = $bulletin->counter+1;
-        $bulletin->save();
+        if($bulletin){
+            $bulletin->counter = $bulletin->counter+1;
+            $bulletin->save();
+        }
+
 
         $data = BulletinBoard::where('slug',$slug)->orderBy('id')->get();
 
