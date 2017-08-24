@@ -34,10 +34,10 @@ class AdminAlertSender
         $find_data['email'] = "x";
         $find_data['id'] = "cek";
         $find_data['full_name'] = $data;
-        $find_data['table'] = "Update Bulletin";
+        $find_data['table'] = "Bulletin";
 
         Mail::queue('email.update_admin', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
                             $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
                         });
     }
