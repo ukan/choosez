@@ -249,10 +249,10 @@ class BulletinBoardsController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Bulletin";
 
-                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        //                 });
+                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                        });
 
                         $user = User::select('email','first_name')
                                     ->where('roles.slug', 'admin-editor')
@@ -274,7 +274,7 @@ class BulletinBoardsController extends Controller
                         $audit->action = "New";
                         $audit->content = $request->img_url.' | '.$request->title.' | '.$request->content.' | '.$request->type.' | '.$request->author;
                     }else{
-                        Event::fire(new AdminAlertEvent());
+                        // Event::fire(new AdminAlertEvent());
 
                         $bulletin_board = BulletinBoard::find($request->bulletin_board_id);
 
