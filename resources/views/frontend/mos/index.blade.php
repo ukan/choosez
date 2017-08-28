@@ -6,6 +6,7 @@
 <script type="text/javascript">
 	function removeHiddenClass(){
 	  $("#imageLoadingClass").removeClass('hidden');
+	  document.getElementById("btnSubmit").disabled = true; 
 	}
 </script>
 <style type="text/css">
@@ -287,7 +288,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"></label>
 								                <div class="col-md-5">
-								                    <button type="submit" onclick="removeHiddenClass()" title="Kirim" class="btn btn-primary btn-submit">Kirim</button>
+								                    <button type="submit" id="btnSubmit" onclick="removeHiddenClass()" title="Kirim" class="btn btn-primary btn-submit">Kirim</button>
 								                    <img id="imageLoadingClass" src="{!! asset($pathp.'assets/general/images/loaderx.gif') !!}" alt="loader" class="styleLoad hidden">
 								                    
 								                </div>
