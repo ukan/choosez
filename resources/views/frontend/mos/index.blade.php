@@ -5,8 +5,7 @@
 @section('css')
 <script type="text/javascript">
 	function removeHiddenClass(){
-	  $("#imageLoadingClass").removeClass('hidden');
-	  document.getElementById("btnSubmit").disabled = true; 
+	  $("#imageLoadingClass").removeClass('hidden'); 
 	}
 </script>
 <style type="text/css">
@@ -348,6 +347,8 @@ article.post-large-custom .post-audio-custom {
             if(response.status == 'success'){
                 var title_not = 'Notification';
                 var type_not = 'success';
+
+                document.getElementById("btnSubmit").disabled = true;
             }else{
                 var title_not = 'Notification';
                 var type_not = 'failed';

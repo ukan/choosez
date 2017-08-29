@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Mos;
 use App\Models\RoomList;
+use App\Models\AutoresponseEmail;
 use App\Models\Activation;
 
 use Illuminate\Http\Request;
@@ -134,14 +135,13 @@ class MosController extends Controller
                 $active->completed_at = date('Y-m-d H:i:s');
                 $active->save();
 
-                $find_data['email'] = strtolower($request->email);
-                $find_data['full_name'] = $request->name;
-                $find_data['password'] = $password;
-                
-                Mail::send('email.new_mos_register', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
-                            $message->to($find_data['email'], $find_data['full_name'])->subject('Notification');
-                        });
+                AutoresponseEmail::create([
+                    'email' => strtolower($request->email),
+                    'full_name' => $request->name,
+                    'password' => $password,
+                    'type' => AutoresponseEmail::MOS_REGISTER,
+                    'status' => AutoresponseEmail::STATUS,
+                ]);
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
