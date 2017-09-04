@@ -18,7 +18,7 @@
         "greggilbert/recaptcha": "dev-master",
         "doctrine/dbal": "^2.5",
         "gloudemans/shoppingcart": "^2.2",
-        "intervention/image": "^2.3",
+        "intervention/image": "^2.4",
         "skovmand/mailchimp-laravel": "^1.0",
         "mailchimp/mailchimp": "^2.0",
         "unisharp/laravel-ckeditor": "^4.5",
