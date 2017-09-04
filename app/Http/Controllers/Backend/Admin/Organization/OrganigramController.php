@@ -230,7 +230,10 @@ class OrganigramController extends Controller
         echo '<div class="form-group">
                 <div class="col-md-2"><strong>Image</strong></div>
                 <div class="col-md-9">
-                    <strong>:</strong> <img src="'.asset($pathp.'/storage/organigram/').'/'.$organigram->image.'" class="img-responsive" >
+                    <strong>:</strong>
+                        <a href="'.asset($pathp.'/storage/organigram/').'/'.$organigram->image.'" target="_blank"> 
+                            <img src="'.asset($pathp.'/storage/organigram/').'/'.$organigram->image.'" class="img-responsive" >
+                        </a>
                 </div>
             </div>';
         }
