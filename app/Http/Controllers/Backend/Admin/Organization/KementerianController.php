@@ -109,10 +109,10 @@ class KementerianController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Kementrian";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $kementerian = new Kementerian;
 
@@ -125,10 +125,10 @@ class KementerianController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Kementrian";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $kementerian = Kementerian::find($request->kementerian_id);
 
@@ -174,10 +174,10 @@ class KementerianController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete Kementrian";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
 
         echo json_encode($response);

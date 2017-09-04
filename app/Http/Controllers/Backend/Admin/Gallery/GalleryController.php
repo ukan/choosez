@@ -144,10 +144,10 @@ class GalleryController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Album";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $data = new Album;
 
@@ -170,7 +170,10 @@ class GalleryController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                            $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }else{
                         $data = Sentinel::getUser()->first_name;
@@ -179,10 +182,10 @@ class GalleryController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Album";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $data = Album::find($request->data_id);
                         $data->name = $request->name;
@@ -204,7 +207,9 @@ class GalleryController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }
                     $audit->save();
@@ -239,10 +244,10 @@ class GalleryController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete Album";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
 
         echo json_encode($response);
@@ -283,7 +288,9 @@ class GalleryController extends Controller
                                 $file = $request->image[$key];
                                 $name = str_random(20). '-' .$file->getClientOriginalName();
                                 $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                                $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
                             }
                             $data->save();
                             $audit->save();
@@ -295,10 +302,10 @@ class GalleryController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Photo";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                     }
 
@@ -331,10 +338,10 @@ class GalleryController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete Photo";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
         echo json_encode($response);
     }

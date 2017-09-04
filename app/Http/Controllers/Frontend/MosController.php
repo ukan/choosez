@@ -111,7 +111,11 @@ class MosController extends Controller
                     $file = Input::file('imageConfirm');
                     $name = str_random(20). '-' .$file->getClientOriginalName();
                     $mos->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
-                    $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    // $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                    $path = public_path('/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+                    resizeAndSaveImage($file, $path);
                 }
 
                 $password = "";

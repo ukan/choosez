@@ -101,10 +101,10 @@ class BookController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create book";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $book = new Book;
                         $audit->action = "New";
@@ -116,10 +116,10 @@ class BookController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Book";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $book = Book::find($request->book_id);                    
                         $audit->action = "Edit";
@@ -144,7 +144,9 @@ class BookController extends Controller
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $book->image = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        $file->move(public_path().'/storage/books/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        // $file->move(public_path().'/storage/books/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        $path = public_path('/storage/books/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                        resizeAndSaveImage($file, $path);
                     }
               
                     $book->save();
@@ -179,10 +181,10 @@ class BookController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete book";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
 
         echo json_encode($response);

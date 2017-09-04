@@ -110,10 +110,10 @@ class OrganigramController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Organigram";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
                         $organigram = new Organigram;
 
                         $organigram->asrama_id = $request->nama;
@@ -133,7 +133,9 @@ class OrganigramController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }else{
                         $data = Sentinel::getUser()->first_name;
@@ -142,10 +144,10 @@ class OrganigramController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Organigram";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
                         $organigram = Organigram::find($request->organigram_id);
 
                         $audit->action = "Edit";
@@ -170,7 +172,9 @@ class OrganigramController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }
 
@@ -206,10 +210,10 @@ class OrganigramController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete Organigram";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
 
         echo json_encode($response);

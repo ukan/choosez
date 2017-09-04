@@ -84,10 +84,10 @@ class BimtesController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Bimtes";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $bimtes_data = new Bimtes;
 
@@ -100,10 +100,10 @@ class BimtesController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Bimtes";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $bimtes_data = Bimtes::find($request->bimtes_id);
 
@@ -125,7 +125,10 @@ class BimtesController extends Controller
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $bimtes_data->pamflet = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        $file->move(public_path().'/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        // $file->move(public_path().'/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                        $path = public_path('/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                        resizeAndSaveImage($file, $path);
                     }
 
                     $bimtes_data->save();

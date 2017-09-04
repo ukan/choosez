@@ -602,7 +602,10 @@ class HomeController extends Controller
                     $file = Input::file('image');
                     $name = str_random(20). '-' .$file->getClientOriginalName();
                     $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                    $file->move(public_path().'/storage/student/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    // $file->move(public_path().'/storage/student/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    
+                    $path = public_path('/storage/student/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    resizeAndSaveImage($file, $path);
                 }
 
                 $password = "";
@@ -695,7 +698,11 @@ class HomeController extends Controller
                     $file = Input::file('image');
                     $name = str_random(20). '-' .$file->getClientOriginalName();
                     $data->photo = date("Y")."/".date("m")."/".date("d")."/".$name;
-                    $file->move(public_path().'/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    // $file->move(public_path().'/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                    $path = public_path('/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+                    resizeAndSaveImage($file, $path);
                 }
                 if($request->hasFile('bukti_pembayaran')) {
                     if($request->action == 'update'){
@@ -708,7 +715,11 @@ class HomeController extends Controller
                     $file = Input::file('bukti_pembayaran');
                     $name = str_random(20). '-' .$file->getClientOriginalName();
                     $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
-                    $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                    // $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                    $path = public_path('/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+                    resizeAndSaveImage($file, $path);
                 }
 
                 $password = "";
@@ -746,14 +757,14 @@ class HomeController extends Controller
                             ->join('roles','roles.id','=','role_users.role_id')
                             ->get();
 
-                foreach ($user as $key => $value) {
-                    $find_data['email'] = $value->email;
-                    $find_data['first_name'] = $value->first_name;
-                    Mail::send('email.bimtes_notification', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                                $message->to($find_data['email'], $find_data['first_name'])->subject('Pendaftar Bimtes Baru');
-                            });
-                }
+                // foreach ($user as $key => $value) {
+                //     $find_data['email'] = $value->email;
+                //     $find_data['first_name'] = $value->first_name;
+                //     Mail::send('email.bimtes_notification', $find_data, function($message) use($find_data) {
+                //                 $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                //                 $message->to($find_data['email'], $find_data['first_name'])->subject('Pendaftar Bimtes Baru');
+                //             });
+                // }
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
@@ -819,7 +830,11 @@ class HomeController extends Controller
             $file = Input::file('image');
             $name = str_random(20). '-' .$file->getClientOriginalName();
             $data->photo = date("Y")."/".date("m")."/".date("d")."/".$name;
-            $file->move(public_path().'/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            // $file->move(public_path().'/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            
+            $path = public_path('/storage/bimtes/photo/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+            resizeAndSaveImage($file, $path);
         }
         if($request->hasFile('bukti_pembayaran')) {
             if($request->action == 'update'){
@@ -832,7 +847,10 @@ class HomeController extends Controller
             $file = Input::file('bukti_pembayaran');
             $name = str_random(20). '-' .$file->getClientOriginalName();
             $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
-            $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            // $file->move(public_path().'/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+            $path = public_path('/storage/bimtes/bukti/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+            resizeAndSaveImage($file, $path);
         }
 
         $data->save();
@@ -999,7 +1017,11 @@ class HomeController extends Controller
                 $file = Input::file('imageConfirm');
                 $name = str_random(20). '-' .$file->getClientOriginalName();
                 $data->image_confirm = date("Y")."/".date("m")."/".date("d")."/".$name;
-                $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                // $file->move(public_path().'/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                
+                $path = public_path('/storage/mos/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                    
+                resizeAndSaveImage($file, $path);
             }
 
             $data->save();
