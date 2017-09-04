@@ -133,10 +133,10 @@ class TeacherController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Teacher";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $teacher = new Teacher;
 
@@ -149,10 +149,10 @@ class TeacherController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Teacher";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $teacher = Teacher::find($request->teacher_id);                    
 
@@ -184,7 +184,10 @@ class TeacherController extends Controller
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $teacher->photo = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        $file->move(public_path().'/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        // $file->move(public_path().'/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                        $path = public_path('/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                        resizeAndSaveImage($file, $path);
                     }
               
                     $teacher->save();
@@ -219,10 +222,10 @@ class TeacherController extends Controller
             $find_data['full_name'] = $data;
             $find_data['table'] = "Delete Teacher";
 
-            Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                            });
+            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+            //                 });
         }
 
         echo json_encode($response);

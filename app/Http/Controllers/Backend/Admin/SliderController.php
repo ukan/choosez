@@ -121,7 +121,10 @@ class SliderController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                            $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }else{
                         $data = Sentinel::getUser()->first_name;
@@ -154,7 +157,9 @@ class SliderController extends Controller
                             $file = Input::file('image');
                             $name = str_random(20). '-' .$file->getClientOriginalName();
                             $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }
                     }
 

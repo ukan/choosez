@@ -338,10 +338,10 @@ class MosController extends BaseController
         $find_data['full_name'] = $data;
         $find_data['table'] = "Delete Mos Data";
 
-        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                    $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                    $message->to("ukansaokani@gmail.com", $find_data['full_name'])->subject('Admin Delete Data');
-                });
+        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+        //             $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+        //             $message->to("ukansaokani@gmail.com", $find_data['full_name'])->subject('Admin Delete Data');
+        //         });
 
         echo json_encode($response);
     }

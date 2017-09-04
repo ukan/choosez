@@ -788,6 +788,31 @@ function getBackground(){
     return asset('storage/background').'/'.$back;
 }
 
+function resizeAndSaveImage($file, $path){
+    $width = Image::make($file->getRealPath())->width();
+    $height = Image::make($file->getRealPath())->height();
+
+    if($width == $height){
+        if($width>600){
+            Image::make($file->getRealPath())->resize(600, 600)->save($path);
+        }else{
+            Image::make($file->getRealPath())->save($path);
+        }
+    }else if($width > $height){
+        if($width>600){
+            Image::make($file->getRealPath())->resize(600, 450)->save($path);
+        }else{
+            Image::make($file->getRealPath())->save($path);
+        }
+    }else{
+        if($height>600){
+            Image::make($file->getRealPath())->resize(450, 600)->save($path);
+        }else{
+            Image::make($file->getRealPath())->save($path);
+        }
+    }
+}
+
 if (! function_exists('ahloo_form_title')) {
     /**
      * Generate title for form.
