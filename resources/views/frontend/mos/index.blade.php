@@ -152,7 +152,8 @@ article.post-large-custom .post-audio-custom {
 							    <div class="panel panel-default">
 							      <div class="panel-heading">
 							        <h4 class="panel-title">
-							          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><b>Form Pendaftaran Ta'aruf dan LPKS Online</b></a>
+							          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><b>Form Pendaftaran Ta'aruf dan LPKS Online</b>
+							          <span style="color:red"> Pendaftaran Ditutup</span></a>
 							        </h4>
 							      </div>
 							      <div id="collapse3" class="panel-collapse collapse in">
@@ -287,7 +288,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label"></label>
 								                <div class="col-md-5">
-								                    <button type="submit" id="btnSubmit" onclick="removeHiddenClass()" title="Kirim" class="btn btn-primary btn-submit">Kirim</button>
+								                    <button disabled="disabled" type="submit" id="btnSubmit" onclick="removeHiddenClass()" title="Kirim" class="btn btn-primary btn-submit">Kirim</button>
 								                    <img id="imageLoadingClass" src="{!! asset($pathp.'assets/general/images/loaderx.gif') !!}" alt="loader" class="styleLoad hidden">
 								                    
 								                </div>
