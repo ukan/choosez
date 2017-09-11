@@ -140,11 +140,11 @@ class BookController extends Controller
                             unlink($image_path);
                             }
                         }
-                        createdirYmd('storage/books');
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $book->image = date("Y")."/".date("m")."/".date("d")."/".$name;          
                         // $file->move(public_path().'/storage/books/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        createdirYmd('storage/books');
                         $path = public_path('/storage/books/'.date("Y")."/".date("m")."/".date("d")."/". $name);
                         resizeAndSaveImage($file, $path);
                     }
