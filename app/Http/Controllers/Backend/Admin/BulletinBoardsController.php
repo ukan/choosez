@@ -436,8 +436,9 @@ class BulletinBoardsController extends Controller
                         if(filesize(Input::file('image'))<=2000000){
                             if($request->action == 'update'){                        
                                 if($bulletin_board->img_url != ""){  
-                                $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
-                                unlink($image_path);
+                                    $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
                                 }
                             }
                             

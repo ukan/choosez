@@ -19,7 +19,8 @@ class BulletinBoard extends Model
            static::deleting( function( $bulletin_board ) {   
                 if($bulletin_board->img_url != ""){  
                     $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                        unlink($image_path);
                 }
            });
     }
