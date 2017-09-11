@@ -292,7 +292,7 @@ class BulletinBoardsController extends Controller
                     }else{
                         $bulletin_board->author = $request->author;
                     }
-dd(Input::hasFile('image'));
+
                     if($request->hasFile('image')) {
                         if($request->action == 'update'){                        
                             if($bulletin_board->img_url != ""){  
