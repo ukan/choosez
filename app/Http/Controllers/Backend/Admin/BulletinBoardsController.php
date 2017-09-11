@@ -303,10 +303,10 @@ class BulletinBoardsController extends Controller
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                         
-                        $path = public_path('/storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                        resizeAndSaveImage($file, $path);
+                        // $path = public_path('/storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                        // resizeAndSaveImage($file, $path);
                     }
               
                     $bulletin_board->save();
@@ -432,10 +432,10 @@ class BulletinBoardsController extends Controller
                         $file = Input::file('image');            
                         $name = str_random(20). '-' .$file->getClientOriginalName();  
                         $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                        $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                         
-                        $path = public_path('/storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                        resizeAndSaveImage($file, $path);
+                        // $path = public_path('/storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                        // resizeAndSaveImage($file, $path);
                     }
               
                     $bulletin_board->save();
