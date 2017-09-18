@@ -294,7 +294,7 @@ class BulletinBoardsController extends Controller
                     }
 
                     if($request->hasFile('image')) {
-                        if(filesize(Input::file('image'))<=2000000){
+                        if(filesize(Input::file('image'))<=1550000){
                             if($request->action == 'update'){                        
                                 if($bulletin_board->img_url != ""){  
                                     $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
@@ -307,9 +307,9 @@ class BulletinBoardsController extends Controller
                             $file = Input::file('image');            
                             $name = str_random(20). '-' .$file->getClientOriginalName();  
                             $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                            // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
+                            $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            // resizeAndSaveImage($file, $path);
                             
                             $bulletin_board->save();
                             $audit->save();
@@ -322,7 +322,7 @@ class BulletinBoardsController extends Controller
                                 $response['status'] = 'success';
                             }
                         }else{
-                            $response['notification'] = 'Upload file size must be less than 2 Mb';
+                            $response['notification'] = 'Upload file size must be less than 1 Mb';
                             $response['status'] = 'failed';
                         }
                     }else{
@@ -433,7 +433,7 @@ class BulletinBoardsController extends Controller
                     }
 
                     if($request->hasFile('image')) {
-                        if(filesize(Input::file('image'))<=2000000){
+                        if(filesize(Input::file('image'))<=1550000){
                             if($request->action == 'update'){                        
                                 if($bulletin_board->img_url != ""){  
                                     $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
@@ -446,9 +446,9 @@ class BulletinBoardsController extends Controller
                             $file = Input::file('image');            
                             $name = str_random(20). '-' .$file->getClientOriginalName();  
                             $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                            // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            $path = public_path('/storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
+                            $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            // resizeAndSaveImage($file, $path);
                             
                             $bulletin_board->save();
                             $audit->save();
@@ -461,7 +461,7 @@ class BulletinBoardsController extends Controller
                                 $response['status'] = 'success';
                             }
                         }else{
-                            $response['notification'] = 'Upload file size must be less than 2 Mb';
+                            $response['notification'] = 'Upload file size must be less than 1 Mb';
                             $response['status'] = 'failed';
                         }
                     }else{
