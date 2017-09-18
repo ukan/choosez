@@ -310,24 +310,21 @@ class BulletinBoardsController extends Controller
                             $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                             // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
                             // resizeAndSaveImage($file, $path);
-                            
-                            $bulletin_board->save();
-                            $audit->save();
-
-                            if($request->action == 'create'){
-                                $response['notification'] = 'Success Create Bulletin Board';
-                                $response['status'] = 'success';
-                            }else{
-                                $response['notification'] = 'Success Update Bulletin Board';
-                                $response['status'] = 'success';
-                            }
                         }else{
                             $response['notification'] = 'Upload file size must be less than 1 Mb';
                             $response['status'] = 'failed';
                         }
+                    }
+
+                    $bulletin_board->save();
+                    $audit->save();
+
+                    if($request->action == 'create'){
+                        $response['notification'] = 'Success Create Bulletin Board';
+                        $response['status'] = 'success';
                     }else{
-                        $response['notification'] = 'Upload file size must be less than 2 Mb';
-                        $response['status'] = 'failed';
+                        $response['notification'] = 'Success Update Bulletin Board';
+                        $response['status'] = 'success';
                     }
               
             }
@@ -449,24 +446,21 @@ class BulletinBoardsController extends Controller
                             $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
                             // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
                             // resizeAndSaveImage($file, $path);
-                            
-                            $bulletin_board->save();
-                            $audit->save();
-
-                            if($request->action == 'create'){
-                                $response['notification'] = 'Success Create Bulletin Board';
-                                $response['status'] = 'success';
-                            }else{
-                                $response['notification'] = 'Success Update Bulletin Board';
-                                $response['status'] = 'success';
-                            }
                         }else{
                             $response['notification'] = 'Upload file size must be less than 1 Mb';
                             $response['status'] = 'failed';
                         }
+                    }
+
+                    $bulletin_board->save();
+                    $audit->save();
+
+                    if($request->action == 'create'){
+                        $response['notification'] = 'Success Create Bulletin Board';
+                        $response['status'] = 'success';
                     }else{
-                        $response['notification'] = 'Upload file size must be less than 2 Mb';
-                        $response['status'] = 'failed';
+                        $response['notification'] = 'Success Update Bulletin Board';
+                        $response['status'] = 'success';
                     }
             }
         }else{            
