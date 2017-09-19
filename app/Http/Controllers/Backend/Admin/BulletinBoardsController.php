@@ -16,8 +16,9 @@ use Validator;
 use Config;
 use Mail;
 use Image;
-
+use URL;
 use Event;
+use File;
 use App\Events\Backend\AdminAlertEvent;
 
 class BulletinBoardsController extends Controller
@@ -216,6 +217,8 @@ class BulletinBoardsController extends Controller
     }
 
     public function post_buletin_board(Request $request){
+        $url = URL::to('/');
+        
         $response = array();
 
         $audit = new AuditrailLog;
@@ -244,16 +247,6 @@ class BulletinBoardsController extends Controller
                 $this->validate($request,$rules);
             } else {
                     if($request->action == 'create'){
-                        $data = Sentinel::getUser()->first_name;
-                        $find_data['email'] = "x";
-                        $find_data['id'] = "cek";
-                        $find_data['full_name'] = $data;
-                        $find_data['table'] = "Create Bulletin";
-
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
 
                         $user = User::select('email','first_name')
                                     ->where('roles.slug', 'admin-editor')
@@ -303,13 +296,15 @@ class BulletinBoardsController extends Controller
                                 }
                             }
                             
-                            createdirYmd('storage/news');
+                            // createdirYmd('storage/news');
+                            
                             $file = Input::file('image');            
                             $name = str_random(20). '-' .$file->getClientOriginalName();  
+                            // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('storage/news/'.date("Y")."/".date("m")."/2001/". $name);
+                            resizeAndSaveImage($file, $path);
+                            
                             $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                            $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            // resizeAndSaveImage($file, $path);
                         }else{
                             $response['notification'] = 'Upload file size must be less than 1 Mb';
                             $response['status'] = 'failed';
@@ -320,6 +315,7 @@ class BulletinBoardsController extends Controller
                     $audit->save();
 
                     if($request->action == 'create'){
+                        $response['url'] = $url;
                         $response['notification'] = 'Success Create Bulletin Board';
                         $response['status'] = 'success';
                     }else{

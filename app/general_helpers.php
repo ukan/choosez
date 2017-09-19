@@ -792,6 +792,12 @@ function resizeAndSaveImage($file, $path){
     $width = Image::make($file->getRealPath())->width();
     $height = Image::make($file->getRealPath())->height();
 
+    $pathPermission = substr($path, 0, strrpos( $path, '/'));
+    if(!File::exists($pathPermission)){
+        mkdir($pathPermission, 0777,TRUE);
+        chmod($pathPermission, 0777);
+    }
+    
     if($width == $height){
         if($width>600){
             Image::make($file->getRealPath())->resize(600, 600)->save($path);
