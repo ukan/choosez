@@ -19,7 +19,8 @@ class Gallery extends Model
            static::deleting( function( $data ) {   
                 if($data->image != ""){  
                     $image_path = public_path().'/storage/gallery/'.$data->image;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                      unlink($image_path);
                 }
            });
     }

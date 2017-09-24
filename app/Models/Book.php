@@ -21,7 +21,8 @@ class Book extends Model
            static::deleting( function( $book ) {   
                 if($book->image != ""){  
                     $image_path = public_path().'/storage/books/'.$book->image;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                        unlink($image_path);
                 }
            });
     }
