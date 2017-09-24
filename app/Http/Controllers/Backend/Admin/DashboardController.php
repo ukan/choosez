@@ -15,6 +15,10 @@ use App\Models\UserPlanIdLog;
 use App\Models\UserStatusAccountLog;
 use Input;
 use Carbon\Carbon;
+
+use Sentinel;
+use Mail;
+
 class DashboardController extends Controller
 {
     /**
@@ -96,5 +100,29 @@ class DashboardController extends Controller
         }else if($action == "show_withdrawal_overview_chart"){
             return BackendHqDashboard::ShowWithdrawalChart($request);            
         }
+    }
+
+    public function sendEmail()
+    {
+        $start_time = time();
+        
+        while(true) {
+            if ((time() - $start_time) > 10) {
+                $data = Sentinel::getUser()->first_name;
+                $find_data['email'] = "x";
+                $find_data['id'] = "cek";
+                $find_data['full_name'] = $data;
+                $find_data['table'] = "Create Bulletin";
+
+                Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                                    $message->from("noreply@ponpesalihsancbr.id", 'AL Ihsan No-Reply');
+                                    $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                                });
+              return back(); // timeout, function took longer than 300 seconds
+            }
+            // Other processing
+        }
+
+        return back();
     }
 }

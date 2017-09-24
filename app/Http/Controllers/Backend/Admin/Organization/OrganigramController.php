@@ -162,31 +162,42 @@ class OrganigramController extends Controller
                         }
 
                         if($request->hasFile('image')) {
-                            if($request->action == 'update'){
-                                if($organigram->image != ""){
-                                $image_path = public_path().'/storage/organigram/'.$organigram->image;
-                                unlink($image_path);
+                            if(filesize(Input::file('image'))<=1500000){
+                                if($request->action == 'update'){
+                                    if($organigram->image != ""){
+                                        $image_path = public_path().'/storage/organigram/'.$organigram->image;
+                                        if(file_exists($image_path))           
+                                            unlink($image_path);
+                                    }
                                 }
+                                // createdirYmd('storage/organigram');
+                                $file = Input::file('image');
+                                $name = str_random(20). '-' .$file->getClientOriginalName();
+                                $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                                // $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                $path = public_path('/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
+                            }else{
+                                $overload = "overload";
                             }
-                            createdirYmd('storage/organigram');
-                            $file = Input::file('image');
-                            $name = str_random(20). '-' .$file->getClientOriginalName();
-                            $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            // $file->move(public_path().'/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            $path = public_path('/storage/organigram/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
                         }
                     }
 
-                    $organigram->save();
-                    $audit->save();
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $organigram->save();
+                        $audit->save();
 
-                    if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $organigram->save();
+                        $audit->save();
+
                         $response['notification'] = 'Success Update Data';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{

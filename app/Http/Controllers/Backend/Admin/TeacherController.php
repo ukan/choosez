@@ -173,33 +173,45 @@ class TeacherController extends Controller
                     $teacher->linkedin = $request->linkedin;
                     $teacher->quote = $request->caption;
 
+                    $fileOverLoad = "";
                     if($request->hasFile('image')) {
-                        if($request->action == 'update'){                        
-                            if($teacher->photo != ""){  
-                            $image_path = public_path().'/storage/avatars/'.$teacher->photo;
-                            unlink($image_path);
+                        if(filesize(Input::file('image'))<=1500000){
+                            if($request->action == 'update'){                        
+                                if($teacher->photo != ""){  
+                                    $image_path = public_path().'/storage/avatars/'.$teacher->photo;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
+                                }
                             }
+                            // createdirYmd('storage/avatars');
+                            $file = Input::file('image');            
+                            $name = str_random(20). '-' .$file->getClientOriginalName();  
+                            $teacher->photo = date("Y")."/".date("m")."/".date("d")."/".$name;          
+                            // $file->move(public_path().'/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+
+                            $path = public_path('/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
+                        }else{
+                            $overload = "overload";
                         }
-                        createdirYmd('storage/avatars');
-                        $file = Input::file('image');            
-                        $name = str_random(20). '-' .$file->getClientOriginalName();  
-                        $teacher->photo = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        // $file->move(public_path().'/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-
-                        $path = public_path('/storage/avatars/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                        resizeAndSaveImage($file, $path);
                     }
-              
-                    $teacher->save();
-                    $audit->save();
 
-                    if($request->action == 'create'){
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $teacher->save();
+                        $audit->save();
+                        
                         $response['notification'] = 'Success Create Teacher Data';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $teacher->save();
+                        $audit->save();
+
                         $response['notification'] = 'Success Update Teacher Data';
                         $response['status'] = 'success';
-                    }
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
+                    }   
             }
         }else{            
             $teacher = Teacher::find($request->teacher_id);

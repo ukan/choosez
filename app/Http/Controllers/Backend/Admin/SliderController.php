@@ -98,10 +98,10 @@ class SliderController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Slider";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        // });
             
                         $organigram = new Slider;
 
@@ -110,21 +110,27 @@ class SliderController extends Controller
                         $audit->action = "New";
                         $audit->content = $request->image.' | '.$request->category;
 
+                        $fileOverLoad = "";
                         if($request->hasFile('image')) {
-                            if($request->action == 'update'){
-                                if($organigram->image != ""){
-                                $image_path = public_path().'/storage/slider/'.$organigram->image;
-                                unlink($image_path);
+                            if(filesize(Input::file('image'))<=1500000){
+                                if($request->action == 'update'){
+                                    if($organigram->image != ""){
+                                        $image_path = public_path().'/storage/slider/'.$organigram->image;
+                                        if(file_exists($image_path))
+                                            unlink($image_path);
+                                        }
                                 }
-                            }
-                            createdirYmd('storage/slider');
-                            $file = Input::file('image');
-                            $name = str_random(20). '-' .$file->getClientOriginalName();
-                            $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                // createdirYmd('storage/slider');
+                                $file = Input::file('image');
+                                $name = str_random(20). '-' .$file->getClientOriginalName();
+                                $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                                // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
 
-                            $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
+                                $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
+                            }else{
+                                $fileOverLoad = "overload";
+                            }
                         }
                     }else{
                         $data = Sentinel::getUser()->first_name;
@@ -133,10 +139,10 @@ class SliderController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Update Slider";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Slider');
+                        // });
 
                         $organigram = Slider::find($request->slider_id);
                         
@@ -146,32 +152,44 @@ class SliderController extends Controller
                         $audit->before = $organigram->image.' | '.$organigram->category;
                         $audit->after = $request->image.' | '.$request->category;
 
+                        $fileOverLoad = "";
                         if($request->hasFile('image')) {
-                            if($request->action == 'update'){
-                                if($organigram->image != ""){
-                                $image_path = public_path().'/storage/slider/'.$organigram->image;
-                                unlink($image_path);
+                            if(filesize(Input::file('image'))<=1500000){
+                                if($request->action == 'update'){
+                                    if($organigram->image != ""){
+                                        $image_path = public_path().'/storage/slider/'.$organigram->image;
+                                        if(file_exists($image_path))
+                                            unlink($image_path);
+                                    }
                                 }
+                                // createdirYmd('storage/slider');
+                                $file = Input::file('image');
+                                $name = str_random(20). '-' .$file->getClientOriginalName();
+                                $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                                // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
+                            }else{
+                                $fileOverLoad = "overload";
                             }
-                            createdirYmd('storage/slider');
-                            $file = Input::file('image');
-                            $name = str_random(20). '-' .$file->getClientOriginalName();
-                            $organigram->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            // $file->move(public_path().'/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            $path = public_path('/storage/slider/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
                         }
                     }
 
-                    $organigram->save();
-                    $audit->save();
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $organigram->save();
+                        $audit->save();
 
-                    if($request->action == 'create'){
                         $response['notification'] = 'Success Create Data';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $organigram->save();
+                        $audit->save();
+
                         $response['notification'] = 'Success Update Data';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{

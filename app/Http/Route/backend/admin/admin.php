@@ -9,6 +9,7 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
     Route::put('profile/{type}', array('as' => 'admin-profile-update', 'uses' => 'ProfileController@update'));
 
     Route::get('user-notifications', array('as' => 'admin-user-notifications', 'uses' => 'UserNotificationsController@index'));
+    Route::get('send-mail', array('as' => 'admin-send-mail', 'uses' => 'DashboardController@sendEmail'));
     
     Route::post('user-notifications/post', array('as' => 'admin-user-notifications-post', 'uses' => 'UserNotificationsController@post'));
 

@@ -286,8 +286,9 @@ class BulletinBoardsController extends Controller
                         $bulletin_board->author = $request->author;
                     }
 
+                    $fileOverLoad = "";
                     if($request->hasFile('image')) {
-                        if(filesize(Input::file('image'))<=1550000){
+                        if(filesize(Input::file('image'))<=1500000){
                             if($request->action == 'update'){                        
                                 if($bulletin_board->img_url != ""){  
                                     $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
@@ -306,21 +307,30 @@ class BulletinBoardsController extends Controller
                             
                             $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
                         }else{
-                            $response['notification'] = 'Upload file size must be less than 1 Mb';
-                            $response['status'] = 'failed';
+                            $fileOverLoad = "overload";
                         }
                     }
 
-                    $bulletin_board->save();
-                    $audit->save();
 
-                    if($request->action == 'create'){
+
+                    if($request->action == 'create' && empty($fileOverLoad)){
                         $response['url'] = $url;
                         $response['notification'] = 'Success Create Bulletin Board';
                         $response['status'] = 'success';
-                    }else{
+
+                        #-- save action
+                        $bulletin_board->save();
+                        $audit->save();
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
                         $response['notification'] = 'Success Update Bulletin Board';
                         $response['status'] = 'success';
+
+                        #-- save action
+                        $bulletin_board->save();
+                        $audit->save();
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
               
             }
@@ -426,7 +436,8 @@ class BulletinBoardsController extends Controller
                     }
 
                     if($request->hasFile('image')) {
-                        if(filesize(Input::file('image'))<=1550000){
+                        $fileOverLoad = "";
+                        if(filesize(Input::file('image'))<=1500000){
                             if($request->action == 'update'){                        
                                 if($bulletin_board->img_url != ""){  
                                     $image_path = public_path().'/storage/news/'.$bulletin_board->img_url;
@@ -435,28 +446,33 @@ class BulletinBoardsController extends Controller
                                 }
                             }
                             
-                            createdirYmd('storage/news');
+                            // createdirYmd('storage/news');
                             $file = Input::file('image');            
                             $name = str_random(20). '-' .$file->getClientOriginalName();  
                             $bulletin_board->img_url = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                            $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            // $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            // resizeAndSaveImage($file, $path);
+                            // $file->move(public_path().'/storage/news/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('storage/news/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }else{
-                            $response['notification'] = 'Upload file size must be less than 1 Mb';
-                            $response['status'] = 'failed';
+                            $fileOverLoad = "overload";
                         }
                     }
 
-                    $bulletin_board->save();
-                    $audit->save();
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $bulletin_board->save();
+                        $audit->save();
 
-                    if($request->action == 'create'){
                         $response['notification'] = 'Success Create Bulletin Board';
                         $response['status'] = 'success';
-                    }else{
+                    }else if ($request->action == 'update' && empty($fileOverLoad)){
+                        $bulletin_board->save();
+                        $audit->save();
+
                         $response['notification'] = 'Success Update Bulletin Board';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{            

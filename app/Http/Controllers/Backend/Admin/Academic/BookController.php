@@ -133,29 +133,41 @@ class BookController extends Controller
                     $audit->table_name = "Kajian";
                     $audit->save();
                     
+                    $fileOverLoad = "";
                     if($request->hasFile('image')) {
-                        if($request->action == 'update'){                        
-                            if($book->image != ""){  
-                            $image_path = public_path().'/storage/books/'.$book->image;
-                            unlink($image_path);
+                        if(filesize(Input::file('image'))<=1500000){
+                            if($request->action == 'update'){                        
+                                if($book->image != ""){  
+                                    $image_path = public_path().'/storage/books/'.$book->image;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
+                                }
                             }
+                            $file = Input::file('image');            
+                            $name = str_random(20). '-' .$file->getClientOriginalName();  
+                            $book->image = date("Y")."/".date("m")."/".date("d")."/".$name;          
+                            // $file->move(public_path().'/storage/books/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // createdirYmd('storage/books');
+                            $path = public_path('/storage/books/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
+                        }else{
+                            $overload = "overload";
                         }
-                        $file = Input::file('image');            
-                        $name = str_random(20). '-' .$file->getClientOriginalName();  
-                        $book->image = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        // $file->move(public_path().'/storage/books/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                        createdirYmd('storage/books');
-                        $path = public_path('/storage/books/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                        resizeAndSaveImage($file, $path);
                     }
               
-                    $book->save();
-                    if($request->action == 'create'){
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $book->save();
+                        
                         $response['notification'] = 'Success Create Book Data';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad){
+                        $book->save();
+
                         $response['notification'] = 'Success Update Book Data';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{            
