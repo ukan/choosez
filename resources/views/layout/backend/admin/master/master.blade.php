@@ -106,6 +106,11 @@
         div.scrollmenu a:hover {
         }
         </style>
+        <style type="text/css">
+            .upload-notif{
+                color: red;
+            }
+        </style>
     </head>
 
     <body>

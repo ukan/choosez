@@ -80,6 +80,7 @@
                     <div class="col-md-9">
                         <input type="file" name="image[]" multiple>
                         <p class="has-error text-danger error-image"></p>
+                        <p class="upload-notif"><i>Upload image size must be less than 1 Mb</i></p>
                     </div>
                 </div>
                 <div class="form-group area-insert-update">
