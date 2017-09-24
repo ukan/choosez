@@ -114,32 +114,44 @@ class BimtesController extends Controller
                     $bimtes_data->title = $request->title;
                     $bimtes_data->content = $request->content;
                     
+                    $fileOverLoad = "";
                     if($request->hasFile('image')) {
-                        if($request->action == 'update'){                        
-                            if($bimtes_data->pamflet != ""){  
-                            $image_path = public_path().'/storage/bimtes/'.$bimtes_data->pamflet;
-                            unlink($image_path);
+                        if(filesize(Input::file('image'))<=1500000){
+                            if($request->action == 'update'){                        
+                                if($bimtes_data->pamflet != ""){  
+                                    $image_path = public_path().'/storage/bimtes/'.$bimtes_data->pamflet;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
+                                }
                             }
-                        }
-                        createdirYmd('storage/bimtes');
-                        $file = Input::file('image');            
-                        $name = str_random(20). '-' .$file->getClientOriginalName();  
-                        $bimtes_data->pamflet = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                        // $file->move(public_path().'/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            // createdirYmd('storage/bimtes');
+                            $file = Input::file('image');            
+                            $name = str_random(20). '-' .$file->getClientOriginalName();  
+                            $bimtes_data->pamflet = date("Y")."/".date("m")."/".date("d")."/".$name;          
+                            // $file->move(public_path().'/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/", $name);
 
-                        $path = public_path('/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                        resizeAndSaveImage($file, $path);
+                            $path = public_path('/storage/bimtes/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
+                        }else{
+                            $overload = "overload";
+                        }
                     }
 
-                    $bimtes_data->save();
-                    $audit->save();
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $bimtes_data->save();
+                        $audit->save();
 
-                    if($request->action == 'create'){
                         $response['notification'] = 'Create Data Successfully';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $bimtes_data->save();
+                        $audit->save();
+
                         $response['notification'] = 'Update Data Successfully';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{            

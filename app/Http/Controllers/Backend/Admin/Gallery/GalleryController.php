@@ -158,22 +158,27 @@ class GalleryController extends Controller
                         $audit->action = "New";
                         $audit->content = $request->image.' | '.$request->name.' | '.$request->date.' | '.$request->link_donwload;
 
-
+                        $fileOverLoad = "";
                         if($request->hasFile('image')) {
-                            if($request->action == 'update'){
-                                if($data->image != ""){
-                                $image_path = public_path().'/storage/gallery/'.$data->image;
-                                unlink($image_path);
+                            if(filesize(Input::file('image'))<=1500000){
+                                if($request->action == 'update'){
+                                    if($data->image != ""){
+                                        $image_path = public_path().'/storage/gallery/'.$data->image;
+                                        if(file_exists($image_path))
+                                            unlink($image_path);
+                                    }
                                 }
-                            }
-                            createdirYmd('storage/gallery');
-                            $file = Input::file('image');
-                            $name = str_random(20). '-' .$file->getClientOriginalName();
-                            $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                // createdirYmd('storage/gallery');
+                                $file = Input::file('image');
+                                $name = str_random(20). '-' .$file->getClientOriginalName();
+                                $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                                // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
 
-                            $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
+                                $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
+                            }else{
+                                $overload = "overload";
+                            }
                         }
                     }else{
                         $data = Sentinel::getUser()->first_name;
@@ -196,31 +201,44 @@ class GalleryController extends Controller
                         $audit->before = $data->image.' | '.$data->name.' | '.$data->date.' | '.$data->link_donwload;
                         $audit->after = $request->image.' | '.$request->name.' | '.$request->date.' | '.$request->link_donwload;
 
+                        $fileOverLoad = "";
                         if($request->hasFile('image')) {
-                            if($request->action == 'update'){
-                                if($data->image != ""){
-                                $image_path = public_path().'/storage/gallery/'.$data->image;
-                                unlink($image_path);
+                            if(filesize(Input::file('image'))<=1500000){
+                                if($request->action == 'update'){
+                                    if($data->image != ""){
+                                        $image_path = public_path().'/storage/gallery/'.$data->image;
+                                        if(file_exists($image_path))
+                                            unlink($image_path);
+                                    }
                                 }
+                                // createdirYmd('storage/gallery');
+                                $file = Input::file('image');
+                                $name = str_random(20). '-' .$file->getClientOriginalName();
+                                $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                                // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                                $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                                resizeAndSaveImage($file, $path);
+                            }else{
+                                $overload = "overload";
                             }
-                            createdirYmd('storage/gallery');
-                            $file = Input::file('image');
-                            $name = str_random(20). '-' .$file->getClientOriginalName();
-                            $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                            // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                            $path = public_path('/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                            resizeAndSaveImage($file, $path);
                         }
                     }
-                    $audit->save();
 
-                    $data->save();
-                    if($request->action == 'create'){
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $audit->save();
+                        $data->save();
+
                         $response['notification'] = 'Success Create Data';
                         $response['status'] = 'success';
-                    }else{
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $audit->save();
+                        $data->save();
+
                         $response['notification'] = 'Success Update Data';
                         $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
                     }
             }
         }else{

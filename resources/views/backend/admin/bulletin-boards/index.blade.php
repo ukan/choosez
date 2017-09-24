@@ -413,6 +413,8 @@
                     if(response.status == 'success'){
                         var title_not = 'Notification';
                         var type_not = 'success';
+                        var url = response.url;
+                        url = url+"/admin/send-mail";
                     }else{
                         var title_not = 'Notification';
                         var type_not = 'failed';
@@ -426,7 +428,8 @@
                         stack: myStack
                     });
                     table.ajax.reload();    
-                    $('#modalFormBulletinBoard').modal('hide'); 
+                    $('#modalFormBulletinBoard').modal('hide');
+                    // location.href=url; 
                 },
                 beforeSend: function() {
                   $('.has-error').html('');
