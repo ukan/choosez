@@ -21,7 +21,8 @@ class Slider extends Model
            static::deleting( function( $slider ) {   
                 if($slider->image != ""){  
                     $image_path = public_path().'/storage/slider/'.$slider->image;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                       unlink($image_path);
                 }
            });
     }

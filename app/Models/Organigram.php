@@ -21,7 +21,8 @@ class Organigram extends Model
            static::deleting( function( $organigram ) {   
                 if($organigram->image != ""){  
                     $image_path = public_path().'/storage/organigram/'.$organigram->image;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                        unlink($image_path);
                 }
            });
     }

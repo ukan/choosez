@@ -400,10 +400,10 @@ class BulletinBoardsController extends Controller
                         $find_data['full_name'] = $data;
                         $find_data['table'] = "Create Buletin Editor";
 
-                        Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                                            $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                                            $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                                        });
+                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
+                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
+                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
+                        //                 });
 
                         $bulletin_board = new BulletinBoard;
                     }else{

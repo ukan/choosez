@@ -35,7 +35,8 @@ class Teacher extends Model
            static::deleting( function( $teachers ) {   
                 if($teachers->photo != ""){  
                     $image_path = public_path().'/storage/avatars/'.$teachers->photo;
-                    unlink($image_path);
+                    if(file_exists($image_path))
+                        unlink($image_path);
                 }
            });
     }
