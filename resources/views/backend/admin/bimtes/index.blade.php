@@ -96,6 +96,7 @@
                     <div class="col-md-9">
                         {!! form_input_file_img('file','image') !!}
                         <p class="has-error text-danger error-image"></p>
+                        <p class="upload-notif"><i>Upload image size must be less than 1 Mb</i></p>
                     </div>
                 </div>
                 <div class="form-group area-delete">                    

@@ -160,7 +160,7 @@ class BookController extends Controller
                         
                         $response['notification'] = 'Success Create Book Data';
                         $response['status'] = 'success';
-                    }else if($request->action == 'update' && empty($fileOverLoad){
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
                         $book->save();
 
                         $response['notification'] = 'Success Update Book Data';
