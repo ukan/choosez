@@ -1,11 +1,11 @@
 @extends('layout.backend.admin.master.master')
 
-@section('title', 'Album Management')
+@section('title', 'Banner Management')
 
 @section('breadcrumb')
     <ol class="breadcrumbs">
         <li><a href="{!! action('Backend\Admin\DashboardController@index') !!}"><i class="fa fa-home"></i> Home</a></li>
-        <li><span>Album Management</span></li>
+        <li><span>Banner Management</span></li>
     </ol>
 @endsection
 
@@ -22,12 +22,12 @@
     </style>
 @endsection
 
-@section('page-header', 'Album Management')
+@section('page-header', 'Banner Management')
 
 @section('content')
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Album Management</h3>
+            <h3 class="panel-title">Banner Management</h3>
         </div>
         <div class="panel-body">
             @include('flash::message')
@@ -38,10 +38,10 @@
                     <tr>
                         <th class="center-align">id</th>
                         <th class="center-align">updated</th>
-                        <th class="center-align">Tumbnail</th>
-                        <th class="center-align">Album Name</th>
-                        <th class="center-align">Date</th>
-                        <th width="15%">Action</th>
+                        <th class="center-align">Image</th>
+                        <th class="center-align">Name</th>
+                        <th class="center-align">Link</th>
+                        <th class="center-align" width="12%">Action</th>
                     </tr>
                 </thead>
             </table>
@@ -74,11 +74,11 @@
           <h4 class="modal-title FormData-title" id="myModalLabel">Create</h4>
         </div>
         <div class="modal-body">
-        {!! Form::open(['route'=>'admin-post-album', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
+        {!! Form::open(['route'=>'admin-post-banner', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
                 <input type="hidden" name="action" id="action" value="">
                 <input type="hidden" name="data_id" value="">
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Tumbnail<b class="text-danger">*</b></label>
+                    <label class="col-md-3 control-label">Image<b class="text-danger">*</b></label>
                     <div class="col-md-9">
                         {!! form_input_file_img('file','image') !!}
                         <p class="has-error text-danger error-image"></p>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Album Name<b class="text-danger">*</b></label>
+                    <label class="col-md-3 control-label">Name</label>
                     <div class="col-lg-9">
                         {!! Form::text('name', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
                         <p class="has-error text-danger error-name"></p>
@@ -94,18 +94,19 @@
                     <div class="clear"></div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Date<b class="text-danger">*</b></label>
+                    <label class="col-md-3 control-label">Link</label>
                     <div class="col-lg-9">
-                        {!! Form::text('date', null, array('class' => 'form-control col-lg-8 datepicker date-disabled', 'autofocus' => 'true')) !!}
-                        <p class="has-error text-danger error-name"></p>
+                        {!! Form::text('link', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
+                        <p class="has-error text-danger error-link"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Link Download<b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
-                        {!! Form::text('link_donwload', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
-                        <p class="has-error text-danger error-link_donwload"></p>
+                    <label class="col-md-3 control-label">Index Order<b class="text-danger">*</b></label>
+                    <div class="col-xs-2">
+                        <!-- <input type="text" name="indexOrder" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> -->
+                        {!! Form::text('indexOrder', null, array('class' => 'form-control', 'autofocus' => 'true')) !!}
+                        <p class="has-error text-danger error-indexOrder"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -150,21 +151,21 @@
         var table = $('#data-tables').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{!! route('datatables-album') !!}",
+                ajax: "{!! route('datatables-banner') !!}",
                 order: [[ 1, 'desc' ]],
                 columns: [
                     {data: 'id', name: 'id',visible:false},
                     {data: 'updated_at', name: 'updated_at',visible:false},
                     {data: 'image', name: 'image', class: 'center-align', searchable: false, orderable: false},
                     {data: 'name', name: 'name'},
-                    {data: 'date', name: 'date'},
-                    {data: 'action', name: 'action', class: '', searchable: false, orderable: false}
+                    {data: 'link', name: 'link'},
+                    {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
                 ]
             });
         function show_data(id){
             $.ajax({
                 type: "POST",
-                url: "{{ route('admin-show-album') }}",
+                url: "{{ route('admin-show-banner') }}",
                 data: {
                     'id': id
                 },
@@ -176,10 +177,11 @@
             });
         }
         function show_form_create(){
-            $('.FormData-title').html('Create Album');
+            $('.FormData-title').html('Create Banner');
             $("[name='action']").val('create');
             $("[name='name']").val('');
-            $("[name='date']").val('');
+            $("[name='link']").val('');
+            $("[name='indexOrder']").val('');
             $('.area-insert-update').show();
             $('.area-delete').hide();
             $('#modalFormData').modal({backdrop: 'static', keyboard: false});
@@ -191,7 +193,7 @@
         function show_form_update(id){
             $.ajax({
                 type: "POST",
-                url: "{{ route('admin-post-album')}}",
+                url: "{{ route('admin-post-banner')}}",
                 data: {
                     'id': id,
                     'action': 'get-data'
@@ -205,14 +207,15 @@
                         $('.fileinput-new.thumbnail.image').html('<img src="{{ asset("assets/backend/admin/img/boxed-bg.jpg") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
                     }
                     $("[name='name']").val(response.name);
-                    $("[name='date']").val(response.date);
+                    $("[name='link']").val(response.link);
+                    $("[name='indexOrder']").val(response.indexOrder);
                 }
             });
 
             $("[name='data_id']").val(id);
             $('.area-insert-update').show();
             $('.area-delete').hide();
-            $('.FormData-title').html('Update Album');
+            $('.FormData-title').html('Update Banner');
             $("[name='action']").val('update');
             $('#modalFormData').modal({backdrop: 'static', keyboard: false});
             $('#modalFormData').modal('show');
@@ -221,7 +224,7 @@
             $("[name='data_id']").val(id);
             $('.area-insert-update').hide();
             $('.area-delete').show();
-            $('.FormData-title').html('Delete Album');
+            $('.FormData-title').html('Delete Banner');
             $("[name='action']").val('delete');
             $('#modalFormData').modal({backdrop: 'static', keyboard: false});
             $('#modalFormData').modal('show');

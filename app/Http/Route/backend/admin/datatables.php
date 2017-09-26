@@ -48,6 +48,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         /*album*/
         Route::get('album', array('as' => 'datatables-album', 'uses' => 'Gallery\GalleryController@datatables'));
         Route::get('photo', array('as' => 'datatables-photo', 'uses' => 'Gallery\GalleryController@datatablesGallery'));
+        /*Banner*/
+        Route::get('banner', array('as' => 'datatables-banner', 'uses' => 'Banner\BannerController@datatables'));
         /*slider*/
         Route::get('slider', array('as' => 'datatables-slider', 'uses' => 'SliderController@datatables'));
 

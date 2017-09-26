@@ -410,18 +410,22 @@
         </script>
 
         <script>
-        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-        $('.loader-body').hide();
-        jQuery(function ($) {
-            var loading = $('.loader-body').hide();
-            $(document)
-            .ajaxStart(function () {
-                loading.show();
-            })
-            .ajaxStop(function () {
-                loading.hide();
+            $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+            $('.loader-body').hide();
+            jQuery(function ($) {
+                var loading = $('.loader-body').hide();
+                $(document)
+                .ajaxStart(function () {
+                    loading.show();
+                })
+                .ajaxStop(function () {
+                    loading.hide();
+                });
             });
-        });
+
+            $(".date-disabled").keydown(function() {
+                return false;
+            });
         </script>
     </body>
 </html>
