@@ -156,13 +156,20 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
     });
 
     Route::group(['prefix' => 'gallery', 'namespace' => 'Gallery'], function () {
-        /*organigram*/
+        /*Gallery*/
         Route::get('/album', array('as' => 'admin-index-album', 'uses' => 'GalleryController@index'));
         Route::post('/album/show', array('as' => 'admin-show-album', 'uses' => 'GalleryController@show'));
         Route::post('/album/post_organigram', array('as' => 'admin-post-album', 'uses' => 'GalleryController@post_album'));
         Route::get('/photo', array('as' => 'admin-index-photo', 'uses' => 'GalleryController@indexGallery'));
         Route::post('/photo/post_photo', array('as' => 'admin-post-photo', 'uses' => 'GalleryController@post_photo'));
         Route::post('/photo/show', array('as' => 'admin-show-photo', 'uses' => 'GalleryController@showPhoto'));
+    });
+
+    Route::group(['prefix' => 'banner', 'namespace' => 'Banner'], function () {
+        /*Banner*/
+        Route::get('/', array('as' => 'admin-index-banner', 'uses' => 'BannerController@index'));
+        Route::post('/banner/show', array('as' => 'admin-show-banner', 'uses' => 'BannerController@show'));
+        Route::post('/banner/post_banner', array('as' => 'admin-post-banner', 'uses' => 'BannerController@post_banner'));
     });
 
     Route::group(['prefix' => 'slider'], function () {

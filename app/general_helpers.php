@@ -788,7 +788,7 @@ function getBackground(){
     return asset('storage/background').'/'.$back;
 }
 
-function resizeAndSaveImage($file, $path){
+function resizeAndSaveImage($file, $path, $is_banner = FALSE){
     $width = Image::make($file->getRealPath())->width();
     $height = Image::make($file->getRealPath())->height();
 
@@ -798,23 +798,32 @@ function resizeAndSaveImage($file, $path){
         chmod($pathPermission, 0777);
     }
     
-    if($width == $height){
-        if($width>600){
-            Image::make($file->getRealPath())->resize(600, 600)->save($path);
+    if($is_banner){
+        $response = array();
+        if( ($width==$height) || ($width<$height) ){
+            return "failed";
         }else{
-            Image::make($file->getRealPath())->save($path);
-        }
-    }else if($width > $height){
-        if($width>600){
-            Image::make($file->getRealPath())->resize(600, 450)->save($path);
-        }else{
-            Image::make($file->getRealPath())->save($path);
+            Image::make($file->getRealPath())->resize(1800, 900)->save($path);
         }
     }else{
-        if($height>600){
-            Image::make($file->getRealPath())->resize(450, 600)->save($path);
+        if($width == $height){
+            if($width>600){
+                Image::make($file->getRealPath())->resize(600, 600)->save($path);
+            }else{
+                Image::make($file->getRealPath())->save($path);
+            }
+        }else if($width > $height){
+            if($width>600){
+                Image::make($file->getRealPath())->resize(600, 450)->save($path);
+            }else{
+                Image::make($file->getRealPath())->save($path);
+            }
         }else{
-            Image::make($file->getRealPath())->save($path);
+            if($height>600){
+                Image::make($file->getRealPath())->resize(450, 600)->save($path);
+            }else{
+                Image::make($file->getRealPath())->save($path);
+            }
         }
     }
 }
