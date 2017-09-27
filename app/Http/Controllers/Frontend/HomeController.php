@@ -631,10 +631,10 @@ class HomeController extends Controller
                 $find_data['first_name'] = $request->nama_panggilan;
                 $find_data['image'] = $data->image;
                 
-                // Mail::send('email.new_user', $find_data, function($message) use($find_data) {
-                //             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
-                //             $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
-                //         });
+                Mail::send('email.new_user', $find_data, function($message) use($find_data) {
+                            $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
+                            $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
+                        });
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
