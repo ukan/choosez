@@ -514,7 +514,7 @@ article.post-large-custom .post-audio-custom {
 <script type="text/javascript">
 	$( function() {
 		$('#tanggal_lahir').datepicker({
-		    format: "dd-mm-yyyy",
+		    format: "mm-dd-yyyy",
 		    forceParse: false
 		});
 	});
