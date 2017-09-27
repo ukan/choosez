@@ -339,6 +339,9 @@
 		        $("#village_id").html(data);
 		    	});
 			}
+			$(".date-disabled").keydown(function() {
+                return false;
+            });
 		</script>
 		@yield('scripts')
 	</body>

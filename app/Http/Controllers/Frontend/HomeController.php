@@ -507,9 +507,9 @@ class HomeController extends Controller
             'kota'   => 'required|not_in:Pilih Kabupaten/Kota',
             // 'kecamatan'   => 'required|not_in:Pilih kecamatan',
             'desa'   => 'required',
-            'sd'   => 'required',
-            'smp'   => 'required',
-            'sma'   => 'required',
+            // 'sd'   => 'required',
+            // 'smp'   => 'required',
+            // 'sma'   => 'required',
             /*'ayah'   => 'required',
             'umur_ayah'   => 'required|numeric',
             'pendidikan_terakhir_ayah'   => 'required',
@@ -519,9 +519,9 @@ class HomeController extends Controller
             'pendidikan_terakhir_ibu'   => 'required',
             'pekerjaan_ibu'   => 'required',*/
             'telepon'   => 'required|numeric',
-            'tahun_lulus_sd'   => 'required|numeric',
-            'tahun_lulus_smp'   => 'required|numeric',
-            'tahun_lulus_sma'   => 'required|numeric',
+            // 'tahun_lulus_sd'   => 'required|numeric',
+            // 'tahun_lulus_smp'   => 'required|numeric',
+            // 'tahun_lulus_sma'   => 'required|numeric',
             'email'   => 'required|email|unique:users',
             'jenis_kelamin'   => 'required|not_in:Pilih Jenis Kelamin',
             'asrama'   => 'required|not_in:Pilih Asrama',
@@ -631,10 +631,10 @@ class HomeController extends Controller
                 $find_data['first_name'] = $request->nama_panggilan;
                 $find_data['image'] = $data->image;
                 
-                Mail::send('email.new_user', $find_data, function($message) use($find_data) {
-                            $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
-                            $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
-                        });
+                // Mail::send('email.new_user', $find_data, function($message) use($find_data) {
+                //             $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
+                //             $message->to($find_data['email'], $find_data['first_name'])->subject('New Account');
+                //         });
 
                 $response['notification'] = "Register Successfully";
                 $response['status'] = "success";
