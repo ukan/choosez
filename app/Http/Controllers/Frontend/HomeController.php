@@ -18,6 +18,7 @@ use App\Models\AuthLogBimtes;
 use App\Models\AuthLogMos;
 use App\Models\AuditrailLog;
 use App\Models\Activation;
+use App\Models\HomepageBanner;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -72,44 +73,43 @@ class HomeController extends Controller
 
     public function index()
     {
+        #-- Get Bulletin Board Data
         $data = BulletinBoard::where('status','article')
                     ->where('publish_status', 'Yes')
                     ->orderBy('created_at', 'desc')
                     ->take(6)->get();
-
         $getData = [];
-        $x = 0;
-
         foreach ($data as $key => $value) {
-            $getData[$x] = $value;
-
-            $x++;
+            array_push($getData, $value);
         }
+
+        #-- Get Banner Data
+        $dataBanners = HomepageBanner::orderBy('index_order', 'asc')->get();
+        $getDataBanners = [];
+        foreach ($dataBanners as $key => $value) {
+            array_push($getDataBanners, $value);
+        }
+
         $count_article = count($getData);
 
+        #-- Get Editor Data
         $data_editor = BulletinBoard::where('status','news')
                     ->where('publish_status', 'Yes')
                     ->orderBy('created_at', 'desc')
                     ->take(6)->get();
-
         $getDataEditor = [];
-        $x = 0;
         foreach ($data_editor as $key => $value) {
-            $getDataEditor[$x] = $value;
-
-            $x++;
+            array_push($getDataEditor, $value);
         }
         $count_news = count($getDataEditor);
 
+        #-- Get Recent Post Data
         $data_recent = BulletinBoard::where('publish_status', 'Yes')
                     ->orderBy('created_at', 'desc')
                     ->take(4)->get();
         $getDataRecent = [];
-        $x = 0;
         foreach ($data_recent as $key => $value) {
-            $getDataRecent[$x] = $value;
-
-            $x++;
+            array_push($getDataRecent, $value);
         }
 
         return view('frontend.dashboard.home')
@@ -117,6 +117,7 @@ class HomeController extends Controller
                  ->with('count_news',$count_news)
                  ->with('bulletin_recent',$getDataRecent)
                  ->with('bulletin_article',$getData)
+                 ->with('banners',$getDataBanners)
                  ->with('bulletin_news',$getDataEditor);
         // return view('email.new_post');
     }

@@ -189,18 +189,27 @@ label.line-infra{
 	        <li data-target="#myCarousel" data-slide-to="3" class="" contenteditable="false"></li>
 	    </ol>
 	    <div class="carousel-inner">
-	        <div class="item active" style="">
-	           <a href="in/mos"> <img src="{{ asset($pathp.'assets/frontend/general/img/slides/pamflet.png') }}" alt="" class=""></a>
-	        </div>
-	        <div class="item ">
-	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/rsz_slide_web.png') }}" alt="" class="">
-	        </div>
-	        <div class="item" style="">
-	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_1.jpeg') }}" alt="" class="">
-	        </div>
-	        <div class="item" style="">
-	            <img src="{{ asset($pathp.'assets/frontend/general/img/slides/slider_2.jpeg') }}" alt="" class="">
-	        </div>
+	    	@foreach($banners as $key => $banner)
+	    		@if($banner->index_order<=1)
+	    			<div class="item active">
+	    		@else
+	    			<div class="item">
+	    		@endif
+
+	    		@if( !empty($banner->link) )
+	    			<a target="_blank" href="{{ $banner->link }}"> <img src="{{ asset($pathp.'storage/banner/'.$banner->image) }}" alt="" class=""></a>
+	    		@else
+	    			<img src="{{ asset($pathp.'storage/banner/'.$banner->image) }}" alt="Banner" class="">
+	    		@endif
+	    		   
+		        </div>
+	    	@endforeach
+		        
+	        <!-- <div class="item active">
+	            <div class="carousel-caption">
+			        <h4><strong> What we Do</strong></h4>
+			      </div>
+	        </div> -->
 	    </div>    
 	</div>
 
