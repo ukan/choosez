@@ -188,7 +188,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group {{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Tanggal Lahir <b class="text-danger">*</b></label>
 								                <div class="col-md-5">
-								                    <input type="text" id="tanggal_lahir" name="tanggal_lahir" class="form-control">
+								                    <input type="text" id="tanggal_lahir" name="tanggal_lahir" class="form-control date-disabled">
 								                    <p class="has-error text-danger error-tanggal_lahir"></p>
 								                </div>
 								            </div>
@@ -321,7 +321,7 @@ article.post-large-custom .post-audio-custom {
 								                <label class="col-md-4 control-label"><strong>Pengalaman Pendidikan</strong></label>
 								            </div>
 
-								            <div class="form-group area-insert-update">
+								            <!-- <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">SD/MI <b class="text-danger">*</b></label>
 								                <div class="col-md-3">
 								                    {!! Form::text('sd', '', ['class' => 'form-control']) !!}
@@ -358,7 +358,7 @@ article.post-large-custom .post-audio-custom {
 								                    {!! Form::text('tahun_lulus_sma', '', ['class' => 'form-control']) !!}
 								                    <p class="has-error text-danger error-tahun_lulus_sma"></p>
 								                </div>
-								            </div>
+								            </div> -->
 
 								            <!-- <div class="form-group area-insert-update">
 								                <label class="col-md-3 control-label">Pondok Pesantren </label>
@@ -514,7 +514,7 @@ article.post-large-custom .post-audio-custom {
 <script type="text/javascript">
 	$( function() {
 		$('#tanggal_lahir').datepicker({
-		    format: "mm-dd-yyyy",
+		    format: "dd-mm-yyyy",
 		    forceParse: false
 		});
 	});
