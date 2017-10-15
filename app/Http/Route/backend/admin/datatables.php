@@ -69,6 +69,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         Route::get('mos-datatable', array('as' => 'datatables-mos', 'uses' => 'Mos\MosController@datatables'));
 
         Route::get('/datatables', array('as' => 'admin-suggestion-datatables', 'uses' => 'Suggestion\SuggestionController@datatables'));
+
+        Route::group(['namespace' => 'Ministry'], function(){
+            Route::get('ministry-of-finance', array('as' => 'datatables-ministry-of-finance', 'uses' => 'MinistryOfFinanceController@datatableOfFinance'));
+        });
     });
 
 });

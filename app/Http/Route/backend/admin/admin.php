@@ -245,6 +245,17 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::post('/show', array('as' => 'admin-show-suggestion', 'uses' => 'SuggestionController@show'));
         Route::post('/post-suggestion', array('as' => 'admin-post-suggestion', 'uses' => 'SuggestionController@post_suggestion'));
     });
+
+    #ministry management
+    Route::group(['prefix' => 'ministry', 'namespace' => 'Ministry'], function () {
+        Route::group(['prefix' => 'finance'], function () {
+            Route::get('/', array('as' => 'finance', 'uses' => 'MinistryOfFinanceController@indexOfFinance'));
+            Route::post('show', array('as' => 'admin-show-ministry-of-finance', 'uses' => 'MinistryOfFinanceController@show'));
+            Route::post('post_finance', array('as' => 'admin-post-finance', 'uses' => 'MinistryOfFinanceController@post_finance'));
+            Route::post('get_data_finance', array('as' => 'admin-get-data-finance', 'uses' => 'MinistryOfFinanceController@get_data'));
+            
+        });
+    });
 });
 
 Route::group(['namespace' => 'Frontend'], function () {
