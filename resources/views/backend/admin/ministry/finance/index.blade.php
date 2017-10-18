@@ -53,9 +53,9 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-primary">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title form-title" id="myModalLabel">Show Detail</h4>
       </div>
       <div class="modal-body" id="getContentFinance">
         
@@ -101,7 +101,7 @@
                 <div class="form-group area-insert-update">
                     <label class="col-md-3 control-label">Value <b class="text-danger">*</b></label>
                     <div class="col-md-3">
-                        <input type="number" id="value" name="value" class="form-control" placeholder="Value">
+                        <input type="text" id="value" name="value" class="form-control" placeholder="Value" onkeypress="return isNumber(event)">
                         <p class="has-error text-danger error-value"></p>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
     <script>
         $( function() {
             $('#date').datepicker({
-                format: "mm-dd-yyyy",
+                format: "yyyy-mm-dd",
                 forceParse: false
             });
         });
@@ -190,7 +190,7 @@
         function show_form_create(){           
             $('.form-title').html('Create Data');
             $("[name='action']").val('create');
-            $("[name='type']").val('');
+            $("[name='type']").val('select type').trigger('change');
             $("[name='value']").val('');
             $("[name='date']").val('');
             $("[name='description']").val('');
@@ -212,11 +212,10 @@
                 dataType: 'json',
                 success: function(response)
                 {
-                    $("[name='type']").val(response.type);
+                    $("[name='type']").val(response.type).trigger('change');
                     $("[name='date']").val(response.date);
                     $("[name='value']").val(response.value);
                     $("[name='description']").val(response.description);
-                    // $('select[name=publish_status]').val(response.publish_status).change();
 
                 }
             });

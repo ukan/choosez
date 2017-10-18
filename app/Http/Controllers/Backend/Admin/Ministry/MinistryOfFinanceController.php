@@ -61,7 +61,10 @@ class MinistryOfFinanceController extends Controller
                         <a onclick="javascript:show_form_delete('.$quote.$ministryOfFinance->id.$quote.')" class="btn btn-danger btn-xs actDelete" title="Delete"><i class="fa fa-trash-o fa-fw"></i></a>';
                 })
                 ->editColumn('value', function ($ministryOfFinance) {
-                        return 'Rp. '.$ministryOfFinance->value;  
+                        return idr_format($ministryOfFinance->value);  
+                })
+                ->editColumn('date', function ($ministryOfFinance) {
+                        return eform_date($ministryOfFinance->date);  
                 })
                 ->editColumn('description', function ($ministryOfFinance) {
                         return str_limit($ministryOfFinance->description, 25);  
@@ -169,23 +172,23 @@ class MinistryOfFinanceController extends Controller
         $ministryOfFinance = FinanceManagement::find($req->id);
 
         echo '<div class="form-group">
-                    <label class="col-lg-3 control-label">type</label>
+                    <label class="col-lg-3 control-label">Type</label>
                     <div class="col-lg-9">
-                        '.$ministryOfFinance->type.'                        
+                        : '.$ministryOfFinance->type.'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
         echo '<div class="form-group">
                     <label class="col-lg-3 control-label">Date</label>
                     <div class="col-lg-9">
-                        '.$ministryOfFinance->date.'                        
+                        : '.eform_date($ministryOfFinance->date).'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
         echo '<div class="form-group">
                     <label class="col-lg-3 control-label">Value</label>
                     <div class="col-lg-9">
-                        '.$ministryOfFinance->value.'                        
+                        : '.idr_format($ministryOfFinance->value).'                        
                     </div>
                     <div class="clear"></div>
                 </div>';
@@ -193,7 +196,7 @@ class MinistryOfFinanceController extends Controller
         echo '<div class="form-group">
                 <label class="col-lg-3 control-label">Description</label>
                 <div class="col-lg-9">
-                    '.$ministryOfFinance->description.'                        
+                    : '.$ministryOfFinance->description.'                        
                 </div>
                 <div class="clear"></div>
             </div>';
