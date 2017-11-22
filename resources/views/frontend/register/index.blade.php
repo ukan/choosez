@@ -277,7 +277,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group {{ $errors->has('rt') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">RT <b class="text-danger">*</b></label>
 								                <div style="width: 75px" class="col-sm-1">
-							                        {!! Form::text('rt', '', ['class' => 'form-control']) !!}
+							                        {!! Form::text('rt', '', ['class' => 'form-control validateNumber']) !!}
 							                        @if ($errors->has('rt'))
 									                    <!-- <p class="has-error text-danger">{{ $errors->first('rt') }}</p> -->
 									                @endif
@@ -286,7 +286,7 @@ article.post-large-custom .post-audio-custom {
 								            <div class="form-group {{ $errors->has('rw') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">RW <b class="text-danger">*</b></label>
 								                <div style="width: 75px" class="col-lg-1">
-							                        {!! Form::text('rw', '', ['class' => 'form-control']) !!}
+							                        {!! Form::text('rw', '', ['class' => 'form-control validateNumber']) !!}
 							                        @if ($errors->has('rw'))
 									                    <!-- <p class="has-error text-danger">{{ $errors->first('rw') }}</p> -->
 									                @endif
@@ -295,8 +295,8 @@ article.post-large-custom .post-audio-custom {
 
 								            <div class="form-group {{ $errors->has('kode_pos') ? ' has-error' : '' }}">
 								                <label class="col-md-3 control-label">Kode Pos <b class="text-danger">*</b></label>
-								                <div class="col-md-4">
-								                    {!! Form::text('kode_pos', '', ['class' => 'form-control']) !!}
+								                <div class="col-md-2">
+								                    {!! Form::text('kode_pos', '', ['class' => 'form-control validateNumber']) !!}
 								                    <p class="has-error text-danger error-kode_pos"></p>
 								                </div>
 								            </div>
