@@ -841,3 +841,36 @@ if (! function_exists('ahloo_form_title')) {
     }
 }
 define('quotes',"'");
+
+if (!function_exists('generate_password'))
+{
+    function generate_password($password = null, $length = 8, $addSpecialChars = false)
+    {
+        $pass = $password;
+
+        if (empty($pass))
+        {
+            $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+            $specialChars = "@*%&!-_";
+            $pass = array();
+            $alphaLength = strlen($alphabet) - 1;
+            $specialCharsLength = strlen($specialChars) - 1;
+            for ($i = 0; $i < $length; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+
+            if ($addSpecialChars) {
+                $n = rand(0, $specialCharsLength);
+                $pass[] = $specialChars[$n];
+            }
+            $pass = implode($pass);
+        }
+        else
+        {
+            $pass = $password;
+        }
+
+        return $pass; //turn the array into a string
+    }
+}
