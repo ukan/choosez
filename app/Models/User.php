@@ -14,6 +14,7 @@ use Sentinel;
 use DB;
 use Cartalyst\Sentinel\Users\EloquentUser as Model;
 use Mail;
+use Hash;
 use Reminder;
 use Carbon\Carbon;
 use App\Models\AuthLog;
@@ -510,5 +511,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }else{
             return '';
         }
+    }
+
+    /**
+     * Set User Password
+     *
+     * @param string $password
+     * @return void
+     */
+    public function setPassword($password=null)
+    {
+        $this->password = Hash::make(generate_password($password));
+
+        return $password;
     }
 }
