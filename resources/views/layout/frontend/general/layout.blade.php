@@ -342,6 +342,23 @@
 			$(".date-disabled").keydown(function() {
                 return false;
             });
+
+			//-- validate number function
+            function validateNumber(event) {
+			    var key = window.event ? event.keyCode : event.which;
+			    if (event.keyCode === 8 || event.keyCode === 46) {
+			        return true;
+			    } else if ( key < 48 || key > 57 ) {
+			        return false;
+			    } else {
+			        return true;
+			    }
+			};
+
+			//-- Validate number action
+		    $(document).ready(function(){
+			    $('.validateNumber').keypress(validateNumber);
+			});
 		</script>
 		@yield('scripts')
 	</body>
