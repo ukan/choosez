@@ -200,6 +200,7 @@
 						<ul class="social-icons">
 							<li class="facebook"><a href="https://www.facebook.com/Pondok-Pesantren-Al-Ihsan-850234935093594/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
 							<li class="instagram"><a href="http://www.instagram.com/alihsan_hits/" target="_blank" data-placement="bottom" data-tooltip title="Instagram">Instagram</a></li>
+							<li class="youtube"><a href="https://www.youtube.com/channel/UCzoAmqqHl4qPfDQDaFF8AXA" target="_blank" data-placement="bottom" data-tooltip title="Youtube">Youtube</a></li>
 						</ul>
 					</div>
 				</div>

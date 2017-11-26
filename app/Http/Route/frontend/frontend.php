@@ -135,6 +135,10 @@ Route::group(['namespace' => 'Frontend'], function () {
     });
 
     Route::get('/subscribe-confirmation/{id}', array('as' => 'subscribe-confirmation', 'uses' => 'HomeController@subscribe_confirmation'));
+
+    Route::group(['prefix' => 'bulletin'], function () {
+        Route::get('/list', array('as' => 'bulletin', 'uses' => 'BulletinController@index'));
+    });
 });
 
 Route::post('/center/proker/show', array('as' => 'general-show-proker-pusat', 'uses' => 'Backend\Admin\Organization\ProkerController@showData'));
