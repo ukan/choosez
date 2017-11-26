@@ -461,12 +461,12 @@ article.post-large-custom .post-audio-custom {
 					                </div>
 					            </div>
 
-					            <div class="form-group area-insert-update">
+					            <!-- <div class="form-group area-insert-update">
 					                <label class="col-md-3 control-label"></label>
 					                <div class="col-md-5">
 					                    {!! Form::submit('Kirim', ['class' => 'btn btn-primary btn-submit', 'title' => 'Kirim']) !!}
 					                </div>
-					            </div>
+					            </div> -->
 					        </form>
 
 						</div>
