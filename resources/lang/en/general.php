@@ -4,14 +4,14 @@ return [
 	'title' =>[
 		'infrastructure' => 'INFRASTRUCTURE & FACILITIES',
 		'recent_post' => 'RECENT POST',
-		'latest_article' => 'Latest <strong class="bold-color">Article</strong> Post',
-		'latest_news' => 'Latest <strong class="bold-color">News</strong> Post',
+		'latest_article' => 'Latest <strong class="bold-color">Article</strong>',
+		'latest_news' => 'Latest <strong class="bold-color">News</strong>',
 		'categories' => 'Categories',
 		'popular_post' => 'Popular',
 		'recent_post' => 'Recent',
+		'all_news' => 'All News',
 		'contact_us' => 'Contact Us',
 		'get_more_photo' => 'Get more photo',
-
 	],
 	'menu' => [
 		'home' => 'Home',
