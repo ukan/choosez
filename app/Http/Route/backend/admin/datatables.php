@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin'], function () 
         Route::get('teacher', array('as' => 'datatables-teacher', 'uses' => 'TeacherController@datatables'));
 
         Route::get('book', array('as' => 'datatables-book', 'uses' => 'Academic\BookController@datatables'));
+        Route::get('download', array('as' => 'datatables-download', 'uses' => 'Download\DownloadController@datatables'));
 
         //organization management
         /*kementerian*/
