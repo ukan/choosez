@@ -47,9 +47,9 @@
 				<li><a href="{{ route('get-page-bimtes') }}" title="Bimbingan Test">@lang('general.menu.bimtes')</a></li>
 			</ul>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="{{ route('download') }}" title="@lang('general.menu.download')">@lang('general.menu.download')</a>
-		</li>
+		</li> -->
 		<li>
 			<a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a>
 		</li>
