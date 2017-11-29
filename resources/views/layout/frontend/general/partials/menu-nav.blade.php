@@ -37,17 +37,24 @@
 				<!-- <li><a href="#" title="@lang('general.menu.academic_support')">@lang('general.menu.academic_support')</a></li> -->
 			</ul>
 		</li>
+		<li class="dropdown">
+			<a title="@lang('general.menu.event')" class="dropdown-toggle" href="#">
+				@lang('general.menu.event')
+				<i class="fa fa-angle-down"></i>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="{{ route('get-page-psb') }}" title="Form Pendaftaran Satri Baru">@lang('general.menu.psb')</a></li>
+				<li><a href="{{ route('get-page-bimtes') }}" title="Bimbingan Test">@lang('general.menu.bimtes')</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="{{ route('download') }}" title="@lang('general.menu.download')">@lang('general.menu.download')</a>
+		</li>
 		<li>
 			<a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a>
 		</li>
 		<li>
 			<a href="{{ route('gallery') }}" title="@lang('general.menu.gallery')">@lang('general.menu.gallery')</a>
-		</li>
-		<li>
-			<a href="{{ route('get-page-psb') }}" title="Form Pendaftaran Satri Baru">@lang('general.menu.psb')</a>
-		</li>
-		<li>
-			<a href="{{ route('get-page-bimtes') }}" title="Bimbingan Test">@lang('general.menu.bimtes')</a>
 		</li>
 		<li>
 			<a href="{{ route('contact') }}" title="@lang('general.menu.contact')">@lang('general.menu.contact')</a>

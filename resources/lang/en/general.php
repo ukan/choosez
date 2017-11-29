@@ -39,6 +39,8 @@ return [
 		'psb_detail' => 'Form Pendaftaran Santri Baru',
 		'register' => 'Register',
 		'mos' => "Ta'aruf and LPKS",
+		'download' => "Download",
+		'event' => "Event",
 	],
 	'form' => [
 		'full_name' => 'Full Name',
