@@ -256,6 +256,13 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
             
         });
     });
+
+    #-- Download management
+    Route::group(['prefix' => 'download-management', 'namespace' => 'Download'], function () {
+        Route::get('/', array('as' => 'admin-index-download', 'uses' => 'DownloadController@index'));
+        Route::post('/show', array('as' => 'admin-show-download', 'uses' => 'DownloadController@show'));
+        Route::post('/post_download', array('as' => 'admin-post-download', 'uses' => 'DownloadController@post_download'));
+    });
 });
 
 Route::group(['namespace' => 'Frontend'], function () {
