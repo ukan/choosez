@@ -139,6 +139,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['prefix' => 'bulletin'], function () {
         Route::get('/list', array('as' => 'bulletin', 'uses' => 'BulletinController@index'));
     });
+    
+    Route::get('/download', array('as' => 'download', 'uses' => 'DownloadController@index'));
 });
 
 Route::post('/center/proker/show', array('as' => 'general-show-proker-pusat', 'uses' => 'Backend\Admin\Organization\ProkerController@showData'));

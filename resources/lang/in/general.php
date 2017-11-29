@@ -38,6 +38,8 @@ return [
 		'psb_detail' => 'Form Pendaftaran Santri Baru',
 		'register' => 'Pendaftaran',
 		'mos' => "Ta'aruf dan LPKS",
+		'download' => "Unduh",
+		'event' => "Acara",
 	],
 	'form' => [
 		'full_name' => 'Nama Lengkap',
