@@ -227,21 +227,11 @@ label.line-infra{
         <div class="gallery-cursual">
             <!-- start content_slider -->
             <div id="owl-demo" class="owl-carousel text-center" data-plugin-options='{"items": 3, "dots": false, "autoplay": true, "autoplayTimeout": 3000}'>
-                <div class="item facilities-slider">
-                    <img alt="fasilitas 5" class="lazyOwl" src="{{ asset($pathp.'storage/asrama1.jpeg') }}" alt="name">
-                </div>
-                <div class="item facilities-slider">
-                    <img alt="fasilitas 1" class="lazyOwl" src="{{ asset($pathp.'storage/masjid2.jpg') }}" alt="name">
-                </div>
-                <div class="item facilities-slider">
-                    <img alt="fasilitas 2" class="lazyOwl" src="{{ asset($pathp.'storage/volly.JPG') }}" alt="name">
-                </div>
-                <div class="item facilities-slider">
-                    <img alt="fasilitas 3" class="lazyOwl" src="{{ asset($pathp.'storage/parkir.jpg') }}" alt="name">
-                </div>
-                <div class="item facilities-slider">
-                    <img alt="fasilitas 4" class="lazyOwl" src="{{ asset($pathp.'storage/gor.JPG') }}" alt="name">
-                </div>
+            	@foreach($facilities as $keyFacilities => $facility)
+	    			<div class="item facilities-slider">
+	                    <img alt="fasilitas" class="lazyOwl" src="{{ asset($pathp.'storage/banner/'.$facility->image) }}" alt="name">
+	                </div>
+	    		@endforeach
             </div>
             <!--//sreen-gallery-cursual -->
         </div>
@@ -312,11 +302,11 @@ label.line-infra{
 												<div class="col-md-6">
 													<article>
 														<div style="color:#0088cc" class="date">
-															<span class="day">{{ eform_date_number($bulletin_article[$x]->created_at) }}</span>
+															<span style="color:#0088cc" class="day">{{ eform_date_number($bulletin_article[$x]->created_at) }}</span>
 															<span style="background-color: #0088cc;" class="month">{{ eform_date_month($bulletin_article[$x]->created_at) }}</span>
 														</div>
-														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $value->slug) }}">{{ str_limit($bulletin_article[$x]->title,41) }}</a></h4>
-														{!! str_limit($bulletin_article[$x]->content, 100) !!}<a href="{{ route('news-detail', $value->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
+														<h4 class="height_title_footer_news"><a href="{{ route('news-detail', $bulletin_article[$x]->slug) }}">{{ str_limit($bulletin_article[$x]->title,41) }}</a></h4>
+														{!! str_limit($bulletin_article[$x]->content, 100) !!}<a href="{{ route('news-detail', $bulletin_article[$x]->slug) }}" class="read-more">@lang('general.public.read_more') <i class="fa fa-angle-right"></i></a>
 													</article>
 												</div>
 												@php $x++; @endphp

@@ -8,6 +8,9 @@ use Config;
 
 class HomepageBanner extends Model
 {
+    const HEADLINE = "Hompage Headline";
+    const FACILITIES = "Hompage Facilities";
+
     protected $table = 'homepage_banner';
 
     protected $fillable = [
@@ -15,6 +18,7 @@ class HomepageBanner extends Model
         'image',
         'link',
         'index_order',
+        'category',
     ];
 
     protected static function boot() {

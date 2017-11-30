@@ -79,18 +79,20 @@ class BannerController extends Controller
         
         if($request->action == 'get-data'){
             $data = HomepageBanner::find($request->id);
-            $response['name'] = $data->name;
-            $response['image'] = HomepageBanner::getBanner($request->id,'image_path');
-            $response['link'] = $data->link;
+            $response['name']       = $data->name;
+            $response['image']      = HomepageBanner::getBanner($request->id,'image_path');
+            $response['link']       = $data->link;
+            $response['category']   = $data->category;
             $response['indexOrder'] = $data->index_order;
         }else if($request->action != 'delete'){
 
             $param = $request->all();
             $rules = array(
                 // 'name'   => 'required',
-                'image'   => 'image|mimes:jpeg,jpg,png',
-                // 'link'   => 'required',
-                'indexOrder'   => 'required|numeric',
+                'image'         => 'image|mimes:jpeg,jpg,png',
+                // 'link'          => 'required',
+                'indexOrder'    => 'required|numeric',
+                'category'      => 'required|not_in:Category',
             );
 
             $validate = Validator::make($param,$rules);
@@ -99,90 +101,46 @@ class BannerController extends Controller
             } else {
                     $isBanner = "";
                     if($request->action == 'create'){
-
-                        $data = Sentinel::getUser()->first_name;
-                        $find_data['email'] = "x";
-                        $find_data['id'] = "cek";
-                        $find_data['full_name'] = $data;
-                        $find_data['table'] = "Create Banner";
-
-                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        //                 });
-
                         $data = new HomepageBanner;
 
-                        $data->name = $request->name;
-                        $data->index_order = $request->indexOrder;
-                        $data->link = $request->link;
-
                         $audit->action = "New";
-                        $audit->content = $request->image.' | '.$request->name.' | '.$request->indexOrder.' | '.$request->link;
-
-                        $fileOverLoad = "";
-                        if($request->hasFile('image')) {
-                            if(filesize(Input::file('image'))<=1500000){
-                                if($request->action == 'update'){
-                                    if($data->image != ""){
-                                        $image_path = public_path().'/storage/banner/'.$data->image;
-                                        if(file_exists($image_path))
-                                            unlink($image_path);
-                                    }
-                                }
-                                // createdirYmd('storage/gallery');
-                                $file = Input::file('image');
-                                $name = str_random(20). '-' .$file->getClientOriginalName();
-                                $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                                // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-
-                                $path = public_path('/storage/banner/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                                $isBanner = resizeAndSaveImage($file, $path, $is_banner=TRUE);
-                            }else{
-                                $overload = "overload";
-                            }
-                        }
+                        $audit->content = $request->image.' | '.$request->name.' | '.$request->indexOrder.' | '.$request->link.' | '.$request->category;
                     }else{
-                        $data = Sentinel::getUser()->first_name;
-                        $find_data['email'] = "x";
-                        $find_data['id'] = "cek";
-                        $find_data['full_name'] = $data;
-                        $find_data['table'] = "Update Banner";
-
-                        // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-                        //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-                        //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-                        //                 });
-
                         $data = HomepageBanner::find($request->data_id);
-                        $data->name = $request->name;
-                        $data->index_order = $request->indexOrder;
-                        $data->link = $request->link;
 
                         $audit->action = "Edit";
-                        $audit->before = $data->image.' | '.$data->name.' | '.$data->index_order.' | '.$data->link;
-                        $audit->after = $request->image.' | '.$request->name.' | '.$request->indexOrder.' | '.$request->link;
+                        $audit->before = $data->image.' | '.$data->name.' | '.$data->index_order.' | '.$data->link.' | '.$data->category;
+                        $audit->after = $request->image.' | '.$request->name.' | '.$request->indexOrder.' | '.$request->link.' | '.$request->category;
+                    }
 
-                        $fileOverLoad = "";
-                        if($request->hasFile('image')) {
-                            if(filesize(Input::file('image'))<=1500000){
-                                if($request->action == 'update'){
-                                    if($data->image != ""){
-                                        $image_path = public_path().'/storage/banner/'.$data->image;
-                                        if(file_exists($image_path))
-                                            unlink($image_path);
-                                    }
+                    $data->name         = $request->name;
+                    $data->index_order  = $request->indexOrder;
+                    $data->link         = $request->link;
+                    $data->category     = $request->category;
+                    
+                    $fileOverLoad = "";
+                    if($request->hasFile('image')) {
+                        if(filesize(Input::file('image'))<=1500000){
+                            if($request->action == 'update'){
+                                if($data->image != ""){
+                                    $image_path = public_path().'/storage/banner/'.$data->image;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
                                 }
-                                // createdirYmd('storage/gallery');
-                                $file = Input::file('image');
-                                $name = str_random(20). '-' .$file->getClientOriginalName();
-                                $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
-                                // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
-                                $path = public_path('/storage/banner/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            }
+                            // createdirYmd('storage/gallery');
+                            $file = Input::file('image');
+                            $name = str_random(20). '-' .$file->getClientOriginalName();
+                            $data->image = date("Y")."/".date("m")."/".date("d")."/".$name;
+                            // $file->move(public_path().'/storage/gallery/'.date("Y")."/".date("m")."/".date("d")."/", $name);
+                            $path = public_path('/storage/banner/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            if($request->category==HomepageBanner::HEADLINE){
                                 $isBanner = resizeAndSaveImage($file, $path, $is_banner=TRUE);
                             }else{
-                                $overload = "overload";
+                                $isBanner = resizeAndSaveImage($file, $path);
                             }
+                        }else{
+                            $fileOverLoad = "overload";
                         }
                     }
 
@@ -210,7 +168,7 @@ class BannerController extends Controller
             $data = HomepageBanner::find($request->data_id);
 
             $audit->action = "Delete";
-            $audit->content = $data->image.' | '.$data->name.' | '.$data->index_order.' | '.$data->link;
+            $audit->content = $data->image.' | '.$data->name.' | '.$data->index_order.' | '.$data->link.' | '.$data->category;
             $audit->save();
 
             if ($data->delete()) {
@@ -220,17 +178,6 @@ class BannerController extends Controller
                         $response['notification'] = 'Delete Data Failed';
                         $response['status'] = 'failed';
             }
-
-            $data = Sentinel::getUser()->first_name;
-            $find_data['email'] = "x";
-            $find_data['id'] = "cek";
-            $find_data['full_name'] = $data;
-            $find_data['table'] = "Delete Banner";
-
-            // Mail::send('email.update_admin', $find_data, function($message) use($find_data) {
-            //                     $message->from("noreply@alihsan.com", 'AL Ihsan No-Reply');
-            //                     $message->to("ukan.job@gmail.com", $find_data['full_name'])->subject('Admin Update Content');
-            //                 });
         }
 
         echo json_encode($response);
@@ -264,6 +211,13 @@ class BannerController extends Controller
                     <label class="col-md-3 control-label"><strong>Link</strong></label>
                     <div class="col-md-9">
                         <strong>:</strong> '.$data->link.'
+                    </div>
+                    <div class="clear"></div>
+                </div>';
+        echo '<div class="form-group">
+                    <label class="col-md-3 control-label"><strong>Category</strong></label>
+                    <div class="col-md-9">
+                        <strong>:</strong> '.$data->category.'
                     </div>
                     <div class="clear"></div>
                 </div>';

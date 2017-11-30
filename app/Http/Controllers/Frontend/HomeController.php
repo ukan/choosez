@@ -84,11 +84,14 @@ class HomeController extends Controller
         }
 
         #-- Get Banner Data
-        $dataBanners = HomepageBanner::orderBy('index_order', 'asc')->get();
+        $dataBanners = HomepageBanner::where('category', HomepageBanner::HEADLINE)->orderBy('index_order', 'asc')->get();
         $getDataBanners = [];
         foreach ($dataBanners as $key => $value) {
             array_push($getDataBanners, $value);
         }
+
+        #-- Get Facilities Data
+        $dataFacilities = HomepageBanner::where('category', HomepageBanner::FACILITIES)->orderBy('index_order', 'asc')->get();
 
         $count_article = count($getData);
 
@@ -118,6 +121,7 @@ class HomeController extends Controller
                  ->with('bulletin_recent',$getDataRecent)
                  ->with('bulletin_article',$getData)
                  ->with('banners',$getDataBanners)
+                 ->with('facilities',$dataFacilities)
                  ->with('bulletin_news',$getDataEditor);
         // return view('email.new_post');
     }

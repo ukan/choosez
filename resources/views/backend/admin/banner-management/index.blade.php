@@ -40,7 +40,9 @@
                         <th class="center-align">updated</th>
                         <th class="center-align">Image</th>
                         <th class="center-align">Name</th>
+                        <th class="center-align">Category</th>
                         <th class="center-align">Link</th>
+                        <th class="center-align">Index</th>
                         <th class="center-align" width="12%">Action</th>
                     </tr>
                 </thead>
@@ -90,6 +92,18 @@
                     <div class="col-lg-9">
                         {!! Form::text('name', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
                         <p class="has-error text-danger error-name"></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group area-insert-update">
+                    <label class="col-md-3 control-label">Name</label>
+                    <div class="col-lg-9">
+                        <select name="category" class="select2" style="width:150px">
+                            <option value="Category">Category</option>
+                            <option value="Hompage Headline">Hompage Headline</option>
+                            <option value="Hompage Facilities">Hompage Facilities</option>
+                        </select>
+                        <p class="has-error text-danger error-category"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -158,7 +172,9 @@
                     {data: 'updated_at', name: 'updated_at',visible:false},
                     {data: 'image', name: 'image', class: 'center-align', searchable: false, orderable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'category', name: 'category'},
                     {data: 'link', name: 'link'},
+                    {data: 'index_order', name: 'index_order'},
                     {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
                 ]
             });
@@ -181,6 +197,7 @@
             $("[name='action']").val('create');
             $("[name='name']").val('');
             $("[name='link']").val('');
+            $('select[name=category]').val('Category').change();
             $("[name='indexOrder']").val('');
             $('.area-insert-update').show();
             $('.area-delete').hide();
@@ -208,6 +225,7 @@
                     }
                     $("[name='name']").val(response.name);
                     $("[name='link']").val(response.link);
+                    $('select[name=category]').val(response.category).change();
                     $("[name='indexOrder']").val(response.indexOrder);
                 }
             });
