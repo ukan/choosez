@@ -13,6 +13,7 @@
 				<li><a href="{{ route('profile-structure') }}" title="@lang('general.menu.structure')">@lang('general.menu.structure')</a></li>
 				<!-- <li><a href="{{ route('profile-teacher') }}" title="@lang('general.menu.teacher')">@lang('general.menu.teacher')</a></li> -->
 				<li><a href="{{ route('profile-achievement') }}" title="@lang('general.menu.achievement')">@lang('general.menu.achievement')</a></li>
+				<li><a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a></li>
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -37,6 +38,9 @@
 				<!-- <li><a href="#" title="@lang('general.menu.academic_support')">@lang('general.menu.academic_support')</a></li> -->
 			</ul>
 		</li>
+		<li>
+			<a href="{{ route('bulletin') }}" title="@lang('general.menu.bulletin')">@lang('general.menu.bulletin')</a>
+		</li>
 		<li class="dropdown">
 			<a title="@lang('general.menu.event')" class="dropdown-toggle" href="#">
 				@lang('general.menu.event')
@@ -49,9 +53,6 @@
 		</li>
 		<li>
 			<a href="{{ route('download') }}" title="@lang('general.menu.download')">@lang('general.menu.download')</a>
-		</li>
-		<li>
-			<a href="{{ route('get-page-facilities') }}" title="@lang('general.menu.facilities')">@lang('general.menu.facilities')</a>
 		</li>
 		<li>
 			<a href="{{ route('gallery') }}" title="@lang('general.menu.gallery')">@lang('general.menu.gallery')</a>

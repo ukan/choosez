@@ -41,6 +41,7 @@ return [
 		'mos' => "Ta'aruf and LPKS",
 		'download' => "Download",
 		'event' => "Event",
+		'bulletin' => "News",
 	],
 	'form' => [
 		'full_name' => 'Full Name',

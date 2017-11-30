@@ -40,6 +40,7 @@ return [
 		'mos' => "Ta'aruf dan LPKS",
 		'download' => "Unduh",
 		'event' => "Acara",
+		'bulletin' => "Berita",
 	],
 	'form' => [
 		'full_name' => 'Nama Lengkap',
