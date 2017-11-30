@@ -99,6 +99,8 @@ class BannerController extends Controller
             if($validate->fails()) {
                 $this->validate($request,$rules);
             } else {
+                DB::beginTransaction();
+                try{
                     $isBanner = "";
                     if($request->action == 'create'){
                         $data = new HomepageBanner;
@@ -163,6 +165,13 @@ class BannerController extends Controller
                         $response['notification'] = 'Upload file size must be less than 1 Mb';
                         $response['status'] = 'failed';
                     }
+                    DB::commit();
+                }
+                catch (\Exception $e)
+                {
+                    DB::rollback();
+                    throw new \Exception($e->getMessage());
+                }
             }
         }else{
             $data = HomepageBanner::find($request->data_id);
