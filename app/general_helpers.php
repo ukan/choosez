@@ -807,19 +807,19 @@ function resizeAndSaveImage($file, $path, $is_banner = FALSE){
         }
     }else{
         if($width == $height){
-            if($width>600){
+            if(filesize($file)>=200 && $width>600){
                 Image::make($file->getRealPath())->resize(600, 600)->save($path);
             }else{
                 Image::make($file->getRealPath())->save($path);
             }
         }else if($width > $height){
-            if($width>600){
+            if(filesize($file)>=200 && $width>600){
                 Image::make($file->getRealPath())->resize(600, 450)->save($path);
             }else{
                 Image::make($file->getRealPath())->save($path);
             }
         }else{
-            if($height>600){
+            if(filesize($file)>=200 && $width>600){
                 Image::make($file->getRealPath())->resize(450, 600)->save($path);
             }else{
                 Image::make($file->getRealPath())->save($path);
