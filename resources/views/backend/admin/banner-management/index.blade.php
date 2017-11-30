@@ -76,7 +76,7 @@
           <h4 class="modal-title FormData-title" id="myModalLabel">Create</h4>
         </div>
         <div class="modal-body">
-        {!! Form::open(['route'=>'admin-post-banner', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
+        {!! Form::open(['route'=>'admin-post-banner', 'files'=>true, 'class' => 'form-horizontal']) !!}
                 <input type="hidden" name="action" id="action" value="">
                 <input type="hidden" name="data_id" value="">
                 <div class="form-group area-insert-update">
