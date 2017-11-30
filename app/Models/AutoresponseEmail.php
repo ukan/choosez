@@ -35,7 +35,6 @@ class AutoresponseEmail extends Model
                     $find_data['full_name'] = $value['full_name'];
                     $find_data['password'] = $value['password'];
                     
-                    
                     Mail::send('email.new_mos_register', $find_data, function($message) use($find_data) {
                                 $message->from("noreply@ponpesalihsancbr.id", 'Al-Ihsan No-Reply');
                                 $message->to($find_data['email'], $find_data['full_name'])->subject('Notification');
