@@ -75,106 +75,106 @@ class DownloadController extends Controller
     public function post_download(Request $request){
         $response = array();
         $audit = new AuditrailLog;
-        DB::beginTransaction();
-        try{
 
-            if($request->action == 'get-data'){
-                $download = Download::find($request->id);
-                $response['title'] = $download->title;
-                $response['description'] = $download->description;            
-                $response['image_path'] = Download::getDownload($request->id,'image_path');
-                $response['link'] = $download->link;            
-            }else if($request->action != 'delete'){
+        if($request->action == 'get-data'){
+            $download = Download::find($request->id);
+            $response['title'] = $download->title;
+            $response['description'] = $download->description;            
+            $response['image_path'] = Download::getDownload($request->id,'image_path');
+            $response['link'] = $download->link;            
+        }else if($request->action != 'delete'){
 
-                $param = $request->all();
-                $rules = array(
-                    'image'         => 'image|mimes:jpeg,jpg,png',
-                    'title'         => 'required',
-                    'link'          => 'required',
-                    // 'description'   => 'required',
-                );
-                $validate = Validator::make($param,$rules);
-                if($validate->fails()) {
-                    $this->validate($request,$rules);
-                } else {
-                        $audit->email = Sentinel::getUser()->email;
-                        
-                        if($request->action == 'create'){
-                            $download = new Download;
-                            $audit->action = "New";
-                            $audit->content = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
-                        }else{
-                            $download = Download::find($request->download_id);                    
-                            $audit->action = "Edit";
-                            $audit->before = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
-                            $audit->after = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
-                        }
-                        $download->title = $request->title;
-                        $download->description = $request->description;
-                        $download->link = $request->link;
+            $param = $request->all();
+            $rules = array(
+                'image'         => 'image|mimes:jpeg,jpg,png',
+                'title'         => 'required',
+                'link'          => 'required',
+                'description'   => 'required',
+            );
+            $validate = Validator::make($param,$rules);
+            if($validate->fails()) {
+                $this->validate($request,$rules);
+            } else {
+                DB::beginTransaction();
+                try{
+                    $audit->email = Sentinel::getUser()->email;
+                    
+                    if($request->action == 'create'){
+                        $download = new Download;
+                        $audit->action = "New";
+                        $audit->content = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
+                    }else{
+                        $download = Download::find($request->download_id);                    
+                        $audit->action = "Edit";
+                        $audit->before = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
+                        $audit->after = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
+                    }
+                    $download->title = $request->title;
+                    $download->description = $request->description;
+                    $download->link = $request->link;
 
-                        $audit->table_name = "Download";
-                        $audit->save();
-                        
-                        $fileOverLoad = "";
-                        if($request->hasFile('image')) {
-                            if(filesize(Input::file('image'))<=1500000){
-                                if($request->action == 'update'){                        
-                                    if($download->image_path != ""){  
-                                        $image_path = public_path().'/storage/downloads/'.$download->image_path;
-                                        if(file_exists($image_path))
-                                            unlink($image_path);
-                                    }
+                    $audit->table_name = "Download";
+                    $audit->save();
+                    
+                    $fileOverLoad = "";
+                    if($request->hasFile('image')) {
+                        if(filesize(Input::file('image'))<=1500000){
+                            if($request->action == 'update'){                        
+                                if($download->image_path != ""){  
+                                    $image_path = public_path().'/storage/downloads/'.$download->image_path;
+                                    if(file_exists($image_path))
+                                        unlink($image_path);
                                 }
-                                $file = Input::file('image');            
-                                $name = str_random(20). '-' .$file->getClientOriginalName();  
-                                $download->image_path = date("Y")."/".date("m")."/".date("d")."/".$name;          
-                                
-                                $path = public_path('/storage/downloads/'.date("Y")."/".date("m")."/".date("d")."/". $name);
-                                resizeAndSaveImage($file, $path);
-                            }else{
-                                $overload = "overload";
                             }
-                        }
-                  
-                        if($request->action == 'create' && empty($fileOverLoad)){
-                            $download->save();
+                            $file = Input::file('image');            
+                            $name = str_random(20). '-' .$file->getClientOriginalName();  
+                            $download->image_path = date("Y")."/".date("m")."/".date("d")."/".$name;          
                             
-                            $response['notification'] = 'Success Create Download Data';
-                            $response['status'] = 'success';
-                        }else if($request->action == 'update' && empty($fileOverLoad)){
-                            $download->save();
-
-                            $response['notification'] = 'Success Update Download Data';
-                            $response['status'] = 'success';
+                            $path = public_path('/storage/downloads/'.date("Y")."/".date("m")."/".date("d")."/". $name);
+                            resizeAndSaveImage($file, $path);
                         }else{
-                            $response['notification'] = 'Upload file size must be less than 1 Mb';
-                            $response['status'] = 'failed';
+                            $overload = "overload";
                         }
+                    }
+              
+                    if($request->action == 'create' && empty($fileOverLoad)){
+                        $download->save();
+                        
+                        $response['notification'] = 'Success Create Download Data';
+                        $response['status'] = 'success';
+                    }else if($request->action == 'update' && empty($fileOverLoad)){
+                        $download->save();
+
+                        $response['notification'] = 'Success Update Download Data';
+                        $response['status'] = 'success';
+                    }else{
+                        $response['notification'] = 'Upload file size must be less than 1 Mb';
+                        $response['status'] = 'failed';
+                    }
+                    DB::commit();
                 }
-            }else{            
-                $download = Download::find($request->download_id);
-
-                $audit->email = Sentinel::getUser()->email;
-                $audit->action = "Delete";
-                $audit->table_name = "Download";
-                $audit->content = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
-                $audit->save();
-
-                if ($download->delete()) {
-                            $response['notification'] = 'Delete Data Success';
-                            $response['status'] = 'success';
-                } else {
-                            $response['notification'] = 'Delete Data Failed';
-                            $response['status'] = 'failed';
+                catch (\Exception $e)
+                {
+                    DB::rollback();
+                    throw new \Exception($e->getMessage());
                 }
             }
-            DB::commit();
-        }
-        catch (\Exception $e)
-        {
-            DB::rollback();
-            throw new \Exception($e->getMessage());
+        }else{            
+            $download = Download::find($request->download_id);
+
+            $audit->email = Sentinel::getUser()->email;
+            $audit->action = "Delete";
+            $audit->table_name = "Download";
+            $audit->content = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
+            $audit->save();
+
+            if ($download->delete()) {
+                $response['notification'] = 'Delete Data Success';
+                $response['status'] = 'success';
+            } else {
+                $response['notification'] = 'Delete Data Failed';
+                $response['status'] = 'failed';
+            }
         }
 
         echo json_encode($response);
@@ -203,13 +203,13 @@ class DownloadController extends Controller
                     </div>
                     <div class="clear"></div>
                 </div>';
-        // echo '<div class="form-group">
-        //             <label class="col-lg-3 control-label">Author</label>
-        //             <div class="col-lg-9">
-        //                 '.$download->description.'                        
-        //             </div>
-        //             <div class="clear"></div>
-        //         </div>';
+        echo '<div class="form-group">
+                    <label class="col-lg-3 control-label">Description</label>
+                    <div class="col-lg-9">
+                        '.$download->description.'                        
+                    </div>
+                    <div class="clear"></div>
+                </div>';
         echo '<div class="form-group">
                     <label class="col-lg-3 control-label">Link</label>
                     <div class="col-lg-9">
