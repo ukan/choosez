@@ -14,6 +14,7 @@ use Validator;
 use Config;
 use Sentinel;
 use Mail;
+use DB;
 
 class BannerController extends Controller
 {
