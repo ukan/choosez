@@ -1,11 +1,11 @@
 @extends('layout.backend.admin.master.master')
 
-@section('title', 'Download Management')
+@section('title', 'Download Category Management')
 
 @section('breadcrumb')
     <ol class="breadcrumbs">
         <li><a href="{!! action('Backend\Admin\DashboardController@index') !!}"><i class="fa fa-home"></i> Home</a></li>
-        <li><span>Download Management</span></li>
+        <li><span>Download Category Management</span></li>
     </ol>
 @endsection
 
@@ -19,25 +19,22 @@
     </style>
 @endsection
 
-@section('page-header', 'Download Management')
+@section('page-header', 'Download Category Management')
 
 @section('content')
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Download Management</h3>
+            <h3 class="panel-title">Download Category Management</h3>
         </div>
         <div class="panel-body">
             @include('flash::message')
             <a class="btn btn-primary pull-right"onclick="javascript:show_form_create()" title="Create"><i class="fa fa-plus fa-fw"></i></a>
             <br><br>
-            <table id="download-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
+            <table id="download-category-table" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
                 <thead>
                     <tr>
                         <th class="center-align">id</th>
-                        <th class="center-align">Image</th>
-                        <th class="center-align">Title</th>
-                        <th class="center-align">Link</th>
-                        <th class="center-align">Category</th>
+                        <th class="center-align">Name</th>
                         <th width="15%">Action</th>
                     </tr>
                 </thead>
@@ -71,50 +68,14 @@
           <h4 class="modal-title FormDownload-title" id="myModalLabel">Create</h4>
         </div>
         <div class="modal-body">
-        {!! Form::open(['route'=>'admin-post-download', 'files'=>true, 'class' => 'form-horizontal jquery-form-download']) !!}
+        {!! Form::open(['route'=>'admin-post-download-category', 'files'=>true, 'class' => 'form-horizontal jquery-form-download']) !!}
                 <input type="hidden" name="action" id="action" value="">      
-                <input type="hidden" name="download_id" value=""> 
+                <input type="hidden" name="download_category_id" value=""> 
                 <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Image<b class="text-danger">*</b></label>
-                    <div class="col-md-9">
-                        {!! form_input_file_img('file','image') !!}
-                        <p class="has-error text-danger error-image"></p>
-                        <p class="upload-notif"><i>Upload image size must be less than 1 Mb</i></p>
-                    </div>
-                </div>
-                <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Title<b class="text-danger">*</b></label>
+                    <label class="col-md-3 control-label">Name<b class="text-danger">*</b></label>
                     <div class="col-lg-9">
-                        {!! Form::text('title', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
-                        <p class="has-error text-danger error-title"></p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">link<b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
-                        {!! Form::text('link', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
-                        <p class="has-error text-danger error-author"></p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Description<b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
-                        {!! Form::textarea('description', null, array('class' => 'ckeditor')) !!}
-                        <p class="has-error text-danger error-description"></p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="form-group area-insert-update">
-                    <label class="col-md-3 control-label">Category<b class="text-danger">*</b></label>
-                    <div class="col-lg-9">
-                        <select multiple id="category" name="category[]" class="select2" style="width:100px">
-                                @foreach($categories as $keyCategory => $category)
-                                    <option value="{{ $keyCategory }}">{{ $category }}</option>
-                                @endforeach
-                        </select>
-                        <p class="has-error text-danger error-category"></p>
+                        {!! Form::text('name', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
+                        <p class="has-error text-danger error-name"></p>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -152,53 +113,34 @@
 
     <script>
         $(".select2").select2();
-        var table = $('#download-table').DataTable({
+        var table = $('#download-category-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{!! route('datatables-download') !!}",
+                ajax: "{!! route('datatables-download-category') !!}",
                 order: [[ 1, 'desc' ]],
                 columns: [
                     {data: 'id', name: 'id',visible:false},
-                    {data: 'image', name: 'image', class: 'center-align', searchable: false, orderable: false},
-                    {data: 'title', name: 'title'},
-                    {data: 'link', name: 'link'},
-                    {data: 'category', name: 'category'},
+                    {data: 'name', name: 'name'},
                     {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
                 ]
             });
-        function show_download(id){
-            $.ajax({
-                type: "POST",
-                url: "{{ route('admin-show-download') }}",
-                data: {
-                    'id': id
-                },
-                success: function(msg)
-                {
-                    $("#getDownloadModal").modal("show");
-                    $("#getContentDownloadModal").html(msg);
-                }
-            });
-        }
+
         function show_form_create(){           
             $('.FormDownload-title').html('Create Download');
             $("[name='action']").val('create');
-            $("[name='title']").val('');
-            $("[name='link']").val('');
-            $("[name='description']").val('');
-            $("#category").val('').trigger('change');
+            $("[name='name']").val('');
             $('.area-insert-update').show();
             $('.area-delete').hide();
             $('#modalFormDownload').modal({backdrop: 'static', keyboard: false});
             $('#modalFormDownload').modal('show');
-            $("[name='download_id']").val('');
+            $("[name='download_category_id']").val('');
             $(".fileinput-new.thumbnail.image").html('<img src="{{asset($pathp."assets/backend/porto-admin/images/!logged-user.png")}}" class="img-responsive">');
         }
         
         function show_form_update(id){          
             $.ajax({
                 type: "POST",
-                url: "{{ route('admin-post-download')}}",
+                url: "{{ route('admin-post-download-category')}}",
                 data: {
                     'id': id,
                     'action': 'get-data'
@@ -206,24 +148,11 @@
                 dataType: 'json',
                 success: function(response)
                 {
-                    if(response.image_path != ''){
-                        $('.fileinput-new.thumbnail.image').html('<img src="'+ response.image_path +'" style="width:100px;height:auto" class=" img-responsive">');
-                    }else{
-                        $('.fileinput-new.thumbnail.image').html('<img src="{{ asset("assets/backend/porto-admin/images/!logged-user.png") }}" style="width:100px;height:auto" class="img-circle img-responsive">');
-                    }
-                    $("[name='title']").val(response.title);
-                    $("[name='link']").val(response.link);
-                    $("[name='description']").val(response.description);
                     
-                    var selectedValues = new Array();
-                        selectedValues[0] = "a";
-                        selectedValues[1] = "c";
-                    $("#category").val(response.category);
-                    // $("[name='category']").val(selectedValues);
-                    // $("[name='category']").val(['1']);
+                    $("[name='name']").val(response.name);
                 }
             });
-            $("[name='download_id']").val(id);
+            $("[name='download_category_id']").val(id);
             $('.area-insert-update').show();
             $('.area-delete').hide();
             $('.FormDownload-title').html('Update Data');
@@ -231,8 +160,9 @@
             $('#modalFormDownload').modal({backdrop: 'static', keyboard: false});
             $('#modalFormDownload').modal('show');
         }
+        
         function show_form_delete(id){         
-            $("[name='download_id']").val(id);
+            $("[name='download_category_id']").val(id);
             $('.area-insert-update').hide();
             $('.area-delete').show();
             $('.FormDownload-title').html('Delete Book');

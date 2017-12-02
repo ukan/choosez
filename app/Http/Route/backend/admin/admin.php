@@ -263,6 +263,12 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         Route::post('/show', array('as' => 'admin-show-download', 'uses' => 'DownloadController@show'));
         Route::post('/post_download', array('as' => 'admin-post-download', 'uses' => 'DownloadController@post_download'));
     });
+
+    #-- Download Category management
+    Route::group(['prefix' => 'download-category-management', 'namespace' => 'DownloadCategory'], function () {
+        Route::get('/', array('as' => 'admin-index-download-category', 'uses' => 'DownloadCategoryController@index'));
+        Route::post('/post_download_categoty', array('as' => 'admin-post-download-category', 'uses' => 'DownloadCategoryController@post_download_category'));
+    });
 });
 
 Route::group(['namespace' => 'Frontend'], function () {

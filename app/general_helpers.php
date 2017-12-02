@@ -874,3 +874,12 @@ if (!function_exists('generate_password'))
         return $pass; //turn the array into a string
     }
 }
+
+if (! function_exists('random_color')) {
+    function random_color($id=0, $code=0) { 
+        $first_part = substr(str_pad( md5( $id ), 3, '0', STR_PAD_LEFT), 0, 3);
+        $last_part = substr(str_pad( md5( $code ), 3, '0', STR_PAD_LEFT), 0, 3);
+        
+        return '#'.$first_part.$last_part; 
+    } 
+}

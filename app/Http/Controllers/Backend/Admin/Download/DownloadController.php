@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Backend\Admin\BaseController;
 use App\Models\Download;
+use App\Models\DownloadCategory;
 use App\Models\AuditrailLog;
 
 use Input;
@@ -36,7 +37,9 @@ class DownloadController extends Controller
 
     public function index(Request $req)
     {
-        return view('backend.admin.download-management.index');
+        $category = DownloadCategory::dropdown();
+            
+        return view('backend.admin.download-management.index')->with('categories', $category);
     }
 
     public function datatables()
@@ -60,6 +63,22 @@ class DownloadController extends Controller
                     return "<img class='center-align' src='".asset($pathp.'storage/downloads/').'/'.$download->image_path."' class='img-responsive' width='100px'>";  
                     }
                 })
+                ->editColumn('category', function ($download) {
+                    if(!empty($download->category)){
+                        $categories = DownloadCategory::whereIn('id', json_decode($download->category,TRUE))->get();  
+
+                        $categoryLists = [];
+                        foreach ($categories as $keyCategory => $category) {
+                            array_push($categoryLists, "<span style='color:".random_color($category->id, $category->name)."'><b>".$category->name."</b>");
+                        }
+
+                        $category = implode(', ', $categoryLists);
+                    }else{
+                        $category = "<span color='grey'><em><b>Uncategorized</b></em></span>";
+                    }
+
+                    return $category;
+                })
                 ->make(true);
     }
 
@@ -82,6 +101,7 @@ class DownloadController extends Controller
             $response['description'] = $download->description;            
             $response['image_path'] = Download::getDownload($request->id,'image_path');
             $response['link'] = $download->link;            
+            $response['category'] = json_decode($download->category,TRUE);            
         }else if($request->action != 'delete'){
 
             $param = $request->all();
@@ -90,6 +110,7 @@ class DownloadController extends Controller
                 'title'         => 'required',
                 'link'          => 'required',
                 'description'   => 'required',
+                'category'    => 'required',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -102,16 +123,17 @@ class DownloadController extends Controller
                     if($request->action == 'create'){
                         $download = new Download;
                         $audit->action = "New";
-                        $audit->content = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
+                        $audit->content = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link.' | '.json_encode($request->category);
                     }else{
                         $download = Download::find($request->download_id);                    
                         $audit->action = "Edit";
-                        $audit->before = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
-                        $audit->after = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link;
+                        $audit->before = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link.' | '.$download->category;
+                        $audit->after = $request->image.' | '.$request->title.' | '.$request->description.' | '.$request->link.' | '.json_encode($request->category);
                     }
-                    $download->title = $request->title;
-                    $download->description = $request->description;
-                    $download->link = $request->link;
+                    $download->title        = $request->title;
+                    $download->description  = $request->description;
+                    $download->link         = $request->link;
+                    $download->category     = json_encode($request->category);
 
                     $audit->table_name = "Download";
                     $audit->save();
@@ -162,10 +184,10 @@ class DownloadController extends Controller
         }else{            
             $download = Download::find($request->download_id);
 
-            $audit->email = Sentinel::getUser()->email;
-            $audit->action = "Delete";
-            $audit->table_name = "Download";
-            $audit->content = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link;
+            $audit->email       = Sentinel::getUser()->email;
+            $audit->action      = "Delete";
+            $audit->table_name  = "Download";
+            $audit->content     = $download->image_path.' | '.$download->title.' | '.$download->description.' | '.$download->link.' | '.$download->category;
             $audit->save();
 
             if ($download->delete()) {

@@ -15,6 +15,7 @@ class Download extends Model
         'image_path',
         'description',
         'link',
+        'category',
     ];
 
     protected static function boot() {
@@ -30,8 +31,9 @@ class Download extends Model
 
     public static function datatables()
     {
-        return static::select('id','title', 'image_path', 'link')->get();
+        return static::select('id','title', 'image_path', 'link', 'category')->get();
     }
+
     public static function getDownload($id="",$field="")
     {   
         $pathp = "";
