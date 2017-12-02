@@ -133,7 +133,7 @@ class DownloadController extends Controller
                     $download->title        = $request->title;
                     $download->description  = $request->description;
                     $download->link         = $request->link;
-                    $download->slug         = str_replace([" ","?"],["-", ""], $request->title);
+                    $download->slug         = str_replace([" ","?"," -","- ","~"],["-", "", "", ""], $request->title);
                     $download->category     = json_encode($request->category);
 
                     $audit->table_name = "Download";
