@@ -239,5 +239,26 @@ class DownloadController extends Controller
                     </div>
                     <div class="clear"></div>
                 </div>';
+
+        if(!empty($download->category)){
+            $categories = DownloadCategory::whereIn('id', json_decode($download->category,TRUE))->get();  
+
+            $categoryLists = [];
+            foreach ($categories as $keyCategory => $category) {
+                array_push($categoryLists, "<span style='color:".random_color($category->id, $category->name)."'><b>".$category->name."</b>");
+            }
+
+            $category = implode(', ', $categoryLists);
+        }else{
+            $category = "<span color='grey'><em><b>Uncategorized</b></em></span>";
+        }
+        
+        echo '<div class="form-group">
+                    <label class="col-lg-3 control-label">Category</label>
+                    <div class="col-lg-9">
+                        '.$category.'                        
+                    </div>
+                    <div class="clear"></div>
+                </div>';
     }
 }
