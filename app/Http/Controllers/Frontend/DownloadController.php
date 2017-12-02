@@ -23,8 +23,10 @@ class DownloadController extends Controller
 
     public function detail($slug){
         $data       = Download::where('slug',$slug)->orderBy('id')->first();
-        $category   = DownloadCategory::whereIn('id', json_decode($data->category,TRUE))->pluck('name')->all();
-        $data['category'] = $category;
+        if(!empty($data->category){
+            $category   = DownloadCategory::whereIn('id', json_decode($data->category,TRUE))->pluck('name')->all();
+            $data['category'] = $category;
+        }
 
         return view('frontend.download.downloadDetail')->with('download', $data);
     }
