@@ -69,7 +69,7 @@ class DownloadController extends Controller
 
                         $categoryLists = [];
                         foreach ($categories as $keyCategory => $category) {
-                            array_push($categoryLists, "<span style='color:".random_color($category->id, $category->name)."'><b>".$category->name."</b>");
+                            array_push($categoryLists, $category->name);
                         }
 
                         $category = implode(', ', $categoryLists);
@@ -245,7 +245,8 @@ class DownloadController extends Controller
 
             $categoryLists = [];
             foreach ($categories as $keyCategory => $category) {
-                array_push($categoryLists, "<span style='color:".random_color($category->id, $category->name)."'><b>".$category->name."</b>");
+                // array_push($categoryLists, "<span style='color:".random_color($category->id, $category->name)."'><b>".$category->name."</b>");
+                array_push($categoryLists, $category->name);
             }
 
             $category = implode(', ', $categoryLists);
