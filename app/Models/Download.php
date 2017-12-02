@@ -16,6 +16,7 @@ class Download extends Model
         'description',
         'link',
         'category',
+        'slug',
     ];
 
     protected static function boot() {

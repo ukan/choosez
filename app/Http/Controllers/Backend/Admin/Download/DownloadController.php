@@ -110,7 +110,7 @@ class DownloadController extends Controller
                 'title'         => 'required',
                 'link'          => 'required',
                 'description'   => 'required',
-                'category'    => 'required',
+                'category'      => 'required',
             );
             $validate = Validator::make($param,$rules);
             if($validate->fails()) {
@@ -133,6 +133,7 @@ class DownloadController extends Controller
                     $download->title        = $request->title;
                     $download->description  = $request->description;
                     $download->link         = $request->link;
+                    $download->slug         = str_replace([" ","?"],["-", ""], $request->title);
                     $download->category     = json_encode($request->category);
 
                     $audit->table_name = "Download";

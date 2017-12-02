@@ -4,7 +4,7 @@
 
 @section('css')
 <style type="text/css">
-.justify{
+p{
 	text-align: justify;
 	font-size: 16px;
 	color: #000;
@@ -54,9 +54,7 @@ label.line{
     line-height: 25px;
 
 }
-/*#2243e8 2807ff buru ungu
-#32ddff 09cff7 tosca
-#0011ff biru*/
+
 #rcorners2 {
     border-radius: 25px;
     border: 2px solid #73AD21;
@@ -99,47 +97,28 @@ article.post-large-custom .post-video-custom {
 article.post-large-custom .post-audio-custom {
 	margin-left: -60px;
 }
-.history-place{width: 100%;box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 40px 0 rgba(0,0,0,0.19);}
-
-.edifice h3{
-	text-align:center;
-    font-size:30px;
+.img-recent{
+	width: 230px;
+	height: 250px;
+	padding-right: 10px;
 }
-/*-- Edifice-Starts-Here --*/
-.edifice {
-    padding-bottom: 50px;
-    border-bottom: 1px solid #EEE;
-    text-align: center;
+@media only screen and (max-width: 550px) {
+	.img-recent{
+		width: 270px;
+		height: 250px;
+		padding-right: 10px;
+	}
 }
-img.lazyOwl {
-    width: 100%;
-}
-#owl-demo .item img {
-    height: 350px;
-}
-/*-- //Edifice-Ends-Here --*/
-.facilities-slider{
-	background-color: #000;
-	padding : 10px 10px 10px 10px; 
-}
-.facilities-slider label{
-	padding-top: 5px;
-	font-size: 18px; 
-	color: #fff;
-}
-.title-download {
-	color: #0088cc;
-	font-size: 16px;
-}
+.history-place{min-height: 430px;width: 100%;box-shadow: 0 10px 8px 0 rgba(0,0,0,0.2), 0 6px 40px 0 rgba(0,0,0,0.19);}
 </style>
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/general/css/style.css') !!}">
-<!-- {!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!} -->
+
+{!! Html::style( $pathp.'assets/backend/porto-admin/vendor/bootstrap/css/bootstrap.css') !!}
 {!! Html::style($pathp.'assets/backend/porto-admin/vendor/pnotify/pnotify.custom.css') !!}
 @endsection
 
 @section('content')
 <div role="main" class="main">
-
 	<section class="page-top">
 		<div class="container">
 			<div class="row">
@@ -166,51 +145,23 @@ img.lazyOwl {
 
 					<article class="post post-large-custom blog-single-post">
 						<div class="post-content back-content history-place">
-							<!-- <h2 class="center"><b>Download File List</b></h2> -->
-							<!-- <div class="post-meta">
-								<hr>
-							</div> -->
-							<div class="tab-pane" id="recentPosts">
-								<ul class="simple-post-list">
-									@foreach($downloads as $key => $value)
-									<li>
-										<div class="post-image">
-											<div class="img-thumbnail">
-												<a href="{{ route('download-detail', $value->slug) }}">
-													<img width="110" height="100" src="{{ asset($pathp.'storage/downloads'.'/'.$value->image_path) }}" alt="news image">
-												</a>
-											</div>
-										</div>
-										<div class="post-info">
-											<div>
-												<a href="{{ route('download-detail', $value->slug) }}"> 
-													<span class="title-download"><b>{!! $value->title !!}</b></span>
-												</a>
-											</div>
-											<div class="post-meta">
-												<i class="fa fa-calendar"></i>
-												<span class="post-by">{{ eform_date_news($value->updated_at) }}</span>
-											</div>
-											<div>
-												@if(!empty($value->description))
-													{!! str_limit($value->description,370) !!}
-												@else
-													<p> <span style="color:white">no description</span></p>
-												@endif
-											</div>
-											<a class="pull-right" href="{{ $value->link }}" target="_blank">
-												<button class="btn btn-sm btn-primary">Donwload</button>
-											</a>
-										</div>
-									</li>
-									@endforeach
-								</ul>
-
+							<div class="sharethis-inline-share-buttons"></div>
+							<h2>{{ $download->title }}</h2>
+							<div class="post-meta">
+								<i class="fa fa-calendar"></i>
+								<span class="post-by">{{ eform_date_news($download->created_at) }}</span>
+							 	@if(!empty($download->category))
+							 		<i class="fa fa-bookmark"></i>
+									<span class="post-by">{{ implode(', ', $download->category) }}</span>
+							 	@endif
+							 	<a class="pull-right" href="{{ $download->link }}" target="_blank">
+									<button class="btn btn-xs btn-primary">Donwload</button>
+								</a>
 							</div>
-							{{ $downloads->links() }}
+							<img style="float: left;" class="img-recent" src="{{ asset($pathp.'storage/downloads'.'/'.$download->image_path) }}">
+							{!! $download->description !!}
 						</div>
 					</article>
-
 				</div>
 			</div>
 
@@ -223,7 +174,7 @@ img.lazyOwl {
 @endsection
 
 @section('scripts')
-<!-- {!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!} -->
+{!! Html::script( $pathp.'assets/backend/porto-admin/javascripts/theme.js') !!}
 <script type="text/javascript">
 	$('.jquery-form-tickets').ajaxForm({
         dataType : 'json',
@@ -241,6 +192,7 @@ img.lazyOwl {
             $("[name='email']").val('');
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
+                title: response.status,
                 text: response.notification,
                 type: type_not,
                 addclass: "stack-custom",
@@ -261,6 +213,7 @@ img.lazyOwl {
             $('#loader').addClass("hidden");
             var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
             new PNotify({
+                title: "Failed",
                 text: "Validate Error, Check Your Data Again",
                 type: 'danger',
                 addclass: "stack-custom",

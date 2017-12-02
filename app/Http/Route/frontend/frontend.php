@@ -140,7 +140,10 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::get('/list', array('as' => 'bulletin', 'uses' => 'BulletinController@index'));
     });
     
-    Route::get('/download', array('as' => 'download', 'uses' => 'DownloadController@index'));
+    Route::group(['prefix' => 'download'], function(){
+        Route::get('/', array('as' => 'download', 'uses' => 'DownloadController@index'));
+        Route::get('/{slug}', array('as' => 'download-detail', 'uses' => 'DownloadController@detail'));
+    });
 });
 
 Route::post('/center/proker/show', array('as' => 'general-show-proker-pusat', 'uses' => 'Backend\Admin\Organization\ProkerController@showData'));
