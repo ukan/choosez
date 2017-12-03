@@ -105,13 +105,16 @@ class UserController extends BaseController
         return datatables(User::datatables(true))
             ->addColumn('action', function ($user) {
                 /*$url = route('admin-edit-users', $user->id);*/
+                $quote = "'";
                 $url = action('Backend\Admin\UserTrustee\UserController@edit', $user->id);
                 $showUrl = route('admin-show-users', $user->id);
 
-                
-                $action =  '<a href="'.$url.'" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-pencil-square-o fa-fw"></i></a>
-                    &nbsp;<a href="#" class="btn btn-danger btn-xs actDelete" title="Banned" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="delete"><i class="fa fa-ban fa-fw"></i></a>
-                    &nbsp;<a href="'.$showUrl.'" class="btn btn-info btn-xs actShow" title="Show Detail" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="show"><i class="fa fa-search fa-fw"></i></a>';
+                $action = ($user->is_active) ? 
+                    '<a href="#" class="btn btn-danger btn-xs actDelete" title="Banned" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="delete"><i class="fa fa-ban fa-fw"></i></a>' :
+                    '<a href="#" class="btn btn-success btn-xs actDelete" title="Activate" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="delete"><i class="fa fa-check-circle-o fa-fw"></i></a>';
+                // $action =  '<a href="'.$url.'" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-pencil-square-o fa-fw"></i></a>
+                //     &nbsp;<a href="#" class="btn btn-danger btn-xs actDelete" title="Banned" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="delete"><i class="fa fa-ban fa-fw"></i></a>
+                //     &nbsp;<a href="'.$showUrl.'" class="btn btn-info btn-xs actShow" title="Show Detail" data-id="'.$user->id.'" data-name="'.$user->username.'" data-button="show"><i class="fa fa-search fa-fw"></i></a>';
 
                 return $action;
 
@@ -125,6 +128,15 @@ class UserController extends BaseController
             })
             ->editColumn('name', function ($user) {
                 return $user->first_name.' '.$user->last_name;
+            })
+            ->editColumn('status', function ($user) {
+                if($user->is_active){ 
+                    $status = "<span style='color:green;'>Active<span>";
+                }else{
+                    $status = "<span style='color:red;'>Inactive<span>";
+                }
+
+                return $status;
             })
             ->make(true);
     }
@@ -285,5 +297,25 @@ class UserController extends BaseController
         }
 
         return true;
+    }
+
+    /**
+     * Update status is active user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus($id)
+    {
+        return $this->transaction(function ($model) use ($id) {
+            $user = User::find($id);
+            if($user->is_active){
+                $user->is_active = FALSE;
+            }else{
+                $user->is_active = TRUE;
+            }
+            $user->save();
+        }, true);
     }
 }

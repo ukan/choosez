@@ -35,11 +35,12 @@
                     <tr>
                         <th class="center-align">Email</th>
                         <th class="center-align">Full Name</th>
-                        <th class="center-align">Nick Name</th>
+                        <!-- <th class="center-align">Nick Name</th> -->
                         <th class="center-align">Phone</th>
                         <th class="center-align">Role</th>
+                        <th class="center-align">Status</th>
                         <th class="center-align">Last Login</th>
-                        <!-- <th width="12%">&nbsp;</th> -->
+                        <th class="center-align" width="8%">Action</th>
                     </tr>
                 </thead>
             </table>
@@ -60,14 +61,15 @@
                 columns: [
                     {data: 'email', name: 'email'},
                     {data: 'username', name: 'username'},
-                    {data: 'first_name', name: 'first_name'},
+                    // {data: 'first_name', name: 'first_name'},
                     {data: 'phone', name: 'phone'},
                     {data: 'role', name: 'role', searchable: false},
+                    {data: 'status', name: 'status'},
                     {data: 'last_login', name: 'last_login', class: 'center-align', searchable: false},
-                    // {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
+                    {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
                 ]
             });
         });
     </script>
-    @include('backend.delete-modal-datatables')
+    @include('backend.update-status-modal-datatables')
 @endsection

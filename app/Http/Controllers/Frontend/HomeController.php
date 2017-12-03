@@ -183,8 +183,14 @@ class HomeController extends Controller
                 flash()->error('Password is incorrect!');
                 return $backToLogin;
             }
-
+            
             if (strtolower(Sentinel::check()->roles[0]->slug) != 'member' and $request->input('type') == "member" or strtolower(Sentinel::check()->roles[0]->slug) == 'member' and $request->input('type') == "admin") {
+                flash()->error('You Have No Access!');
+                Sentinel::logout();
+                return $backToLogin;
+            }
+
+            if (!$user->is_active) {
                 flash()->error('You Have No Access!');
                 Sentinel::logout();
                 return $backToLogin;

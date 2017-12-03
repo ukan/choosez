@@ -114,6 +114,7 @@ return [
 	    'access_forbiden' => 'Access Forbiden',
 
 	    'confirmation_delete' => 'Are you sure want to continue delete data ',
+	    'confirmation_update_status' => 'Are you sure want to continue change status ',
 	    'confirmation_restore' => 'Are you sure want to continue restore activated data ',
 
 	    'create_new' => 'Add New',

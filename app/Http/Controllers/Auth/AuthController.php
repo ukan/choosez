@@ -82,8 +82,8 @@ class AuthController extends Controller
         $rules = [
                     'email' => 'required|email',
                     'password' => 'required|min:8',
-                    'g-recaptcha-response'  => 'required',
-                    'captcha'               => 'required|min:1'
+                    // 'g-recaptcha-response'  => 'required',
+                    // 'captcha'               => 'required|min:1'
                 ];
         $messages = [
                     'email.required'        => 'Email is required',
@@ -129,6 +129,12 @@ class AuthController extends Controller
                 }
 
                 if (strtolower(Sentinel::check()->roles[0]->slug) != 'member' and $request->input('type') == "member" or strtolower(Sentinel::check()->roles[0]->slug) == 'member' and $request->input('type') == "admin") {
+                    flash()->error('You Have No Access!');
+                    Sentinel::logout();
+                    return $backToLogin;
+                }
+
+                if (!$user->is_active) {
                     flash()->error('You Have No Access!');
                     Sentinel::logout();
                     return $backToLogin;

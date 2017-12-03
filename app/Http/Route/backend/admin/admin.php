@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
         // User Trustee Management...
         Route::resource('users', 'UserController', ['except' => 'show']);
         Route::delete('users/{id}/delete', 'UserController@delete');
+        Route::post('users/{id}/update', 'UserController@updateStatus');
 
     });
 
@@ -216,16 +217,6 @@ Route::group(['prefix' => 'admin','middleware' => 'AdminAccess', 'namespace' => 
     Route::group(['prefix' => 'mos/log-history-page','namespace' => 'AuthLogHistory'], function () {
         Route::get('log-history', array('as' => 'admin-view-history-log-mos', 'uses' => 'HistoryLogsController@indexMos'));
         Route::get('log-history-datatable-mos', array('as' => 'admin-view-history-log-datatable-mos', 'uses' => 'HistoryLogsController@datatablesLoginMos'));
-    });
-
-    Route::group(['prefix' => 'lcw-pages','namespace' => 'LcwPage'], function () {
-        // Category Management...
-        Route::resource('lcwcategorys', 'LcwCategorysController', ['except' => 'show']);
-        Route::delete('lcwcategorys/{id}/delete', 'LcwCategorysController@destroy');
-
-        // User Trustee Management...
-        Route::resource('lcwcontents', 'LcwContentsController', ['except' => 'show']);
-        Route::delete('lcwcontents/{id}/delete', 'LcwContentsController@destroy');
     });
 
     Route::group(['prefix' => 'log-history-page','namespace' => 'AuthLogHistory'], function () {

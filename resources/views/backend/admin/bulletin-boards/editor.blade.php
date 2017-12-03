@@ -252,6 +252,7 @@
             $("[name='bulletin_board_id']").val('');
             $(".thumbnail.image").html('<img src="{{asset($pathp.'assets/backend/admin/img/boxed-bg.jpg')}}" class="img-responsive">');
         }
+        
         /*start show for active member*/
         function show_form_unpublish(id){
             $.ajax({

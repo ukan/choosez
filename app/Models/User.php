@@ -82,6 +82,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'hostel',
         'room',
         'status',
+        'is_active',
     ];
 
     /**
@@ -108,7 +109,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'roles.name as role',
             'users.last_login',
             'users.image',
-            'users.phone'
+            'users.phone',
+            'users.is_active'
         )
         ->where('email','!=','superadmin@alihsan.com')
         ->join('role_users', 'role_users.user_id', '=', 'users.id')
@@ -128,7 +130,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'users.hostel',
             'users.room',
             'users.updated_at',
-            'users.phone'
+            'users.phone',
+            'users.is_active'
         )
         ->join('role_users', 'role_users.user_id', '=', 'users.id')
         ->join('roles', 'role_users.role_id', '=', 'roles.id')
